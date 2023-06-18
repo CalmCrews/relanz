@@ -1,0 +1,115 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-size: 16px;
+  font-family: Pretendard;
+  background-color: #fff;
+}
+
+#pc-content {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  #pc-content {
+    display: none;
+  }
+}
+
+#pc-content #side-box {
+  display: block;
+  position: absolute;
+  top: calc(50vh - 25%);
+  left: calc(50vw - 30%);
+  z-index: 1;
+  width: 40rem;
+  height: 35rem;
+}
+
+#side-box > .logo-box {
+  display: flex;
+  width: 147px;
+  height: 84px;
+  margin-right: calc(100% - 98px);
+}
+
+#side-box > .logo-box > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#side-box .message-box {
+  margin: 2.2rem 0 0 0;
+}
+
+#side-box > .message-box > .large-message {
+  font-size: 2.7rem;
+  font-weight: 600;
+}
+
+#side-box > .message-box > .small-message {
+  margin: 1.2rem 0 0 0;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+#side-box > .word-box {
+  margin-top: 5rem;
+}
+
+#side-box > .word-box > .word-define {
+  width: 19rem;
+  height: 3rem;
+  border-radius: 30px;
+  padding: 0.5rem;
+  background: #9abcff;
+  color: #fff;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+#side-box > .word-box > .word-define > span {
+  vertical-align: sub;
+}
+
+#side-box > .word-box > .word-describe {
+  width: 19rem;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+#mobile-content {
+  display: block;
+  position: relative;
+  margin: 0 0 0 calc(50vw - 1px);
+  max-width: 640px;
+  min-height: 100vh;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  background: #fff;
+  z-index: 2;
+}
+
+@media screen and (max-width: 900px) {
+  #mobile-content {
+    margin: 0 auto;
+  }
+}

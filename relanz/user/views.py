@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 # Create your views here.
 
 def home(request):
-    return render(request, 'base.html')
+    return render(request, 'home.html')
 
 def signup(request):
     if request.method=="GET":
