@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    회원가입 페이지 <br/>
+    <form method='post'>
+    {% csrf_token %}
+      <div class="container">
+    <input type="text" required="required" name='username' id='username' value={{username}}>
+    <span>User ID</span>
+    <hr>
+    <input type="password" required="required" name='password' id='password' value={{password}}>
+    <span>PassWord</span>
+    <hr>
+    <input type="password" required="required" name='re_password' id='re_password' value={{re_password}}>
+    <span>Re-Enter PassWord</span>
+    <hr>
+
+    </section>
+    {{error}}
+    <button class="login" type="submit" value="Sign up">Sign Up</button>
+      <button type="submit">회원 가입</button>
+    </form>
+  </body>
+</html>
