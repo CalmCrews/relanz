@@ -5,16 +5,6 @@ from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 
-def home(request):
-    if request.user.is_anonymous:
-         return render(request, 'home.html')
-    user = User.objects.get(username=request.user)
-    if Account.objects.filter(user=request.user).exists():
-        account = Account.objects.get(user_id=user.id)
-        return render(request, 'home.html', {'account':account})
-    return render(request, 'home.html')
-    
-
 def signup(request):
     if request.method=="GET":
         return render(request, 'user/signup.html')
@@ -51,11 +41,11 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('user:home')
+                return redirect('main:home')
             else:
                 return render(request, 'user/signin.html', {'error':"아이디 혹은 비밀번호가 다릅니다."})
         else:
-            return redirect('user:home')
+            return redirect('main:home')
         
 def signout(request):
     logout(request)
