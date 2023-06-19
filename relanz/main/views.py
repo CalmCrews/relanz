@@ -13,5 +13,6 @@ def home(request):
         return render(request, 'main/home.html', {'account':account})
     return render(request, 'main/home.html')
 
+# 이인이 signin.html 연결해볼라고 임시로 만듬
 def login(request):
     return render(request, 'user/signin.html')
