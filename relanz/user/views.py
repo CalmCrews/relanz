@@ -1,12 +1,21 @@
 from django.shortcuts import render, redirect
 from .models import User
+from account.models import Account
 from django.contrib.auth import login, logout, authenticate
 
 
 # Create your views here.
 
 def home(request):
+    if request.user.is_anonymous:
+         return render(request, 'base.html')
+    user = User.objects.get(username=request.user)
+    if Account.objects.filter(user=request.user).exists():
+        account = Account.objects.get(user_id=user.id)
+        print(account)
+        return render(request, 'base.html', {'account':account})
     return render(request, 'base.html')
+    
 
 def signup(request):
     if request.method=="GET":
