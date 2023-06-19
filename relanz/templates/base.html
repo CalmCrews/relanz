@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock title %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static "css/base.css"%}"> 
-    {% block extrahead %}{% endblock extrahead %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/base.css"%}"> {%
+    block extrahead %}{% endblock extrahead %}
   </head>
   <body>
     <div id="pc-content">
@@ -17,7 +17,7 @@
         </div>
         <div class="message-box">
           <div class="large-message">
-            <p>올바른 스트레스 해소법,<br>릴렌즈와 함께 찾아봐!</p>
+            <p>올바른 스트레스 해소법,<br />릴렌즈와 함께 찾아봐!</p>
           </div>
           <div class="small-message">
             <p>챌린지 말고, 이젠 릴렌지 하자!</p>
@@ -28,7 +28,10 @@
             <span>Relax+Challenge=릴렌지</span>
           </div>
           <div class="word-describe">
-            <p>나한테 맞는 스트레스 해소법 찾고,<br>릴렌즈와 함께 관리를 시작해보세요</p>
+            <p>
+              나한테 맞는 스트레스 해소법 찾고,<br />릴렌즈와 함께 관리를
+              시작해보세요
+            </p>
           </div>
         </div>
       </div>

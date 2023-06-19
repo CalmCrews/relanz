@@ -101,7 +101,7 @@ body {
   display: block;
   position: relative;
   margin: 0 0 0 calc(50vw - 1px);
-  max-width: 640px;
+  max-width: 430px;
   min-height: 100vh;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   background: #fff;
