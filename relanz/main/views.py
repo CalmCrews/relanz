@@ -12,3 +12,6 @@ def home(request):
         account = Account.objects.get(user_id=user.id)
         return render(request, 'main/home.html', {'account':account})
     return render(request, 'main/home.html')
+
+def login(request):
+    return render(request, 'user/signin.html')

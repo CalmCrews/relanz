@@ -1,0 +1,193 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+.container-mobile {
+    padding: 3em 0;
+}
+
+.logo-box_big {
+    display: flex;
+    width: 190px;
+    height: 109px;
+    margin: 0 auto;
+    margin-bottom: 5.4em;
+}
+
+.logo-box_big > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.small-message_mobile {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.06em;
+
+    color: #555555;
+    display: flex;
+    justify-content: center;
+    
+    margin-bottom: 1em;
+}
+
+.login-center-mobile {
+    justify-content: center;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #71A1FF;
+    display: flex;
+    letter-spacing: -0.06em;
+
+    margin-bottom: 1.5em;
+}
+.login-form-div-mobile {
+    display: flex;
+    justify-content: center;
+}
+
+.login-form-div-mobile > form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 260px;
+}
+
+.login-form-div-mobile .username-input {
+    border: none;
+    padding: 10px 15px; 
+    border-radius: 9999px;
+    background-color: #E7E7E7;
+
+    margin-bottom: 0.4em;
+}
+.login-form-div-mobile .username-input::placeholder {
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 19px;
+    letter-spacing: -0.06em;
+    text-align: left;
+    color: #b8b8b8;
+}
+
+.login-form-div-mobile .password-input {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 9999px;
+    background-color: #E7E7E7;
+    color: #AAAAAA;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: -0.06em;
+    text-align: left;
+
+    margin-bottom: 0.4em;
+}
+.login-form-div-mobile .password-input::placeholder {
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 19px;
+    letter-spacing: -0.06em;
+    color: #b8b8b8;
+}   
+
+.login-form-div-mobile .find-id-password {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: -0.05em;
+
+    margin-bottom: 4.5em;
+}
+
+.login-form-div-mobile .find-id-password .find-id {
+    text-decoration:none;
+    color: #7b7b7b;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: -0.05em;
+}
+.login-form-div-mobile .find-id-password .find-password {
+    text-decoration:none;
+    color: #7b7b7b;;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: -0.05em;
+}
+
+.login-form-div-mobile .find-id-password .find-id:link {
+    text-decoration:none
+}
+.login-form-div-mobile .find-id-password .find-id:visited {
+    text-decoration:none
+}
+
+.login-form-div-mobile .find-id-password .find-password:link {
+    text-decoration:none
+}
+.login-form-div-mobile .find-id-password .find-password:visited {
+    text-decoration:none
+}
+
+.login-form-div-mobile .submit-input {
+    border: none;
+    padding: 15px 15px; 
+    border-radius: 9999px;
+    background-color: #71A1FF;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: -0.05em;
+    color: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+    margin-bottom: 0.8em;
+}
+
+.ask-signup-div {
+    display: flex;
+    justify-content: center;
+    color: #71A1FF;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    gap: 0.5em;  
+}
+
+
+.ask-signup-div .ask-signup-a {
+    text-decoration: none;
+    text-decoration: underline;
+}
+.ask-signup-div .ask-signup-a:link {
+    color: #71A1FF;
+}
+.ask-signup-div .ask-signup-a:visited {
+    color: #71A1FF;
+}
