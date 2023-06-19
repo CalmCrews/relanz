@@ -22,7 +22,6 @@
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
     line-height: 19px;
     letter-spacing: -0.06em;
 
@@ -61,12 +60,12 @@
     padding: 10px 15px; 
     border-radius: 9999px;
     background-color: #E7E7E7;
+    height: 3em;
 
     margin-bottom: 0.4em;
 }
 .login-form-div-mobile .username-input::placeholder {
     font-family: Pretendard;
-    font-size: 16px;
     font-weight: 300;
     line-height: 19px;
     letter-spacing: -0.06em;
@@ -80,17 +79,16 @@
     border-radius: 9999px;
     background-color: #E7E7E7;
     color: #AAAAAA;
-    font-size: 16px;
     font-weight: 400;
     line-height: 19px;
     letter-spacing: -0.06em;
     text-align: left;
+    height: 3em;
 
     margin-bottom: 0.4em;
 }
 .login-form-div-mobile .password-input::placeholder {
     font-family: Pretendard;
-    font-size: 16px;
     font-weight: 300;
     line-height: 19px;
     letter-spacing: -0.06em;
@@ -157,7 +155,6 @@
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
     line-height: 19px;
     text-align: center;
     letter-spacing: -0.05em;
