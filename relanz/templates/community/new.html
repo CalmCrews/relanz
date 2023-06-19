@@ -1,0 +1,21 @@
+{% comment %} {% extends "base.html" %}
+{% load static%}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+{% endblock extrahead %} {% endcomment %}
+
+{% block title%}
+<h1>new 페이지</h1>
+{% endblock title %}
+
+{% block content %}
+<form method="POST" action="{% url 'community:new' %}">
+    {% csrf_token %}
+    제목 : <input type="text" name="title" value=""/>
+    본문 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+    <button type="submit">글작성</button>
+</form>
+
+<a href="{% url 'user:home' %}">홈</a>
+{% endblock content %}
