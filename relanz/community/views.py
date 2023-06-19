@@ -42,4 +42,4 @@ def delete(request, id):
 
     article.delete()
 
-    return redirect('user:home')
+    return redirect('main:home')
