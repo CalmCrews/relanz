@@ -1,0 +1,19 @@
+{% comment %} {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+{% endblock extrahead %} {% endcomment %}
+
+{% block title %}
+<h1>edit 페이지</h1>
+{% endblock title %}
+
+{% block content %}
+<form method="POST" action="{% url 'community:edit' article.id %}">
+    {% csrf_token %}
+    <input type="text" name="title" value="{{article.title}}"/>
+    <textarea name="content" id="" cols="30">{{article.content}}</textarea>
+    <input type="submit" value="수정하기">
+</form>
+
+<a href="{% url 'user:home' %}">홈</a>
+<a href="{% url 'community:delete' article.id %}">삭제하기</a>
+{% endblock content %}
