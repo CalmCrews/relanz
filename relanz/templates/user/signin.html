@@ -19,6 +19,7 @@
     </div>
     <div class="login-form-div-mobile">
       <form action="" method="post">
+        {% csrf_token %}
         <input type="text" placeholder="아이디 입력" id="username" class="username-input">
         <input type="password" placeholder="비밀번호 입력" id="password" class="password-input">
         <div class="find-id-password">
