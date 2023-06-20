@@ -88,3 +88,17 @@ rePasswordInput.addEventListener("keyup", (event)=> {
   }
 })
 
+// 마우스 클릭했을 때
+document.getElementById("submit_input").addEventListener("mouseover", (event)=>{
+  const tag = document.getElementById("submit_input")
+  tag.style.backgroundColor = "#3F80FC"
+})
+document.getElementById("submit_input").addEventListener("mouseleave", (event)=>{
+
+})
+
+
+idCheckBtn.addEventListener("mouseleave", (event)=>{
+  console.log(" 벗어남")
+  idCheckBtn.classList.remove("mouse-over");
+})
