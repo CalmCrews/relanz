@@ -8,8 +8,8 @@ def home(request):
     if request.user.is_anonymous:
          return render(request, 'main/home.html')
     user = User.objects.get(username=request.user)
-    if Account.objects.filter(user=request.user).exists():
-        account = Account.objects.get(user_id=user.id)
+    if User.objects.filter(user=request.user).exists():
+        account = User.objects.get(user_id=user.id)
         return render(request, 'main/home.html', {'account':account})
     return render(request, 'main/home.html')
 
