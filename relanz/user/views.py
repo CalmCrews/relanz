@@ -53,27 +53,24 @@ def signout(request):
 
 
 
-# def nickname(request):
-#     user_data={}
-#     if request.method=="GET":
-#         return render(request, 'user/nickname.html')
-#     if request.method=="POST":
-#         nickname = request.POST.get('nickname')
-#         user = request.user
+def nickname(request):
+    user_data={}
+    if request.method=="GET":
+        return render(request, 'user/nickname.html')
+    if request.method=="POST":
+        nickname = request.POST.get('nickname')
+        user = User.objects.get(username=request.user)
+        if not nickname:
+            user_data['error'] = "닉네임을 입력해주세요."
+            return render(request, 'user/nickname.html', user_data)
         
-#         if not nickname:
-#             user_data['error'] = "닉네임을 입력해주세요."
-#             return render(request, 'user/nickname.html', user_data)
-        
-#         elif User.objects.filter(nickname=nickname).exists():
-#             user_data['error'] = "이미 존재하는 닉네임입니다."
-#             return render(request, 'user/nickname.html', user_data)
-        
-#         else:
-#             user = User(nickname=nickname)
-#             user.user = user
-#             user.save()
-#             return redirect('user:content')
+        elif User.objects.filter(nickname=nickname).exists():
+            user_data['error'] = "이미 존재하는 닉네임입니다."
+            return render(request, 'user/nickname.html', user_data)
+        else:
+            user.nickname = nickname
+            user.save()
+            return redirect('user:nickname')
 
 
 
