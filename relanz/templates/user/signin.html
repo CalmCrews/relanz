@@ -20,14 +20,14 @@
     <div class="login-form-div-mobile">
       <form action="" method="post">
         {% csrf_token %}
-        <input type="text" placeholder="아이디 입력" id="username" class="username-input">
-        <input type="password" placeholder="비밀번호 입력" id="password" class="password-input">
+        <input type="text" placeholder="아이디 입력" name="username" id="username" class="username-input"> <!-- name tag 그대로 유지 안하면 서버에서 데이터 받을 때 인식 못해요! -->
+        <input type="password" placeholder="비밀번호 입력" name="password" id="password" class="password-input"> <!-- name tag 그대로 유지 안하면 서버에서 데이터 받을 때 인식 못해요! -->
         <div class="find-id-password">
           <a href="http://" class="find-id">아이디 찾기</a>
           <span>|</span>
           <a href="http://" class="find-password">비밀번호 찾기</a>
         </div>
-        <input type="submit" value="로그인하기" class="submit-input">
+        <input type="submit" value="login" name='login' class="submit-input"> <!--여기도 동일하게 name tag 유지 해주셔야 되여!-->
       </form>
     </div>
     <div class="ask-signup-div">
