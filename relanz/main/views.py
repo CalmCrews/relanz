@@ -6,9 +6,9 @@ from user.models import User
 def home(request):
     if request.user.is_anonymous:
          return render(request, 'main/home.html')
-    
-    user = User.objects.get(username=request.user)
-    if User.objects.filter(username=request.user).exists():
+
+    user = request.user
+    if User.objects.filter(username=user.username).exists():
         account = User.objects.get(username=user)
         return render(request, 'main/home.html', {'account':account})
     return render(request, 'main/home.html')
