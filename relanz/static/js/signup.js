@@ -26,7 +26,7 @@ const onClickCheckId = async () => {
         return
     }
     // 여기에다 url을 알려줘~
-    const url =``
+    const url =`/user/api/identify`
     const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -38,8 +38,8 @@ const onClickCheckId = async () => {
     })
 
     // 여기에서 백에서 준 데이터 받아 변수에 할당하는 곳!
-    const {} = await response.json()
-
+    const message = await response.json()
+    console.log(message)
     // 이후 처리에 따라 아이디 중복 여부를 유저에게 피드백하면 됨!
     // reject_msg approve_msg
 }
