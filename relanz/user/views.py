@@ -70,22 +70,21 @@ def nickname(request):
         else:
             user.nickname = nickname
             user.save()
-            return redirect('user:nickname')
+            return redirect('user:content')
 
 
 
-# def content(request):
-#     if request.method=="GET":
-#         user = User(user=request.user)
-#         return render(request, 'user/content.html', {'user':user})
-#     if request.method=="POST":
-#         user = User.objects.get(user=request.user)
-#         birth = request.POST.get('birth')
-#         sex = request.POST.get('sex')
-#         user.birth = birth
-#         user.sex = sex
-#         user.save()
-#         return redirect('user:accountInfo', user.id)
+def content(request):
+    if request.method=="GET":
+        return render(request, 'user/content.html')
+    if request.method=="POST":
+        user = User.objects.get(username=request.user)
+        birth = int(request.POST.get('birth'))
+        sex = request.POST.get('sex')
+        user.birth = 2023 - birth
+        user.sex = sex
+        user.save()
+        return redirect('user:content')
     
 
 # def accountInfo(request, user_id):
