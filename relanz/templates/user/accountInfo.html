@@ -5,10 +5,10 @@
 <hr />
 {{user.nickname}}
 <hr />
-<p>닉네임: {{account.nickname}}</p>
+<p>닉네임: {{user.nickname}}</p>
 
-<p>나이: {{ account.birth }}</p>
-{% if account.sex == 'male' %}
+<p>나이: {{ user.birth }}</p>
+{% if user.sex == 'male' %}
 <p>성별: 남성 </p>
 {% else %}
 <p>성별: 여성 </p>
