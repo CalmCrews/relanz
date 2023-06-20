@@ -8,7 +8,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=20, blank=False)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    nickname = models.CharField(max_length=32, unique=True, blank=False)
+    nickname = models.CharField(max_length=32, unique=True, null=True)
     birth = models.IntegerField(null=True, default=0)
     
     sex_tuple = [
@@ -16,5 +16,5 @@ class User(AbstractUser):
         ('female', 'female')
     ]
 
-    sex = models.CharField(max_length=10, choices=sex_tuple, blank=False)
+    sex = models.CharField(max_length=10, choices=sex_tuple, null=True)
 
