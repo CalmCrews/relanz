@@ -21,6 +21,7 @@ app_name = 'user'
 
 urlpatterns = [
     path('signup/', views.signup, name="signup"),
+    # 이인이 signin.html 연결해볼라고 임시로 만듬
     path('signin/', views.signin, name="signin"),
     path('signout/', views.signout, name="signout"),
 ]
