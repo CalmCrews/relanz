@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  {% block mobile_title %}{% endblock mobile_title %}
+{% endblock title %}
+
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/mobileBase.css"%}">
+  {% block mobile_extrahead %}{% endblock mobile_extrahead %}
+{% endblock extrahead %}
+
+{% block content%}
+  <div class="mobile-header">
+    <a href="{% url 'main:home' %}">
+      <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo1">
+    </a>
+  </div>
+  <div class="mobile-content">
+    {% block mobile_content %}{% endblock mobile_content %}
+  </div>
+  <div class="mobile-nav">
+    <ul class="menu-list">
+      <li>
+        <a href="{% url 'main:home' %}">
+          <img src="{% static "icons/Home_icon.png"%}" alt="home-icon">
+        </a>
+      </li>
+      <li>
+        {% comment %}임시로 연결{% endcomment %}
+        <a href="{% url 'main:home' %}">
+          <img src="{% static "icons/Around_icon.png"%}" alt="around-icon">
+        </a>
+      </li>
+      <li>
+        {% comment %}임시로 연결{% endcomment %}
+        <a href="{% url 'community:new' %}">
+          <img src="{% static "icons/Community_icon.png"%}" alt="community-icon">
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'account:content' %}">
+          <img src="{% static "icons/Settings_icon.png"%}" alt="settings-icon">
+        </a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}

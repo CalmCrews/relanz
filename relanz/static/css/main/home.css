@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+.whole-bg {
+  width: 100%;
+  overflow: scrolls;
+  background-color: #D0E0FF;
+}
+
 #not-authenticated {
   display: block;
   position: relative;

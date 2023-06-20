@@ -1,24 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'mobileBase.html' %}
 {% load static %}
-{% block title %}
+{% block mobile_title %}
   Home | Start!
-{% endblock title %}
+{% endblock mobile_title %}
 
-{% block extrahead %}
+{% block mobile_extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static "css/main/home.css"%}">
-{% endblock extrahead %}
+{% endblock mobile_extrahead %}
 
-{% block content%}
+{% block mobile_content%}
   {% if user.is_authenticated %}
-    <a href="{% url 'user:signout' %}">로그아웃</a>
-    <h1>환영합니다!
-      {{user.username}}
-      님</h1>
-    {% if not account.nickname %}
-      <a href="{% url 'account:nickname' %}">프로필 설정</a>
-    {% else %}
-      <a href="{% url 'account:accountInfo' account.id %}">프로필 보기</a>
-    {% endif %}
+    <div class="whole-bg">
+      <a href="{% url 'user:signout' %}">로그아웃</a>
+      <h1>환영합니다!
+        {{user.username}}
+        님</h1>
+      {% if not account.nickname %}
+        <a href="{% url 'account:nickname' %}">프로필 설정</a>
+      {% else %}
+        <a href="{% url 'account:accountInfo' account.id %}">프로필 보기</a>
+      {% endif %}
+    </div>
   {% else %}
     <div id="not-authenticated">
       <div class="background-section">
