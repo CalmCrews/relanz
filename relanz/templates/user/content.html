@@ -10,6 +10,13 @@
     나이, 성별 <br/>
     <form method='post'>
     {% csrf_token %}
+     닉네임 설정해주세요 <br/>
+    {{error}}
+    <form method='post'>
+    {% csrf_token %}
+    <input type="text" required="required" name='nickname' id='nickname' value="{{nickname}}">
+    <span>nickname</span>
+    <hr>
     <input type="number" required="required" name='birth'>
     <span>나이</span>
     <hr>

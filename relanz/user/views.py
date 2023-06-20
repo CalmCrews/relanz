@@ -63,23 +63,16 @@ def signout(request):
 
 
 def nickname(request):
-    user_data={}
+    
     if request.method=="GET":
         return render(request, 'user/nickname.html')
     if request.method=="POST":
-        nickname = request.POST.get('nickname')
-        user = User.objects.get(username=request.user)
-        if not nickname:
-            user_data['error'] = "닉네임을 입력해주세요."
-            return render(request, 'user/nickname.html', user_data)
         
-        elif User.objects.filter(nickname=nickname).exists():
-            user_data['error'] = "이미 존재하는 닉네임입니다."
-            return render(request, 'user/nickname.html', user_data)
-        else:
-            user.nickname = nickname
-            user.save()
-            return redirect('user:content')
+        user = User.objects.get(username=request.user)
+        
+        
+        
+        
 
 
 
@@ -87,16 +80,31 @@ def content(request):
     if request.method=="GET":
         return render(request, 'user/content.html')
     if request.method=="POST":
-        user = User.objects.get(username=request.user)
+        message = {}
+        user = request.user
+        user = User.objects.get(username=user.username)
+
+        nickname = request.POST.get('nickname')
         birth = request.POST.get('birth')
         sex = request.POST.get('sex')
-        user.birth = birth
-        user.sex = sex
-        user.save()
-        return redirect('user:userinfo', user.id)
+        if not nickname:
+            message['error'] = "닉네임을 입력해주세요."
+            return render(request, 'user/content.html', message)
+        elif User.objects.filter(nickname=nickname).exists():
+            message['error'] = "이미 존재하는 닉네임입니다."
+            return render(request, 'user/content.html', message)
+        else:
+            user.nickname = nickname
+            user.birth = birth
+            user.sex = sex
+            user.save()
+            return redirect('user:userinfo', user.id)
+
+       
     
 
 def userinfo(request, user_id):
-    user = User.objects.get(username=request.user)
-    user.birth = 2023 - user.birth
+    user = request.user
+    user = User.objects.get(username=user.username) 
+    user.save()
     return render(request, 'user/userinfo.html', {'user':user})

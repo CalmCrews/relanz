@@ -7,13 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-    닉네임 설정해주세요 <br/>
-    {{error}}
-    <form method='post'>
-    {% csrf_token %}
-    <input type="text" required="required" name='nickname' id='nickname' value="{{nickname}}">
-    <span>nickname</span>
-    <hr>
+   
     <button class="nickname" type="submit" >다음</button>
     </form>
   </body>
