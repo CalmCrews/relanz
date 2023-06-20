@@ -1,4 +1,67 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  SignUp
+{% endblock title %}
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/signup.css"%}">
+{% endblock extrahead %}
+{% block content%}
+  <div class="container-mobile">
+    <div class="logo-box_big">
+      <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo">
+    </div>
+    <div class="signup-center-mobile">
+      <h4>Sign up</h4>
+    </div>
+    <div class="signup-form-div-mobile">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="username-div">
+          <label for="username" class="username-label">아이디 설정</label>
+          <div class="username-input-uni-div">
+            <span class="id-letter">ID</span>
+            <input type="text" placeholder="아이디 입력" name="username" id="username" class="username-input">
+          </div>
+          <input type="button" value="아아디 중복 확인" class="username-button" id="username_button">
+        </div>
+        
+        <div>
+          <div class="password-div">
+            <label for="password" class="password-label">비밀번호 설정</label>
+            <div class="password-input-uni-div">
+              <span class="pw-letter">PW</span>
+              <input type="password" placeholder="비밀번호 입력" name="password" id="password" class="password-input">
+            </div>
+          </div>
+          <div class="re-password-div">
+            <label for="re_password" class="re-password-label">비밀번호 확인</label>
+            <div class="re_password-input-uni-div">
+              <span class="pw-letter">PW</span>
+              <input type="password" placeholder="비밀번호 입력" name="re_password" id="re_password" class="re-password-input">
+            </div>
+            <div class="re-password-check-div">
+              <div class="check-img-div">
+                <img src="" alt="" srcset="체크체크" class="check-img-tag">
+              </div>
+              <p class="re-password-check-p">확인되었습니다</p>
+            </div>
+          </div>
+        </div>
+        <div class="submit-div">
+          <input type="submit" value="회원가입하기" name='signup' class="submit-input">
+        </div>
+        
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts%}
+  <script src={% static "js/signup.js"%}></script>
+{% endblock scripts%}
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -23,8 +86,8 @@
 
     </section>
     {{error}}
-    <button class="login" type="submit" value="Sign up">Sign Up</button>
+    <button class="signup" type="submit" value="Sign up">Sign Up</button>
       <button type="submit">회원 가입</button>
     </form>
   </body>
-</html>
+</html> {% endcomment %}
