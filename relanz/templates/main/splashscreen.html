@@ -1,0 +1,80 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} Welcome! Relanz {% endblock title %} 
+{% block extrahead %} 
+  <link rel="stylesheet" type="text/css" href="{% static "css/main/splashscreen.css"%}"> 
+{% endblock extrahead %} 
+{% block content %}
+<div class="scrollable-container">
+  <div id="div1" class="scrollable-item">
+      <div class="background">
+          <p>나만의 스트레스 해소법을<br>찾아줄 친구,</p>
+          <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo">
+      </div>
+  </div>
+  <div id="div2" class="scrollable-item">
+    <div class="background">
+      <p>오늘도 힘든 하루, 잘 보내셨나요?<br>점차 쌓이는 스트레스, 이젠 관리해봐요!</p>
+      <img src="{% static "images/coffeewalking.png" %}" alt="coffee-walking">
+      <a href="{% url 'main:home' %}">
+        <img src="{% static "icons/skip.png" %}" alt="skip">
+      </a>
+    </div>
+  </div>
+  <div id="div3" class="scrollable-item">
+    <div class="background">
+      <p>릴렌즈에서는 챌린지가 아닌</p>
+      <div class="word-define">
+        <span>Relax+Challenge=릴렌지</span>
+      </div>
+      <p>당신만의 해소법을 찾아갈 수 있는 다양한<br>활동들을 소개해드려요!</p>
+      <img src="{% static "logo/relanz-logo2.png" %}" alt="relanz-logo">
+      <a href="{% url 'main:home' %}">
+        <img src="{% static "icons/skip.png" %}" alt="skip">
+      </a>
+    </div>
+  </div>
+  <div id="div4" class="scrollable-item">
+    <div class="background">
+      <p>릴렌즈가 당신에게 맞는 다양한<br>릴렌지 활동을 추천할테니<br>나만의 스트레스 해소법을 발견해보아요!</p>
+      <img src="{% static "images/listeningmusic.png" %}" alt="listening-music">
+      <a href="{% url 'main:home' %}">
+        <img src="{% static "icons/skip.png" %}" alt="skip">
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 스크롤 이벤트를 관리하는 함수
+  function goToHome() {
+    window.location.href = "{% url 'main:home' %}";
+  }
+
+  function scrollDiv() {
+    const container = document.querySelector('.scrollable-container');
+    let items = document.querySelectorAll('.scrollable-item');
+    
+    // div1을 현재 화면에 보이도록 스크롤 이동
+    container.scrollTop = items[0].offsetTop;
+    
+    const scrollInterval = 3000; 
+    
+    setInterval(function() {
+      const firstItem = items[0];
+      if (firstItem.id === 'div4') {
+        goToHome();
+      }
+      container.removeChild(firstItem);
+
+      console.log("remove!");
+      items = document.querySelectorAll('.scrollable-item');
+      container.scrollTop = items[0].offsetTop;
+
+    }, scrollInterval);
+  }
+  
+  // 페이지 로드 시 스크롤 이벤트 함수 호출
+  window.addEventListener('load', scrollDiv);
+</script>
+{% endblock %}

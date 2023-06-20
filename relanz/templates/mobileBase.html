@@ -38,7 +38,10 @@
         </a>
       </li>
       <li>
-        <a href="{% url 'account:content' %}">
+        {% comment %}임시로 연결{% endcomment %}
+        <a href="{% url 'main:home' %}">
+        {% comment %} 조건문 필요할 듯 {% endcomment %}
+        {% comment %} <a href="{% url 'user:userinfo' user.id %}"> {% endcomment %}
           <img src="{% static "icons/Settings_icon.png"%}" alt="settings-icon">
         </a>
       </li>
