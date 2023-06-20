@@ -79,16 +79,15 @@ def content(request):
         return render(request, 'user/content.html')
     if request.method=="POST":
         user = User.objects.get(username=request.user)
-        birth = int(request.POST.get('birth'))
+        birth = request.POST.get('birth')
         sex = request.POST.get('sex')
-        user.birth = 2023 - birth
+        user.birth = birth
         user.sex = sex
         user.save()
-        return redirect('user:content')
+        return redirect('user:userinfo', user.id)
     
 
-# def accountInfo(request, user_id):
-#     user = request.user
-#     user = User.objects.get(user)
-#     user.birth = 2023 - user.birth
-#     return render(request, 'user/accountInfo.html', {'user':user})
+def userinfo(request, user_id):
+    user = User.objects.get(username=request.user)
+    user.birth = 2023 - user.birth
+    return render(request, 'user/userinfo.html', {'user':user})
