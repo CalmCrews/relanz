@@ -1,0 +1,263 @@
+.container-mobile {
+    padding: 3em 0;
+}
+
+.logo-box_big {
+    display: flex;
+    width: 70px;
+    height: 41px;
+    margin: 0 auto;
+    margin-bottom: 3.5em;
+}
+
+.logo-box_big > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.signup-center-mobile {
+    text-align: center;
+    margin-bottom: 2em;
+}
+.signup-center-mobile >  h4 {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+
+    letter-spacing: -0.06em;
+
+    color: #71A1FF;
+} 
+
+.signup-form-div-mobile {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.signup-form-div-mobile {
+    .username-div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+
+        padding-bottom: 1.5em;
+        border-bottom: solid 1px #D9D9D9;
+
+        .username-label {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 19px;
+            letter-spacing: -0.06em;
+            
+            color: #494949;
+            padding-left: 0.4em;
+        }
+        .username-input-uni-div {
+            height: 40px;
+            position: relative;
+            .id-letter {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                left: 10%;
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 17px;
+
+                color: #9ABCFF;
+            }
+            .username-input {
+                width: 299px;
+                height: 40px;
+                border: 1px solid #71A1FF;
+                border-radius: 30px;
+                background: #FFFFFF;
+                padding-left: 5em;
+                padding-right: 2em;
+            }
+            .username-input::placeholder {
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: -0.06em;
+                color: #AAAAAA;
+            }
+        }
+        
+        .username-button {
+            border: none;
+            width: 101px;
+            height: 31px;
+            background: #9ABCFF;
+            border-radius: 30px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 14px;
+            letter-spacing: -0.06em;
+            color: #FFFFFF;
+        }
+    }
+    .password-div {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.6em;
+        margin-bottom: 0.7em;
+        gap: 0.3em;
+
+        .password-label {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 19px;
+            letter-spacing: -0.06em;
+
+            color: #494949;
+            padding-left: 0.4em;
+        }
+        .password-input-uni-div {
+            position: relative;
+            .pw-letter {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                left: 10%;
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 17px;
+                color: #9ABCFF;
+            }
+            .password-input {
+                width: 299px;
+                height: 40px;
+                border: 1px solid #71A1FF;
+                border-radius: 30px;
+                background: #FFFFFF;
+                padding-left: 5em;
+                padding-right: 2em;
+            }
+            .password-input::placeholder {
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: -0.06em;
+                color: #AAAAAA;
+            }
+        }
+    }
+    .re-password-div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3em;
+        margin-bottom: 4.5em;
+
+        .re-password-label {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 19px;
+            letter-spacing: -0.06em;
+
+            color: #494949;
+            padding-left: 0.4em;
+        }
+        .re_password-input-uni-div {
+            position: relative;
+            .pw-letter {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                left: 10%;
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 17px;
+                color: #9ABCFF;
+            }
+            .re-password-input {
+                width: 299px;
+                height: 40px;
+                border: 1px solid #71A1FF;
+                border-radius: 30px;
+                background: #FFFFFF;
+                padding-left: 5em;
+                padding-right: 2em;
+            }
+            .re-password-input::placeholder {
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: -0.06em;
+                color: #AAAAAA;
+            }
+        }
+
+        .re-password-check-div {
+            display: flex;
+            align-items: center;
+            padding-left: 0.7em;
+            padding-top: 0.2em;
+            .check-img-div {
+                width: 18px;
+                height: 18px;
+                background-color: aquamarine;
+                margin-right: 0.7em;
+                .check-img-tag {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .re-password-check-p {
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: -0.06em;
+                color: #7E7E7E;
+            }
+        }
+    }
+    .submit-div {
+        display: flex;
+        justify-content: center;
+        .submit-input {
+            Width : 254px;
+            Height: 50px;
+            background: #71A1FF;
+            border: none;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 30px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: -0.05em;
+
+            color: #FFFFFF;
+        }
+    }
+}

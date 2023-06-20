@@ -9,18 +9,15 @@
 {% endblock mobile_extrahead %}
 
 {% block mobile_content%}
-  {% if user.is_authenticated %}
-    <div class="whole-bg">
-      <a href="{% url 'user:signout' %}">로그아웃</a>
-      <h1>환영합니다!
-        {{user.username}}
-        님</h1>
-      {% if not account.nickname %}
-        <a href="{% url 'account:nickname' %}">프로필 설정</a>
-      {% else %}
-        <a href="{% url 'account:accountInfo' account.id %}">프로필 보기</a>
-      {% endif %}
-    </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'user:signout' %}">로그아웃</a>
+        <h1>환영합니다! {{user.username}} 님</h1>
+        {% if not user.nickname %}
+        <a href="{% url 'user:nickname' %}">프로필 설정</a>
+        {% else %}
+        {% comment %} <a href="{% url 'user:accountInfo' user.id %}">프로필 보기</a> {% endcomment %}
+        {% endif %}
+
   {% else %}
     <div id="not-authenticated">
       <div class="background-section">
