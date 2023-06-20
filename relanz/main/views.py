@@ -9,8 +9,8 @@ def home(request):
 
     user = request.user
     if User.objects.filter(username=user.username).exists():
-        account = User.objects.get(username=user)
-        return render(request, 'main/home.html', {'account':account})
+        user = User.objects.get(username=user)
+        return render(request, 'main/home.html', {'user':user})
     return render(request, 'main/home.html')
 
 

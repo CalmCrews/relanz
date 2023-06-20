@@ -97,6 +97,6 @@ def content(request):
     
 
 def userinfo(request, user_id):
-    user = User.objects.get(username=request.user)
+    user = request.user
     user.birth = 2023 - user.birth
     return render(request, 'user/userinfo.html', {'user':user})
