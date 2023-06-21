@@ -95,9 +95,20 @@ def survey(request):
         if user.nickname is None:
             return render(request, 'user/content.html', {'user':user})
         if request.user.is_authenticated:
-            return redirect('user:survey')
+            return redirect('user:release')
     return render(request, 'main/home.html')
 
+@login_required(login_url='/user/signin')
+def release(request):
+    if request.method=="GET":
+        return render(request, 'tag/release.html')
+    if request.method=="POST":
+        user=request.user
+        if user.nickname is None:
+            return render(request, 'user/content.html', {'user':user})
+        if request.user.is_authenticated:
+            return redirect('user:release')
+    return render(request, 'main/home.html')
 
 
 
