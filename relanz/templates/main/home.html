@@ -15,7 +15,8 @@
         {% if not user.nickname %}
         <a href="{% url 'user:content' %}">프로필 설정</a>
         {% else %}
-        {% comment %} <a href="{% url 'user:accountInfo' user.id %}">프로필 보기</a> {% endcomment %}
+        {% comment %} <a href="{% url 'user:accountedit' user.id %}">프로필 수정</a> {% endcomment %}
+        <a href="{% url 'user:userinfo' user.id %}">프로필 보기</a>
         {% endif %}
 
   {% else %}

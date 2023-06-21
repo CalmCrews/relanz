@@ -4,12 +4,8 @@ from user.models import User
 # Create your views here.
 
 def home(request):
-    if request.user.is_anonymous:
-         return render(request, 'main/home.html')
-
-    user = request.user
-    if User.objects.filter(username=user.username).exists():
-        user = User.objects.get(username=user)
+    user=request.user
+    if request.user.is_authenticated:
         return render(request, 'main/home.html', {'user':user})
     return render(request, 'main/home.html')
 
