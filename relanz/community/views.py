@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from .forms import ArticleForm
 from .models import Article, Like
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required(login_url='/user/signin')
 def communityHome(request):
     articles = Article.objects.all()
     
@@ -14,6 +16,7 @@ def communityHome(request):
 
     return render(request, 'community/communityHome.html', {'articles':articles, 'page_obj':page_obj})
 
+@login_required(login_url='/user/signin')
 def new(request):
     form = ArticleForm()
 
@@ -28,12 +31,14 @@ def new(request):
 
     return render(request, 'community/new.html', {'form':form})
 
+@login_required(login_url='/user/signin')
 def detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     like_count = len(Like.objects.filter(article=article))
 
     return render(request, 'community/detail.html', {'article':article, 'like_count':like_count})
 
+@login_required(login_url='/user/signin')
 def edit(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
 
@@ -48,6 +53,7 @@ def edit(request, article_id):
     
     return render(request, 'community/edit.html', {'form':form, 'article':article})
 
+@login_required(login_url='/user/signin')
 def delete(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
 

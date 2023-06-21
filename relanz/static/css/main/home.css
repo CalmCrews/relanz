@@ -4,36 +4,94 @@
   box-sizing: border-box;
 }
 
-.whole-bg {
+/* profile-unset */
+#profile-unset {
   width: 100%;
-  overflow: scrolls;
-  background-color: #D0E0FF;
+  height: calc(100vh - 11.3em);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+#profile-unset .signin-complete {
+  margin-bottom: 50px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 145.02%;
+  text-align: center;
+  color: #71a1ff;
+}
+
+#profile-unset > .welcome-box {
+  position: relative;
+  height: 25vh;
+  width: 80%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#profile-unset > .welcome-box > img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
+#profile-unset > .wel-message {
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 40px;
+}
+
+#profile-unset > a {
+  width: 230px;
+  height: 50px;
+  margin-top: 40px;
+  padding: 15px 15px;
+  border-radius: 9999px;
+  background-color: #71a1ff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+}
+
+/* profile-set(real main-page) */
+
+/* not-authenticated */
 #not-authenticated {
   display: block;
   position: relative;
   width: 100%;
   height: 100vh;
-  background: #9ABCFF;
+  background: #9abcff;
 }
 
 #not-authenticated > .background-section {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30vh;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: 1;
 }
 
 #not-authenticated > .background-section > .img-section {
-  position: absolute;
-  width: 86%;
-  top: 18%;
-  left: 7%;
+  width: 80%;
   z-index: 2;
 }
 
-@media (max-height: 900px) {
+@media (max-height: 700px) {
   #not-authenticated > .background-section > .img-section {
     display: none;
   }
@@ -44,13 +102,17 @@
   object-fit: cover;
 }
 
-#not-authenticated > .background-section > .gradient{
+#not-authenticated > .background-section > .gradient {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 63.02%);
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0) 63.02%
+  );
   z-index: 3;
 }
 
@@ -87,7 +149,7 @@
 #not-authenticated > .sign-section > .sign-up > .sign-up-button {
   width: 80%;
   height: 3em;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   text-decoration: none;
@@ -97,17 +159,16 @@
 }
 
 .sign-section > .sign-up > .sign-up-button > span {
-  color: #9ABCFF;
+  color: #9abcff;
   text-align: center;
   font-size: 1em;
 }
-
 
 #not-authenticated > .sign-section > .sign-in {
   margin-top: 0.8em;
   text-align: center;
   color: #fff;
-  
+
   font-size: 0.8em;
 }
 
@@ -115,4 +176,3 @@
   text-decoration: none;
   color: #fff;
 }
-
