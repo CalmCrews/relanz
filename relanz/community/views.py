@@ -4,6 +4,10 @@ from .models import Article
 
 # Create your views here.
 
+def communityHome(request):
+    articles = Article.objects.all()
+    return render(request, 'community/communityHome.html', {'articles':articles})
+
 def new(request):
     form = ArticleForm()
 
