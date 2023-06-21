@@ -122,6 +122,19 @@ def activetime(request):
             return redirect('user:tagsurvey')
     return render(request, 'main/home.html')
 
+@login_required(login_url='/user/signin')
+def tagsurvey(request):
+    if request.method=="GET":
+        return render(request, 'tag/tagsurvey.html')
+    if request.method=="POST":
+        user=request.user
+        if user.nickname is None:
+            return render(request, 'user/content.html', {'user':user})
+        if request.user.is_authenticated:
+            return redirect('user:userinfo', user.id)
+    return render(request, 'main/home.html')
+
+
 
 
 @login_required(login_url='/user/signin')
