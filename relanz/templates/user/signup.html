@@ -21,37 +21,59 @@
           <label for="username" class="username-label">아이디 설정</label>
           <div class="username-input-uni-div">
             <span class="id-letter">ID</span>
-            <input type="text" placeholder="아이디 입력" name="username" id="username" class="username-input">
+            <input type="text" placeholder="아이디를 입력해주세요" name="username" id="username" class="username-input">
           </div>
-          <input type="button" value="아아디 중복 확인" class="username-button" id="username_button">
+          <div class="username-button-div">
+            <input type="button" value="아아디 중복 확인" class="username-button" id="username_button">
+            <div class="approve-msg hide" id="approve_msg">
+              <div class="approve-msg-div">
+                <img src="{% static "images/login/okIcon.png" %}" alt="." class="check-icon">
+              </div>
+              <span class="approve-msg-span">확인되었습니다</span>
+            </div>
+            <div class="reject-msg hide" id="reject_msg">
+              <div class="reject-msg-div">
+                <img src="{% static "images/login/xIcon.png" %}" alt="." class="check-icon">
+              </div>
+              <span class="reject-msg-span">사용할 수 없는 아이디입니다</span>
+            </div>
+          </div>
         </div>
-        
+
         <div>
           <div class="password-div">
             <label for="password" class="password-label">비밀번호 설정</label>
             <div class="password-input-uni-div">
               <span class="pw-letter">PW</span>
-              <input type="password" placeholder="비밀번호 입력" name="password" id="password" class="password-input">
+              <div class="pw-eye-div hide" id="password_eye">
+                <img class="pw-eye" src="{% static "images/login/closeEye.png" %}" alt="."></img>
+              </div>
+              <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" class="password-input">
             </div>
           </div>
           <div class="re-password-div">
             <label for="re_password" class="re-password-label">비밀번호 확인</label>
             <div class="re_password-input-uni-div">
               <span class="pw-letter">PW</span>
-              <input type="password" placeholder="비밀번호 입력" name="re_password" id="re_password" class="re-password-input">
+              <div class="pw-eye-div hide" id="rePasswordEye">
+                <img class="pw-eye" src="{% static "images/login/eye.png" %}" alt="."></img>
+              </div>
+              <input type="password" placeholder="비밀번호를 입력해주세요" name="re_password" id="re_password" class="re-password-input">
             </div>
             <div class="re-password-check-div">
-              <div class="check-img-div">
-                <img src="" alt="" srcset="체크체크" class="check-img-tag">
+              <div class="check-img-div-relative hide" id="passwordCheckMsg">
+                <div class="check-img-div">
+                  <img src="{% static "images/login/okIcon.png" %}" alt="." class="check-img-tag">
+                </div>
+                <p class="re-password-check-p">확인되었습니다</p>
               </div>
-              <p class="re-password-check-p">확인되었습니다</p>
             </div>
           </div>
         </div>
         <div class="submit-div">
-          <input type="submit" value="회원가입하기" name='signup' class="submit-input">
+          <input type="submit" value="회원가입하기" name='signup' class="mouseover submit-input" id="submit_input">
         </div>
-        
+
       </form>
     </div>
   </div>
@@ -60,34 +82,3 @@
 {% block scripts%}
   <script src={% static "js/signup.js"%}></script>
 {% endblock scripts%}
-
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    회원가입 페이지 <br/>
-    <form method='post'>
-    {% csrf_token %}
-      <div class="container">
-    <input type="text" required="required" name='username' id='username' value={{username}}>
-    <span>User ID</span>
-    <hr>
-    <input type="password" required="required" name='password' id='password' value={{password}}>
-    <span>PassWord</span>
-    <hr>
-    <input type="password" required="required" name='re_password' id='re_password' value={{re_password}}>
-    <span>Re-Enter PassWord</span>
-    <hr>
-
-    </section>
-    {{error}}
-    <button class="signup" type="submit" value="Sign up">Sign Up</button>
-      <button type="submit">회원 가입</button>
-    </form>
-  </body>
-</html> {% endcomment %}
