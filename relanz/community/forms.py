@@ -7,4 +7,5 @@ class ArticleForm(forms.ModelForm):
         fields = [
             'title',
             'content',
+            'image',
         ]
