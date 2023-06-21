@@ -20,6 +20,37 @@
         <a href="{% url 'user:content' %}">프로필 설정하기</a>
       </div>
     {% else %}
+      <div id="profile-set">
+        <div id="under-page">
+          <div class="profile-section">
+            <div class="profile-img"></div>
+            <div class="bubble"></div>
+            <div class="badge-section"></div>
+          </div>
+        </div>
+        <div id="top-page">
+          <div class="header-message"></div>
+          <div class="relenge-section">
+            <ul class="tag-list"></ul>
+            <ul class="relenge-list">
+            </ul>
+          </div>
+          <div class="report-section">
+            <div class="report-header">
+              <div class="report-title"></div>
+              <div class="weekly-monthly"></div>
+            </div>
+            <div class="report-summary">
+              <div class="summary-block"></div>
+              <div class="summary-detail-1"></div>
+              <div class="summary-detail-2"></div>
+            </div>
+            <div class="relanz-magazine">
+              
+            </div>
+          </div>
+        </div>
+      </div>
       <a href="{% url 'user:userinfo' user.id %}">프로필 보기</a>
     {% endif %}
 
