@@ -8,5 +8,3 @@ def home(request):
     if request.user.is_authenticated:
         return render(request, 'main/home.html', {'user':user})
     return render(request, 'main/home.html')
-
-
