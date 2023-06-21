@@ -5,7 +5,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 
 
 @csrf_protect
@@ -47,12 +47,19 @@ def signin(request):
         if 'login' in request.POST:
             username = request.POST['username']
             password = request.POST['password']
+            if not username:
+                messages.add_message(request, messages.ERROR, 'Please enter a valid username.')
+                return render(request, 'user/signin.html')
+            if not password:
+                messages.add_message(request, messages.ERROR, 'Please enter a valid password.')
+                return render(request, 'user/signin.html')
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('main:home')
+                return render(request, 'main/home.html')
             else:
-                return render(request, 'user/signin.html', {'error':"아이디 혹은 비밀번호가 다릅니다."})
+                messages.add_message(request, messages.ERROR, '유효한 ID와 비밀번호가 아닙니다.')
+                return render(request, 'user/signin.html')
         else:
             return redirect('main:home')
                 

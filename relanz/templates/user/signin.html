@@ -30,9 +30,19 @@
         <input type="submit" value="login" name='login' class="submit-input"> <!--여기도 동일하게 name tag 유지 해주셔야 되여!-->
       </form>
     </div>
+
+
     <div class="ask-signup-div">
       <p>아직 회원이 아니신가요?</p>
       <a href="{% url 'user:signup' %}" class="ask-signup-a">회원가입</a>
+      <!-- {% if messages %}
+	      {% for message in messages %}
+		      {{ message.tags }}
+		      {{ message.message }}
+      	{% endfor %}
+      {% endif %} 
+    tag는 error, message는 view에서 전달해주는 값
+    -->
     </div>
   </div>
 {% endblock %}
