@@ -106,5 +106,4 @@ def content(request):
 def userinfo(request, user_id):
     user = request.user
     user = User.objects.get(username=user.username) 
-    user.save()
     return render(request, 'user/userinfo.html', {'user':user})
