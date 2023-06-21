@@ -2,6 +2,8 @@
 
 .container-mobile {
     padding: 3em 0;
+    min-width: 430px;
+    position: relative;
 }
 
 .logo-box_big {
@@ -164,6 +166,15 @@
     margin-bottom: 0.8em;
 }
 
+.submit-input{
+    transition: background-color 0.15s ease;
+}
+.submit-input:hover {
+    background: #3F80FC ;
+    cursor: pointer;
+}
+
+
 .ask-signup-div {
     display: flex;
     justify-content: center;
@@ -187,4 +198,71 @@
 }
 .ask-signup-div .ask-signup-a:visited {
     color: #71A1FF;
+}
+
+.warning-user {
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 300px;
+    height: 150px;
+    box-sizing: border-box;
+    border-radius: 35px;
+    background: #FFFFFF;
+    border: 2px solid #71A1FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    gap: 2em;
+}
+
+.warning-user > .warning-ment {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 19px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: -0.05em;
+
+    color: #494949;
+
+    padding-top: 0.6em;
+}
+.warning-user > .warning-btn {
+    width: 137px;
+    height: 50px;
+    background: #71A1FF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    box-sizing: border-box;
+    border: none;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: -0.05em;
+
+    color: #FFFFFF;
+
+}
+.warning-user > .warning-btn:hover {
+    cursor: pointer;
+    background-color: #3F80FC;
+}
+
+.hide {
+    visibility: hidden;
+    z-index: -1;
 }

@@ -111,9 +111,10 @@
                 color: #FFFFFF;
                 transition: background-color 0.15s ease;
             }
-            .username-button:hover {
+            /* .username-button:hover {
                 background: #3F80FC ;
-            }
+                cursor: pointer;
+            } */
 
             .approve-msg {
                 display: flex;
@@ -361,9 +362,10 @@
             color: #FFFFFF;
             transition: background-color 0.15s ease;
         }
-        .submit-input:hover {
+        /* .submit-input:hover {
             background: #3F80FC ;
-        }
+            cursor: pointer;
+        } */
     }
 }
 
@@ -371,3 +373,12 @@
     visibility: hidden;
 }
 
+
+.username-button:hover {
+    background-color: #3F80FC ;
+    cursor: pointer;
+}
+.submit-input:hover {
+    background-color: #3F80FC ;
+    cursor: pointer;
+}
