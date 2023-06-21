@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
 from .forms import ArticleForm
 from .models import Article
 
@@ -6,7 +7,12 @@ from .models import Article
 
 def communityHome(request):
     articles = Article.objects.all()
-    return render(request, 'community/communityHome.html', {'articles':articles})
+    
+    paginator = Paginator(articles, 3) # 한페이지 당 사진 3개로 설정
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'community/communityHome.html', {'articles':articles, 'page_obj':page_obj})
 
 def new(request):
     form = ArticleForm()
