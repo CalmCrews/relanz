@@ -3,7 +3,6 @@
 {% block title %} Welcome! Relanz {% endblock title %} 
 {% block extrahead %} 
   <link rel="stylesheet" type="text/css" href="{% static "css/main/splashscreen.css"%}"> 
-  <script src={% static "js/splashscreen.js"%}></script>
 {% endblock extrahead %} 
 {% block content %}
 <div class="scrollable-container">
@@ -45,5 +44,34 @@
     </div>
   </div>
 </div>
+{% endblock %}
 
+{% block scripts %}
+  <script>
+    function goToHome() {
+      window.location.href = "{% url 'main:home' %}";
+    }
+    
+    function scrollDiv() {
+      const container = document.querySelector(".scrollable-container");
+      let items = document.querySelectorAll(".scrollable-item");
+      let itemIndex = 0;
+      const scrollInterval = 2500;
+    
+      function scrollToNextItem() {
+        if (itemIndex < items.length - 1) {
+          const nextItem = items[itemIndex + 1];
+          container.scrollTop = nextItem.offsetTop;
+          itemIndex++;
+        } else {
+          goToHome();
+        }
+      }
+
+      setInterval(scrollToNextItem, scrollInterval);
+    }
+    
+    // 페이지 로드 시 스크롤 이벤트 함수 호출
+    window.addEventListener("load", scrollDiv);    
+  </script>
 {% endblock %}
