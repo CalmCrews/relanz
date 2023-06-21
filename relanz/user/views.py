@@ -82,12 +82,12 @@ def content(request):
             user.birth = birth
             user.sex = sex
             user.save()
-            return redirect('user:userinfo', user.id)
+            return redirect('user:survey')
     
 def seurvey(request):
     user=request.user
     if request.user.is_authenticated:
-        return render(request, 'main/home.html', {'user':user})
+        return render(request, 'user/survey.html', {'user':user})
     return render(request, 'main/home.html')
 
 
