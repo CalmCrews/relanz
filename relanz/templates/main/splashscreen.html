@@ -3,6 +3,7 @@
 {% block title %} Welcome! Relanz {% endblock title %} 
 {% block extrahead %} 
   <link rel="stylesheet" type="text/css" href="{% static "css/main/splashscreen.css"%}"> 
+  <script src={% static "js/splashscreen.js"%}></script>
 {% endblock extrahead %} 
 {% block content %}
 <div class="scrollable-container">
@@ -45,36 +46,4 @@
   </div>
 </div>
 
-<script>
-  // 스크롤 이벤트를 관리하는 함수
-  function goToHome() {
-    window.location.href = "{% url 'main:home' %}";
-  }
-
-  function scrollDiv() {
-    const container = document.querySelector('.scrollable-container');
-    let items = document.querySelectorAll('.scrollable-item');
-    
-    // div1을 현재 화면에 보이도록 스크롤 이동
-    container.scrollTop = items[0].offsetTop;
-    
-    const scrollInterval = 3000; 
-    
-    setInterval(function() {
-      const firstItem = items[0];
-      if (firstItem.id === 'div4') {
-        goToHome();
-      }
-      container.removeChild(firstItem);
-
-      console.log("remove!");
-      items = document.querySelectorAll('.scrollable-item');
-      container.scrollTop = items[0].offsetTop;
-
-    }, scrollInterval);
-  }
-  
-  // 페이지 로드 시 스크롤 이벤트 함수 호출
-  window.addEventListener('load', scrollDiv);
-</script>
 {% endblock %}
