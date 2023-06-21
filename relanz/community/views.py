@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from .forms import ArticleForm
-from .models import Article
+from .models import Article, Like
 
 # Create your views here.
 
@@ -30,8 +30,9 @@ def new(request):
 
 def detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
+    like_count = len(Like.objects.filter(article=article))
 
-    return render(request, 'community/detail.html', {'article':article})
+    return render(request, 'community/detail.html', {'article':article, 'like_count':like_count})
 
 def edit(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
@@ -53,3 +54,19 @@ def delete(request, article_id):
     article.delete()
 
     return redirect('main:home')
+
+def like(request, article_id):
+    # 로그인하지 않았다면 좋아요 못누르고 로그인으로 이동
+    if request.user.is_anonymous:
+        return redirect("user:signin")
+    
+    # 현재 로그인한 사용자가 해당 글에 Like 객체를 만든 것이 존재한다면 detail로 이동 -> 본인 글에 좋아요 누르기 가능
+    if Like.objects.filter(likedUser=request.user, article_id=article_id):
+        return redirect("community:detail", article_id)
+    
+    # 현재 로그인한 사용자가 해당 글에 Like 객체를 만든 것이 존재하지 않는다면 Like 객체 만들기
+    like = Like()
+    like.article = get_object_or_404(Article, pk=article_id)
+    like.likedUser = request.user
+    like.save()
+    return redirect('community:detail', article_id)
