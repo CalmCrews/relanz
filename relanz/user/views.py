@@ -107,9 +107,20 @@ def release(request):
         if user.nickname is None:
             return render(request, 'user/content.html', {'user':user})
         if request.user.is_authenticated:
-            return redirect('user:release')
+            return redirect('user:activetime')
     return render(request, 'main/home.html')
 
+@login_required(login_url='/user/signin')
+def activetime(request):
+    if request.method=="GET":
+        return render(request, 'tag/activetime.html')
+    if request.method=="POST":
+        user=request.user
+        if user.nickname is None:
+            return render(request, 'user/content.html', {'user':user})
+        if request.user.is_authenticated:
+            return redirect('user:tagsurvey')
+    return render(request, 'main/home.html')
 
 
 

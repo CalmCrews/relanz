@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+activetime
+{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content%}
+3
+
+<a href="{% url 'main:home' %}">홈으로</a>
+
+<form method='post'>
+    {% csrf_token %}
+    <button class="userinfo" type="submit" action="{% url 'user:activetime' %}">다음</button>
+</form>
+
+{% comment %} 홈 버튼은 test용 입니다. {% endcomment %}
+{% endblock %}
