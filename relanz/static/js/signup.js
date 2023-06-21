@@ -1,4 +1,24 @@
-console.log("hih")
+const passwordInput = document.getElementById("password")
+const rePasswordInput = document.getElementById("re_password")
+
+const idCheckBtn = document.getElementById("username_button")
+const sumbitBtn = document.getElementById("submit_input")
+
+let passwordIsFilled = false
+let rePasswordIsFilled = false
+let passwordIsSame = false
+
+
+const messageAppearFunc = (id) => {
+  const tag = document.getElementById(id)
+  tag.classList.remove("hide")
+}
+const messageDisppearFunc = (id) => {
+  const tag = document.getElementById(id)
+  tag.classList.add("hide")
+}
+
+
 const onClickCheckId = async () => {
     const id = document.getElementById("username").value
     if (!id) {
@@ -21,6 +41,50 @@ const onClickCheckId = async () => {
     const message = await response.json()
     console.log(message)
     // 이후 처리에 따라 아이디 중복 여부를 유저에게 피드백하면 됨!
+    // reject_msg approve_msg
 }
 
 document.getElementById("username_button").addEventListener("click", onClickCheckId)
+
+passwordInput.addEventListener("keyup", (event)=>{
+  const inputValue = event.target.value !== "" ? true : false
+  if (inputValue) {
+    messageAppearFunc("password_eye")
+    passwordIsFilled = inputValue
+  } else {
+    if (passwordIsFilled === inputValue) {
+      return
+    }
+    messageDisppearFunc("password_eye")
+    passwordIsFilled = inputValue
+  }
+})
+
+rePasswordInput.addEventListener("keyup", (event)=> {
+  const inputValue = event.target.value !== "" ? true : false
+  if (inputValue) {
+    messageAppearFunc("rePasswordEye")
+    rePasswordIsFilled = inputValue
+  } else {
+    if (rePasswordIsFilled === inputValue) {
+      return
+    }
+    messageDisppearFunc("rePasswordEye")
+    rePasswordIsFilled = inputValue
+  }
+})
+
+rePasswordInput.addEventListener("keyup", (event)=> {
+  const isSame = event.target.value === passwordInput.value ? true : false
+  if (isSame) {
+    messageAppearFunc("passwordCheckMsg")
+    passwordIsSame = isSame
+  } else {
+    if (passwordIsSame === isSame) {
+      return
+    }
+    messageDisppearFunc("passwordCheckMsg")
+    passwordIsSame = isSame
+  }
+})
+

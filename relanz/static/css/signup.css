@@ -92,21 +92,89 @@
                 color: #AAAAAA;
             }
         }
-        
-        .username-button {
-            border: none;
-            width: 101px;
-            height: 31px;
-            background: #9ABCFF;
-            border-radius: 30px;
+        .username-button-div {
+            position: relative;
 
-            font-family: 'Pretendard';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 12px;
-            line-height: 14px;
-            letter-spacing: -0.06em;
-            color: #FFFFFF;
+            .username-button {
+                border: none;
+                width: 101px;
+                height: 31px;
+                background: #9ABCFF;
+                border-radius: 30px;
+    
+                font-family: 'Pretendard';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: -0.06em;
+                color: #FFFFFF;
+                transition: background-color 0.15s ease;
+            }
+            .username-button:hover {
+                background: #3F80FC ;
+            }
+
+            .approve-msg {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                top: 30%;
+                left: 40%;
+                
+
+                .approve-msg-div {
+                    width: 14px;
+                    height: 14px;
+                    margin-right: 0.5em;
+
+                    .check-icon {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .approve-msg-span {
+                    font-family: 'Pretendard';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: -0.06em;
+
+                    color: #727272;
+                } 
+            }
+
+            .reject-msg {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                top: 30%;
+                left: 40%;
+
+                .reject-msg-div {
+                    width: 14px;
+                    height: 14px;
+                    margin-right: 0.5em;
+
+                    .check-icon {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .reject-msg-span {
+                    font-family: 'Pretendard';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: -0.06em;
+
+                    color: #727272;
+                }
+            }
         }
     }
     .password-div {
@@ -141,6 +209,19 @@
                 line-height: 17px;
                 color: #9ABCFF;
             }
+            .pw-eye-div {
+                position: absolute;
+                top: 65%;
+                transform: translate(-50%, -50%);
+                right: 2%;
+                display: flex;
+                width: 16px;
+                height: 12px;
+                .pw-eye {
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
             .password-input {
                 width: 299px;
                 height: 40px;
@@ -165,7 +246,7 @@
         display: flex;
         flex-direction: column;
         gap: 0.3em;
-        margin-bottom: 4.5em;
+        margin-bottom: 5em;
 
         .re-password-label {
             font-family: 'Pretendard';
@@ -192,6 +273,19 @@
                 line-height: 17px;
                 color: #9ABCFF;
             }
+            .pw-eye-div {
+                position: absolute;
+                top: 65%;
+                transform: translate(-50%, -50%);
+                right: 2%;
+                display: flex;
+                width: 16px;
+                height: 12px;
+                .pw-eye {
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
             .re-password-input {
                 width: 299px;
                 height: 40px;
@@ -213,30 +307,37 @@
         }
 
         .re-password-check-div {
-            display: flex;
-            align-items: center;
+            position: relative;
             padding-left: 0.7em;
             padding-top: 0.2em;
-            .check-img-div {
-                width: 18px;
-                height: 18px;
-                background-color: aquamarine;
-                margin-right: 0.7em;
-                .check-img-tag {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
+            
+            .check-img-div-relative {
+                position: absolute;
+                display: flex;
+                align-items: center;
+
+                .check-img-div {
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 0.7em;
+                    .check-img-tag {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .re-password-check-p {
+                    font-family: 'Pretendard';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: -0.06em;
+                    color: #7E7E7E;
                 }
             }
-            .re-password-check-p {
-                font-family: 'Pretendard';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 12px;
-                line-height: 14px;
-                letter-spacing: -0.06em;
-                color: #7E7E7E;
-            }
+
         }
     }
     .submit-div {
@@ -258,6 +359,15 @@
             letter-spacing: -0.05em;
 
             color: #FFFFFF;
+            transition: background-color 0.15s ease;
+        }
+        .submit-input:hover {
+            background: #3F80FC ;
         }
     }
 }
+
+.hide {
+    visibility: hidden;
+}
+
