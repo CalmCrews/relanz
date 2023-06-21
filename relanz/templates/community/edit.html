@@ -3,14 +3,12 @@
 {% endblock extrahead %} {% endcomment %}
 
 {% block title %}
-<h1>edit 페이지</h1>
+<h1>사진 수정 페이지</h1>
 {% endblock title %}
 
 {% block content %}
 <form method="POST" action="{% url 'community:edit' article.id %}" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="text" name="title" value="{{article.title}}"/>
-    <textarea name="content" id="" cols="30">{{article.content}}</textarea>
     <input type="file" name="image" value="{{article.image}}"/>
     <input type="submit" value="수정하기">
 </form>
