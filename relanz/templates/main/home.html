@@ -1,26 +1,54 @@
-{% extends 'base.html' %}
+{% extends 'mobileBase.html' %}
 {% load static %}
-{% block title %}
-  Home
-{% endblock title %}
+{% block mobile_title %}
+  Home | Start!
+{% endblock mobile_title %}
 
-{% block extrahead %}
-{% comment %} <link rel="stylesheet" type="text/css" href="{% static "css/home.css"%}"> {% endcomment %}
-{% endblock extrahead %}
+{% block mobile_extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/main/home.css"%}">
+{% endblock mobile_extrahead %}
 
-{% block content%}
+{% block mobile_content%}
     {% if user.is_authenticated %}
         <a href="{% url 'user:signout' %}">로그아웃</a>
         <h1>환영합니다! {{user.username}} 님</h1>
-        {% if not account.nickname %}
-        <a href="{% url 'account:nickname' %}">프로필 설정</a>
+        {% if not user.nickname %}
+        <a href="{% url 'user:content' %}">프로필 설정</a>
         {% else %}
-        <a href="{% url 'account:accountInfo' account.id %}">프로필 보기</a>
+        {% comment %} <a href="{% url 'user:accountedit' user.id %}">프로필 수정</a> {% endcomment %}
+        <a href="{% url 'user:userinfo' user.id %}">프로필 보기</a>
         {% endif %}
-    {% else %}
-        <a href="{% url 'user:signup' %}">회원가입</a>
-        <a href="{% url 'user:signin' %}">로그인</a>
-    {% endif %}
-{% endblock  %}
 
+  {% else %}
+    <div id="not-authenticated">
+      <div class="background-section">
+        <div class="img-section">
+          <img src="{% static "images/home-faces.svg" %}" alt="home-faces">
+        </div>
+        <div class="gradient">
+          <p></p>
+        </div>
+      </div>
+      <div class="text-section">
+        <span>이젠 릴렌즈와 함께<br>당신의 스트레스 해소법을 찾아<br>스트레스 면역력을 키워봐요!</span>
+      </div>
+      <div class="sign-section">
+        <div class="sign-up">
+          <a class="sign-up-button" href="{% url 'user:signup' %}">
+            <span>
+              <u>새롭게 시작하기</u>
+            </span>
+          </a>
+        </div>
+        <div class="sign-in">
+          <a href="{% url 'user:signin' %}">
+            <span>
+              <u>이미 계정이 있어요!(로그인하기)</u>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
 
+  {% endif %}
+{% endblock %}

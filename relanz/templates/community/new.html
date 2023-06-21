@@ -6,14 +6,13 @@
 {% endblock extrahead %} {% endcomment %}
 
 {% block title%}
-<h1>new 페이지</h1>
+<h1>사진 업로드 페이지</h1>
 {% endblock title %}
 
 {% block content %}
-<form method="POST" action="{% url 'community:new' %}">
+<form method="POST" action="{% url 'community:new' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    제목 : <input type="text" name="title" value=""/>
-    본문 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+    사진 : <input type="file" name="image"/>
     <button type="submit">글작성</button>
 </form>
 

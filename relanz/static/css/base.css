@@ -55,33 +55,39 @@ body {
 }
 
 #side-box .message-box {
-  margin: 2.2rem 0 0 0;
+  margin: 2.2em 0 0 0;
+}
+
+@media (max-width: 1500px) {
+  #side-box {
+    font-size: 60%;
+  }
 }
 
 #side-box > .message-box > .large-message {
-  font-size: 2.7rem;
+  font-size: 2.7em;
   font-weight: 600;
 }
 
 #side-box > .message-box > .small-message {
-  margin: 1.2rem 0 0 0;
-  font-size: 1.8rem;
+  margin: 1.2em 0 0 0;
+  font-size: 1.8em;
   font-weight: 500;
 }
 
 #side-box > .word-box {
-  margin-top: 5rem;
+  margin-top: 5em;
 }
 
 #side-box > .word-box > .word-define {
-  width: 19rem;
-  height: 3rem;
+  width: 18em;
+  height: 3em;
   border-radius: 30px;
-  padding: 0.5rem;
+  padding: 0.5em;
   background: #9abcff;
   color: #fff;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.2em;
   font-weight: 500;
 }
 
@@ -90,10 +96,10 @@ body {
 }
 
 #side-box > .word-box > .word-describe {
-  width: 19rem;
+  width: 18em;
   justify-content: center;
-  padding: 1rem;
-  font-size: 1.2rem;
+  padding: 1em;
+  font-size: 1.2em;
   font-weight: 500;
 }
 
