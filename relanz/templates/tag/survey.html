@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Survey
+{% endblock title %}
+
+{% block extrahead %}
+
+{% endblock extrahead %}
+{% block content%}
+1
+<a href="{% url 'main:home' %}">홈으로</a>
+<form method='post'>
+  {% csrf_token %}
+  <button type="submit" action="{% url 'user:survey' %}">다음</button>
+  <br>
+</form>
+{% comment %} 홈 버튼은 test용 입니다. {% endcomment %}
+{% endblock %}
