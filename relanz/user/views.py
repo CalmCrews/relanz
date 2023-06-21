@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -59,7 +60,7 @@ def signout(request):
     logout(request)
     return render(request, 'user/signout.html')
 
-
+@login_required(login_url='/user/signin')
 def content(request):
     if request.method=="GET":
         return render(request, 'user/content.html')
@@ -84,13 +85,14 @@ def content(request):
             user.save()
             return redirect('user:survey')
     
+@login_required(login_url='/user/signin')
 def seurvey(request):
     user=request.user
     if request.user.is_authenticated:
         return render(request, 'user/survey.html', {'user':user})
     return render(request, 'main/home.html')
 
-
+@login_required(login_url='/user/signin')
 def userinfo(request, user_id):
     user = request.user
     user = User.objects.get(username=user.username) 
