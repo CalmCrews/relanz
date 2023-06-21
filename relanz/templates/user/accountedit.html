@@ -26,7 +26,7 @@
     <input type="radio" name="sex" value="female">
     <label>여자</label>
 
-    <button class="userinfo" type="submit" action="{% url 'user:content' %}">다음</button>
+    <button class="userinfo" type="submit" action="{% url 'user:accountedit' user.id %}">수정하기</button>
     <br>
 </form>
 

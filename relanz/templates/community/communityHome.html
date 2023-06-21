@@ -1,0 +1,18 @@
+{% block title %}
+<h1>기록 게시판 홈</h1>  
+{% endblock title %}
+
+{% block content %}
+<a href="{% url 'community:new'%}">내 기록 남기기</a>
+<a href="{% url 'community:communityHome' %}">내 기록 모아보기</a>
+<br />
+<hr />
+{% for article in articles %}
+<a href="{% url 'community:detail' article.id %}">
+    <img src="{{article.image.url}}" width="100">
+</a>
+{% endfor %}
+
+<br/>
+<a href="{% url 'main:home' %}">홈</a>
+{% endblock content %}

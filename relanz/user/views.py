@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import User
 from django.contrib.auth import login, logout, authenticate
 import json
@@ -36,7 +36,7 @@ def identify(request):
         username = json_data.get('id')
         if User.objects.filter(username=username).exists():
             message = {'message': '이미 있는 아이디입니다.'}
-            return JsonResponse(message, status=200)
+            return JsonResponse(message, status=400)
         return render(request, 'user/signup.html')
 
 def signin(request):
@@ -60,43 +60,68 @@ def signout(request):
     return render(request, 'user/signout.html')
 
 
-
-
-def nickname(request):
-    user_data={}
-    if request.method=="GET":
-        return render(request, 'user/nickname.html')
-    if request.method=="POST":
-        nickname = request.POST.get('nickname')
-        user = User.objects.get(username=request.user)
-        if not nickname:
-            user_data['error'] = "닉네임을 입력해주세요."
-            return render(request, 'user/nickname.html', user_data)
-        
-        elif User.objects.filter(nickname=nickname).exists():
-            user_data['error'] = "이미 존재하는 닉네임입니다."
-            return render(request, 'user/nickname.html', user_data)
-        else:
-            user.nickname = nickname
-            user.save()
-            return redirect('user:content')
-
-
-
 def content(request):
     if request.method=="GET":
         return render(request, 'user/content.html')
     if request.method=="POST":
-        user = User.objects.get(username=request.user)
+        message = {}
+        user = request.user
+        user = User.objects.get(username=user.username)
+
+        nickname = request.POST.get('nickname')
         birth = request.POST.get('birth')
         sex = request.POST.get('sex')
-        user.birth = birth
-        user.sex = sex
-        user.save()
-        return redirect('user:userinfo', user.id)
+        if not nickname:
+            message['error'] = "닉네임을 입력해주세요."
+            return render(request, 'user/content.html', message)
+        elif User.objects.filter(nickname=nickname).exists():
+            message['error'] = "이미 존재하는 닉네임입니다."
+            return render(request, 'user/content.html', message)
+        else:
+            user.nickname = nickname
+            user.birth = birth
+            user.sex = sex
+            user.save()
+            return redirect('user:survey')
     
+def seurvey(request):
+    user=request.user
+    if request.user.is_authenticated:
+        return render(request, 'user/survey.html', {'user':user})
+    return render(request, 'main/home.html')
+
 
 def userinfo(request, user_id):
-    user = User.objects.get(username=request.user)
-    user.birth = 2023 - user.birth
+    user = request.user
+    user = User.objects.get(username=user.username) 
     return render(request, 'user/userinfo.html', {'user':user})
+
+
+# def accountedit(request, user_id):
+#     account = get_object_or_404(User, pk=user_id)
+#     if request.method == 'GET':
+#         return render(request, 'user/accountedit.html', {'user':account})
+#     if request.method == 'POST':
+#         message = {}
+#         nickname = request.POST.get('nickname')
+#         birth = request.POST.get('birth')
+#         sex = request.POST.get('sex')
+#         if not nickname:
+#             message['error'] = "닉네임을 입력해주세요."
+#             return render(request, 'user/accountedit.html', message)
+#         elif User.objects.filter(nickname=nickname).exists():
+#             if account.nickname == nickname:
+#                     account.nickname = nickname
+#                     account.birth = birth 
+#                     account.sex = sex
+#                     account.save()
+#                     return redirect('user:userinfo', account.id)
+            
+#             message['error'] = "이미 존재하는 닉네임입니다."
+#             return render(request, 'user/accountedit.html', message)
+#         else:
+#             account.nickname = nickname
+#             account.birth = birth 
+#             account.sex = sex
+#             account.save()
+#             return redirect('user:userinfo', account.id)

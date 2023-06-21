@@ -12,11 +12,7 @@ def welcome(request):
 
 
 def home(request):
-    if request.user.is_anonymous:
-        return render(request, 'main/home.html')
-
-    user = User.objects.get(username=request.user)
-    if User.objects.filter(username=request.user).exists():
-        account = User.objects.get(username=user)
-        return render(request, 'main/home.html', {'account': account})
+    user=request.user
+    if request.user.is_authenticated:
+        return render(request, 'main/home.html', {'user':user})
     return render(request, 'main/home.html')

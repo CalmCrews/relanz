@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime
+
 
 # Create your models here.
 
@@ -18,3 +20,7 @@ class User(AbstractUser):
 
     sex = models.CharField(max_length=10, choices=sex_tuple, null=True)
 
+    @property
+    def age(self):
+        age_ = datetime.now().year - self.birth
+        return age_
