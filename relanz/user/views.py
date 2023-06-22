@@ -100,7 +100,7 @@ def survey(request):
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
-            return render(request, 'user/content.html', {'user':user})
+            return redirect('user:content')
         if request.user.is_authenticated:
             return redirect('user:release')
     return render(request, 'main/home.html')
@@ -112,7 +112,7 @@ def release(request):
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
-            return render(request, 'user/content.html', {'user':user})
+            return redirect('user:content')
         if request.user.is_authenticated:
             return redirect('user:activetime')
     return render(request, 'main/home.html')
@@ -125,7 +125,7 @@ def activetime(request):
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
-            return render(request, 'user/content.html', {'user':user})
+            return redirect('user:content')
         morning = request.POST.get('morning')
         afternoon = request.POST.get('afternoon')
         evening = request.POST.get('evening')
@@ -154,7 +154,12 @@ def tagsurvey(request):
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
-            return render(request, 'user/content.html', {'user':user})
+            return redirect('user:content')
+        try:
+            tags = Tag.objects.get(user=user)
+        except Tag.DoesNotExist:
+            tags = Tag.objects.create(user=user)
+            return redirect('user:activetime')
         
         inside = request.POST.get('inside')
         outside = request.POST.get('outside')
@@ -170,7 +175,12 @@ def tagsurvey(request):
         short = request.POST.get('short')
         newtry = request.POST.get('newtry')
         tags = Tag.objects.get(user=user)
-        if inside or outside or solo or group or extreme or calm or focus or achievement or bodyhealth or confidence or mental or short or newtry:
+        tag_cnt = 0
+        tag_lists = [inside, outside, solo, group, extreme, calm, focus, achievement, bodyhealth, confidence, mental, short, newtry]
+        for tag_list in tag_lists:
+            if tag_list is not None:
+                tag_cnt += 1
+        if tag_cnt > 0:
             if inside is not None:
                 tags.inside = True
             if outside is not None:
@@ -195,7 +205,9 @@ def tagsurvey(request):
                 tags.newtry = True
             tags.save()
             return redirect('user:userinfo', user.id)
-        return redirect('user:userinfo', user.id)
+        else:
+            messages.add_message(request, messages.ERROR, '하나 이상 선택해 주세요.')
+            return render(request, 'tag/tagsurvey.html')
     return render(request, 'main/home.html')
 
 
