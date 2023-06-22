@@ -24,3 +24,25 @@ class User(AbstractUser):
     def age(self):
         age_ = datetime.now().year - self.birth
         return age_
+
+class Tag(models.Model):
+    class Meta:
+        db_table = 'tag'
+
+    user = models.ForeignKey('User', on_delete=models.CASCADE, unique=True)
+    morning = models.BooleanField(default=False)
+    afternoon = models.BooleanField(default=False)
+    evening = models.BooleanField(default=False)
+    inside = models.BooleanField(default=False)
+    outside = models.BooleanField(default=False)
+    solo = models.BooleanField(default=False)
+    group = models.BooleanField(default=False)
+    extreme = models.BooleanField(default=False)
+    calm = models.BooleanField(default=False)
+    focus = models.BooleanField(default=False)
+    achievement = models.BooleanField(default=False)
+    bodyhealth = models.BooleanField(default=False)
+    confidence = models.BooleanField(default=False)
+    mental = models.BooleanField(default=False)
+    short = models.BooleanField(default=False)
+    newtry = models.BooleanField(default=False)

@@ -92,12 +92,57 @@ def content(request):
             user.save()
             return redirect('user:survey')
     
+
 @login_required(login_url='/user/signin')
-def seurvey(request):
-    user=request.user
-    if request.user.is_authenticated:
-        return render(request, 'user/survey.html', {'user':user})
+def survey(request):
+    if request.method=="GET":
+        return render(request, 'tag/survey.html')
+    if request.method=="POST":
+        user=request.user
+        if user.nickname is None:
+            return render(request, 'user/content.html', {'user':user})
+        if request.user.is_authenticated:
+            return redirect('user:release')
     return render(request, 'main/home.html')
+
+@login_required(login_url='/user/signin')
+def release(request):
+    if request.method=="GET":
+        return render(request, 'tag/release.html')
+    if request.method=="POST":
+        user=request.user
+        if user.nickname is None:
+            return render(request, 'user/content.html', {'user':user})
+        if request.user.is_authenticated:
+            return redirect('user:activetime')
+    return render(request, 'main/home.html')
+
+@login_required(login_url='/user/signin')
+def activetime(request):
+    if request.method=="GET":
+        return render(request, 'tag/activetime.html')
+    if request.method=="POST":
+        user=request.user
+        if user.nickname is None:
+            return render(request, 'user/content.html', {'user':user})
+        if request.user.is_authenticated:
+            return redirect('user:tagsurvey')
+    return render(request, 'main/home.html')
+
+@login_required(login_url='/user/signin')
+def tagsurvey(request):
+    if request.method=="GET":
+        return render(request, 'tag/tagsurvey.html')
+    if request.method=="POST":
+        user=request.user
+        if user.nickname is None:
+            return render(request, 'user/content.html', {'user':user})
+        if request.user.is_authenticated:
+            return redirect('user:userinfo', user.id)
+    return render(request, 'main/home.html')
+
+
+
 
 @login_required(login_url='/user/signin')
 def userinfo(request, user_id):
@@ -105,6 +150,8 @@ def userinfo(request, user_id):
     user = User.objects.get(username=user.username) 
     return render(request, 'user/userinfo.html', {'user':user})
 
+# views.py에 함수가 너무 많고 길어져서 https://wikidocs.net/71657#pybourlspy를 참고해서 바꾸는 게 좋을 듯 합니다.
+# user와 profile로 나누는 게 가장 적당하고 생각합니다. 그래도 길면은 survey, profile, user이렇게 3개...
 
 # def accountedit(request, user_id):
 #     account = get_object_or_404(User, pk=user_id)
