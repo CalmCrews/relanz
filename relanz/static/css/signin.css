@@ -77,6 +77,17 @@
     color: #b8b8b8;
 }
 
+
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #E7E7E7 inset !important;
+	box-shadow: 0 0 0 1000px #E7E7E7 inset !important;
+}
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #494949;
+    text-fill-color:  #494949;
+}
+
 .login-form-div-mobile .password-input {
     border: none;
     padding: 10px 15px;
