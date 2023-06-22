@@ -64,6 +64,106 @@
 }
 
 /* profile-set(real main-page) */
+#profile-set {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100vh;
+  background-color: #d0e0ff;
+}
+
+#profile-set #under-page {
+  /* 뒷 페이지 스타일 */
+  display: flex;
+  width: 100%;
+  height: 250px;
+}
+
+#profile-set #under-page .profile-section {
+  /* 프로필 섹션 스타일 */
+  display: flex;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  padding: 5%;
+  height: 180px;
+  border: 3px dotted #fff;
+}
+
+#profile-set #under-page .profile-section .profile-img {
+  /* 프로필 이미지 스타일 */
+}
+
+#profile-set #under-page .profile-section .bubble {
+  /* 버블 스타일 */
+}
+
+#profile-set #under-page .profile-section .badge-section {
+  /* 배지 섹션 스타일 */
+}
+
+#profile-set #top-page {
+  /* 상단 페이지 스타일 */
+  
+  width: 100%;
+  height: 200vh;
+  background: #ffffff;
+  box-shadow: 0px -20px 5px -1px rgba(154, 188, 255, 0.3);
+  border-radius: 38px 38px 0px 0px;
+  z-index: 3;
+}
+
+#profile-set #top-page .header-message {
+  /* 헤더 메시지 스타일 */
+}
+
+#profile-set #top-page .relenge-section {
+  /* 릴렌지 섹션 스타일 */
+}
+
+#profile-set #top-page .relenge-section .tag-list {
+  /* 태그 리스트 스타일 */
+}
+
+#profile-set #top-page .relenge-section .relenge-list {
+  /* 릴렌지 리스트 스타일 */
+}
+
+#profile-set #top-page .report-section {
+  /* 보고서 섹션 스타일 */
+}
+
+#profile-set #top-page .report-section .report-header {
+  /* 보고서 헤더 스타일 */
+}
+
+#profile-set #top-page .report-section .report-header .report-title {
+  /* 보고서 제목 스타일 */
+}
+
+#profile-set #top-page .report-section .report-header .weekly-monthly {
+  /* 주간/월간 스타일 */
+}
+
+#profile-set #top-page .report-section .report-summary {
+  /* 보고서 요약 스타일 */
+}
+
+#profile-set #top-page .report-section .report-summary .summary-block {
+  /* 요약 블록 스타일 */
+}
+
+#profile-set #top-page .report-section .report-summary .summary-detail-1 {
+  /* 요약 세부내용 1 스타일 */
+}
+
+#profile-set #top-page .report-section .report-summary .summary-detail-2 {
+  /* 요약 세부내용 2 스타일 */
+}
+
+#profile-set #top-page .report-section .relanz-magazine {
+  /* 릴렌즈 매거진 스타일 */
+}
 
 /* not-authenticated */
 #not-authenticated {

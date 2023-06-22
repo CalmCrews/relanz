@@ -21,7 +21,7 @@
           <label for="username" class="username-label">아이디 설정</label>
           <div class="username-input-uni-div">
             <span class="id-letter">ID</span>
-            <input type="text" placeholder="아이디를 입력해주세요" name="username" id="username" class="username-input">
+            <input type="text" placeholder="아이디를 입력해주세요" name="username" id="username" class="username-input" requried="requried">
           </div>
           <div class="username-button-div">
             <input type="button" value="아아디 중복 확인" class="username-button" id="username_button">
@@ -48,7 +48,7 @@
               <div class="pw-eye-div hide" id="password_eye">
                 <img class="pw-eye" src="{% static "images/login/closeEye.png" %}" alt="."></img>
               </div>
-              <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" class="password-input">
+              <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" class="password-input" requried="requried">
             </div>
           </div>
           <div class="re-password-div">
@@ -58,7 +58,7 @@
               <div class="pw-eye-div hide" id="rePasswordEye">
                 <img class="pw-eye" src="{% static "images/login/eye.png" %}" alt="."></img>
               </div>
-              <input type="password" placeholder="비밀번호를 입력해주세요" name="re_password" id="re_password" class="re-password-input">
+              <input type="password" placeholder="비밀번호를 입력해주세요" name="re_password" id="re_password" class="re-password-input" requried="requried">
             </div>
             <div class="re-password-check-div">
               <div class="check-img-div-relative hide" id="passwordCheckMsg">

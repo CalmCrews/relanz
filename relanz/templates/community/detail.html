@@ -5,8 +5,13 @@
 {% block content %}
 <br />
 <hr />
+<p>{{article.author}}님</p>
 <p><img src="{{article.image.url}}" width="100"</p>
-<p>{{article.created_at}}</p>
+<p>기록 일시: {{article.created_at}}</p>
+
+{{like_count}}
+<a href="{% url 'community:like' article.id %}">좋아요</a>
+<br/>
 
 <a href="{% url 'community:communityHome' %}">기록 게시판으로 돌아가기</a>
 <a href="{% url 'community:edit' article.id %}">수정하기</a>
