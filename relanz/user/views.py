@@ -56,7 +56,7 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request, 'main/home.html')
+                return redirect('main:home')
             else:
                 messages.add_message(request, messages.ERROR, '유효한 ID와 비밀번호가 아닙니다.')
                 return render(request, 'user/signin.html')
