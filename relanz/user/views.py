@@ -194,10 +194,9 @@ def tagsurvey(request):
             if newtry is not None:
                 tags.newtry = True
             tags.save()
-            return redirect('user:tagsurvey')
+            return redirect('user:userinfo', user.id)
         return redirect('user:userinfo', user.id)
     return render(request, 'main/home.html')
-
 
 
 
