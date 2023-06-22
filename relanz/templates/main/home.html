@@ -23,7 +23,21 @@
     <div id="profile-set">
       <div id="under-page">
         <div class="profile-section">
-          <div class="profile-img"></div>
+          <div class="profile-img">
+            <div class="profile-wrapper">
+              <div class="profile-circle">
+                <div class="back-hair"></div>
+                <div class="face"></div>
+                <div class="front-hair"></div>
+                <div class="eyebrows"></div>
+                <div class="eyes"></div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
+                <div class="cheek"></div>
+              </div>
+            </div>
+
+          </div>
           <div class="bubble"></div>
           <div class="badge-section"></div>
         </div>
@@ -52,4 +66,36 @@
       </div>
     </div>
   {% endif %}
+{% endblock %}
+
+{% block mobile-scripts %}
+  <script>
+    function renderProfileCombination(combinationData) {
+      const backHairElement = document.querySelector(".back-hair");
+      const frontHairElement = document.querySelector(".front-hair");
+      const eyebrowsElement = document.querySelector(".eyebrows");
+      const eyesElement = document.querySelector(".eyes");
+      const noseElement = document.querySelector(".nose");
+      const mouthElement = document.querySelector(".mouth");
+      const cheekElement = document.querySelector(".cheek");
+      const faceElement = document.querySelector(".face");
+    
+      // 각 조합 요소의 숫자에 해당하는 이미지 경로 설정
+      backHairElement.style.backgroundImage = `url("{% static 'character/backhair/back_hair' %}${combinationData[0]}.png")`;
+      frontHairElement.style.backgroundImage = `url("{% static 'character/fronthair/front_hair' %}${combinationData[1]}.png")`;
+      eyebrowsElement.style.backgroundImage = `url("{% static 'character/brows/brows' %}${combinationData[2]}.png")`;
+      eyesElement.style.backgroundImage = `url("{% static 'character/eyes/eyes' %}${combinationData[3]}.png")`;
+      noseElement.style.backgroundImage = `url("{% static 'character/nose/nose' %}${combinationData[4]}.png")`;
+      mouthElement.style.backgroundImage = `url("{% static 'character/mouth/mouth' %}${combinationData[5]}.png")`;
+      cheekElement.style.backgroundImage = `url("{% static 'character/cheeks/cheeks' %}${combinationData[6]}.png")`;
+      faceElement.style.backgroundImage = `url("{% static 'character/face.png' %}`;
+
+    }
+    
+    // 예시 조합 데이터
+    const exampleCombinationData = "3211123";
+    
+    // 조합 데이터를 적용하여 프로필 렌더링
+    renderProfileCombination(exampleCombinationData);
+  </script>
 {% endblock %}
