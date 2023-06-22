@@ -100,7 +100,7 @@ def survey(request):
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
-            return render(request, 'user/content.html', {'user':user})
+            return redirect('user:content')
         if request.user.is_authenticated:
             return redirect('user:release')
     return render(request, 'main/home.html')
@@ -112,7 +112,7 @@ def release(request):
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
-            return render(request, 'user/content.html', {'user':user})
+            return redirect('user:content')
         if request.user.is_authenticated:
             return redirect('user:activetime')
     return render(request, 'main/home.html')
@@ -125,7 +125,7 @@ def activetime(request):
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
-            return render(request, 'user/content.html', {'user':user})
+            return redirect('user:content')
         morning = request.POST.get('morning')
         afternoon = request.POST.get('afternoon')
         evening = request.POST.get('evening')
@@ -154,11 +154,61 @@ def tagsurvey(request):
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
-            return render(request, 'user/content.html', {'user':user})
-        if request.user.is_authenticated:
+            return redirect('user:content')
+        try:
+            tags = Tag.objects.get(user=user)
+        except Tag.DoesNotExist:
+            tags = Tag.objects.create(user=user)
+            return redirect('user:activetime')
+        
+        inside = request.POST.get('inside')
+        outside = request.POST.get('outside')
+        solo = request.POST.get('solo')
+        group = request.POST.get('group')
+        extreme = request.POST.get('extreme')
+        calm = request.POST.get('calm')
+        focus = request.POST.get('focus')
+        achievement = request.POST.get('achievement')
+        bodyhealth = request.POST.get('bodyhealth')
+        confidence = request.POST.get('confidence')
+        mental = request.POST.get('mental')
+        short = request.POST.get('short')
+        newtry = request.POST.get('newtry')
+        tags = Tag.objects.get(user=user)
+        tag_cnt = 0
+        tag_lists = [inside, outside, solo, group, extreme, calm, focus, achievement, bodyhealth, confidence, mental, short, newtry]
+        for tag_list in tag_lists:
+            if tag_list is not None:
+                tag_cnt += 1
+        if tag_cnt > 0:
+            if inside is not None:
+                tags.inside = True
+            if outside is not None:
+                tags.outside = True
+            if extreme is not None:
+                tags.extreme = True
+            if calm is not None:
+                tags.calm = True
+            if focus is not None:
+                tags.focus = True
+            if achievement is not None:
+                tags.achievement = True
+            if bodyhealth is not None:
+                tags.bodyhealth = True
+            if confidence is not None:
+                tags.confidence = True
+            if mental is not None:
+                tags.mental = True
+            if short is not None:
+                tags.short = True
+            if newtry is not None:
+                tags.newtry = True
+            tags.save()
             return redirect('user:userinfo', user.id)
+        else:
+            messages.add_message(request, messages.ERROR, '하나 이상 선택해 주세요.')
+            return render(request, 'tag/tagsurvey.html')
     return render(request, 'main/home.html')
-
 
 
 
@@ -166,7 +216,10 @@ def tagsurvey(request):
 def userinfo(request, user_id):
     user = request.user
     user = User.objects.get(username=user.username) 
-    return render(request, 'user/userinfo.html', {'user':user})
+    tags = Tag.objects.get(user_id=user_id)
+    
+    
+    return render(request, 'user/userinfo.html', {'user':user, 'tags':tags})
 
 # views.py에 함수가 너무 많고 길어져서 https://wikidocs.net/71657#pybourlspy를 참고해서 바꾸는 게 좋을 듯 합니다.
 # user와 profile로 나누는 게 가장 적당하고 생각합니다. 그래도 길면은 survey, profile, user이렇게 3개...
