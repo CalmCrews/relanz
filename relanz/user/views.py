@@ -65,7 +65,7 @@ def signin(request):
                 
 def signout(request):
     logout(request)
-    return render(request, 'user/signout.html')
+    return render(request, 'main/home.html')
 
 @login_required(login_url='/user/signin')
 def content(request):
