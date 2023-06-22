@@ -7,11 +7,25 @@
 <a href="{% url 'community:communityHome' %}">내 기록 모아보기</a>
 <br />
 <hr />
-{% for article in articles %}
+{% for article in page_obj %}
 <a href="{% url 'community:detail' article.id %}">
     <img src="{{article.image.url}}" width="100">
 </a>
 {% endfor %}
+
+<span>
+    {% if page_obj.has_previous %}
+    <a href="?page=1">처음으로</a>
+    <a href="?page={{ page_obj.previous_page_number }}">이전</a>
+    {% endif %}
+
+    <p>{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</p>
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">다음</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">마지막으로</a>
+    {% endif %}
+</span>
 
 <br/>
 <a href="{% url 'main:home' %}">홈</a>
