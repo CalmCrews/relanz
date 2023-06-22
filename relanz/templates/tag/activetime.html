@@ -15,8 +15,8 @@ activetime
 <form method='post'>
     {% csrf_token %}
     <fieldset>
-        <legend>Choose your monster's features:</legend>
-    
+        <legend>활동 시간 체크</legend>
+        
         <div>
           <input type="checkbox" id="morning" name="morning">
           <label for="scales">아침</label>
@@ -42,6 +42,7 @@ activetime
       	{% endfor %}
     {% endif %} 
     
+
     <button class="userinfo" type="submit" action="{% url 'user:activetime' %}">다음</button>
 </form>
 

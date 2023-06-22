@@ -141,7 +141,7 @@ def activetime(request):
             if evening is not None:
                 tags.evening = True
             tags.save()
-            return redirect('user:activetime')
+            return redirect('user:tagsurvey')
         else:
             messages.add_message(request, messages.ERROR, '하나 이상 선택해 주세요.')
             return render(request, 'tag/activetime.html')
