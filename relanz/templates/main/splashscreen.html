@@ -39,38 +39,91 @@
 
       </div>
     </div>
-    <a href="{% url 'main:home' %}">
+    <a href="#div5" id="skip">
       <img src="{% static "icons/skip.png" %}" alt="skip">
     </a>
+    <div id="div5" class="scrollable-item">
+      <div class="background-section">
+        <div class="img-section">
+          <img src="{% static "images/home-faces.svg" %}" alt="home-faces">
+        </div>
+        <div class="gradient">
+          <p></p>
+        </div>
+      </div>
+      <div class="text-section">
+        <span>이젠 릴렌즈와 함께<br>당신의 스트레스 해소법을 찾아<br>스트레스 면역력을 키워봐요!</span>
+      </div>
+      <div class="sign-section">
+        <div class="sign-up">
+          <a class="sign-up-button" href="{% url 'user:signup' %}">
+            <span>
+              새롭게 시작하기
+            </span>
+          </a>
+        </div>
+        <div class="sign-in">
+          <a href="{% url 'user:signin' %}">
+            <span>
+              &nbsp이미 계정이 있어요!(로그인하기)&nbsp
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
 {% block scripts %}
   <script>
-    function goToHome() {
-      window.location.href = "{% url 'main:home' %}";
-    }
 
     function scrollDiv() {
       const container = document.querySelector(".scrollable-container");
       let items = document.querySelectorAll(".scrollable-item");
       let itemIndex = 0;
       const scrollInterval = 3000;
+      let intervalId;
 
       function scrollToNextItem() {
         if (itemIndex < items.length - 1) {
           const nextItem = items[itemIndex + 1];
           container.scrollTop = nextItem.offsetTop;
           itemIndex++;
+          if (itemIndex === 4) {
+            const skipElement = document.getElementById("skip");
+            skipElement.style.display = "none"; // skip 태그 숨기기
+          }
         } else {
-          goToHome();
+          clearInterval(intervalId);
         }
       }
 
-      setInterval(scrollToNextItem, scrollInterval);
+      intervalId = setInterval(scrollToNextItem, scrollInterval);
+
+      container.addEventListener("scroll", function() {
+        clearInterval(intervalId);
+      });
+
+      const skipElement = document.getElementById("skip");
+      const lastItem = items[items.length - 1];
+      const observerOptions = {
+        root: container,
+        threshold: 0.9
+      };
+  
+      const observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          if (entry.target === lastItem && entry.isIntersecting) {
+            skipElement.style.display = "none";
+          } else {
+            skipElement.style.display = "block";
+          }
+        });
+      }, observerOptions);
+
+      observer.observe(lastItem);
     }
 
-    // 페이지 로드 시 스크롤 이벤트 함수 호출
     window.addEventListener("load", scrollDiv);
   </script>
 {% endblock %}
