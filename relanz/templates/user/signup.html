@@ -8,77 +8,91 @@
 {% endblock extrahead %}
 {% block content%}
   <div class="container-mobile">
-    <div class="logo-box_big">
-      <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo">
-    </div>
-    <div class="signup-center-mobile">
-      <h4>Sign up</h4>
-    </div>
-    <div class="signup-form-div-mobile">
-      <form action="" method="post">
-        {% csrf_token %}
-        <div class="username-div">
-          <label for="username" class="username-label">아이디 설정</label>
-          <div class="username-input-uni-div">
-            <span class="id-letter">ID</span>
-            <input type="text" placeholder="아이디를 입력해주세요" name="username" id="username" class="username-input">
-          </div>
-          <div class="username-button-div">
-            <input type="button" value="아아디 중복 확인" class="username-button" id="username_button">
-            <div class="approve-msg hide" id="approve_msg">
-              <div class="approve-msg-div">
-                <img src="{% static "images/login/okIcon.png" %}" alt="." class="check-icon">
-              </div>
-              <span class="approve-msg-span">확인되었습니다</span>
+    <div class="container-mobile-relative-div">
+      <div class="modal" id="modal">
+        <p>공백을 사용할 수 없습니다.</p>
+        <p>공백은 자동으로 제거 됩니다.</p>
+        <button id="modal_btn" onclick="modal_btn_ok()">확인</button>
+      </div>
+      <div class="block-while-modal" id="block_while_modal"></div>
+      <div class="logo-box_big">
+        <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo">
+      </div>
+      <div class="signup-center-mobile">
+        <h4>Sign up</h4>
+      </div>
+      <div class="signup-form-div-mobile">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="username-div">
+            <label for="username" class="username-label">아이디 설정</label>
+            <div class="username-input-uni-div">
+              <span class="id-letter">ID</span>
+              <input type="text" placeholder="아이디를 입력해주세요" name="username" id="username" class="username-input" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
             </div>
-            <div class="reject-msg hide" id="reject_msg">
-              <div class="reject-msg-div">
-                <img src="{% static "images/login/xIcon.png" %}" alt="." class="check-icon">
-              </div>
-              <span class="reject-msg-span">사용할 수 없는 아이디입니다</span>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="password-div">
-            <label for="password" class="password-label">비밀번호 설정</label>
-            <div class="password-input-uni-div">
-              <span class="pw-letter">PW</span>
-              <div class="pw-eye-div hide" id="password_eye">
-                <img class="pw-eye" src="{% static "images/login/closeEye.png" %}" alt="."></img>
-              </div>
-              <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" class="password-input">
-            </div>
-          </div>
-          <div class="re-password-div">
-            <label for="re_password" class="re-password-label">비밀번호 확인</label>
-            <div class="re_password-input-uni-div">
-              <span class="pw-letter">PW</span>
-              <div class="pw-eye-div hide" id="rePasswordEye">
-                <img class="pw-eye" src="{% static "images/login/eye.png" %}" alt="."></img>
-              </div>
-              <input type="password" placeholder="비밀번호를 입력해주세요" name="re_password" id="re_password" class="re-password-input">
-            </div>
-            <div class="re-password-check-div">
-              <div class="check-img-div-relative hide" id="passwordCheckMsg">
-                <div class="check-img-div">
-                  <img src="{% static "images/login/okIcon.png" %}" alt="." class="check-img-tag">
+            <div class="username-button-div">
+              <input type="button" value="아아디 중복 확인" class="username-button" id="username_button">
+              <div class="approve-msg hide" id="approve_msg">
+                <div class="approve-msg-div">
+                  <img src="{% static "images/login/okIcon.png" %}" alt="." class="check-icon">
                 </div>
-                <p class="re-password-check-p">확인되었습니다</p>
+                <span class="approve-msg-span">확인되었습니다</span>
+              </div>
+              <div class="reject-msg hide" id="reject_msg">
+                <div class="reject-msg-div">
+                  <img src="{% static "images/login/xIcon-red.png" %}" alt="." class="check-icon">
+                </div>
+                <span class="reject-msg-span">사용할 수 없는 아이디입니다</span>
               </div>
             </div>
           </div>
-        </div>
-        <div class="submit-div">
-          <input type="submit" value="회원가입하기" name='signup' class="mouseover submit-input" id="submit_input">
-        </div>
 
-      </form>
+          <div>
+            <div class="password-div">
+              <label for="password" class="password-label">비밀번호 설정</label>
+              <div class="password-input-uni-div">
+                <span class="pw-letter">PW</span>
+                <div class="pw-eye-div hide" id="password_eye">
+                  <img class="pw-eye" src="{% static "images/login/closeEye.png" %}" alt="." id="pw_eye" onclick="convertPassword(this)"></img>
+                </div>
+                <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" class="password-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
+              </div>
+            </div>
+            <div class="re-password-div">
+              <label for="re_password" class="re-password-label">비밀번호 확인</label>
+              <div class="re_password-input-uni-div">
+                <span class="pw-letter">PW</span>
+                <div class="pw-eye-div hide" id="rePasswordEye">
+                  <img class="pw-eye" src="{% static "images/login/closeEye.png" %}" alt="." id="re_pw_eye" onclick="convertPassword(this)"></img>
+                </div>
+                <input type="password" placeholder="비밀번호를 입력해주세요" name="re_password" id="re_password" class="re-password-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
+              </div>
+              <div class=" re-password-check-div" =" re-password-check-div" "=" re-password-check-div""="re-password-check-div" "" ">
+                <div class=" check-img-div-relative hide" id="passwordCheckMsgOk">
+                  <div class="check-img-div">
+                    <img src="{% static "images/login/okIcon.png" %}" alt="." class="check-img-tag">
+                  </div>
+                  <p class="re-password-check-p">확인되었습니다</p>
+                </div>
+
+                <div class="check-img-div-relative hide" id="passwordCheckMsgNo">
+                  <div class="check-img-div">
+                    <img src="{% static "images/login/xIcon-red.png" %}" alt="." class="check-img-tag">
+                  </div>
+                  <p class="re-password-check-p">비밀번호가 일치하지 않습니다</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="submit-div">
+            <input type="submit" value="회원가입하기" name='signup' class="mouseover submit-input" id="submit_input">
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
+  <script src={% static "js/signup.js"%}></script>
 {% endblock %}
 
-{% block scripts%}
-  <script src={% static "js/signup.js"%}></script>
-{% endblock scripts%}
+{% block scripts%}{% endblock scripts%}
