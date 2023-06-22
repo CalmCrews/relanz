@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import User
+from .models import User, Tag   
 from django.contrib.auth import login, logout, authenticate
 import json
 from django.http import JsonResponse
@@ -117,6 +117,7 @@ def release(request):
             return redirect('user:activetime')
     return render(request, 'main/home.html')
 
+
 @login_required(login_url='/user/signin')
 def activetime(request):
     if request.method=="GET":
@@ -125,8 +126,25 @@ def activetime(request):
         user=request.user
         if user.nickname is None:
             return render(request, 'user/content.html', {'user':user})
-        if request.user.is_authenticated:
+        morning = request.POST.get('morning')
+        afternoon = request.POST.get('afternoon')
+        evening = request.POST.get('evening')
+        if morning or afternoon or evening:
+            try:
+                tags = Tag.objects.get(user=user)
+            except Tag.DoesNotExist:
+                tags = Tag.objects.create(user=user)
+            if morning is not None:
+                tags.morning = True
+            if afternoon is not None:
+                tags.afternoon = True
+            if evening is not None:
+                tags.evening = True
+            tags.save()
             return redirect('user:tagsurvey')
+        else:
+            messages.add_message(request, messages.ERROR, '하나 이상 선택해 주세요.')
+            return render(request, 'tag/activetime.html')
     return render(request, 'main/home.html')
 
 @login_required(login_url='/user/signin')
