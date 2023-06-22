@@ -4,5 +4,5 @@
 {{challenge.effect}}
 {{challenge.recommnad}}
 {% if challenge.image %}
-<img src="{{challenge.image.url}}" alt="이미지">
+<img src="{% static challenge.image %}" alt="이미지">
 {% endif %}
