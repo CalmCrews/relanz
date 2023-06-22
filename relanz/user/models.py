@@ -24,6 +24,8 @@ class User(AbstractUser):
     def age(self):
         age_ = datetime.now().year - self.birth
         return age_
+    
+    avatar = models.CharField(max_length=30, null=True)
 
 class Tag(models.Model):
     class Meta:
