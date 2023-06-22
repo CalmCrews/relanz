@@ -14,6 +14,34 @@ activetime
 
 <form method='post'>
     {% csrf_token %}
+    <fieldset>
+        <legend>Choose your monster's features:</legend>
+    
+        <div>
+          <input type="checkbox" id="morning" name="morning">
+          <label for="scales">아침</label>
+        </div>
+    
+        <div>
+          <input type="checkbox" id="afternoon" name="afternoon">
+          <label for="horns">점심</label>
+        </div>
+        <div>
+           <input type="checkbox" id="evening" name="evening">
+           <label for="horns">저녁</label>
+        </div>
+        <div>
+           <input type="checkbox" id="all" name="all">
+           <label for="horns">모두</label>
+        </div>
+    </fieldset>
+    {% if messages %}
+	      {% for message in messages %}
+		      {{ message.tags }}
+		      {{ message.message }}
+      	{% endfor %}
+    {% endif %} 
+    
     <button class="userinfo" type="submit" action="{% url 'user:activetime' %}">다음</button>
 </form>
 

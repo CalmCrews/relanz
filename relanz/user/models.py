@@ -29,7 +29,7 @@ class Tag(models.Model):
     class Meta:
         db_table = 'tag'
 
-    user = models.ForeignKey('User', on_delete=models.CASCADE, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
     morning = models.BooleanField(default=False)
     afternoon = models.BooleanField(default=False)
     evening = models.BooleanField(default=False)
