@@ -113,6 +113,7 @@
             }
             .username-button:hover {
                 background: #3F80FC ;
+                cursor: pointer;
             }
 
             .approve-msg {
@@ -363,6 +364,7 @@
         }
         .submit-input:hover {
             background: #3F80FC ;
+            cursor: pointer;
         }
     }
 }
@@ -370,4 +372,3 @@
 .hide {
     visibility: hidden;
 }
-
