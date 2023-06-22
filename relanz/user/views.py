@@ -75,7 +75,6 @@ def content(request):
         message = {}
         user = request.user
         user = User.objects.get(username=user.username)
-
         nickname = request.POST.get('nickname')
         birth = request.POST.get('birth')
         sex = request.POST.get('sex')

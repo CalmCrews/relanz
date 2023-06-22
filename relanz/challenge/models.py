@@ -9,4 +9,4 @@ class Challenge(models.Model):
     sub_effect = models.TextField(blank=False)
     effect = models.TextField(blank=False)
     recommnad = models.TextField(blank=False)
-    image = models.ImageField(upload_to='images/challenge', default='images/challenge/Tom.gif')
+    image = models.ImageField(upload_to='images/challenge')
