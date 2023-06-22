@@ -2,9 +2,11 @@
 
 .container-mobile {
     padding: 3em 0;
-    min-width: 430px;
+}
+.container-for-relative {
     position: relative;
 }
+
 
 .logo-box_big {
     display: flex;
