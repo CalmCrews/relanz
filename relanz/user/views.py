@@ -216,7 +216,10 @@ def tagsurvey(request):
 def userinfo(request, user_id):
     user = request.user
     user = User.objects.get(username=user.username) 
-    return render(request, 'user/userinfo.html', {'user':user})
+    tags = Tag.objects.get(user_id=user_id)
+    
+    
+    return render(request, 'user/userinfo.html', {'user':user, 'tags':tags})
 
 # views.py에 함수가 너무 많고 길어져서 https://wikidocs.net/71657#pybourlspy를 참고해서 바꾸는 게 좋을 듯 합니다.
 # user와 profile로 나누는 게 가장 적당하고 생각합니다. 그래도 길면은 survey, profile, user이렇게 3개...
