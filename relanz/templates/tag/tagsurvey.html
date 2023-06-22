@@ -10,11 +10,87 @@
 {% block content%}
 4
 
-
-<a href="{% url 'main:home' %}">홈으로</a>
 <form method='post'>
-    {% csrf_token %}
-    <button class="userinfo" type="submit" action="{% url 'user:userinfo' user.id %}">다음</button>
+  {% csrf_token %}
+  <fieldset>
+      <legend>Tag 선택</legend>
+      
+      <div>
+        <input type="checkbox" id="inside" name="inside">
+        <label for="inside">실내에서 하는</label>
+      </div>
+  
+      <div>
+        <input type="checkbox" id="outside" name="outside">
+        <label for="outside">실외에서 하는</label>
+      </div>
+
+      <div>
+         <input type="checkbox" id="solo" name="solo">
+         <label for="solo">혼자만의 시간</label>
+      </div>
+
+      <div>
+         <input type="checkbox" id="group" name="group">
+         <label for="group">여럿이서 하는</label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="extreme" name="extreme">
+        <label for="extreme">익스트림한 활동</label>
+      </div>
+      
+     <div>
+      <input type="checkbox" id="calm" name="calm">
+      <label for="calm">잔잔한 활동</label>
+     </div>
+
+     <div>
+      <input type="checkbox" id="focus" name="focus">
+      <label for="focus">몰두할 수 있는</label>
+     </div>
+
+     <div>
+      <input type="checkbox" id="achievement" name="achievement">
+      <label for="achievement">성취감 느끼기</label>
+     </div>
+
+     <div>
+      <input type="checkbox" id="bodyhealth" name="bodyhealth">
+      <label for="bodyhealth">몸 건강해지기</label>
+     </div>
+
+     <div>
+      <input type="checkbox" id="confidence" name="confidence">
+      <label for="confidence">자신감 얻기</label>
+     </div>
+
+     <div>
+      <input type="checkbox" id="mental" name="mental">
+      <label for="mental">마음 건강해지기</label>
+     </div>
+
+     <div>
+      <input type="checkbox" id="short" name="short">
+      <label for="short">짧은 시간 내에</label>
+     </div>
+
+     <div>
+      <input type="checkbox" id="newtry" name="newtry">
+      <label for="newtry">새로운 도전</label>
+     </div>
+
+  </fieldset>
+  {% if messages %}
+      {% for message in messages %}
+        {{ message.tags }}
+        {{ message.message }}
+      {% endfor %}
+  {% endif %} 
+  
+
+  <button class="userinfo" type="submit" action="{% url 'user:activetime' %}">다음</button>
 </form>
+<a href="{% url 'main:home' %}">홈으로</a>
 {% comment %} 홈 버튼은 test용 입니다. {% endcomment %}
 {% endblock %}

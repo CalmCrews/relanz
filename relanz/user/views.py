@@ -155,8 +155,47 @@ def tagsurvey(request):
         user=request.user
         if user.nickname is None:
             return render(request, 'user/content.html', {'user':user})
-        if request.user.is_authenticated:
-            return redirect('user:userinfo', user.id)
+        
+        inside = request.POST.get('inside')
+        outside = request.POST.get('outside')
+        solo = request.POST.get('solo')
+        group = request.POST.get('group')
+        extreme = request.POST.get('extreme')
+        calm = request.POST.get('calm')
+        focus = request.POST.get('focus')
+        achievement = request.POST.get('achievement')
+        bodyhealth = request.POST.get('bodyhealth')
+        confidence = request.POST.get('confidence')
+        mental = request.POST.get('mental')
+        short = request.POST.get('short')
+        newtry = request.POST.get('newtry')
+        tags = Tag.objects.get(user=user)
+        if inside or outside or solo or group or extreme or calm or focus or achievement or bodyhealth or confidence or mental or short or newtry:
+            if inside is not None:
+                tags.inside = True
+            if outside is not None:
+                tags.outside = True
+            if extreme is not None:
+                tags.extreme = True
+            if calm is not None:
+                tags.calm = True
+            if focus is not None:
+                tags.focus = True
+            if achievement is not None:
+                tags.achievement = True
+            if bodyhealth is not None:
+                tags.bodyhealth = True
+            if confidence is not None:
+                tags.confidence = True
+            if mental is not None:
+                tags.mental = True
+            if short is not None:
+                tags.short = True
+            if newtry is not None:
+                tags.newtry = True
+            tags.save()
+            return redirect('user:tagsurvey')
+        return redirect('user:userinfo', user.id)
     return render(request, 'main/home.html')
 
 
