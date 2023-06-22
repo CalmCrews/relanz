@@ -28,13 +28,20 @@
   height: 25vh;
   width: 80%;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 #profile-unset > .welcome-box > img {
   height: 100%;
-  width: auto;
   object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  #profile-unset > .welcome-box > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 #profile-unset > .wel-message {
@@ -45,22 +52,32 @@
   margin-bottom: 40px;
 }
 
-#profile-unset > a {
+#profile-unset > .user-button {
   width: 230px;
   height: 50px;
-  margin-top: 40px;
   padding: 15px 15px;
   border-radius: 9999px;
-  background-color: #71a1ff;
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
   line-height: 19px;
   text-align: center;
   letter-spacing: -0.05em;
-  color: #ffffff;
+  
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   text-decoration: none;
+}
+
+#profile-unset > #profile_setting {
+  margin-top: 40px;
+  color: #ffffff;
+  background-color: #71a1ff;
+}
+
+#profile-unset > #log_out {
+  margin-top: 15px;
+  color: #ffffff;
+  background-color: #E7E7E7;;
 }
 
 /* profile-set(real main-page) */
@@ -104,7 +121,7 @@
 
 #profile-set #top-page {
   /* 상단 페이지 스타일 */
-  
+
   width: 100%;
   height: 200vh;
   background: #ffffff;
@@ -209,7 +226,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    180deg,
+    0deg,
     #ffffff 0%,
     rgba(255, 255, 255, 0) 63.02%
   );
@@ -249,7 +266,7 @@
 #not-authenticated > .sign-section > .sign-up > .sign-up-button {
   width: 80%;
   height: 3em;
-  background: #ffffff;
+  background: #71A1FF;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   text-decoration: none;
@@ -258,9 +275,14 @@
   align-items: center;
 }
 
+.sign-up-button:hover {
+  background-color: #3F80FC;
+}
+
 .sign-section > .sign-up > .sign-up-button > span {
-  color: #9abcff;
+  color: #fff;
   text-align: center;
+  font-weight: 700;
   font-size: 1em;
 }
 
@@ -268,7 +290,6 @@
   margin-top: 0.8em;
   text-align: center;
   color: #fff;
-
   font-size: 0.8em;
 }
 

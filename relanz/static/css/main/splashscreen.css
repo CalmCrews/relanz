@@ -10,11 +10,18 @@
   position: relative;
   height: 100vh;
   width: 100%;
-  overflow-y: hidden;
+  overflow-y: scroll;
   scroll-behavior: smooth;
 }
 
-.scrollable-container > a {
+.scrollable-item {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+}
+
+/* skip */
+.scrollable-container > #skip {
   position: fixed;
   top: calc(100vh - 90px);
   height: 30px;
@@ -22,16 +29,9 @@
   z-index: 80;
 }
 
-.scrollable-container > a > img {
+.scrollable-container > #skip > img {
   height: 100%;
   object-fit: cover;
-}
-
-
-.scrollable-item {
-  width: 100%;
-  height: 100vh;
-  justify-content: center;
 }
 
 /* div1 */
@@ -98,9 +98,7 @@
   mix-blend-mode: overlay;
 }
 
-
 /* div3 */
-
 #div3 > .background {
   position: relative;
   display: flex;
@@ -173,4 +171,120 @@
   width: 90%;
   object-fit: cover;
   mix-blend-mode: overlay;
+}
+
+/* div5 */
+#div5 {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #9abcff;
+}
+
+#div5 > .background-section {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30vh;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#div5 > .background-section > .img-section {
+  width: 80%;
+  z-index: 2;
+}
+
+@media (max-height: 700px) {
+  #div5 > .background-section > .img-section {
+    display: none;
+  }
+}
+
+#div5 > .background-section > .img-section > img {
+  width: 100%;
+  object-fit: cover;
+}
+
+#div5 > .background-section > .gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #ffffff 0%, rgba(255, 255, 255, 0) 63.02%);
+  z-index: 3;
+}
+
+#div5 > .text-section {
+  position: absolute;
+  width: 100%;
+  padding: 2em;
+  bottom: calc(100vh - 70%);
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.25em;
+  line-height: 1.375em;
+  z-index: 4;
+}
+
+#div5 > .sign-section {
+  position: absolute;
+  width: 100%;
+  padding: 2em;
+  bottom: calc(100vh - 80%);
+  z-index: 4;
+}
+
+#div5 > .sign-section > .sign-up {
+  display: flex;
+  width: 100%;
+  padding: 2em 2em 0 2em;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#div5 > .sign-section > .sign-up > .sign-up-button {
+  width: 80%;
+  height: 3em;
+  background: #71a1ff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#div5 > .sign-section > .sign-up > .sign-up-button:hover {
+  background-color: #3f80fc;
+}
+
+.sign-section > .sign-up > .sign-up-button > span {
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1em;
+}
+
+#div5 > .sign-section > .sign-in {
+  margin-top: 1em;
+  text-align: center;
+  font-weight: 600;
+  line-height: 14px;
+  font-size: 0.8em;
+  color: #71a1ff;
+  text-underline-offset: 4px;
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+}
+
+#div5 > .sign-section > .sign-in > a:visited {
+  color: #71a1ff;
 }

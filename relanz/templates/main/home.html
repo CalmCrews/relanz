@@ -9,83 +9,47 @@
 {% endblock mobile_extrahead %}
 
 {% block mobile_content%}
-  {% if user.is_authenticated %}
-    {% if not user.nickname %}
-      <div id="profile-unset">
-        <p class="signin-complete">회원가입이 완료되었습니다!</p>
-        <div class="welcome-box">
-          <img src="{% static "images/welcome-box.png" %}" alt="welcome-img">
-        </div>
-        <p class="wel-message">이제 릴렌즈와<br>스트레스 해소법을 찾아보아요!</p>
-        <a href="{% url 'user:content' %}">프로필 설정하기</a>
-        <a href="{% url 'user:signout' %}">로그아웃하기</a>
-      
+  {% if not user.nickname %}
+    <div id="profile-unset">
+      <p class="signin-complete">회원가입이 완료되었습니다!</p>
+      <div class="welcome-box">
+        <img src="{% static "images/welcome-box.png" %}" alt="welcome-img">
       </div>
-    {% else %}
-      <div id="profile-set">
-        <div id="under-page">
-          <div class="profile-section">
-            <div class="profile-img"></div>
-            <div class="bubble"></div>
-            <div class="badge-section"></div>
-          </div>
-        </div>
-        <div id="top-page">
-          <div class="header-message"></div>
-          <div class="relenge-section">
-            <ul class="tag-list"></ul>
-            <ul class="relenge-list">
-            </ul>
-          </div>
-          <div class="report-section">
-            <div class="report-header">
-              <div class="report-title"></div>
-              <div class="weekly-monthly"></div>
-            </div>
-            <div class="report-summary">
-              <div class="summary-block"></div>
-              <div class="summary-detail-1"></div>
-              <div class="summary-detail-2"></div>
-            </div>
-            <div class="relanz-magazine">
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    {% endif %}
-
-
+      <p class="wel-message">이제 릴렌즈와<br>스트레스 해소법을 찾아보아요!</p>
+      <a href="{% url 'user:content' %}" class="user-button" id="profile_setting">프로필 설정하기</a>
+      <a href="{% url 'user:signout' %}" class="user-button" id="log_out">로그아웃하기</a>
+    </div>
   {% else %}
-    <div id="not-authenticated">
-      <div class="background-section">
-        <div class="img-section">
-          <img src="{% static "images/home-faces.svg" %}" alt="home-faces">
-        </div>
-        <div class="gradient">
-          <p></p>
+    <div id="profile-set">
+      <div id="under-page">
+        <div class="profile-section">
+          <div class="profile-img"></div>
+          <div class="bubble"></div>
+          <div class="badge-section"></div>
         </div>
       </div>
-      <div class="text-section">
-        <span>이젠 릴렌즈와 함께<br>당신의 스트레스 해소법을 찾아<br>스트레스 면역력을 키워봐요!</span>
-      </div>
-      <div class="sign-section">
-        <div class="sign-up">
-          <a class="sign-up-button" href="{% url 'user:signup' %}">
-            <span>
-              <u>새롭게 시작하기</u>
-            </span>
-          </a>
+      <div id="top-page">
+        <div class="header-message"></div>
+        <div class="relenge-section">
+          <ul class="tag-list"></ul>
+          <ul class="relenge-list">
+          </ul>
         </div>
-        <div class="sign-in">
-          <a href="{% url 'user:signin' %}">
-            <span>
-              <u>이미 계정이 있어요!(로그인하기)</u>
-            </span>
-          </a>
+        <div class="report-section">
+          <div class="report-header">
+            <div class="report-title"></div>
+            <div class="weekly-monthly"></div>
+          </div>
+          <div class="report-summary">
+            <div class="summary-block"></div>
+            <div class="summary-detail-1"></div>
+            <div class="summary-detail-2"></div>
+          </div>
+          <div class="relanz-magazine">
+            
+          </div>
         </div>
       </div>
     </div>
-
   {% endif %}
 {% endblock %}
