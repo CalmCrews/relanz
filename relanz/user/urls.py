@@ -15,4 +15,5 @@ urlpatterns = [
     path('release/', views.release, name="release"), # 해소 방법 -> 해소 정도 조사 이후에 나타는 페이지
     path('activetime/', views.activetime, name="activetime"), # 활동 시간대 
     path('tagsurvey/', views.tagsurvey, name="tagsurvey"), # 유저의 tag 선택
+    path('avatar/', views.avatar, name='avatar') # 프로필 이미지
 ]

@@ -19,12 +19,14 @@ class User(AbstractUser):
     ]
 
     sex = models.CharField(max_length=10, choices=sex_tuple, null=True)
+    
+    avatar = models.CharField(max_length=30, null=True)
 
     @property
     def age(self):
         age_ = datetime.now().year - self.birth
         return age_
-
+    
 class Tag(models.Model):
     class Meta:
         db_table = 'tag'
