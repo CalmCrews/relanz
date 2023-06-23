@@ -8,5 +8,5 @@ class Challenge(models.Model):
     title = models.CharField(max_length=32, unique=True, blank=False)
     sub_effect = models.TextField(blank=False)
     effect = models.TextField(blank=False)
-    recommnad = models.TextField(blank=False)
+    recommand = models.TextField(blank=False)
     image = models.ImageField()
