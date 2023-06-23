@@ -21,8 +21,9 @@
     </div>
   {% else %}
     <div id="profile-set">
-      <div id="under-page">
+      <div class="page-wrapper">
         <div class="profile-section">
+
           <div class="profile-img">
             <div class="profile-wrapper">
               <div class="profile-circle">
@@ -36,33 +37,55 @@
                 <div class="cheek"></div>
               </div>
             </div>
-
           </div>
+
           <div class="bubble"></div>
           <div class="badge-section"></div>
+
         </div>
-      </div>
-      <div id="top-page">
-        <div class="header-message"></div>
-        <div class="relenge-section">
-          <ul class="tag-list"></ul>
-          <ul class="relenge-list">
-          </ul>
+
+        <div id="top-page">
+          <div class="top-page-content">
+            <div class="header-message">
+              <img src="{% static "icons/dot.png" %}" alt="">
+              <span>{{ user.nickname }}님께 추천하는 관리 활동입니다.</br>마음에 드는 릴렌지를 시도해보아요!</span>
+            </div>
+            <div class="relenge-section">
+              <ul class="tag-list">
+                {% comment %} 임시 {% endcomment %}
+                <li>전체</li>
+                <li>야외</li>
+                <li>실내</li>
+                <li>동적인</li>
+                <li>정적인</li>
+                <li>혼자서</li>
+              </ul>
+              <ul class="relenge-list">
+                {% comment %} 임시 {% endcomment %}
+                <li>전체</li>
+                <li>야외</li>
+                <li>실내</li>
+                <li>동적인</li>
+                <li>정적인</li>
+                <li>혼자서</li>
+              </ul>
+            </div>
+            <div class="report-section">
+              <div class="report-header">
+                <div class="report-title"></div>
+                <div class="weekly-monthly"></div>
+              </div>
+              <div class="report-summary">
+                <div class="summary-block"></div>
+                <div class="summary-detail-1"></div>
+                <div class="summary-detail-2"></div>
+              </div>
+              <div class="relanz-magazine">
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="report-section">
-          <div class="report-header">
-            <div class="report-title"></div>
-            <div class="weekly-monthly"></div>
-          </div>
-          <div class="report-summary">
-            <div class="summary-block"></div>
-            <div class="summary-detail-1"></div>
-            <div class="summary-detail-2"></div>
-          </div>
-          <div class="relanz-magazine">
-            
-          </div>
-        </div>
+
       </div>
     </div>
   {% endif %}
