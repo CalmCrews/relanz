@@ -6,7 +6,9 @@
 <br />
 <hr />
 <p>{{article.author}}님</p>
-<p><img src="{{article.image.url}}" width="100"</p>
+{% if article.image %}
+<img src="{{article.image.url}}" width="100">
+{% endif %}
 <p>기록 일시: {{article.created_at}}</p>
 
 {{like_count}}
