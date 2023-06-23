@@ -5,5 +5,4 @@ from django.contrib.auth.decorators import login_required
 
 def challenge(request, challenge_id):
     challenge = Challenge.objects.get(id=challenge_id)
-    print(challenge.image)
     return render(request, 'challenge/challenge.html', {'challenge':challenge})
