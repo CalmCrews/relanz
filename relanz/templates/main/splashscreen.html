@@ -100,10 +100,6 @@
 
       intervalId = setInterval(scrollToNextItem, scrollInterval);
 
-      container.addEventListener("scroll", function() {
-        clearInterval(intervalId);
-      });
-
       const skipElement = document.getElementById("skip");
       const lastItem = items[items.length - 1];
       const observerOptions = {
@@ -115,6 +111,7 @@
         entries.forEach(function(entry) {
           if (entry.target === lastItem && entry.isIntersecting) {
             skipElement.style.display = "none";
+            clearInterval(intervalId);
           } else {
             skipElement.style.display = "block";
           }

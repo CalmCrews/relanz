@@ -1,34 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    나이, 성별 <br/>
-    <form method='post'>
-    {% csrf_token %}
-     닉네임 설정해주세요 <br/>
-    {{error}}
-    <form method='post'>
-    {% csrf_token %}
-    <input type="text" required="required" name='nickname' id='nickname' value="{{nickname}}">
-    <span>nickname</span>
-    <hr>
-    <input type="number" required="required" name='birth'>
-    <span>나이</span>
-    <hr>
-    <span>성별</span>
-    <input type="radio" name="sex" value="male" checked>
-    <label>남자</label>
-    <input type="radio" name="sex" value="female">
-    <label>여자</label>
-
-    <button class="userinfo" type="submit" action="{% url 'user:content' %}">다음</button>
-    <br>
-</form>
-
-  </body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Content
+{% endblock title %}
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/content.css"%}">
+{% endblock extrahead %}
+{% block content%}
+  <div class="container-mobile">
+    <div class="intro-ment-div">
+      <p>먼저, 릴렌즈에게</p>
+      <p>당신의 이름을 알려주세요</p>
+    </div>
+    <form action="" method="post" class="content-form">
+      {% csrf_token %}
+      <div class="content-nickname">
+        <p>나를</p>
+        <input type="text" placeholder="닉네임을 입력해주세요" name='nickname' class="nickname-field">
+        <p>라고 불러줘!</p>
+      </div>
+      <div class="content-img-box">
+        <img src="{% static "images/contentUser.png"%}" alt="." class="content-user-img">
+      </div>
+      <div class="content-info-div">
+        <p>나이와 성별도 알려주세요!</p>
+        <div class="year-gender-div">
+          <p class="year-ment">내가 태어난 연도는</p>
+          <div class="select-div">
+            <div class="selcet-img-div">
+              <img src="{% static 'icons/check_circle_up.png' %}" alt="." onclick="showBirthYear(this)" id="showBirthArrow">
+            </div>
+            <div type="text" name="birth" id="select_born_year" class="select-born-year"></div>
+            <input type="hidden" name="birth" id="hidden_birth">
+            <div class="select-li-div" id="select_li_div"></div>
+          </div>
+          <p class="gender-ment">나의 성별은</p>
+          <div class="input-gender-div">
+            <input type="hidden" name="sex" id="sex_value">
+            <input type="button" id="sex_male" value="남자" class="input-gender" onclick="selectOnlyOneGenderForMan(this)">
+            <input type="button" id="sex_female" value="여자" class="input-gender" onclick="selectOnlyOneGenderForWoman(this)"></input>
+          </div>
+          <input type="submit" value="다음 단계" class="submit">
+        </div>
+      </form>
+    </div>
+    <script src={% static "js/content.js" %}></script>
+  {% endblock %}
+  {% block scripts%}{% endblock scripts%}

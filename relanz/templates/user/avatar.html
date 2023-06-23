@@ -1,0 +1,13 @@
+<form method='post'>
+    {% csrf_token %}
+    <fieldset>
+        <legend>아바타</legend>
+        <div>
+          <input type="text" id="avatar" name="avatar">
+          <label for="scales">avatar</label>
+        </div>
+    </fieldset>
+    
+    {% comment %} <a href="{% url 'main:home'%}">프로필 설정 완료 !</a> {% endcomment %}
+    <button class="avatar" type="submit">다음</button>
+</form>

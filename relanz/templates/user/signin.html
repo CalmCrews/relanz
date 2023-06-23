@@ -27,7 +27,7 @@
           {% csrf_token %}
           <input type="text" placeholder="아이디 입력" name="username" id="username" class="username-input">
           <!-- name tag 그대로 유지 안하면 서버에서 데이터 받을 때 인식 못해요! -->
-          <input type="password" placeholder="비밀번호 입력" name="password" id="password" class="password-input">
+          <input type="password" placeholder="비밀번호 입력" name="password" id="password" class="password-input" autocomplete='off'>
           <!-- name tag 그대로 유지 안하면 서버에서 데이터 받을 때 인식 못해요! -->
           <div class="find-id-password">
             <a href="http://" class="find-id">아이디 찾기</a>

@@ -202,7 +202,7 @@ def tagsurvey(request):
             if newtry is not None:
                 tags.newtry = True
             tags.save()
-            return redirect('user:userinfo', user.id)
+            return redirect('user:avatar')
         else:
             messages.add_message(request, messages.ERROR, '하나 이상 선택해 주세요.')
             return render(request, 'tag/tagsurvey.html')
@@ -250,3 +250,12 @@ def userinfo(request, user_id):
 #             account.sex = sex
 #             account.save()
 #             return redirect('user:userinfo', account.id)
+
+def avatar(request):
+    if request.method == 'GET':
+        return render(request, 'user/avatar.html')
+    if request.method == 'POST':
+        user = request.user
+        user.avatar = request.POST.get('avatar')
+        user.save()
+        return redirect('main:home')

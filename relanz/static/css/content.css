@@ -1,0 +1,242 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+.container-mobile {
+    width: 255px;
+    margin: 0 auto;
+    padding-top: 8em;
+}
+
+.intro-ment-div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+.intro-ment-div  > p {
+    color: #9ABCFF;
+    font-size: 20px;
+    font-family: Pretendard;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.content-form {
+    padding-top: 2.5em;
+}
+.content-nickname {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+}
+
+.content-nickname > p {
+    color: #494949;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+}
+.content-nickname > input {
+    width: 261px;
+    height: 20px;
+    flex-shrink: 0;
+    border: none;
+    border-bottom: 3px solid #9ABCFF;
+    color: #9ABCFF;
+
+    font-size: 16px;
+    font-family: Pretendard;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+
+    padding-bottom: 0.1em;
+}
+.content-nickname > input:focus {
+    outline: none;
+    border-bottom: 3px solid #5f93fb;
+}
+.nickname-field:-webkit-autofill {
+    -webkit-text-fill-color: #9ABCFF;
+    text-fill-color:  #9ABCFF;
+}
+.nickname-field:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 1000px white inset;
+	box-shadow: 0 0 0 1000px white inset;
+}
+
+
+.content-nickname > input::placeholder {
+    color: #9ABCFF;
+
+    color: #AAA;
+    font-size: 12px;
+    font-family: Pretendard;
+    letter-spacing: -0.72px;
+}
+
+
+
+.content-img-box {
+    margin: 0 auto;
+    margin-top: 3em;
+    display: flex;
+    width: 199px;
+    height: 199px;
+}
+
+.content-img-box > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content-info-div {
+    margin-top: 4.5em;
+}
+
+.content-info-div  >p {
+    color: #9ABCFF;
+font-size: 20px;
+    font-family: Pretendard;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.year-gender-div {
+    margin-top: 2.5em;
+}
+
+.year-ment {
+    color: #494949;
+    font-size: 16px;
+    font-family: Pretendard;
+    letter-spacing: -0.8px;
+}
+
+.gender-ment {
+    margin-top: 2em;
+    color: #494949;
+    font-size: 16px;
+    font-family: Pretendard;
+    letter-spacing: -0.8px;
+}
+
+.select-div {
+    margin-top: 1em;
+    width: 253px;
+    height: 40px;
+    position: relative;
+    
+}
+
+.selcet-img-div {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    top: 20%;
+    right: 5%;
+    z-index: 11;
+}
+.selcet-img-div > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.selcet-img-div > img:hover {
+    cursor: pointer;
+}
+
+
+
+
+
+
+.select-born-year {
+    z-index: 10;
+
+    width: 253px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 25px;
+    border: 2px solid #9ABCFF;
+    background: #FFF;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+    color: #494949;
+    font-size: 16px;
+    font-family: Pretendard;
+    letter-spacing: -0.8px;
+
+    display: flex;
+    align-items: center;
+    padding-left: 2em;
+    position: relative;
+}
+
+
+
+
+.select-li-div {
+    z-index: 0;
+
+    position: absolute;
+    top: 40%;
+    width: 253px;
+    height: 300px;
+
+    background-color: #FFFFFF;
+    border: 1px solid #9ABCFF;
+    border-radius: 0px 0px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow:scroll;
+
+    padding-top: 2em;
+    padding-bottom: 1em;
+}
+
+.input-gender-div {
+    margin-top: 1em;
+}
+
+.input-gender {
+    width: 122px;
+    height: 40px;
+    border-radius: 25px;
+    border: 2px solid #9ABCFF;
+    background: #FFF;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+    color: #494949;
+    font-size: 16px;
+    font-family: Pretendard;
+    letter-spacing: -0.8px;
+}
+.input-gender:hover {
+    background-color: #D0E0FF;
+    cursor: pointer;
+}
+
+.submit {
+    width: 254px;
+    height: 50px;
+    flex-shrink: 0;
+    background-color: #71A1FF;
+    color: #FFFFFF;
+    border-radius: 30px;
+    border: none;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+    font-size: 16px;
+    font-family: Pretendard;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+
+    margin-top: 6em;
+    margin-bottom: 3em;
+}
+.submit:hover {
+    background-color: #3F80FC;
+    cursor: pointer;
+}
