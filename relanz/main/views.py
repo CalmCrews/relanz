@@ -36,6 +36,9 @@ def home(request):
         # challenges = Challenge.objects.filter(recommand__contains='싶어요')
         c1 = Challenge.objects.filter(title__contains='클라이밍')
         c2 = Challenge.objects.filter(sub_effect__contains='스트레스')
+        c2 = Challenge.objects.filter(sub_effect__contains='스트레스')
+        c2 = Challenge.objects.filter(sub_effect__contains='스트레스')
+        
         challenges = c1.union(c2)
 
         # challenge = Challenge.objects.()
