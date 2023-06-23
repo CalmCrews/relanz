@@ -6,7 +6,11 @@ from challenge.models import Challenge
 def home(request):
     user=request.user
     if request.user.is_authenticated:
-        tag = Tag.objects.get(user=user.id)
+        print(user.nickname)
+        try:
+            tag = Tag.objects.get(user=user)
+        except Tag.DoesNotExist:
+            tag = Tag.objects.create(user=user)
         tags = {
         'morning': tag.morning,
         'afternoon': tag.afternoon,
@@ -30,7 +34,11 @@ def home(request):
             if tag_value is True:
                 tag_list.append(tag_name)
 
-        challenges = Challenge.objects.filter(recommand__contains='싶어요')
+        # challenges = Challenge.objects.filter(recommand__contains='싶어요')
+        c1 = Challenge.objects.filter(title__contains='클라이밍')
+        c2 = Challenge.objects.filter(sub_effect__contains='스트레스')
+        challenges = c1.union(c2)
+        print(challenges)
 
         # challenge = Challenge.objects.()
         return render(request, 'main/home.html', {'user':user, 'tag_list':tag_list, 'challenges':challenges})
