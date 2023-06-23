@@ -40,14 +40,15 @@
             <!-- 전달되는 item의 값은 뷰에서 전달할 수 있습니다. -->
           </ul>
           <ul class="relenge-list">
-            <!-- {% for challenge in challenges %}
+            {% for challenge in challenges %}
               <hr>
               {{challenge.title}}
               <hr>
               {{challenge.sub_effect}}
               <hr>
               {{challenge.recommand}}
-            {% endfor %} -->
+              <a href="{% url 'challenge:challenge' challenge.id %}">참여하기</a>
+            {% endfor %}
             <!-- 세션 때 블로그 목록 보여주듯이 챌린지 목록을 보여줌 -->
           </ul>
         </div>

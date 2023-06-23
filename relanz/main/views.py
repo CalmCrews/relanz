@@ -31,11 +31,7 @@ def home(request):
                 tag_list.append(tag_name)
 
         challenges = Challenge.objects.filter(recommand__contains='싶어요')
-        
-        print(challenges)        
 
-
-        
         # challenge = Challenge.objects.()
         return render(request, 'main/home.html', {'user':user, 'tag_list':tag_list, 'challenges':challenges})
     return render(request, 'main/splashscreen.html')
