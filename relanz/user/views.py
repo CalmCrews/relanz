@@ -159,7 +159,6 @@ def tagsurvey(request):
         except Tag.DoesNotExist:
             tags = Tag.objects.create(user=user)
             return redirect('user:activetime')
-        
         inside = request.POST.get('inside')
         outside = request.POST.get('outside')
         solo = request.POST.get('solo')

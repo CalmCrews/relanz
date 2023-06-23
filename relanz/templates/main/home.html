@@ -43,11 +43,11 @@
         </div>
       </div>
       <div id="top-page">
-        <div class="header-message"></div>
+        <div class="header-message">
+        </div>
         <div class="relenge-section">
           <ul class="tag-list"></ul>
-          <ul class="relenge-list">
-          </ul>
+          <ul class="relenge-list"></ul>
         </div>
         <div class="report-section">
           <div class="report-header">
@@ -67,6 +67,7 @@
     </div>
   {% endif %}
 {% endblock %}
+
 
 {% block mobile-scripts %}
   <script>
@@ -99,3 +100,22 @@
     renderProfileCombination(exampleCombinationData);
   </script>
 {% endblock %}
+
+
+<!-- {% for item in tag_list %}
+        {{item}}
+      {% endfor %} -->
+            <!-- item => 유저가 갖고 있는 태그 -->
+            <!-- 전달되는 item의 값은 뷰에서 전달할 수 있습니다. -->
+
+
+<!-- {% for challenge in challenges %}
+              <hr>
+              {{challenge.title}}
+              <hr>
+              {{challenge.sub_effect}}
+              <hr>
+              {{challenge.recommand}}
+              <a href="{% url 'challenge:challenge' challenge.id %}">참여하기</a>
+            {% endfor %} -->
+            <!-- 세션 때 블로그 목록 보여주듯이 챌린지 목록을 보여줌 -->

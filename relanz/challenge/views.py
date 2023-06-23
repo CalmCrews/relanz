@@ -3,7 +3,10 @@ from .models import Challenge
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 
+@login_required
 def challenge(request, challenge_id):
+    user=request.user
+    if user.nickname is None:
+            return redirect('user:content')
     challenge = Challenge.objects.get(id=challenge_id)
-    print(challenge.image)
     return render(request, 'challenge/challenge.html', {'challenge':challenge})
