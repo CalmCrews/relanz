@@ -13,10 +13,11 @@ def signup(request):
         return render(request, 'user/signup.html')
     elif request.method=="POST":
         username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
         re_password = request.POST['re_password']
         res_data = {'username':username, 'password':password}
-        if not (username and password and re_password):
+        if not (username and email and password and re_password):
             res_data['error']="입력되지 않은 값이 있습니다."
             render(request, 'user/signup.html', res_data)
         elif (password != re_password):
@@ -25,10 +26,11 @@ def signup(request):
         else:
             user=User.objects.create_user(
                 username=username,
+                email=email,
                 password=password,
             )
             user.save()
-            return redirect('user:signin')
+            return redirect('user:signin')   
 
 @csrf_exempt
 def identify(request):
