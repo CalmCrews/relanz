@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from user.models import User, User_tag
-from .models import Challenge, Challenge_tag, Participant
+from user.models import User, UserTag
+from challenge.models import Challenge, ChallengeTag, Participant
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
@@ -12,7 +12,7 @@ def challenge(request, challenge_id):
 	if user.nickname is None:
 			return redirect('user:content')
 	challenge = Challenge.objects.get(id=challenge_id)
-	challenge_tag = Challenge_tag.objects.get(challengename_id=challenge_id)
+	challenge_tag = ChallengeTag.objects.get(challengename_id=challenge_id)
 	
 	# 챌린지가 갖고 있는 기본 태그
 	challenge_basic_tags = {
@@ -48,7 +48,7 @@ def participate(request, challenge_id):
 	
 
 	challenge = Challenge.objects.get(id=challenge_id)
-	challenge_tag = Challenge_tag.objects.get(challengename=challenge_id)
+	challenge_tag = ChallengeTag.objects.get(challengename=challenge_id)
 	challenge_tag_dict = model_to_dict(challenge_tag)
 
 	# 기본 태그 dictionary

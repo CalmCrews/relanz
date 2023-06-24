@@ -27,7 +27,7 @@ class User(AbstractUser):
         age_ = datetime.now().year - self.birth
         return age_
     
-class User_tag(models.Model):
+class UserTag(models.Model):
     class Meta:
         db_table = 'user_tag'
 

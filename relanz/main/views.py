@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from user.models import User, User_tag
-from challenge.models import Challenge, Challenge_tag, Participant
+from user.models import User, UserTag
+from challenge.models import Challenge, ChallengeTag, Participant
 
 # Create your views here.
 def home(request):
     user=request.user
     if request.user.is_authenticated:
-        user_tag = User_tag.objects.get(user=user.id)
+        user_tag = UserTag.objects.get(user=user.id)
         basic_tags = {
         'morning': user_tag.morning,
         'afternoon': user_tag.afternoon,

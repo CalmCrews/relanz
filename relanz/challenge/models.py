@@ -11,9 +11,9 @@ class Challenge(models.Model):
     recommand = models.TextField(blank=False)
     image = models.ImageField()
 
-class Challenge_tag(models.Model):
+class ChallengeTag(models.Model):
     class Meta:
-        db_table="challenge_tag"
+        db_table="challengeTag"
         
     challengename = models.ForeignKey(Challenge, on_delete=models.CASCADE, unique=True)
     #기본 태그
