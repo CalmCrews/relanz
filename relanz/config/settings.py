@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 from django.conf.urls.static import static
 from django.contrib.messages import constants as messages_constants
-import environ
 
 
 from django.contrib.messages import constants as messages_constants
@@ -146,19 +145,12 @@ AUTH_USER_MODEL = 'user.User'
 MESSAGE_LEVEL = messages_constants.DEBUG
 
 
-env = environ.Env()
-environ.Env.read_env()
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT='587'
 EMAIL_USE_TLS=True
-EMAIL_HOST_USER=env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
 
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # 인증 안하면 로그인 못함
-# ACCOUNT_CONFIRM_EMAIL_ON_GET = True  # 이메일로 전송된 링크 누르면 바로 회원가입 완료
-
-# ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "email_confirmation"
-# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "email_confirmation"
+LOGIN_URL = '/user/signin/'
