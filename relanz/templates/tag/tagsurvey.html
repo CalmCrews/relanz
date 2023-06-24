@@ -5,10 +5,81 @@
 {% endblock title %}
 
 {% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/tagsurvey.css" %}">
 {% endblock extrahead %}
 
 {% block content%}
-4
+<div class="container-mobile">
+  <div class="text-div">
+    <div class="title" id="title">체크리스트 결과가 반영되었어요!</div>
+    <div class="sub-title" id="sub_title">캄크루즈님은 주로<br>어떤 방식으로 스트레스를 푸시나요?</div>
+    <div class="guide-small" id="guide_small">(중복 가능)</div>
+  </div>
+  <div class="select-outside-div">
+    <div class="select-type-first" id="select_type_first">
+      <div id="type_first_sleep" onclick="selectMyTag(this)" class="class-for-hover">잠자기</div>
+      <div id="type_first_exercise" onclick="selectMyTag(this)" class="class-for-hover">운동 및<br>취미활동</div>
+      <div id="type_first_chatter" onclick="selectMyTag(this)" class="class-for-hover">수다떨기</div>
+      <div id="type_first_smoke" onclick="selectMyTag(this)" class="class-for-hover">음주 및 흡연</div>
+      <div id="type_first_binge" onclick="selectMyTag(this)" class="class-for-hover">음식 마구마구<br>먹기</div>
+      <div id="type_first_sns" onclick="selectMyTag(this)" class="class-for-hover">영상 시청 및<br>SNS</div>
+    </div>
+    <div class="select-type-second" id="select_type_second">
+      <div id="type_second_morning" class="short " onclick="selectMyTagForVictim(this)">아침</div>
+      <div id="type_second_nooing" class="short" onclick="selectMyTagForVictim(this)">점심</div>
+      <div id="type_second_evening" class="short" onclick="selectMyTagForVictim(this)">저녁</div>
+      <div id="type_second_anytime" class="anytime-long" onclick="selectMyTag(this)">시간 상관없이 추천 받을께요</div>
+    </div>
+    <div class="select-type-third" id="select_type_third">
+      <div id="type_third_inside" class="inside class-for-hover" onclick="selectMyTag(this)">실내에서 하는</div>
+      <div id="type_third_solo" class="solo class-for-hover" onclick="selectMyTag(this)">혼자만의 시간</div>
+      <div id="type_third_calm" class="calm class-for-hover" onclick="selectMyTag(this)">잔잔한 활동</div>
+      <div id="type_third_outside" class="outside class-for-hover" onclick="selectMyTag(this)">실외에서 하는</div>
+      <div id="type_third_group" class="group class-for-hover" onclick="selectMyTag(this)">여럿이서 하는</div>
+      <div id="type_third_extreme" class="extreme class-for-hover" onclick="selectMyTag(this)">익스트림한<br>활동</div>
+    </div>
+  </div>
+  <div class="submit-div">
+    <button type="button" class="submit-shape-btn" id="submit_shape_btn" onclick="changePage(this)" data-pageindex="1">다음 단계</button>
+  </div>
+  <div>
+    <form action="" method="post" id="submit_form">
+      {% csrf_token %}
+      <div>
+        <input type="hidden" value="" name="sleep" id="sleep">
+        <input type="hidden" value="" name="exercise" id="exercise">
+        <input type="hidden" value="" name="chatter" id="chatter">
+        <input type="hidden" value="" name="smoke" id="smoke">
+        <input type="hidden" value="" name="binge" id="binge">
+        <input type="hidden" value="" name="sns" id="sns">
+      </div>
+      <div>
+        <input type="hidden" value="" name="morning" id="morning">
+        <input type="hidden" value="" name="nooing" id="nooing">
+        <input type="hidden" value="" name="evening" id="evening">
+        <input type="hidden" value="" name="anytime" id="anytime">
+      </div>
+      <div>
+        <input type="hidden" value="" name="inside" id="inside">
+        <input type="hidden" value="" name="outside" id="outside">
+        <input type="hidden" value="" name="solo" id="solo">
+        <input type="hidden" value="" name="group" id="group">
+        <input type="hidden" value="" name="extreme" id="extreme">
+        <input type="hidden" value="" name="calm" id="calm">
+        <input type="hidden" value="" name="focus" id="focus">
+        <input type="hidden" value="" name="achievement" id="achievement"> 
+        <input type="hidden" value="" name="bodyhealth" id="bodyhealth">
+        <input type="hidden" value="" name="confidence" id="confidence">
+        <input type="hidden" value="" name="mental" id="mental">
+        <input type="hidden" value="" name="short" id="short">
+        <input type="hidden" value="" name="newtry" id="newtry">
+      </div>
+      <button type="submit" id="real_submit_btn"></button>
+    </form>
+  </div>
+</div>
+<script src="{% static "js/tagsurvey.js" %}"></script>
+{% comment %} 4
 
 <form method='post'>
   {% csrf_token %}
@@ -16,67 +87,67 @@
       <legend>Tag 선택</legend>
       
       <div>
-        <input type="checkbox" id="inside" name="inside">
+        <input type="checkbox" id="inside" value="" name="inside">
         <label for="inside">실내에서 하는</label>
       </div>
   
       <div>
-        <input type="checkbox" id="outside" name="outside">
+        <input type="checkbox" id="outside" value="" name="outside">
         <label for="outside">실외에서 하는</label>
       </div>
 
       <div>
-         <input type="checkbox" id="solo" name="solo">
+         <input type="checkbox" id="solo" value="" name="solo">
          <label for="solo">혼자만의 시간</label>
       </div>
 
       <div>
-         <input type="checkbox" id="group" name="group">
+         <input type="checkbox" id="group" value="" name="group">
          <label for="group">여럿이서 하는</label>
       </div>
 
       <div>
-        <input type="checkbox" id="extreme" name="extreme">
+        <input type="checkbox" id="extreme" value="" name="extreme">
         <label for="extreme">익스트림한 활동</label>
       </div>
       
      <div>
-      <input type="checkbox" id="calm" name="calm">
+      <input type="checkbox" id="calm" value="" name="calm">
       <label for="calm">잔잔한 활동</label>
      </div>
 
      <div>
-      <input type="checkbox" id="focus" name="focus">
+      <input type="checkbox" id="focus" value="" name="focus">
       <label for="focus">몰두할 수 있는</label>
      </div>
 
      <div>
-      <input type="checkbox" id="achievement" name="achievement">
+      <input type="checkbox" id="achievement" value="" name="achievement">
       <label for="achievement">성취감 느끼기</label>
      </div>
 
      <div>
-      <input type="checkbox" id="bodyhealth" name="bodyhealth">
+      <input type="checkbox" id="bodyhealth" value="" name="bodyhealth">
       <label for="bodyhealth">몸 건강해지기</label>
      </div>
 
      <div>
-      <input type="checkbox" id="confidence" name="confidence">
+      <input type="checkbox" id="confidence" value="" name="confidence">
       <label for="confidence">자신감 얻기</label>
      </div>
 
      <div>
-      <input type="checkbox" id="mental" name="mental">
+      <input type="checkbox" id="mental" value="" name="mental">
       <label for="mental">마음 건강해지기</label>
      </div>
 
      <div>
-      <input type="checkbox" id="short" name="short">
+      <input type="checkbox" id="short" value="" name="short">
       <label for="short">짧은 시간 내에</label>
      </div>
 
      <div>
-      <input type="checkbox" id="newtry" name="newtry">
+      <input type="checkbox" id="newtry" value="" name="newtry">
       <label for="newtry">새로운 도전</label>
      </div>
 
@@ -91,6 +162,5 @@
 
   <button class="userinfo" type="submit" action="{% url 'user:activetime' %}">다음</button>
 </form>
-<a href="{% url 'main:home' %}">홈으로</a>
-{% comment %} 홈 버튼은 test용 입니다. {% endcomment %}
+<a href="{% url 'main:home' %}">홈으로</a> {% endcomment %}
 {% endblock %}

@@ -1,0 +1,208 @@
+.class-for-hover:hover {
+    cursor: pointer;
+    background-color: #3F80FC;
+}
+
+.container-mobile {
+    background-color: #FFF;
+}
+
+.text-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5.5em;
+}
+.title {
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: -0.05em;
+    text-align: center;
+    color: #9ABCFF;
+}
+.sub-title {
+    font-family: Pretendard;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.05em;
+    text-align: center;
+    color: #494949;
+
+    padding-top: 1.8em;
+}
+.guide-small {
+    font-family: Pretendard;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: -0.05em;
+    text-align: center;
+    color: #494949;
+
+    padding-top: 0.4em;
+}
+
+.select-outside-div {
+    width: 320px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+
+    position: relative;
+    padding-top: 3em;
+}
+
+.select-type-first {
+    position: absolute;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55em;
+    margin: 0 auto;
+}
+.select-type-first  > div {
+    width: 100px;
+    height: 80px;
+    border: 2px solid #9ABCFF;
+    border-radius: 20px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #FFF;
+
+    color: #494949;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    letter-spacing: -0.7px;
+}
+.select-type-first  > div:hover {
+    cursor: pointer;
+    background: #D0E0FF;
+}
+
+.select-type-second {
+    z-index: -1;
+    position: absolute;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55em;
+    margin: 0 auto;
+}
+.short:hover {
+    cursor: pointer;
+    background: #D0E0FF;
+}
+.anytime-long:hover {
+    cursor: pointer;
+    background: #D0E0FF;
+}
+
+.short {
+    width: 100px;
+    height: 80px;
+    border: 2px solid #9ABCFF;
+    border-radius: 20px;
+    background: #FFF;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: #494949;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    letter-spacing: -0.7px;
+}
+.anytime-long {
+    width: 319px;
+    height: 80px;
+    flex-shrink: 0;
+    border: 2px solid #9ABCFF;
+    border-radius: 20px;
+    background: #FFF;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: #494949;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    letter-spacing: -0.7px;
+}
+
+.select-type-third {
+    z-index: -1;
+
+    position: absolute;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55em;
+    margin: 0 auto;
+}
+.select-type-third > div {
+    width: 100px;
+    height: 80px;
+    border: 2px solid #9ABCFF;
+    border-radius: 20px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #FFF;
+
+    color: #494949;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    letter-spacing: -0.7px;
+}
+.select-type-third > div:hover {
+    cursor: pointer;
+    background: #D0E0FF;
+}
+
+
+.submit-shape-btn {
+    width: 254px;
+    height: 50px;
+    flex-shrink: 0;
+
+    border-radius: 30px;
+    background: #71A1FF;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+}
+
+.submit-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit-shape-btn:hover {
+    cursor: pointer;
+    background-color: #3F80FC;
+}

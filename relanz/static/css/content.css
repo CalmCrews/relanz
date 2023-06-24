@@ -54,6 +54,15 @@
     outline: none;
     border-bottom: 3px solid #5f93fb;
 }
+.nickname-field:-webkit-autofill {
+    -webkit-text-fill-color: #9ABCFF;
+    text-fill-color:  #9ABCFF;
+}
+.nickname-field:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 1000px white inset;
+	box-shadow: 0 0 0 1000px white inset;
+}
+
 
 .content-nickname > input::placeholder {
     color: #9ABCFF;

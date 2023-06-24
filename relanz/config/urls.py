@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path('user/', include('user.urls')),
     path('community/', include('community.urls')),
-    # path('challege/', include('challenge.urls')),
+    path('challenge/', include('challenge.urls')),
 ]
 
 if settings.DEBUG:
