@@ -112,6 +112,7 @@ body {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   background: #fff;
   z-index: 2;
+  overflow-x: hidden;
 }
 
 @media screen and (max-width: 900px) {

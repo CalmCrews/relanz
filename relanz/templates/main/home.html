@@ -35,6 +35,7 @@
                 <div class="nose"></div>
                 <div class="mouth"></div>
                 <div class="cheek"></div>
+                <div class="clothes"></div>
               </div>
             </div>
           </div>
@@ -104,6 +105,7 @@
       const mouthElement = document.querySelector(".mouth");
       const cheekElement = document.querySelector(".cheek");
       const faceElement = document.querySelector(".face");
+      const clothesElement = document.querySelector(".clothes");
     
       // 각 조합 요소의 숫자에 해당하는 이미지 경로 설정
       backHairElement.style.backgroundImage = `url("{% static 'character/backhair/back_hair' %}${combinationData[0]}.png")`;
@@ -113,12 +115,13 @@
       noseElement.style.backgroundImage = `url("{% static 'character/nose/nose' %}${combinationData[4]}.png")`;
       mouthElement.style.backgroundImage = `url("{% static 'character/mouth/mouth' %}${combinationData[5]}.png")`;
       cheekElement.style.backgroundImage = `url("{% static 'character/cheeks/cheeks' %}${combinationData[6]}.png")`;
-      faceElement.style.backgroundImage = `url("{% static 'character/face.png' %}`;
+      faceElement.style.backgroundImage = `url("{% static 'character/face.png' %}")`;
+      clothesElement.style.backgroundImage = `url("{% static 'character/clothes/clothes' %}${combinationData[7]}.png")`;
 
     }
     
     // 예시 조합 데이터
-    const exampleCombinationData = "3211123";
+    const exampleCombinationData = "32111232";
     
     // 조합 데이터를 적용하여 프로필 렌더링
     renderProfileCombination(exampleCombinationData);
