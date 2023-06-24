@@ -1,0 +1,10 @@
+<div class="login-form-div-mobile">
+    <h2>아이디 찾기 페이지입니다.</h2>
+
+    회원가입 시 등록한 이메일을 입력해주세요.
+    <form action="{% url 'user:findid' %}" method="post">
+      {% csrf_token %}
+      <input type="email" placeholder="email@email.com" name="email" id="email" class="email-input" required>
+      <input type="submit" value="이메일 전송" class="submit-input">
+    </form>
+  </div>
