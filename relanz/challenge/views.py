@@ -81,7 +81,7 @@ def participate(request, challenge_id):
 			challenge_tag_list.append(tag_name)  
 
 	# user가 갖고 있는 tag 정보 갖고오기
-	user_tag = User_tag.objects.get(user=user.id)
+	user_tag = UserTag.objects.get(user=user.id)
 
 	# 챌린지가 갖고 있는 tag명을 이용해서 user_tag를 파싱후 +1 해주기
 	for tag_name in challenge_tag_list:

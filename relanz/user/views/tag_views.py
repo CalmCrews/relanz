@@ -41,9 +41,9 @@ def activetime(request):
         evening = request.POST.get('evening')
         if morning or afternoon or evening:
             try:
-                tags = Tag.objects.get(user=user)
-            except Tag.DoesNotExist:
-                tags = Tag.objects.create(user=user)
+                tags = UserTag.objects.get(user=user)
+            except UserTag.DoesNotExist:
+                tags = UserTag.objects.create(user=user)
             if morning is not None:
                 tags.morning = True
             if afternoon is not None:
@@ -66,26 +66,21 @@ def tagsurvey(request):
         if user.nickname is None:
             return redirect('user:content')
         try:
-            tags = Tag.objects.get(user=user)
-        except Tag.DoesNotExist:
-            tags = Tag.objects.create(user=user)
+            tags = UserTag.objects.get(user=user)
+        except UserTag.DoesNotExist:
+            tags = UserTag.objects.create(user=user)
             return redirect('user:activetime')
         inside = request.POST.get('inside')
         outside = request.POST.get('outside')
         solo = request.POST.get('solo')
-        group = request.POST.get('group')
-        extreme = request.POST.get('extreme')
-        calm = request.POST.get('calm')
-        focus = request.POST.get('focus')
-        achievement = request.POST.get('achievement')
-        bodyhealth = request.POST.get('bodyhealth')
-        confidence = request.POST.get('confidence')
-        mental = request.POST.get('mental')
-        short = request.POST.get('short')
-        newtry = request.POST.get('newtry')
-        tags = Tag.objects.get(user=user)
+        group = request.POST.get('Group')
+        pay = request.POST.get('pay')
+        free = request.POST.get('free')
+        static = request.POST.get('static')
+        dynamic = request.POST.get('dynamic')
+        tags = UserTag.objects.get(user=user)
         tag_cnt = 0
-        tag_lists = [inside, outside, solo, group, extreme, calm, focus, achievement, bodyhealth, confidence, mental, short, newtry]
+        tag_lists = [inside, outside, solo, group, pay, free, static, dynamic]
         for tag_list in tag_lists:
             if tag_list is not None:
                 tag_cnt += 1
@@ -94,24 +89,16 @@ def tagsurvey(request):
                 tags.inside = True
             if outside is not None:
                 tags.outside = True
-            if extreme is not None:
-                tags.extreme = True
-            if calm is not None:
-                tags.calm = True
-            if focus is not None:
-                tags.focus = True
-            if achievement is not None:
-                tags.achievement = True
-            if bodyhealth is not None:
-                tags.bodyhealth = True
-            if confidence is not None:
-                tags.confidence = True
-            if mental is not None:
-                tags.mental = True
-            if short is not None:
-                tags.short = True
-            if newtry is not None:
-                tags.newtry = True
+            if solo is not None:
+                tags.solo = True
+            if group is not None:
+                tags.group = True
+            if pay is not None:
+                tags.pay = True
+            if free is not None:
+                tags.static = True
+            if dynamic is not None:
+                tags.dynamic = True
             tags.save()
             return redirect('user:avatar')
         else:
