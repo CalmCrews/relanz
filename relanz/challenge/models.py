@@ -12,6 +12,9 @@ class Challenge(models.Model):
     image = models.ImageField()
 
 class Challenge_tag(models.Model):
+    class Meta:
+        db_table="challenge_tag"
+        
     challengename = models.ForeignKey(Challenge, on_delete=models.CASCADE, unique=True)
     #기본 태그
     morning = models.BooleanField(default=False, verbose_name='아침')  # 아침
@@ -62,6 +65,13 @@ class Challenge_tag(models.Model):
     newchallenge = models.BooleanField(default=False, verbose_name='새로운 도전')  # 새로운 도전
     friends = models.BooleanField(default=False, verbose_name='친구와 함께')  # 친구와 함께
     awareness = models.BooleanField(default=False, verbose_name='도전 의식')  # 도전 의식
+    confidence = models.BooleanField(default=False, verbose_name='자신감') # 자신감
+    output = models.BooleanField(default=False, verbose_name='산출물') # 산출물
 
 
+class Participant(models.Model):
+    class Meta:
+        db_table="participaint"
 
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)

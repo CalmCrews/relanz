@@ -6,3 +6,6 @@
 {% if challenge.image %}
 <img src="{% static challenge.image %}" alt="이미지">
 {% endif %}
+{% for item in challenge_tag %}
+    {{item}}
+{% endfor %}
