@@ -77,8 +77,6 @@
     color: #b8b8b8;
 }
 
-
-
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px #E7E7E7 inset !important;
 	box-shadow: 0 0 0 1000px #E7E7E7 inset !important;
