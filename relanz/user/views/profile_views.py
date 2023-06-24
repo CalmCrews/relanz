@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import User, Tag
+from ..models import User, UserTag
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/user/signin')
