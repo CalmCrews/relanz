@@ -60,15 +60,17 @@
                 <li>정적인</li>
                 <li>혼자서</li>
               </ul>
-              <ul class="relenge-list">
-                {% comment %} 임시 {% endcomment %}
-                <li>전체</li>
-                <li>야외</li>
-                <li>실내</li>
-                <li>동적인</li>
-                <li>정적인</li>
-                <li>혼자서</li>
-              </ul>
+              <div class="relenge-list-container">
+                <ul class="relenge-list">
+                  {% comment %} 임시 {% endcomment %}
+                  <li>전체</li>
+                  <li>야외</li>
+                  <li>실내</li>
+                  <li>동적인</li>
+                  <li>정적인</li>
+                  <li>혼자서</li>
+                </ul>
+              </div>
             </div>
             <div class="report-section">
               <div class="report-header">
@@ -120,5 +122,9 @@
     
     // 조합 데이터를 적용하여 프로필 렌더링
     renderProfileCombination(exampleCombinationData);
+    
+
+   
   </script>
 {% endblock %}
+
