@@ -16,4 +16,5 @@ urlpatterns = [
     path('activetime/', views.activetime, name="activetime"), # 활동 시간대 
     path('tagsurvey/', views.tagsurvey, name="tagsurvey"), # 유저의 tag 선택
     path('avatar/', views.avatar, name='avatar'), # 프로필 이미지
+    path('findid/', views.findid, name="findid"),
 ]
