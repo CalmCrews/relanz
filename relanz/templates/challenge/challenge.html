@@ -1,0 +1,8 @@
+{% load static %}
+{{challenge.title}}
+{{challenge.sub_effect}}
+{{challenge.effect}}
+{{challenge.recommnad}}
+{% if challenge.image %}
+<img src="{% static challenge.image %}" alt="이미지">
+{% endif %}

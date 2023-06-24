@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'community',
-    # 'challenge',
+    'challenge',
 ]
 
 MIDDLEWARE = [
@@ -142,7 +142,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.User'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 MESSAGE_LEVEL = messages_constants.DEBUG

@@ -8,5 +8,5 @@ from django.conf import settings
 app_name = 'challenge'
 
 urlpatterns = [
-    path('<int:account_id>/', views.challenge, name="challenge"),
+    path('<int:challenge_id>/', views.challenge, name="challenge"),
 ]
