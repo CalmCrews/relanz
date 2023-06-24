@@ -38,3 +38,58 @@ def challenge(request, challenge_id):
 
 
 
+@login_required
+def participate(request, challenge_id):
+	user = request.user
+	if user.nickname is None:
+		return redirect('user:content')
+	if Participant.objects.filter(user=user.id, challenge=challenge_id):
+		return redirect("challenge:challenge", challenge_id)
+	
+
+	challenge = Challenge.objects.get(id=challenge_id)
+	challenge_tag = Challenge_tag.objects.get(challengename=challenge_id)
+	challenge_tag_dict = model_to_dict(challenge_tag)
+
+	# 기본 태그 dictionary
+	challenge_basic_tags = {
+		'morning': challenge_tag.morning,
+		'afternoon': challenge_tag.afternoon,
+		'evening': challenge_tag.evening,
+		'inside': challenge_tag.inside,
+		'outside': challenge_tag.outside,
+		'solo': challenge_tag.solo,
+		'group': challenge_tag.group,
+		'pay': challenge_tag.pay,
+		'free': challenge_tag.free,
+		'static': challenge_tag.static,
+		'dynamic': challenge_tag.dynamic,
+		}
+	
+	# 기본 태그 list
+	challenge_basic_list=[]
+	for tag_name, tag_value in challenge_basic_tags.items():
+		if tag_value is True:
+			challenge_basic_list.append(tag_name)
+			
+
+	# 챌린지가 갖고 있는 태그 list
+	challenge_tag_list=[]
+	challenge_tag_dict = model_to_dict(challenge_tag)
+	for tag_name, tag_value in challenge_tag_dict.items():
+		if tag_value is True and tag_name not in challenge_basic_list:
+			challenge_tag_list.append(tag_name)  
+
+	# user가 갖고 있는 tag 정보 갖고오기
+	user_tag = User_tag.objects.get(user=user.id)
+
+	# 챌린지가 갖고 있는 tag명을 이용해서 user_tag를 파싱후 +1 해주기
+	for tag_name in challenge_tag_list:
+		setattr(user_tag, tag_name, getattr(user_tag, tag_name) + 1)
+	user_tag.save()
+
+	participant = Participant(user=user, challenge=challenge)
+	participant.save()
+
+	return render(request, 'challenge/participate.html')
+

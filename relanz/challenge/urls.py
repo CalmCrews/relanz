@@ -9,4 +9,5 @@ app_name = 'challenge'
 
 urlpatterns = [
     path('<int:challenge_id>/', views.challenge, name="challenge"),
+    path('participate/<int:challenge_id>', views.participate, name="participate"),
 ]
