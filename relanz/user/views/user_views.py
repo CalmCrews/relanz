@@ -7,6 +7,18 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.contrib import messages
 
+
+from django.contrib.auth import get_user_model
+from django.contrib import auth
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_str
+from user.tokens import account_activation_token
+
+User = get_user_model()
+
 @csrf_protect
 def signup(request):
     if request.method=="GET":
@@ -29,8 +41,21 @@ def signup(request):
                 email=email,
                 password=password,
             )
+            user.is_active = False # 유저 비활성화
             user.save()
-            return redirect('user:signin')   
+
+            current_site = get_current_site(request) 
+            message = render_to_string('user/activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            mail_title = "계정 활성화 확인 이메일"
+            mail_to = request.POST["email"]
+            email = EmailMessage(mail_title, message, to=[mail_to])
+            email.send()
+            return redirect('user:signin')
 
 @csrf_exempt
 def identify(request):
@@ -67,3 +92,17 @@ def signin(request):
 def signout(request):
     logout(request)
     return redirect('main:home')
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        auth.login(request, user)
+        return redirect("main:home")
+    else:
+        return render(request, 'main/home.html', {'error' : '계정 활성화 오류'})

@@ -10,6 +10,7 @@ urlpatterns = [
     path('community/', include('community.urls')),
     path('challenge/', include('challenge.urls')),
     path('', include('django.contrib.auth.urls')),
+    # path('', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
