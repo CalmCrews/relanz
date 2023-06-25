@@ -138,10 +138,10 @@
 <!-- {% for challenge in challenges %}
               <hr>
               {{challenge.title}}
-              <hr>
-              {{challenge.sub_effect}}
-              <hr>
-              {{challenge.recommand}}
+{% if challenge.image %}
+<img src="{% static challenge.image %}" alt="이미지">
+{% endif %}
+              
               <a href="{% url 'challenge:challenge' challenge.id %}">참여하기</a>
             {% endfor %} -->
             <!-- 세션 때 블로그 목록 보여주듯이 챌린지 목록을 보여줌 -->
