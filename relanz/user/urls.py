@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 app_name = 'user'
 
@@ -15,6 +16,11 @@ urlpatterns = [
     path('release/', views.release, name="release"), # 해소 방법 -> 해소 정도 조사 이후에 나타는 페이지
     path('activetime/', views.activetime, name="activetime"), # 활동 시간대 
     path('tagsurvey/', views.tagsurvey, name="tagsurvey"), # 유저의 tag 선택
-    path('avatar/', views.avatar, name='avatar'), # 프로필 이미지
-    path('findid/', views.findid, name="findid"),
+    path('avatar/', views.avatar, name="avatar"), # 프로필 이미지
+    path('findid/', views.findid, name="findid"), # 아이디 찾기
+
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name="password_reset"),
+    path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
+    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 ]
