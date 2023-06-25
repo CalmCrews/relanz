@@ -63,7 +63,7 @@
   line-height: 19px;
   text-align: center;
   letter-spacing: -0.05em;
-  
+
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   text-decoration: none;
 }
@@ -77,26 +77,26 @@
 #profile-unset > #log_out {
   margin-top: 15px;
   color: #ffffff;
-  background-color: #E7E7E7;;
+  background-color: #e7e7e7;
 }
 
 /* profile-set(real main-page) */
+
 #profile-set {
-  position: relative;
-  display: block;
+  /* 배경 페이지 스타일 */
   width: 100%;
-  height: 100vh;
   background-color: #d0e0ff;
 }
 
-#profile-set #under-page {
-  /* 뒷 페이지 스타일 */
-  display: flex;
-  width: 100%;
-  height: 250px;
+.page-wrapper {
+  margin-top: 100px;
+  padding-top: 270px;
+  padding-bottom: 1000px;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-#profile-set #under-page .profile-section {
+.profile-section {
   /* 프로필 섹션 스타일 */
   display: flex;
   position: absolute;
@@ -109,42 +109,37 @@
 
 #profile-set #under-page .profile-section .profile-img {
   /* 프로필 이미지 스타일 */
-
 }
 
 .profile-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px; /* 조정 가능 */
+  height: 100px; /* 조정 가능 */
 }
 
 .profile-circle {
-  width: 200px; /* 조정 가능 */
-  height: 200px; /* 조정 가능 */
+  width: 100px; /* 조정 가능 */
+  height: 100px; /* 조정 가능 */
   border-radius: 50%;
   background-color: #ccc; /* 배경색 조정 가능 */
   position: relative;
   overflow: hidden;
 }
 
-
 .profile-circle div {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   background: transparent center/cover;
 }
 
-
 .back-hair {
   /* 배경 머리 스타일의 CSS 속성 */
-  
 }
 
 .front-hair {
   /* 앞 머리 스타일의 CSS 속성 */
-  
 }
 
 .eyebrows {
@@ -183,31 +178,127 @@
   /* 배지 섹션 스타일 */
 }
 
-#profile-set #top-page {
-  /* 상단 페이지 스타일 */
-
+#top-page {
+  position: sticky;
+  top: 20px;
   width: 100%;
-  height: 200vh;
   background: #ffffff;
-  box-shadow: 0px -20px 5px -1px rgba(154, 188, 255, 0.3);
+  box-shadow: 0px -21px 24px #9abcff;
   border-radius: 38px 38px 0px 0px;
-  z-index: 3;
+  z-index: 8;
+}
+
+.top-page-content {
+  /* 상단 페이지 컨텐츠 스타일 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding-top: 27px;
+  z-index: 10;
+
 }
 
 #profile-set #top-page .header-message {
-  /* 헤더 메시지 스타일 */
+  display: flex;
+  width: 82%;
+  height: 72px;
+  border-radius: 20px;
+  padding: 20px 25px;
+  background: #d0e0ff;
+  align-items: center;
+  line-height: 110%;
 }
+
+.header-message > img {
+  width: 32px;
+  height: 32px;
+  margin: 0 20px 7px 0;
+}
+
+.header-message > span {
+  font-size: 14px;
+}
+
 
 #profile-set #top-page .relenge-section {
   /* 릴렌지 섹션 스타일 */
+  width: 100%;
+  margin: 20px 0;
+  overflow-x: auto;
 }
 
 #profile-set #top-page .relenge-section .tag-list {
   /* 태그 리스트 스타일 */
+  padding-left: 10%;
+  list-style: none;
+  overflow-x: scroll;
+  margin-bottom: 40px;
+  white-space: nowrap;
 }
 
-#profile-set #top-page .relenge-section .relenge-list {
+#profile-set #top-page .relenge-section .tag-list::-webkit-scrollbar {
+  display: none;
+}
+
+#profile-set #top-page .relenge-section .tag-list > li {
+  display: inline-block;
+  width: 80px;
+  height: 25px;
+  margin-right: 10px;
+  padding: 3px;
+  color: #5F5F5F;
+  background-color: #fff;
+  border: 2px solid #9abcff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+}
+
+.relenge-section > .relenge-list-container {
+  width: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.relenge-list-container  .relenge-list {
   /* 릴렌지 리스트 스타일 */
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+#profile-set #top-page .relenge-section .relenge-list::-webkit-scrollbar {
+  display: none;
+}
+
+.relenge-list li {
+  flex: 0 0 80%;
+  margin: 0 10% 0 10%;
+  transform: scale(0.8);
+  opacity: 0.5;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  width: 160px;
+  height: 300px;
+  color: #5F5F5F;
+  background-color: #fff;
+  border: 2px solid #9abcff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+}
+
+.relenge-list li.active {
+  transform: scale(1);
+  opacity: 1;
 }
 
 #profile-set #top-page .report-section {
@@ -245,4 +336,3 @@
 #profile-set #top-page .report-section .relanz-magazine {
   /* 릴렌즈 매거진 스타일 */
 }
-
