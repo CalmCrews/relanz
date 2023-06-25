@@ -6,7 +6,8 @@ from django.contrib import messages
 @login_required(login_url='/user/signin')
 def survey(request):
     if request.method=="GET":
-        return render(request, 'tag/survey.html')
+        user = request.user
+        return render(request, 'tag/survey.html', {user:user})
     if request.method=="POST":
         user=request.user
         if user.nickname is None:
