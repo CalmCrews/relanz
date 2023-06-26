@@ -7,4 +7,14 @@
       <input type="email" placeholder="email@email.com" name="email" id="email" class="email-input" required>
       <input type="submit" value="이메일 전송" class="submit-input">
     </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+      <a href="{% url 'user:signin' %}">로그인 페이지로 돌아가기</a>
+    {% endif %}
+    {% if success %}
+      <p class="success">{{ success }}</p>
+      <a href="{% url 'user:signin' %}">로그인 페이지로 돌아가기</a>
+    {% endif %}
+    
   </div>
