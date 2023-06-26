@@ -6,6 +6,7 @@
 
 .container-mobile-relative-div {
     position: relative;
+    background-color: #FFFFFF;
 }
 
 .modal {
@@ -447,3 +448,121 @@
     visibility: hidden;
 }
 
+.email-div {
+    margin-top: 1.5em;
+    height: 90px;
+
+    position: relative;
+}
+.approve-div-email {
+    position: absolute;
+    bottom: 5%;
+    padding-left: 1em;
+
+    display: flex;
+    align-items: center;
+
+    z-index: -1;
+}
+.approve-email-img-div {
+    display: flex;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-right: 0.3em;
+}
+.approve-email-img-div > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.approve-div-email > p {
+    color: #727272;
+    text-align: center;
+    font-size: 12px;
+    font-family: Pretendard;
+    letter-spacing: -0.72px;
+}
+
+.reject-div-email {
+    position: absolute;
+    bottom: 5%;
+    padding-left: 1em;
+
+    display: flex;
+    align-items: center;
+
+    z-index: -1;
+}
+.reject-email-img-div {
+    display: flex;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-right: 0.3em;
+}
+.reject-email-img-div > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.reject-div-email > p {
+    color: #727272;
+    text-align: center;
+    font-size: 12px;
+    font-family: Pretendard;
+    letter-spacing: -0.72px;
+}
+
+.email-label {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 19px;
+    letter-spacing: -0.06em;
+    
+    color: #494949;
+    padding-left: 0.4em;
+    display: flex;
+    padding-bottom: 0.3em;
+}
+
+.email-input-uni-div {
+    height: 40px;
+    position: relative;
+}
+.email-input-uni-div  > span {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 10%;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #9ABCFF;
+    padding-left: 1em;
+}
+
+.email-input {
+    width: 299px;
+    height: 40px;
+    border: 1px solid #71A1FF;
+    border-radius: 30px;
+    background: #FFFFFF;
+    padding-left: 5em;
+    padding-right: 2em;
+}
+.email-input::placeholder {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: -0.06em;
+    color: #AAAAAA;
+}
