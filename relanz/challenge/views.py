@@ -33,8 +33,9 @@ def challenge(request, challenge_id):
 	for tag_name, tag_value in challenge_basic_tags.items():
 		if tag_value is True:
 			challenge_tag_list.append(tag_name)
-	
-	return render(request, 'challenge/challenge.html', {'challenge':challenge, 'challenge_tag':challenge_tag_list})
+	participant_count = len(Participant.objects.filter(challenge=challenge_id))
+
+	return render(request, 'challenge/challenge.html', {'challenge':challenge, 'challenge_tag':challenge_tag_list, 'participant':participant_count})
 
 
 
