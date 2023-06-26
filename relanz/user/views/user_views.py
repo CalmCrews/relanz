@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.contrib import messages
 
-
+# 이메일 인증 관련 import
 from django.contrib.auth import get_user_model
 from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
@@ -16,6 +16,7 @@ from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes, force_str
 from user.tokens import account_activation_token
+
 
 User = get_user_model()
 
@@ -43,17 +44,8 @@ def signup(request):
             )
             user.save()
 
-            current_site = get_current_site(request) 
-            message = render_to_string('user/activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            mail_title = "계정 활성화 확인 이메일"
-            mail_to = request.POST["email"]
-            email = EmailMessage(mail_title, message, to=[mail_to])
-            email.send()
+            email_sent(request, user) # 인증 메일 전송
+
             return render(request, 'user/email_sent.html')
 
 @csrf_exempt
@@ -82,8 +74,15 @@ def signin(request):
                 return render(request, 'user/signin.html')
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
-                return redirect('main:home')
+                login(request, user) # 로그인은 되도록 설정
+
+                # 이메일 인증 여부 확인
+                if user.is_email_valid:
+                    return redirect('main:home')
+                else:
+                    message = {'message': '이메일 인증을 완료해주세요'}
+                    return JsonResponse(message)
+                
             else:
                 messages.add_message(request, messages.ERROR, '유효한 ID와 비밀번호가 아닙니다.')
                 return render(request, 'user/signin.html')
@@ -94,6 +93,23 @@ def signout(request):
     logout(request)
     return redirect('main:home')
 
+
+# 인증 메일 보내기
+def email_sent(request, user):
+    current_site = get_current_site(request)
+    message = render_to_string('user/activation_email.html', {
+    'user': user,
+    'domain': current_site.domain,
+    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+    'token': account_activation_token.make_token(user),
+    })
+
+    mail_title = "계정 활성화 확인 이메일"
+    mail_to = request.POST["email"]
+    email = EmailMessage(mail_title, message, to=[mail_to])
+    email.send()
+
+# 이메일 인증 후 유저 활성화
 def activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -103,7 +119,8 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_email_valid = True
         user.save()
-        auth.login(request, user)
+        login(request, user)
         return redirect("main:home")
     else:
-        return render(request, 'main/home.html', {'error' : '계정 활성화 오류'})
+        res_data = {'error' : '계정 활성화 오류'}
+        return render(request, 'main/home.html', res_data)

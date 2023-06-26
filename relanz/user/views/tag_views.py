@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from ..models import UserTag
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, email_verified_required
 from django.contrib import messages
 
+@email_verified_required
 @login_required(login_url='/user/signin')
 def survey(request):
     if request.method=="GET":
@@ -16,7 +17,7 @@ def survey(request):
             return redirect('user:tagsurvey')
     return render(request, 'main/home.html')
 
-
+@email_verified_required
 @login_required(login_url='/user/signin')
 def tagsurvey(request):
     if request.method=="GET":
