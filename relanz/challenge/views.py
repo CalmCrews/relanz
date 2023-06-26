@@ -12,7 +12,7 @@ def challenge(request, challenge_id):
 	if user.nickname is None:
 			return redirect('user:content')
 	challenge = Challenge.objects.get(id=challenge_id)
-	challenge_tag = ChallengeTag.objects.get(challengename_id=challenge_id)
+	challenge_tag = ChallengeTag.objects.get(challenge_id=challenge_id)
 	
 	# 챌린지가 갖고 있는 기본 태그
 	challenge_basic_tags = {
@@ -48,7 +48,7 @@ def participate(request, challenge_id):
 	
 
 	challenge = Challenge.objects.get(id=challenge_id)
-	challenge_tag = ChallengeTag.objects.get(challengename=challenge_id)
+	challenge_tag = ChallengeTag.objects.get(challenge=challenge_id)
 	challenge_tag_dict = model_to_dict(challenge_tag)
 
 	# 기본 태그 dictionary
