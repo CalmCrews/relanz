@@ -41,7 +41,6 @@ def signup(request):
                 email=email,
                 password=password,
             )
-            user.is_active = False # 유저 비활성화
             user.save()
 
             current_site = get_current_site(request) 
@@ -55,7 +54,7 @@ def signup(request):
             mail_to = request.POST["email"]
             email = EmailMessage(mail_title, message, to=[mail_to])
             email.send()
-            return redirect('user:signin')
+            return render(request, 'user/email_sent.html')
 
 @csrf_exempt
 def identify(request):
@@ -100,7 +99,7 @@ def activate(request, uidb64, token):
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
     if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
+        user.is_email_valid = True
         user.save()
         auth.login(request, user)
         return redirect("main:home")

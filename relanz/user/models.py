@@ -13,6 +13,7 @@ class User(AbstractUser):
     updated_at = models.DateTimeField(auto_now=True)
     nickname = models.CharField(max_length=32, unique=True, null=True)
     birth = models.IntegerField(null=True, default=0)
+    is_email_valid = models.BooleanField(default=False)
     
     sex_tuple = [
         ('male', 'male'),
