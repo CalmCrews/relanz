@@ -52,7 +52,20 @@
             <div class="email-div">
               <label for="email" class="email-label">이메일</label>
               <div class="email-input-uni-div">
-                <input type="email" placeholder="이메일을 입력해주세요" name="email" id="email" class="email-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
+                <span>e-mail</span>
+                <input type="email" placeholder="이메일을 입력해주세요" name="email" id="email" class="email-input" autocomplete="off" onkeyup="checkValidEmail(this);" onchange="checkValidEmail(this)">
+              </div>
+              <div class="approve-div-email" id="approve_div_email">
+                <div class="approve-email-img-div">
+                  <img src="{% static "images/login/okIcon.png" %}" alt="" srcset="">
+                </div>
+                <p>확인되었습니다</p>
+              </div>
+              <div class="reject-div-email" id="reject_div_email">
+                <div class="reject-email-img-div">
+                  <img src="{% static "images/login/xIcon-red.png" %}" alt="" srcset="">
+                </div>
+                <p>올바르지 않는 이메일 형식입니다</p>
               </div>
             </div>
           </div>
