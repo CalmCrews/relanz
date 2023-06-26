@@ -37,28 +37,15 @@ const onClickCheckId = async () => {
     })
 
     // 여기에서 백에서 준 데이터 받아 변수에 할당하는 곳!
-    const data = await response.json();
+    const message = await response.json();
     const approveMsg = "사용가능한 아이디입니다."
     const rejectMsg = "이미 있는 아이디입니다."
 
-    reject_msg
-    approve_msg
-
-    if (data.message === approveMsg) {
-      const approve_msg = document.getElementById("approve_msg")
-      const reject_msg = document.getElementById("reject_msg")
-      approve_msg.classList.remove("hide")
-      reject_msg.classList.add("hide")
-      console.log(approve_msg, reject_msg)
-      return
+    if (message === approveMsg) {
+      console.log("사용가능")
     }
-    else if (data.message === rejectMsg) {
-      const approve_msg = document.getElementById("approve_msg")
-      const reject_msg = document.getElementById("reject_msg")
-      approve_msg.classList.add("hide")
-      reject_msg.classList.remove("hide")
-      console.log(approve_msg, reject_msg)
-      return
+    else if (message === rejectMsg) {
+      console.log("사용 불가능")
     }
     return
     // 이후 처리에 따라 아이디 중복 여부를 유저에게 피드백하면 됨!
@@ -204,30 +191,5 @@ function convertPassword(obj) {
   }
 }
 
-
-
-
-function checkValidEmail(obj) {
-  let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
-  const inputText = obj.value;
-  const approve_div_email = document.getElementById("approve_div_email");
-  const reject_div_email = document.getElementById("reject_div_email");
-  if (!inputText){
-    // 글자가 아무것도 없으면!
-    approve_div_email.style.zIndex = "-1";
-    reject_div_email.style.zIndex = "-1";
-  }
-  else {
-    // 값이 있으면!
-    const isEmpty = inputText.includes(" ")
-    const isEmail = regex.test(inputText)
-    if (!isEmpty && isEmail) {
-      approve_div_email.style.zIndex = "10";
-      reject_div_email.style.zIndex = "-1";
-    }
-    else {
-      approve_div_email.style.zIndex = "-1";
-      reject_div_email.style.zIndex = "10";
-    }
-  }
-}
+// pw_eye.addEventListener("click", ()=>{})
+// re_pw_eye.addEventListener("click", ()=>{})
