@@ -39,7 +39,9 @@ def identify(request):
         if User.objects.filter(username=username).exists():
             message = {'message': '이미 있는 아이디입니다.'}
             return JsonResponse(message, status=400)
-        return render(request, 'user/signup.html')
+        message = {'message': '사용가능한 아이디입니다.'}
+        return JsonResponse(message, status=200)
+        # return render(request, 'user/signup.html')
 
 def signin(request):
     if request.method == "GET":
