@@ -39,7 +39,10 @@
             </div>
           </div>
 
-          <div class="bubble"></div>
+          <div class="bubble">
+            <div class="triangle"><img src="{%static 'icons/triangleforbubble.png'%}" alt=""></div>
+            <div class="circle">{{ user.nickname }}님에게 도착한 오늘의 한마디 &#128172;</div>
+          </div>
           <div class="badge-section"></div>
 
         </div>
@@ -59,7 +62,7 @@
                 <li>정적인</li>
                 <li>혼자서</li>
                 {% comment %} {% for item in tag_list %}
-                  <l>{{item}}</l
+                  <li>{{item}}</li>
                 {% endfor %} {% endcomment %}
                 
               </ul>
