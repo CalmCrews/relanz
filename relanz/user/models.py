@@ -7,6 +7,12 @@ from datetime import datetime
 # Create your models here.
 
 class User(AbstractUser):
+    SEX_TUPLE = [
+        ('male', 'male'),
+        ('female', 'female')
+    ]
+
+    sex = models.CharField(max_length=10, choices=SEX_TUPLE, null=True)
     password = models.CharField(max_length=20, blank=False)
     email = models.EmailField(max_length=128, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -14,14 +20,6 @@ class User(AbstractUser):
     nickname = models.CharField(max_length=32, unique=True, null=True)
     birth = models.IntegerField(null=True, default=0)
     is_email_valid = models.BooleanField(default=False)
-    
-    sex_tuple = [
-        ('male', 'male'),
-        ('female', 'female')
-    ]
-
-    sex = models.CharField(max_length=10, choices=sex_tuple, null=True)
-    
     avatar = models.CharField(max_length=30, null=True)
 
     @property
