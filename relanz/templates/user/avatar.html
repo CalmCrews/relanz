@@ -9,110 +9,111 @@
 {% endblock extrahead %}
 
 {% block content%}
-
-  <div class="header-message">
-    <span>이제 마지막!</span>
-    <p>{{ user.nickname }} 님을 표현하는 캐릭터를<br>설정하면 끝이에요!</p>
-  </div>
-  <div class="profile-img-container">
-    <div class="profile-image-wrapper">
-      <div class="profile-wrapper">
-        <div class="backhair"></div>
-        <div class="face">
-          <img src="{% static 'character/face.png' %}" alt="face">
-        </div>
-        <div class="fronthair"></div>
-        <div class="brows"></div>
-        <div class="eyes"></div>
-        <div class="nose"></div>
-        <div class="mouth"></div>
-        <div class="makeup"></div>
-        <div class="clothes"></div>
-        <div class="acc"></div>
-      </div>
+  <div class="avatar-page-container">
+    <div class="header-message">
+      <span>이제 마지막!</span>
+      <p>{{ user.nickname }} 님을 표현하는 캐릭터를<br>설정하면 끝이에요!</p>
     </div>
-    <div class="random-option"></div>
-  </div>
-  <div class="options-container">
+    <div class="profile-img-container">
+      <div class="profile-image-wrapper">
+        <div class="profile-wrapper">
+          <div class="backhair"></div>
+          <div class="face">
+            <img src="{% static 'character/face.png' %}" alt="face">
+          </div>
+          <div class="fronthair"></div>
+          <div class="brows"></div>
+          <div class="eyes"></div>
+          <div class="nose"></div>
+          <div class="mouth"></div>
+          <div class="makeup"></div>
+          <div class="clothes"></div>
+          <div class="acc"></div>
+        </div>
+      </div>
+      <div class="random-option"></div>
+    </div>
     <div class="options-select">
-      <div class="hair"></div>
-      <div class="face"></div>
-      <div class="clothes"></div>
+      <div class="hair">머리</div>
+      <div class="face">표정</div>
+      <div class="fashion">패션</div>
     </div>
-    <div class="hair-container">
-      <div>
-        <label for="avatar">앞머리</label>
-        <div class="item-selection avatar-section" id="fronthair">
-          <img src="{% static "character/fronthair/fronthair1.png" %}" alt="앞머리 1" data-id="1" class="selected">
-          <img src="{% static "character/fronthair/fronthair2.png" %}" alt="앞머리 2" data-id="2">
-          <img src="{% static "character/fronthair/fronthair3.png" %}" alt="앞머리 3" data-id="3">
-          <img src="{% static "character/fronthair/fronthair4.png" %}" alt="앞머리 4" data-id="4">
+    <div class="options-container">
+      <div class="hair-container">
+        <div>
+          <label for="avatar">앞머리</label>
+          <div class="item-selection avatar-section" id="fronthair">
+            <img src="{% static "character/fronthair/fronthair1.png" %}" alt="앞머리 1" data-id="1" class="selected">
+            <img src="{% static "character/fronthair/fronthair2.png" %}" alt="앞머리 2" data-id="2">
+            <img src="{% static "character/fronthair/fronthair3.png" %}" alt="앞머리 3" data-id="3">
+            <img src="{% static "character/fronthair/fronthair4.png" %}" alt="앞머리 4" data-id="4">
+          </div>
+        </div>
+        <div>
+          <label for="avatar">뒷머리</label>
+          <div class="item-selection avatar-section-optional" id="backhair">
+            <img src="{% static "character/backhair/backhair1.png" %}" alt="뒷머리 1" data-id="1">
+            <img src="{% static "character/backhair/backhair2.png" %}" alt="뒷머리 2" data-id="2">
+            <img src="{% static "character/backhair/backhair3.png" %}" alt="뒷머리 3" data-id="3">
+            <img src="{% static "character/backhair/backhair4.png" %}" alt="뒷머리 4" data-id="4">
+            <img src="{% static "character/backhair/backhair5.png" %}" alt="뒷머리 5" data-id="5">
+          </div>
         </div>
       </div>
-      <div>
-        <label for="avatar">뒷머리</label>
-        <div class="item-selection avatar-section-optional" id="backhair">
-          <img src="{% static "character/backhair/backhair1.png" %}" alt="뒷머리 1" data-id="1">
-          <img src="{% static "character/backhair/backhair2.png" %}" alt="뒷머리 2" data-id="2">
-          <img src="{% static "character/backhair/backhair3.png" %}" alt="뒷머리 3" data-id="3">
-          <img src="{% static "character/backhair/backhair4.png" %}" alt="뒷머리 4" data-id="4">
-          <img src="{% static "character/backhair/backhair5.png" %}" alt="뒷머리 5" data-id="5">
+      <div class="face-container">
+        <div>
+          <label for="avatar">눈썹</label>
+          <div class="item-selection avatar-section" id="brows">
+            <img src="{% static "character/brows/brows1.png" %}" alt="눈썹 1" data-id="1" class="selected">
+            <img src="{% static "character/brows/brows2.png" %}" alt="눈썹 2" data-id="2">
+          </div>
+        </div>
+        <div>
+          <label for="avatar">눈</label>
+          <div class="item-selection avatar-section" id="eyes">
+            <img src="{% static "character/eyes/eyes1.png" %}" alt="눈 1" data-id="1" class="selected">
+            <img src="{% static "character/eyes/eyes2.png" %}" alt="눈 2" data-id="2">
+          </div>
+        </div>
+        <div>
+          <label for="avatar">코</label>
+          <div class="item-selection avatar-section" id="nose">
+            <img src="{% static "character/nose/nose1.png" %}" alt="코 1" data-id="1" class="selected">
+            <img src="{% static "character/nose/nose2.png" %}" alt="코 2" data-id="2">
+          </div>
+        </div>
+        <div>
+          <label for="avatar">입</label>
+          <div class="item-selection avatar-section" id="mouth">
+            <img src="{% static "character/mouth/mouth1.png" %}" alt="입 1" data-id="1" class="selected">
+            <img src="{% static "character/mouth/mouth2.png" %}" alt="입 2" data-id="2">
+            <img src="{% static "character/mouth/mouth3.png" %}" alt="입 2" data-id="3">
+          </div>
+        </div>
+        <div>
+          <label for="avatar">메이크업</label>
+          <div class="item-selection avatar-section-optional" id="makeup">
+            <img src="{% static "character/makeup/makeup1.png" %}" alt="메이크업 1" data-id="1">
+            <img src="{% static "character/makeup/makeup2.png" %}" alt="메이크업 2" data-id="2">
+            <img src="{% static "character/makeup/makeup3.png" %}" alt="메이크업 2" data-id="3">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="face-container">
-      <div>
-        <label for="avatar">눈썹</label>
-        <div class="item-selection avatar-section" id="brows">
-          <img src="{% static "character/brows/brows1.png" %}" alt="눈썹 1" data-id="1" class="selected">
-          <img src="{% static "character/brows/brows2.png" %}" alt="눈썹 2" data-id="2">
+      <div class="fashion-container">
+        <div>
+          <label for="avatar">옷</label>
+          <div class="item-selection avatar-section" id="clothes">
+            <img src="{% static "character/clothes/clothes1.png" %}" alt="옷 1" data-id="1" class="selected">
+            <img src="{% static "character/clothes/clothes2.png" %}" alt="옷 2" data-id="2">
+            <img src="{% static "character/clothes/clothes3.png" %}" alt="옷 2" data-id="3">
+          </div>
         </div>
-      </div>
-      <div>
-        <label for="avatar">눈</label>
-        <div class="item-selection avatar-section" id="eyes">
-          <img src="{% static "character/eyes/eyes1.png" %}" alt="눈 1" data-id="1" class="selected">
-          <img src="{% static "character/eyes/eyes2.png" %}" alt="눈 2" data-id="2">
-        </div>
-      </div>
-      <div>
-        <label for="avatar">코</label>
-        <div class="item-selection avatar-section" id="nose">
-          <img src="{% static "character/nose/nose1.png" %}" alt="코 1" data-id="1" class="selected">
-          <img src="{% static "character/nose/nose2.png" %}" alt="코 2" data-id="2">
-        </div>
-      </div>
-      <div>
-        <label for="avatar">입</label>
-        <div class="item-selection avatar-section" id="mouth">
-          <img src="{% static "character/mouth/mouth1.png" %}" alt="입 1" data-id="1" class="selected">
-          <img src="{% static "character/mouth/mouth2.png" %}" alt="입 2" data-id="2">
-          <img src="{% static "character/mouth/mouth3.png" %}" alt="입 2" data-id="3">
-        </div>
-      </div>
-      <div>
-        <label for="avatar">메이크업</label>
-        <div class="item-selection avatar-section-optional" id="makeup">
-          <img src="{% static "character/makeup/makeup1.png" %}" alt="메이크업 1" data-id="1">
-          <img src="{% static "character/makeup/makeup2.png" %}" alt="메이크업 2" data-id="2">
-          <img src="{% static "character/makeup/makeup3.png" %}" alt="메이크업 2" data-id="3">
-        </div>
-      </div>
-    </div>
-    <div class="fashion-container">
-      <div>
-        <label for="avatar">옷</label>
-        <div class="item-selection avatar-section" id="clothes">
-          <img src="{% static "character/clothes/clothes1.png" %}" alt="옷 1" data-id="1" class="selected">
-          <img src="{% static "character/clothes/clothes2.png" %}" alt="옷 2" data-id="2">
-          <img src="{% static "character/clothes/clothes3.png" %}" alt="옷 2" data-id="3">
-        </div>
-      </div>
-      <div>
-        <label for="avatar">귀걸이</label>
-        <div class="item-selection avatar-section-optional" id="acc">
-          <img src="{% static "character/acc/acc1.png" %}" alt="귀걸이 1" data-id="1">
-          <img src="{% static "character/acc/acc2.png" %}" alt="귀걸이 2" data-id="2">
+        <div>
+          <label for="avatar">귀걸이</label>
+          <div class="item-selection avatar-section-optional" id="acc">
+            <img src="{% static "character/acc/acc1.png" %}" alt="귀걸이 1" data-id="1">
+            <img src="{% static "character/acc/acc2.png" %}" alt="귀걸이 2" data-id="2">
+          </div>
         </div>
       </div>
     </div>
@@ -133,7 +134,35 @@
 {% endblock %}
 
 {% block scripts%}
+
 <script>
+  const options = document.querySelectorAll('.options-select div');
+  const containers = document.querySelectorAll('.options-container > div');
+
+  options.forEach((option, index) => {
+    option.addEventListener('click', () => {
+      // 이미 선택된 경우 선택 해제
+      if (option.classList.contains('option-selected')) {
+        option.classList.remove('option-selected');
+        containers[index].style.display = 'none';
+      } else {
+        // 다른 선택 해제
+        options.forEach((otherOption) => {
+          otherOption.classList.remove('option-selected');
+        });
+
+        // 선택한 요소 표시
+        option.classList.add('option-selected');
+
+        // 선택한 옵션에 해당하는 container를 보임
+        containers.forEach((container) => {
+          container.style.display = 'none';
+        });
+        containers[index].style.display = 'block';
+      }
+    });
+  });
+
   const avatarSections = document.querySelectorAll('.avatar-section');
   avatarSections.forEach(section => {
     const imagesInCategory = section.querySelectorAll('img');

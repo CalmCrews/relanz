@@ -1,16 +1,42 @@
-.profile-wrapper {
+.avatar-page-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100px; /* 조정 가능 */
+  padding: 90px 0;
+}
+
+.header-message {
+  text-align: center;
+}
+
+.header-message span{
+  color: #9ABCFF;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -5%;
+}
+
+.header-message p{
+  color: #494949;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -5%;
 }
 
 .profile-wrapper {
-  width: 100px; /* 조정 가능 */
-  height: 100px; /* 조정 가능 */
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  height: 100px; 
+}
+
+.profile-wrapper {
+  width: 180px; 
+  height: 180px; 
   border-radius: 50%;
-  border: 2px solid #71a1ff;
-  background-color: #fff; /* 배경색 조정 가능 */
+  border: 3px solid #71a1ff;
+  background-color: #fff;
   position: relative;
   overflow: hidden;
   z-index: 10;
@@ -18,8 +44,8 @@
 
 .profile-wrapper div {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 189px;
+  height: 180px;
   background: transparent center/cover;
 }
 
@@ -74,13 +100,53 @@
   z-index: 15;
 }
 
-.accessories {
+.acc {
   /* 악세사리 스타일의 CSS 속성 */
   z-index: 15;
 }
 
+.options-select {
+  width: 320px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.options-select div {
+  display: flex;
+  width: 100px;
+  height: 80px;
+  border: 2px solid rgba(154, 188, 255, 0.5);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #494949;
+  justify-content: center;
+  align-items: center;
+}
+
+.options-select .option-selected {
+  background-color:#9ABCFF;
+  color: #fff;
+}
+
+.options-container {
+  width: 320px;
+}
+
+.options-container > div {
+  display: none;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #494949;
+}
+
 .avatar-section, .avatar-section-optional {
-  width: 80%;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
@@ -97,4 +163,9 @@
 
 .avatar-section img.selected , .avatar-section-optional img.selected{
   background-color: rgba(154, 188, 255, 0.5); /* 선택된 이미지 배경색 변경 */
+}
+
+
+form {
+  display: none;
 }
