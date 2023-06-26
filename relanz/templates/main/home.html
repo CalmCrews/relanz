@@ -112,9 +112,9 @@
       const accElement = document.querySelector(".acc");
     
       // 각 조합 요소의 숫자에 해당하는 이미지 경로 설정
-      if (combinationData[0] > 0)
-        backHairElement.style.backgroundImage = `url("{% static 'character/backhair/backhair' %}${combinationData[0]}.png")`;
-      frontHairElement.style.backgroundImage = `url("{% static 'character/fronthair/fronthair' %}${combinationData[1]}.png")`;
+      frontHairElement.style.backgroundImage = `url("{% static 'character/fronthair/fronthair' %}${combinationData[0]}.png")`;
+      if (combinationData[1] > 0)
+        backHairElement.style.backgroundImage = `url("{% static 'character/backhair/backhair' %}${combinationData[1]}.png")`;
       eyebrowsElement.style.backgroundImage = `url("{% static 'character/brows/brows' %}${combinationData[2]}.png")`;
       eyesElement.style.backgroundImage = `url("{% static 'character/eyes/eyes' %}${combinationData[3]}.png")`;
       noseElement.style.backgroundImage = `url("{% static 'character/nose/nose' %}${combinationData[4]}.png")`;

@@ -11,37 +11,37 @@
 {% block content%}
   <div class="avatar-page-container">
     <div class="header-message">
-      <span>이제 마지막!</span>
-      <p>{{ user.nickname }} 님을 표현하는 캐릭터를<br>설정하면 끝이에요!</p>
+      <div class="span"><span>이제 마지막!</span></div>
+      <div class="para"><p>{{ user.nickname }}님을 표현하는 캐릭터를<br>설정하면 끝이에요!</p></div>
     </div>
-    <div class="profile-img-container">
-      <div class="profile-image-wrapper">
-        <div class="profile-wrapper">
-          <div class="backhair"></div>
-          <div class="face">
-            <img src="{% static 'character/face.png' %}" alt="face">
-          </div>
-          <div class="fronthair"></div>
-          <div class="brows"></div>
-          <div class="eyes"></div>
-          <div class="nose"></div>
-          <div class="mouth"></div>
-          <div class="makeup"></div>
-          <div class="clothes"></div>
-          <div class="acc"></div>
-        </div>
+
+    <div class="profile-wrapper">
+      <div class="backhair"></div>
+      <div class="face">
+        <img src="{% static 'character/face.png' %}" alt="face">
       </div>
-      <div class="random-option"></div>
+      <div class="fronthair"></div>
+      <div class="brows"></div>
+      <div class="eyes"></div>
+      <div class="nose"></div>
+      <div class="mouth"></div>
+      <div class="makeup"></div>
+      <div class="clothes"></div>
+      <div class="acc"></div>
     </div>
+
+    <div class="random-option">랜덤으로 할래요!</div>
+    
     <div class="options-select">
       <div class="hair">머리</div>
       <div class="face">표정</div>
       <div class="fashion">패션</div>
     </div>
+
     <div class="options-container">
       <div class="hair-container">
         <div>
-          <label for="avatar">앞머리</label>
+          <label for="avatar">&nbsp;&nbsp; 앞머리</label>
           <div class="item-selection avatar-section" id="fronthair">
             <img src="{% static "character/fronthair/fronthair1.png" %}" alt="앞머리 1" data-id="1" class="selected">
             <img src="{% static "character/fronthair/fronthair2.png" %}" alt="앞머리 2" data-id="2">
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div>
-          <label for="avatar">뒷머리</label>
+          <label for="avatar">&nbsp;&nbsp; 뒷머리</label>
           <div class="item-selection avatar-section-optional" id="backhair">
             <img src="{% static "character/backhair/backhair1.png" %}" alt="뒷머리 1" data-id="1">
             <img src="{% static "character/backhair/backhair2.png" %}" alt="뒷머리 2" data-id="2">
@@ -62,28 +62,28 @@
       </div>
       <div class="face-container">
         <div>
-          <label for="avatar">눈썹</label>
+          <label for="avatar">&nbsp;&nbsp; 눈썹</label>
           <div class="item-selection avatar-section" id="brows">
             <img src="{% static "character/brows/brows1.png" %}" alt="눈썹 1" data-id="1" class="selected">
             <img src="{% static "character/brows/brows2.png" %}" alt="눈썹 2" data-id="2">
           </div>
         </div>
         <div>
-          <label for="avatar">눈</label>
+          <label for="avatar">&nbsp;&nbsp; 눈</label>
           <div class="item-selection avatar-section" id="eyes">
             <img src="{% static "character/eyes/eyes1.png" %}" alt="눈 1" data-id="1" class="selected">
             <img src="{% static "character/eyes/eyes2.png" %}" alt="눈 2" data-id="2">
           </div>
         </div>
         <div>
-          <label for="avatar">코</label>
+          <label for="avatar">&nbsp;&nbsp; 코</label>
           <div class="item-selection avatar-section" id="nose">
             <img src="{% static "character/nose/nose1.png" %}" alt="코 1" data-id="1" class="selected">
             <img src="{% static "character/nose/nose2.png" %}" alt="코 2" data-id="2">
           </div>
         </div>
         <div>
-          <label for="avatar">입</label>
+          <label for="avatar">&nbsp;&nbsp; 입</label>
           <div class="item-selection avatar-section" id="mouth">
             <img src="{% static "character/mouth/mouth1.png" %}" alt="입 1" data-id="1" class="selected">
             <img src="{% static "character/mouth/mouth2.png" %}" alt="입 2" data-id="2">
@@ -91,7 +91,7 @@
           </div>
         </div>
         <div>
-          <label for="avatar">메이크업</label>
+          <label for="avatar">&nbsp;&nbsp; 메이크업</label>
           <div class="item-selection avatar-section-optional" id="makeup">
             <img src="{% static "character/makeup/makeup1.png" %}" alt="메이크업 1" data-id="1">
             <img src="{% static "character/makeup/makeup2.png" %}" alt="메이크업 2" data-id="2">
@@ -101,7 +101,7 @@
       </div>
       <div class="fashion-container">
         <div>
-          <label for="avatar">옷</label>
+          <label for="avatar">&nbsp;&nbsp; 옷</label>
           <div class="item-selection avatar-section" id="clothes">
             <img src="{% static "character/clothes/clothes1.png" %}" alt="옷 1" data-id="1" class="selected">
             <img src="{% static "character/clothes/clothes2.png" %}" alt="옷 2" data-id="2">
@@ -109,7 +109,7 @@
           </div>
         </div>
         <div>
-          <label for="avatar">귀걸이</label>
+          <label for="avatar">&nbsp;&nbsp; 귀걸이</label>
           <div class="item-selection avatar-section-optional" id="acc">
             <img src="{% static "character/acc/acc1.png" %}" alt="귀걸이 1" data-id="1">
             <img src="{% static "character/acc/acc2.png" %}" alt="귀걸이 2" data-id="2">
@@ -117,6 +117,7 @@
         </div>
       </div>
     </div>
+    <button id="bttn_shape" type="submit">설정 완료</button>
   </div>
 
   <form method='post'>
@@ -129,13 +130,14 @@
         </div>
     </fieldset>
     {% comment %} <a href="{% url 'main:home'%}">프로필 설정 완료 !</a> {% endcomment %}
-    <button class="avatar" type="submit">다음</button>
+    <button id="real_bttn"class="avatar" type="submit">다음</button>
   </form>
 {% endblock %}
 
 {% block scripts%}
 
 <script>
+  //container display
   const options = document.querySelectorAll('.options-select div');
   const containers = document.querySelectorAll('.options-container > div');
 
@@ -163,11 +165,13 @@
     });
   });
 
+  //조합 이미지 업데이트
   const avatarSections = document.querySelectorAll('.avatar-section');
   avatarSections.forEach(section => {
     const imagesInCategory = section.querySelectorAll('img');
     imagesInCategory.forEach(image => {
       image.addEventListener('click', () => {
+
         const currentSelected = section.querySelector('.selected');
         if (currentSelected) {
           currentSelected.classList.remove('selected');
@@ -192,8 +196,8 @@
   
     images.forEach(image => {
       image.addEventListener('click', () => {
+
         const isSelected = image.classList.contains('selected');
-  
         // 이미 선택된 이미지인 경우 선택 해제
         if (isSelected) {
           image.classList.remove('selected');
@@ -224,6 +228,44 @@
       });
     });
   });
+
+  //랜덤 조합
+  const randomSelect = document.querySelector('.random-option');
+
+  randomSelect.addEventListener('click', () => {
+    const isSelected = randomSelect.classList.contains('random-selected');
+    let combinations = "101111010";
+    //선택 
+    if (!isSelected) {
+      randomSelect.classList.add('random-selected');
+      const getRandomInt = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
+      combinations = `${getRandomInt(1, 4)}${getRandomInt(1, 5)}${getRandomInt(1, 2)}${getRandomInt(1, 2)}${getRandomInt(1, 2)}${getRandomInt(1, 3)}${getRandomInt(1, 3)}${getRandomInt(1, 3)}${getRandomInt(1, 2)}`; 
+    }
+    else {
+      randomSelect.classList.remove('random-selected');
+      combinations = "101111010";
+    }
+
+
+    const avatarItemSelection = document.querySelectorAll('.item-selection');
+
+    combinations.split('').forEach((combination, index) => {
+
+      const categoryIndex = parseInt(combination) - 1;
+      const imagesInCategory = avatarItemSelection[index].querySelectorAll('img');
+      let imageToSelect = imagesInCategory[categoryIndex];
+      if (combination === "0") {
+        imageToSelect = avatarItemSelection[index].querySelector('.selected');
+      }
+
+      imageToSelect.click();
+    });
+  });
+
 
   //첫 프로필 화면 로드
   window.addEventListener('DOMContentLoaded', () => {
@@ -258,6 +300,13 @@
     console.log(selectedImages);
   });
 
+  //설정 완료 버튼
+  const bttnShape = document.getElementById('bttn_shape');
+  const realBttn = document.getElementById('real_bttn');
+
+  bttnShape.addEventListener('click', () => {
+    realBttn.click();
+  });
   
 </script>
 {% endblock %}
