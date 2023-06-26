@@ -48,24 +48,26 @@ def home(request):
                     tag_lists.append(tag_name)
             challenges = ChallengeTag.objects.filter(**{tag_list: True for tag_list in tag_lists})
 
+            # id, user_id 등 불필요한 데이터 제외
             minus_tag = ['id','user']
             for tag_name, tag_value in basic_tags.items():
                 minus_tag.append(tag_name)
             
+            # 유저가 릴렌지를 참여함에 따라 빈도 수가 높은 릴렌지 태그를 뽑음
             user_tag_dict = model_to_dict(user_tag)
             for i in range(0, len(minus_tag)):
                 del user_tag_dict[f'{minus_tag[i]}']
             sorted_user_tag = sorted(user_tag_dict.items(), key=lambda x:x[1], reverse=True)
             sorted_user_keys = [item[0] for item in sorted_user_tag]
 
-            
-            c1_query =Q()
+            # 기본 태그를 통해 가져온 챌린지와 릴렌지 태그를 통해 가져온 챌린지 쿼리를 합집합
+            basic_tag_query =Q()
             for key in sorted_user_keys[:3]:
-                c1_query |=Q(**{key: True})
-            c2_query=Q()
+                basic_tag_query |=Q(**{key: True})
+            challenge_tag_query=Q()
             for key in tag_lists:
-                c2_query |=Q(**{key: True})
-            challenge_query = c1_query|c2_query
+                challenge_tag_query |=Q(**{key: True})
+            challenge_query = basic_tag_query|challenge_tag_query
             
             challenge_tags = ChallengeTag.objects.filter(challenge_query).order_by(f'-{sorted_user_keys[0]}', f'-{sorted_user_keys[1]}', f'-{sorted_user_keys[2]}')
             challenge_ids  = challenge_tags.values_list('challengename', flat=True)
@@ -93,7 +95,6 @@ def home(request):
             for tag_name, tag_value in basic_tags_.items():
                 if tag_value is True:
                     tag_lists_.append(tag_name)
-            print(tag_lists_)
             basic_tags = {
             'morning': user_tag.morning,
             'afternoon': user_tag.afternoon,
