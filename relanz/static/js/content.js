@@ -1,10 +1,12 @@
 function selectLiYear(obj) {
     const value = obj.value
 
+    console.log(value)
     const setValueDiv = document.getElementById("select_born_year")
     const hidden_birth = document.getElementById("hidden_birth")
     setValueDiv.innerText = `${value}년`
     hidden_birth.value = value
+    console.log(document.getElementById("hidden_birth").value)
 
     const up_circle_name = "check_circle_up.png";
     const showBirthArrow = document.getElementById("showBirthArrow")
@@ -67,8 +69,6 @@ function showBirthYear (obj) {
 
     const up_circle_name = "check_circle_up.png";
     const down_circle_name = "check_circle_down.png";
-
-    console.log(fileName)
     if (fileName === up_circle_name) {
         obj.src = `/static/icons/${down_circle_name}`
         
@@ -92,7 +92,6 @@ function selectOnlyOneGenderForMan (obj) {
         const sex_male_tag = document.getElementById("sex_male")
         const sex_female_tag = document.getElementById("sex_female")
 
-        console.log(sex_male_tag)
         sex_male_tag.style.backgroundColor = "#D0E0FF";
 
         sex_female_tag.style.backgroundColor = "#FFF";
