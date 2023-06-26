@@ -1,7 +1,8 @@
 from django.http import HttpResponseForbidden, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from ..models import User, UserTag
-from django.contrib.auth.decorators import login_required, email_verified_required
+from django.contrib.auth.decorators import login_required
+from config.email_decorator import email_verified_required
 
 @login_required(login_url='/user/signin')
 @email_verified_required

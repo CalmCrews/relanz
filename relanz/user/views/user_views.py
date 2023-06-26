@@ -44,10 +44,10 @@ def signup(request):
             )
             user.save()
 
-            email_sent(request, user) # 인증 메일 전송
+            email_sent(request, user)
 
-            return render(request, 'user/email_sent.html')
-
+            return render(request, 'user/email_sent.html', {'user':user})
+        
 @csrf_exempt
 def identify(request):
         json_data=json.loads(request.body)
@@ -75,14 +75,12 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user) # 로그인은 되도록 설정
-
-                # 이메일 인증 여부 확인
                 if user.is_email_valid:
                     return redirect('main:home')
                 else:
-                    message = {'message': '이메일 인증을 완료해주세요'}
-                    return JsonResponse(message)
-                
+                    email_sent(request, user)
+                    messages.add_message(request, messages.INFO, '이메일 인증을 완료해주세요. 이메일을 확인하세요.')
+                    return render(request, 'user/email_sent.html', {'user':user})
             else:
                 messages.add_message(request, messages.ERROR, '유효한 ID와 비밀번호가 아닙니다.')
                 return render(request, 'user/signin.html')
@@ -105,9 +103,12 @@ def email_sent(request, user):
     })
 
     mail_title = "계정 활성화 확인 이메일"
-    mail_to = request.POST["email"]
+    mail_to = user.email
     email = EmailMessage(mail_title, message, to=[mail_to])
     email.send()
+
+    res_data = {'user':user, 'error':'인증이 완료되지 않았습니다. 다시 시도해주세요.'}
+    return render(request, 'user/email_sent.html', res_data)
 
 # 이메일 인증 후 유저 활성화
 def activate(request, uidb64, token):
