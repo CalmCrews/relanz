@@ -47,6 +47,14 @@
 {% endblock %}
 
 {% block scripts%}
+  <script>
+    {% if not user.nickname %}
+      const mobileHeader = document.querySelector('.mobile-header');
+      const mobileNav = document.querySelector('.mobile-nav');
+      mobileHeader.style.display = 'none';
+      mobileNav.style.display = 'none';
+    {% endif %}
+  </script>
   {% block mobile-scripts %}
   {% endblock %}
 {% endblock %}
