@@ -24,18 +24,18 @@
       <div class="page-wrapper">
         <div class="profile-section">
 
-          <div class="profile-img">
-            <div class="profile-wrapper">
-              <div class="profile-circle">
-                <div class="back-hair"></div>
-                <div class="face"></div>
-                <div class="front-hair"></div>
-                <div class="eyebrows"></div>
-                <div class="eyes"></div>
-                <div class="nose"></div>
-                <div class="mouth"></div>
-                <div class="cheek"></div>
-              </div>
+          <div class="profile-wrapper">
+            <div class="profile-circle">
+              <div class="back-hair"></div>
+              <div class="face"></div>
+              <div class="front-hair"></div>
+              <div class="eyebrows"></div>
+              <div class="eyes"></div>
+              <div class="nose"></div>
+              <div class="mouth"></div>
+              <div class="makeup"></div>
+              <div class="clothes"></div>
+              <div class="acc"></div>
             </div>
           </div>
 
@@ -58,6 +58,10 @@
                 <li>동적인</li>
                 <li>정적인</li>
                 <li>혼자서</li>
+                {% comment %} {% for item in tag_list %}
+                  <l>{{item}}</l
+                {% endfor %} {% endcomment %}
+                
               </ul>
               <div class="relenge-list-container">
                 <ul class="relenge-list">
@@ -102,37 +106,38 @@
       const eyesElement = document.querySelector(".eyes");
       const noseElement = document.querySelector(".nose");
       const mouthElement = document.querySelector(".mouth");
-      const cheekElement = document.querySelector(".cheek");
+      const cheekElement = document.querySelector(".makeup");
       const faceElement = document.querySelector(".face");
+      const clothesElement = document.querySelector(".clothes");
+      const accElement = document.querySelector(".acc");
     
       // 각 조합 요소의 숫자에 해당하는 이미지 경로 설정
-      backHairElement.style.backgroundImage = `url("{% static 'character/backhair/back_hair' %}${combinationData[0]}.png")`;
-      frontHairElement.style.backgroundImage = `url("{% static 'character/fronthair/front_hair' %}${combinationData[1]}.png")`;
+      frontHairElement.style.backgroundImage = `url("{% static 'character/fronthair/fronthair' %}${combinationData[0]}.png")`;
+      if (combinationData[1] > 0)
+        backHairElement.style.backgroundImage = `url("{% static 'character/backhair/backhair' %}${combinationData[1]}.png")`;
       eyebrowsElement.style.backgroundImage = `url("{% static 'character/brows/brows' %}${combinationData[2]}.png")`;
       eyesElement.style.backgroundImage = `url("{% static 'character/eyes/eyes' %}${combinationData[3]}.png")`;
       noseElement.style.backgroundImage = `url("{% static 'character/nose/nose' %}${combinationData[4]}.png")`;
       mouthElement.style.backgroundImage = `url("{% static 'character/mouth/mouth' %}${combinationData[5]}.png")`;
-      cheekElement.style.backgroundImage = `url("{% static 'character/cheeks/cheeks' %}${combinationData[6]}.png")`;
-      faceElement.style.backgroundImage = `url("{% static 'character/face.png' %}`;
+      if (combinationData[6] > 0)
+        cheekElement.style.backgroundImage = `url("{% static 'character/makeup/makeup' %}${combinationData[6]}.png")`;
+      faceElement.style.backgroundImage = `url("{% static 'character/face.png' %}")`;
+      clothesElement.style.backgroundImage = `url("{% static 'character/clothes/clothes' %}${combinationData[7]}.png")`;
+      if (combinationData[8] > 0)
+        accElement.style.backgroundImage = `url("{% static 'character/acc/acc' %}${combinationData[8]}.png")`;
 
     }
     
-    // 예시 조합 데이터
-    const exampleCombinationData = "3211123";
     
     // 조합 데이터를 적용하여 프로필 렌더링
-    renderProfileCombination(exampleCombinationData);
+    console.log({{user.avatar}})
+    renderProfileCombination("{{user.avatar}}");
     
-
+    
    
   </script>
 {% endblock %}
 
-<!-- {% for item in tag_list %}
-        {{item}}
-      {% endfor %} -->
-            <!-- item => 유저가 갖고 있는 태그 -->
-            <!-- 전달되는 item의 값은 뷰에서 전달할 수 있습니다. -->
 
 
 <!-- {% for challenge in challenges %}

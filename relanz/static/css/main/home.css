@@ -104,12 +104,8 @@
   width: 100%;
   padding: 5%;
   height: 180px;
-  border: 3px dotted #fff;
 }
 
-#profile-set #under-page .profile-section .profile-img {
-  /* 프로필 이미지 스타일 */
-}
 
 .profile-wrapper {
   display: flex;
@@ -122,9 +118,11 @@
   width: 100px; /* 조정 가능 */
   height: 100px; /* 조정 가능 */
   border-radius: 50%;
-  background-color: #ccc; /* 배경색 조정 가능 */
+  border: 2px solid #71a1ff;
+  background-color: #fff; /* 배경색 조정 가능 */
   position: relative;
   overflow: hidden;
+  z-index: 10;
 }
 
 .profile-circle div {
@@ -135,39 +133,53 @@
 }
 
 .back-hair {
-  /* 배경 머리 스타일의 CSS 속성 */
+  /* 머리 스타일의 CSS 속성 */
+  z-index: 11;
+}
+
+.face {
+  /* 얼굴 스타일의 CSS 속성 */
+  z-index: 12;
 }
 
 .front-hair {
   /* 앞 머리 스타일의 CSS 속성 */
+  z-index: 14;
 }
 
 .eyebrows {
   /* 눈썹 스타일의 CSS 속성 */
+  z-index: 13;
 }
 
 .eyes {
   /* 눈 스타일의 CSS 속성 */
+  z-index: 13;
 }
 
 .nose {
   /* 코 스타일의 CSS 속성 */
+  z-index: 13;
 }
 
 .mouth {
   /* 입 스타일의 CSS 속성 */
+  z-index: 13;
 }
 
-.cheek {
+.makeup {
   /* 볼터치 스타일의 CSS 속성 */
+  z-index: 14;
 }
 
 .clothes {
   /* 옷 스타일의 CSS 속성 */
+  z-index: 15;
 }
 
-.accessories {
+.acc {
   /* 악세사리 스타일의 CSS 속성 */
+  z-index: 15;
 }
 
 #profile-set #under-page .profile-section .bubble {

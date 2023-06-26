@@ -1,0 +1,211 @@
+.avatar-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 90px 0;
+}
+
+.header-message {
+  text-align: center;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.header-message > .span {
+  color: #9abcff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 35px;
+}
+
+.header-message > .para {
+  color: #494949;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 135%;
+}
+
+.profile-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 180px;
+  margin: 10px 0 23px 0;
+  border-radius: 50%;
+  border: 3px solid #71a1ff;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.profile-wrapper div {
+  position: absolute;
+  width: 189px;
+  height: 180px;
+  background: transparent center/cover;
+}
+
+.backhair {
+  /* 머리 스타일의 CSS 속성 */
+  z-index: 11;
+}
+
+.face {
+  /* 얼굴 스타일의 CSS 속성 */
+  z-index: 12;
+}
+
+.face img {
+  width: 100%;
+  object-fit: cover;
+  z-index: 12;
+}
+
+.fronthair {
+  /* 앞 머리 스타일의 CSS 속성 */
+  z-index: 14;
+}
+
+.brows {
+  /* 눈썹 스타일의 CSS 속성 */
+  z-index: 13;
+}
+
+.eyes {
+  /* 눈 스타일의 CSS 속성 */
+  z-index: 13;
+}
+
+.nose {
+  /* 코 스타일의 CSS 속성 */
+  z-index: 13;
+}
+
+.mouth {
+  /* 입 스타일의 CSS 속성 */
+  z-index: 13;
+}
+
+.makeup {
+  /* 볼터치 스타일의 CSS 속성 */
+  z-index: 14;
+}
+
+.clothes {
+  /* 옷 스타일의 CSS 속성 */
+  z-index: 15;
+}
+
+.acc {
+  /* 악세사리 스타일의 CSS 속성 */
+  z-index: 15;
+}
+
+.avatar-page-container .random-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  height: 30px;
+  margin-bottom: 50px;
+  border: 1px solid #9abcff;
+  border-radius: 15px;
+  color: #9abcff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.avatar-page-container .random-selected {
+  color: #fff;
+  background-color: #9abcff;
+}
+
+.options-select {
+  width: 320px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin-bottom: 40px;
+}
+
+.options-select div {
+  display: flex;
+  width: 100px;
+  height: 80px;
+  border: 2px solid rgba(154, 188, 255, 0.5);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #494949;
+  justify-content: center;
+  align-items: center;
+}
+
+.options-select .option-selected {
+  background-color: #9abcff;
+  color: #fff;
+}
+
+.options-container {
+  width: 320px;
+  margin-bottom: 30px;
+}
+
+.options-container > div {
+  display: none;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #494949;
+}
+
+.avatar-section,
+.avatar-section-optional {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin: 15px 0 30px 0;
+}
+
+.avatar-section img,
+.avatar-section-optional img {
+  width: 100px;
+  height: 100px;
+  border: 2px solid rgba(154, 188, 255, 0.5);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.avatar-section img.selected,
+.avatar-section-optional img.selected {
+  background-color: rgba(154, 188, 255, 0.5); /* 선택된 이미지 배경색 변경 */
+}
+
+button {
+  width: 250px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  background: #71a1ff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  color: #fff;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #3f80fc;
+}
+
+form {
+  display: none;
+}
