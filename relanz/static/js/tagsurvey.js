@@ -27,19 +27,23 @@ const changePage = function(obj) {
 }
 
 function selectMyTag(obj) {
-    const isClicked = obj.dataset.isclicked === "1" ? true : false;
+    const isClicked = String(obj.dataset.isclicked) === "1" ? true : false;
 
     const inputId = obj.id.split("_").pop();
-    const selectBoolean = document.getElementById(inputId).value === "";
+    const tag = document.getElementById(inputId)
 
 
-    if (isClicked && !selectBoolean) {
+    if (isClicked) {
         obj.classList.remove("clicked-change-color");
-        document.getElementById(inputId).value = inputId;
+        obj.dataset.isclicked = "0"
+
+        tag.value = "";
     }
     else {
         obj.classList.add("clicked-change-color");
-        document.getElementById(inputId).value = "";
+        obj.dataset.isclicked =  "1"
+
+        tag.value = inputId;
     }
 }
 

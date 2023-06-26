@@ -76,7 +76,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: #FFF;
 
     color: #494949;
     text-align: center;
@@ -112,7 +111,6 @@
     height: 80px;
     border: 2px solid #9ABCFF;
     border-radius: 20px;
-    background: #FFF;
 
     display: flex;
     justify-content: center;
@@ -131,7 +129,6 @@
     flex-shrink: 0;
     border: 2px solid #9ABCFF;
     border-radius: 20px;
-    background: #FFF;
 
     display: flex;
     justify-content: center;
@@ -165,7 +162,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: #FFF;
 
     color: #494949;
     text-align: center;
