@@ -44,7 +44,9 @@ def signup(request):
             )
             user.save()
 
-            email_sent(request, user)
+            login(request, user)
+
+            email_sent(request)
 
             return render(request, 'user/email_sent.html', {'user':user})
         
@@ -78,7 +80,7 @@ def signin(request):
                 if user.is_email_valid:
                     return redirect('main:home')
                 else:
-                    email_sent(request, user)
+                    email_sent(request)
                     messages.add_message(request, messages.INFO, '이메일 인증을 완료해주세요. 이메일을 확인하세요.')
                     return render(request, 'user/email_sent.html', {'user':user})
             else:
@@ -93,13 +95,14 @@ def signout(request):
 
 
 # 인증 메일 보내기
-def email_sent(request, user):
+def email_sent(request):
+    user = request.user
     current_site = get_current_site(request)
     message = render_to_string('user/activation_email.html', {
-    'user': user,
-    'domain': current_site.domain,
-    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-    'token': account_activation_token.make_token(user),
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
     })
 
     mail_title = "계정 활성화 확인 이메일"

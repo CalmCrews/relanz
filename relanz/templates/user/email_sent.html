@@ -6,7 +6,7 @@
 회원가입을 완료해 주세요<br>
 <br>
 {% if user.is_authenticated %}
-    {{ error }}}
+    {{ error }}
 {% endif %}
 <a href="{% url 'main:home' %}">인증 완료</a>
 {% endblock %}
