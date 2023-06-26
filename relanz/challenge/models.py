@@ -15,7 +15,7 @@ class ChallengeTag(models.Model):
     class Meta:
         db_table="challengeTag"
         
-    challengename = models.ForeignKey(Challenge, on_delete=models.CASCADE, unique=True)
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, unique=True)
     #기본 태그
     morning = models.BooleanField(default=False, verbose_name='아침')  # 아침
     afternoon = models.BooleanField(default=False, verbose_name='점심')  # 점심
@@ -74,4 +74,4 @@ class Participant(models.Model):
         db_table="participaint"
 
     user = models.ForeignKey('user.User', on_delete=models.CASCADE)
-    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, related_name='challenge')
