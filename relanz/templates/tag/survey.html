@@ -8,6 +8,8 @@
   <link rel="stylesheet" type="text/css" href="{% static "css/survey.css"%}">
 {% endblock extrahead %}
 {% block content%}
+<form method="POST">
+  {% csrf_token %}
   <div class="container-mobile">
     <div class="intro-text-div">
       <p>반가워요,</p>
@@ -51,15 +53,9 @@
       </div>
     </div>
     <div class="next-button-div">
-      <button>다음단계</button>
+      <button type="submit" action="{% url 'user:survey' %}">다음단계</button>
     </div>
   </div>
-
+</form>
   <script src="{% static "js/survey.js" %}"></script>
-  {% comment %} <a href="{% url 'main:home' %}">홈으로</a> {% endcomment %}
-  {% comment %} <form method='post'>
-    {% csrf_token %}
-    <button type="submit" action="{% url 'user:survey' %}">다음</button>
-    <br>
-  </form> {% endcomment %}
 {% endblock %}
