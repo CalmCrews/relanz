@@ -206,3 +206,7 @@
     cursor: pointer;
     background-color: #3F80FC;
 }
+
+.clicked-change-color {
+    background: #D0E0FF;
+}
