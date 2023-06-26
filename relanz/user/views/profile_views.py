@@ -40,9 +40,11 @@ def avatar(request):
 def userinfo(request, user_id):
     user = request.user
     user = User.objects.get(username=user.username) 
-    tags = Tag.objects.get(user_id=user_id)
+    tags = UserTag.objects.get(user_id=user_id)
+
+    res_data = {'user':user, 'tags':tags}
     
-    return render(request, 'user/userinfo.html', {'user':user, 'tags':tags})
+    return render(request, 'user/userinfo.html', res_data)
 
 # def accountedit(request, user_id):
 #     account = get_object_or_404(User, pk=user_id)

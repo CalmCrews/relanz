@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404, resolve_url
+from django.shortcuts import render, redirect
 from ..models import User
 from django.core.mail import send_mail
 import os
@@ -14,11 +14,17 @@ def findid(request):
             recipient_list = [email]
 
             send_mail(subject=subject, message=message, from_email=from_email, recipient_list=recipient_list)
+            
+            res_data = {'success': '입력하신 이메일로 아이디를 전송했습니다.'}
 
-            return redirect('user:signin')
+            return render(request, 'user/findid.html', res_data)
         
+        # 일치하는 이메일 없으면 에러메시지 반환
         except User.DoesNotExist:
-            return render(request, 'user/findid.html', {'error': '일치하는 사용자가 없습니다.'})
+
+            res_data = {'error': '일치하는 사용자가 없습니다. 이메일을 다시 입력해주세요.'}
+            
+            return render(request, 'user/findid.html', res_data)
 
     return render(request, 'user/findid.html')
 
