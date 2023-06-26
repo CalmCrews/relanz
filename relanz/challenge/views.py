@@ -12,7 +12,7 @@ def challenge(request, challenge_id):
 	if user.nickname is None:
 			return redirect('user:content')
 	challenge = Challenge.objects.get(id=challenge_id)
-	challenge_tag = ChallengeTag.objects.get(challengename_id=challenge_id)
+	challenge_tag = ChallengeTag.objects.get(challenge_id=challenge_id)
 	
 	# 챌린지가 갖고 있는 기본 태그
 	challenge_basic_tags = {
@@ -33,8 +33,9 @@ def challenge(request, challenge_id):
 	for tag_name, tag_value in challenge_basic_tags.items():
 		if tag_value is True:
 			challenge_tag_list.append(tag_name)
-	
-	return render(request, 'challenge/challenge.html', {'challenge':challenge, 'challenge_tag':challenge_tag_list})
+	participant_count = len(Participant.objects.filter(challenge=challenge_id))
+
+	return render(request, 'challenge/challenge.html', {'challenge':challenge, 'challenge_tag':challenge_tag_list, 'participant':participant_count})
 
 
 
@@ -48,7 +49,7 @@ def participate(request, challenge_id):
 	
 
 	challenge = Challenge.objects.get(id=challenge_id)
-	challenge_tag = ChallengeTag.objects.get(challengename=challenge_id)
+	challenge_tag = ChallengeTag.objects.get(challenge=challenge_id)
 	challenge_tag_dict = model_to_dict(challenge_tag)
 
 	# 기본 태그 dictionary

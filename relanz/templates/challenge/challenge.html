@@ -9,4 +9,5 @@
 {% for item in challenge_tag %}
     {{item}}
 {% endfor %}
+{{participant}}
 <a href="{% url 'challenge:participate' challenge_id=challenge.id %}">참여하기</a>
