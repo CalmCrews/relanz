@@ -41,7 +41,8 @@
 
           <div class="bubble">
             <div class="triangle"><img src="{%static 'icons/triangleforbubble.png'%}" alt=""></div>
-            <div class="circle">{{ user.nickname }}님에게 도착한 오늘의 한마디 &#128172;</div>
+            <div class="circle"><p>{{ user.nickname }}님에게 도착한 오늘의 한마디 &#128172;<p></div>
+            <div class="hidden-message"><p>오늘도 화이팅!<p></div>
           </div>
           <div class="badge-section"></div>
 
@@ -136,7 +137,30 @@
     //console.log({{user.avatar}})
     renderProfileCombination("{{user.avatar}}");
     
+    //오늘의 메세지 전환 효과
+    const bubble = document.querySelector('.bubble');
+    const bubbleMessage = document.querySelector('.bubble > .circle > p');
+    const hiddenMessage = document.querySelector('.hidden-message');
+    const triangle = document.querySelector('.bubble .triangle');
+    const circle = document.querySelector('.bubble .circle');
     
+    bubble.addEventListener('click', function() {
+
+      const isBubbleClicked = bubble.classList.contains('clicked');
+      if (isBubbleClicked) {
+        bubble.classList.remove('clicked');
+        bubble.classList.add('unclicked');
+        bubbleMessage.style.display = 'block';
+        hiddenMessage.style.display = 'none';
+      }
+      else {
+        bubble.classList.add('clicked');
+        bubble.classList.remove('unclicked');
+        bubbleMessage.style.display = 'none';
+        hiddenMessage.style.display = 'flex';
+      }
+
+    });
    
   </script>
 {% endblock %}
