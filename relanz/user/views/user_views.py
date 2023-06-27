@@ -32,10 +32,10 @@ def signup(request):
         res_data = {'username':username, 'password':password}
         if not (username and email and password and re_password):
             res_data['error']="입력되지 않은 값이 있습니다."
-            render(request, 'user/signup.html', res_data)
+            return render(request, 'user/signup.html', res_data)
         elif (password != re_password):
             res_data['error']="비밀번호가 일치하지 않습니다."
-            render(request, 'user/signup.html', res_data)
+            return render(request, 'user/signup.html', res_data)
         else:
             user=User.objects.create_user(
                 username=username,
