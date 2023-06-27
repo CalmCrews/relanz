@@ -39,7 +39,6 @@ def tagsurvey(request):
         group = request.POST.get('Group')
         static = request.POST.get('static')
         dynamic = request.POST.get('dynamic')
-        tags = UserTag.objects.get(user=user)
         tag_cnt = 0
         tag_lists = [morning, afternoon, evening, inside, outside, solo, group, static, dynamic]
         for tag_list in tag_lists:
