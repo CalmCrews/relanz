@@ -89,10 +89,9 @@
 }
 
 .page-wrapper {
+  position: relative;
   margin-top: 100px;
-  padding-top: 270px;
-  padding-bottom: 1000px;
-  max-width: 700px;
+  padding-top: 250px;
   margin: 0 auto;
 }
 
@@ -100,7 +99,7 @@
   /* 프로필 섹션 스타일 */
   display: flex;
   position: absolute;
-  top: 50px;
+  top: 55px;
   width: 100%;
   padding: 5% 7%;
   height: 180px;
@@ -181,11 +180,8 @@
   z-index: 15;
 }
 
-#profile-set #under-page .profile-section .bubble {
-  /* 버블 스타일 */
-}
 
-#profile-set #under-page .profile-section .badge-section {
+.score-section {
   /* 배지 섹션 스타일 */
 }
 
@@ -224,7 +220,7 @@
   justify-content: center;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
   transform-origin: center bottom;
-  transition: transform 0.3s; 
+  transition: transform 0.3s;
 }
 
 .bubble .hidden-message {
@@ -256,10 +252,12 @@
 }
 
 @keyframes blinkTriangle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
-  10%, 90% {
+  10%,
+  90% {
     opacity: 0.1;
   }
   50% {
@@ -267,16 +265,17 @@
   }
 }
 
-
 .bubble.unclicked .triangle {
   animation: blinkTriangleUnclicked 0.35s;
 }
 
 @keyframes blinkTriangleUnclicked {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
-  10%, 90% {
+  10%,
+  90% {
     opacity: 0.1;
   }
   50% {
@@ -312,7 +311,6 @@
   }
 }
 
-
 .bubble.unclicked .circle {
   animation: rotateCircleUnclicked 0.3s linear;
   transform-style: preserve-3d;
@@ -345,6 +343,20 @@
     opacity: 1;
   }
 }
+
+.name {
+  position: absolute;
+  top: 187px;
+  left: 54px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.name > span {
+  color: #71a1ff;
+
+}
+
 
 /* 컨텐츠 페이지 */
 #top-page {
@@ -394,7 +406,7 @@
 #profile-set #top-page .relenge-section {
   /* 릴렌지 섹션 스타일 */
   width: 100%;
-  margin: 20px 0;
+  margin: 30px 0;
   overflow-x: auto;
 }
 
@@ -403,7 +415,7 @@
   padding-left: 10%;
   list-style: none;
   overflow-x: scroll;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   white-space: nowrap;
 }
 
@@ -413,7 +425,7 @@
 
 #profile-set #top-page .relenge-section .tag-list > li {
   display: inline-block;
-  width: 80px;
+  width: 70px;
   height: 25px;
   margin-right: 10px;
   padding: 3px;
@@ -447,27 +459,121 @@
   display: none;
 }
 
-.relenge-list li {
-  flex: 0 0 80%;
-  margin: 0 10% 0 10%;
-  transform: scale(0.8);
-  opacity: 0.5;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  width: 160px;
-  height: 300px;
-  color: #5f5f5f;
-  background-color: #fff;
-  border: 2px solid #9abcff;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  align-items: center;
+/* 릴렌지 카드 섹션 */
+.relenge-list-container {
+  position: relative;
+  width: 100%;
 }
 
-.relenge-list li.active {
-  transform: scale(1);
-  opacity: 1;
+.relenge-list {
+  width: 100%;
+  height: 380px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.relenge-list .relenge-card {
+  position: absolute;
+  width: 240px;
+  height: 360px;
+  text-align: justify;
+  border: 2px solid #9abcff;
+  border-radius: 25px;
+  transition: 0.5s;
+  left: calc(50% - 110px);
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.relenge-card > .image-section {
+  width: 100%;
+  height: 65%;
+  background-color: #f2f2f2;
+}
+
+.relenge-card > .info-section {
+  position: relative;
+  width: 100%;
+  height: 35%;
+  background-color: #fff;
+}
+
+.info-section > .sticker {
+  position: absolute;
+  width: 75px;
+  height: 20px;
+  top: -8px;
+  left: 10px;
+  color: #9abcff;
+  border: 1px solid #9abcff;
+  border-radius: 15px;
+  padding: 2px;
+  font-size: 8px;
+  font-weight: 500;
+  background-color: #fff;
+  text-align: center;
+}
+
+.info-section > h2 {
+  position: absolute;
+  top: 25px;
+  left: 17px;
+  width: 180px;
+  height: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #5f5f5f;
+}
+
+.info-section > img {
+  position: absolute;
+  bottom: 24px;
+  left: 20px;
+  font-size: 8px;
+}
+
+.info-section > span {
+  position: absolute;
+  bottom: 24px;
+  left: 37px;
+  font-size: 8px;
+  color: #626262;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #e7e7e7;
+  margin: 0 3px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #9abcff;
+}
+
+.carousel-arrows {
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.arrow {
+  font-size: 24px;
+  cursor: pointer;
 }
 
 #profile-set #top-page .report-section {
