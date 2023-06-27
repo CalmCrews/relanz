@@ -1,8 +1,8 @@
 {% load static %}
 {{challenge.title}}
-{{challenge.sub_effect}}
-{{challenge.effect}}
-{{challenge.recommnad}}
+{{challenge.sub_effect|linebreaks}}
+{{challenge.effect|linebreaks}}
+{{challenge.recommnad|linebreaks}}
 {% if challenge.image %}
 <img src="{% static challenge.image %}" alt="이미지">
 {% endif %}
