@@ -8,7 +8,9 @@ from django.db.models import Q
 # Create your views here.
 def home(request):
     user=request.user
-    if request.user.is_authenticated:
+    if user.is_authenticated:
+        if not user.is_email_valid:
+            return redirect('user:email_sent')
         try:
             user_tag = UserTag.objects.get(user=user.id)
             participant = Participant.objects.filter(user=user.id)

@@ -21,4 +21,7 @@ urlpatterns = [
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
     path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
+
+    path('email_sent/', views.email_sent, name="email_sent"), # 이메일 전송
+    path('activate/<str:uidb64>/<str:token>/', views.activate, name="activate"), # 이메일 인증 활성화
 ]

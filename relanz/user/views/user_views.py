@@ -7,6 +7,19 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.contrib import messages
 
+# 이메일 인증 관련 import
+from django.contrib.auth import get_user_model
+from django.contrib import auth
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_str
+from user.tokens import account_activation_token
+
+
+User = get_user_model()
+
 @csrf_protect
 def signup(request):
     if request.method=="GET":
@@ -30,8 +43,13 @@ def signup(request):
                 password=password,
             )
             user.save()
-            return redirect('user:signin')   
 
+            login(request, user)
+
+            email_sent(request)
+
+            return render(request, 'user/email_sent.html', {'user':user})
+        
 @csrf_exempt
 def identify(request):
         json_data=json.loads(request.body)
@@ -58,8 +76,13 @@ def signin(request):
                 return render(request, 'user/signin.html')
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
-                return redirect('main:home')
+                login(request, user) # 로그인은 되도록 설정
+                if user.is_email_valid:
+                    return redirect('main:home')
+                else:
+                    email_sent(request)
+                    messages.add_message(request, messages.INFO, '이메일 인증을 완료해주세요. 이메일을 확인하세요.')
+                    return render(request, 'user/email_sent.html', {'user':user})
             else:
                 messages.add_message(request, messages.ERROR, '정보')
                 return render(request, 'user/signin.html')
@@ -69,3 +92,39 @@ def signin(request):
 def signout(request):
     logout(request)
     return redirect('main:home')
+
+
+# 인증 메일 보내기
+def email_sent(request):
+    user = request.user
+    current_site = get_current_site(request)
+    message = render_to_string('user/activation_email.html', {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+    })
+
+    mail_title = "계정 활성화 확인 이메일"
+    mail_to = user.email
+    email = EmailMessage(mail_title, message, to=[mail_to])
+    email.send()
+
+    res_data = {'user':user, 'error':'인증이 완료되지 않았습니다. 다시 시도해주세요.'}
+    return render(request, 'user/email_sent.html', res_data)
+
+# 이메일 인증 후 유저 활성화
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_email_valid = True
+        user.save()
+        login(request, user)
+        return redirect("main:home")
+    else:
+        res_data = {'error' : '계정 활성화 오류'}
+        return render(request, 'main/home.html', res_data)

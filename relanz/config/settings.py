@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.sites',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
     'user',
     'community',
     'challenge',
@@ -152,5 +156,6 @@ EMAIL_USE_TLS=True
 EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
+
 
 LOGIN_URL = '/user/signin/'
