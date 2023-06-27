@@ -9,10 +9,16 @@
 {% block content%}
   <div class="container-mobile">
     <div class="container-for-relative">
-      <div class="warning-user" id="warning_user_div">
-        <p class="warning-ment">사용자의 정보가 올바르지 않습니다.</p>
-        <button type="button" class="warning-btn" id="warning_btn">확인</button>
-      </div>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="warning-user" id="warning_user_div">
+            <p class="warning-ment">사용자의
+              {{message}}가 올바르지 않습니다.</p>
+            <button type="button" class="warning-btn" id="warning_btn">확인</button>
+          </div>
+        {% endfor %}
+      {% endif %}
+
       <div class="small-message_mobile">
         <p>챌린지 말고, 이젠 릴렌지 하자!</p>
       </div>

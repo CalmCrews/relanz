@@ -51,17 +51,17 @@ def signin(request):
             username = request.POST['username']
             password = request.POST['password']
             if not username:
-                messages.add_message(request, messages.ERROR, 'Please enter a valid username.')
+                messages.add_message(request, messages.ERROR, '아이디')
                 return render(request, 'user/signin.html')
             if not password:
-                messages.add_message(request, messages.ERROR, 'Please enter a valid password.')
+                messages.add_message(request, messages.ERROR, '비밀번호')
                 return render(request, 'user/signin.html')
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('main:home')
             else:
-                messages.add_message(request, messages.ERROR, '유효한 ID와 비밀번호가 아닙니다.')
+                messages.add_message(request, messages.ERROR, '정보')
                 return render(request, 'user/signin.html')
         else:
             return redirect('main:home')
