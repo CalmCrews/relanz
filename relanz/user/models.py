@@ -7,7 +7,7 @@ from datetime import datetime
 # Create your models here.
 
 class User(AbstractUser):
-    password = models.CharField(max_length=20, blank=False)
+    password = models.CharField(max_length=255, blank=False)
     email = models.EmailField(max_length=128, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
