@@ -26,106 +26,77 @@ const changePage = function(obj) {
     }
 }
 
-function setBackgroundColor(tagId, color) {
-    const tag = document.getElementById(`${tagId}`);
-    tag.style.backgroundColor = `${color}`;
-}
-function mouseOverFunc () {
-    setBackgroundColor(obj.id, "#D0E0FF")
-}
-function mouseLeaveFunc () {
-    setBackgroundColor(obj.id, "#FFF")
-}
-
 function selectMyTag(obj) {
+    const isClicked = String(obj.dataset.isclicked) === "1" ? true : false;
+
     const inputId = obj.id.split("_").pop();
-    const selectBoolean = document.getElementById(inputId).value === ""
+    const tag = document.getElementById(inputId)
 
-    if (inputId === "anytime") {
-        // 클릭이 되면 true 아님 false
-        const isCLicked = document.getElementById(inputId).value !== "";
 
-        if (!isCLicked) {
-            // value가 비어있으면, 클릭이 안되면
-            // 이젠 클릭된 상태임.
+    if (isClicked) {
+        obj.classList.remove("clicked-change-color");
+        obj.dataset.isclicked = "0"
 
-            document.getElementById(inputId).value = inputId;
-            obj.style.backgroundColor = "#D0E0FF";
+        tag.value = "";
+    }
+    else {
+        obj.classList.add("clicked-change-color");
+        obj.dataset.isclicked =  "1"
 
-            // 클릭으로 가자 값이 있으면 눌러야함
-            const shouldIClick_morning = document.getElementById("morning").value;
-            const shouldIClick_nooing = document.getElementById("nooing").value;
-            const shouldIClick_evening = document.getElementById("evening").value;
+        tag.value = inputId;
+    }
+}
 
-            if (shouldIClick_morning) {
-                console.log("shouldIClick_morning :", document.getElementById("morning").value)
-                document.getElementById("type_second_morning").click();
-                console.log("shouldIClick_morning :", document.getElementById("morning").value)
-            }
-            if (shouldIClick_nooing) {
-                console.log("shouldIClick_nooing", document.getElementById("nooing").value)
-                document.getElementById("type_second_nooing").click()
-                console.log("shouldIClick_nooing", document.getElementById("nooing").value)
-            }
-            if (shouldIClick_evening) {
-                console.log("shouldIClick_evening", document.getElementById("evening").value )
-                document.getElementById("type_second_evening").click()
-                console.log("shouldIClick_evening", document.getElementById("evening").value )
-            }
-            return;
 
-        } else if (isCLicked) {
-            document.getElementById(inputId).value = "";
-            obj.style.backgroundColor = "#FFF";
+function selectMyTag_ver2 (obj) {
+    const isClicked = String(obj.dataset.isclicked) === "1" ? true : false;
 
-            return;
+    const inputId = obj.id.split("_").pop();
+    const tag = document.getElementById(inputId)
+
+    const morning = document.getElementById("type_second_morning")
+    const nooing = document.getElementById("type_second_nooing")
+    const evening = document.getElementById("type_second_evening")
+    const anytime = document.getElementById("type_second_anytime")
+
+    if (inputId === 'anytime') {
+        if (String(morning.dataset.isclicked) === "1") {
+            morning.click()
+        }
+        if (String(nooing.dataset.isclicked) === "1") {
+            nooing.click()
+        }
+        if (String(evening.dataset.isclicked) === "1") {
+            evening.click()
         }
     }
 
-    document.getElementById(inputId).value = document.getElementById(inputId).value === "" ? inputId : ""
-    if (selectBoolean && inputId !== "anytime") {
-        obj.style.backgroundColor = "#D0E0FF";
+    if (isClicked) {
+        obj.classList.remove("clicked-change-color");
+        obj.dataset.isclicked = "0"
 
-    } else if (!selectBoolean) {
-
-        obj.style.backgroundColor = "#FFF"
-        obj.addEventListener("mouseover", ()=>{
-            setBackgroundColor(obj.id, "#D0E0FF")
-        })
-        obj.addEventListener("mouseleave", ()=>{
-            setBackgroundColor(obj.id, "#FFF")
-        })
+        tag.value = "";
     }
-}
+    else {
+        if (String(anytime.dataset.isclicked) === "1" && inputId !== 'anytime') {
+            anytime.click()
+        }
 
+        obj.classList.add("clicked-change-color");
+        obj.dataset.isclicked =  "1"
 
-function selectMyTag2(obj, isSelected) {
-    if (isSelected) {
-        obj.style.backgroundColor = "#FFF";
-    } else {
-        obj.style.backgroundColor = "#D0E0FF";
-        obj.addEventListener("mouseover", mouseOverFunc);
-        obj.addEventListener("mouseleave", mouseLeaveFunc);
+        tag.value = inputId;
+
+        const morning_boolean = String(morning.dataset.isclicked) === "1";
+        const nooing_boolean = String(nooing.dataset.isclicked) === "1";
+        const evening_boolean = String(evening.dataset.isclicked) === "1";
+
+        if (morning_boolean && nooing_boolean && evening_boolean && inputId !== 'anytime') {
+            morning.click()
+            nooing.click()
+            evening.click()
+            anytime.click()
+        }
+        
     }
-}
-
-function selectMyTagForVictim(obj) {
-    const inputId = obj.id.split("_").pop();
-    const selectBoolean = Boolean(document.getElementById(inputId).value);
-
-    document.getElementById(inputId).value = selectBoolean ? "" : inputId;
-
-    console.log(inputId, selectBoolean)
-    console.log(document.getElementById(inputId).value)
-    if (inputId === "anytime") {
-        const shouldIClick_morning = Boolean(document.getElementById("morning").value);
-        const shouldIClick_nooing = Boolean(document.getElementById("nooing").value);
-        const shouldIClick_evening = Boolean(document.getElementById("evening").value);
-
-        selectMyTag2(document.getElementById("type_second_morning"), !shouldIClick_morning);
-        selectMyTag2(document.getElementById("type_second_nooing"), !shouldIClick_nooing);
-        selectMyTag2(document.getElementById("type_second_evening"), !shouldIClick_evening);
-    }
-
-    selectMyTag2(obj, selectBoolean);
 }
