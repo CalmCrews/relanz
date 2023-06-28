@@ -69,7 +69,7 @@ def edit(request, challenge_id, article_id):
     return render(request, 'community/edit.html', res_data)
 
 @login_required(login_url='/user/signin')
-def delete(request, article_id):
+def delete(request, challenge_id, article_id):
     article = get_object_or_404(Article, pk=article_id)
 
     article.delete()
