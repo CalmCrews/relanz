@@ -77,3 +77,17 @@ def like(request, article_id):
     like.likedUser = request.user
     like.save()
     return redirect('community:detail', article_id)
+
+# a 참가자의 글들을 a 유저에 저장
+def save_articles(request, participant_id):
+    try:
+        participant = Participant.objects.get(id=participant_id)
+        user = participant.user
+
+        # participant_id의 글들 저장
+        articles = participant.article_set.all()
+        for article in articles:
+            Article.objects.create(author=participant, user=user, image=article.image)
+            
+    except Participant.DoesNotExist:
+        return HttpResponse("참여자가 존재하지 않습니다")
