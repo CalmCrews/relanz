@@ -36,7 +36,7 @@
                 <div class="participant-img-div">
                     <img src="{% static "icons/human_shaped.png" %}" alt=".">
                 </div>
-                <small class="participant-count-small">{{participant}} 명이 참여 중인 릴렌지</small>
+                <small class="participant-count-small">{{participant}}명이 참여 중인 릴렌지</small>
             </div>
         </div>
         <div class="tag-container-div">
@@ -65,23 +65,25 @@
                 <div class="content">{{challenge.recommnad}}</div>
             </div>
             {% comment %} 여기가 장소라 if 템플릿 사용하면 되용! {% endcomment %}
-            <div class="recommand-place-container-div">
-                <div class="title-div">
-                    <div class="img-div">
-                        <img src="" alt=".">
+            <div class="recommand-place-container-outer-div">
+                <div class="recommand-place-container-div">
+                    <div class="title-div">
+                        <div class="img-div">
+                            <img src="{% static "icons/map_point.png" %}" alt=".">
+                        </div>
+                        <p>추천 장소 안내</p>
                     </div>
-                    <p>추천 장소 안내</p>
-                </div>
-                <div class="text-info-div">
-                    <p>유로 활동의 경우 릴렌즈에서 추천 장소를 안내해드려요</p>
-                </div>
-                <div>
+                    <div class="text-info-div">
+                        <p>유로 활동의 경우 릴렌즈에서 추천 장소를 안내해드려요!</p>
+                    </div>
                     <a href="http://" class="go-to-place-a">
                         <div>장소 보러 가기</div>
                     </a>
                 </div>
             </div>
-            <div class="start-btn-div">시작하기</div>
+            <div class="start-btn-div">
+                <a href="">시작하기</a>
+            </div>
         </div>
     </div>
 

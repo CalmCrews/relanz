@@ -255,19 +255,13 @@
 }
 
 #profile-set #top-page .relenge-section .tag-list > li {
-  display: inline-block;
-  width: 80px;
-  height: 25px;
-  margin-right: 10px;
-  padding: 3px;
-  color: #5F5F5F;
-  background-color: #fff;
-  border: 2px solid #9abcff;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
+    display: flex;
+  height: 22px;
+  padding: 4px 14px;
+  justify-content: center;
   align-items: center;
+  gap: -1px;
+  flex-shrink: 0;
 }
 
 .relenge-section > .relenge-list-container {
