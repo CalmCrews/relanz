@@ -21,7 +21,7 @@ class User(AbstractUser):
     birth = models.IntegerField(null=True)
     sex = models.CharField(max_length=10, choices=SEX_TUPLE, null=True)
     avatar = models.CharField(max_length=30, null=True)
-    survey_result_count = models.IntegerField(default=0)
+    survey_result_count = models.IntegerField(default=0, null=True)
 
     @property
     def age(self):
