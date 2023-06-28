@@ -437,6 +437,8 @@
   font-weight: 600;
   text-align: center;
   align-items: center;
+  gap: -1px;
+  flex-shrink: 0;
 }
 
 .relenge-section > .relenge-list-container {

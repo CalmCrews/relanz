@@ -1,13 +1,96 @@
+{% extends 'mobileBase.html' %}
 {% load static %}
-{{challenge.title}}
-{{challenge.sub_effect|linebreaks}}
-{{challenge.effect|linebreaks}}
-{{challenge.recommnad|linebreaks}}
-{% if challenge.image %}
-<img src="{% static challenge.image %}" alt="이미지">
-{% endif %}
-{% for item in challenge_tag %}
-    {{item}}
-{% endfor %}
-{{participant}}
-<a href="{% url 'challenge:participate' challenge_id=challenge.id %}">참여하기</a>
+{% block mobile_title %}
+  challenge
+{% endblock mobile_title %}
+{% block mobile_extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/challenge.css"%}">
+{% endblock mobile_extrahead %}
+{% block mobile_content%}
+  <div class="scroll container-mobile">
+    <div class="main-img-div">
+        {% if not challenge.image %}
+            <img src="{% static "challenge.image" %}" alt="이미지">
+        {% else %}
+            <img src="{% static "images/challenge/jerry.gif" %}" alt=".">
+        {% endif %}
+    </div>
+    <div class="main-container-div scroll">
+        <div class="nav-div-absolute">
+            <div class="nav-info">
+                <a href="http://">릴렌지 안내</a>
+            </div>
+            <div class="nav-board">
+                {% comment %} 여기에 커뮤게시판으로 가기 url {% endcomment %}
+                <a href="http://">커뮤니티 게시판</a>
+            </div>
+        </div>
+        <div class="title-container-div">
+            <div class="title-div">
+                <div class="img-div">
+                    <img src="{% static "icons/check_circle_down_lean.png" %}" alt=".">
+                </div>
+                <p class="title-p">{{challenge.title}}</p>
+            </div>
+            <div class="participant-count-div">
+                <div class="participant-img-div">
+                    <img src="{% static "icons/human_shaped.png" %}" alt=".">
+                </div>
+                <small class="participant-count-small">{{participant}}명이 참여 중인 릴렌지</small>
+            </div>
+        </div>
+        <div class="tag-container-div">
+            <div class="tag-div scroll">
+                <div class="label">관련 태그</div>
+                <ul class="scroll tag-list-ul">
+                    {% for item in challenge_tag %}
+                        <li class="tag-item-li">
+                            {{item}}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="effect-div">
+                <div class="label">효과</div>
+                <div class="effect-text">{{challenge.sub_effect}}</div>
+            </div>
+        </div>
+        <div class="content-container-div">
+            <div class="effect-div">
+                <div class="title">해소효과</div>
+                <div class="content">{{challenge.effect}}</div>
+            </div>
+            <div class="recommand-to-people-container-div">
+                <div class="title">이런 사람에게 추천해요!</div>
+                <div class="content">{{challenge.recommnad}}</div>
+            </div>
+            {% comment %} 여기가 장소라 if 템플릿 사용하면 되용! {% endcomment %}
+            <div class="recommand-place-container-outer-div">
+                <div class="recommand-place-container-div">
+                    <div class="title-div">
+                        <div class="img-div">
+                            <img src="{% static "icons/map_point.png" %}" alt=".">
+                        </div>
+                        <p>추천 장소 안내</p>
+                    </div>
+                    <div class="text-info-div">
+                        <p>유로 활동의 경우 릴렌즈에서 추천 장소를 안내해드려요!</p>
+                    </div>
+                    <a href="http://" class="go-to-place-a">
+                        <div>장소 보러 가기</div>
+                    </a>
+                </div>
+            </div>
+            <div class="start-btn-div">
+                <a href="{% url 'challenge:participate' challenge_id=challenge.id %}">시작하기</a>
+            </div>
+        </div>
+    </div>
+
+  </div>
+{% endblock %}
+
+{% block scripts%}
+  <script src={% static "js/challenge.js"%}></script>
+{% endblock scripts%}
+
