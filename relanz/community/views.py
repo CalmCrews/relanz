@@ -2,23 +2,29 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from .forms import ArticleForm
 from .models import Article, Like, Participant
+from challenge.models import Challenge
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 # Create your views here.
 
 @login_required(login_url='/user/signin')
-def communityHome(request):
-    articles = Article.objects.all()
+def communityHome(request, challenge_id):
+    challenge = Challenge.objects.get(id=challenge_id)
+    articles = Article.objects.filter(challenge=challenge) # a 챌린지의 게시물들만 가져오기
     
     paginator = Paginator(articles, 3) # 한페이지 당 사진 3개로 설정
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'community/communityHome.html', {'articles':articles, 'page_obj':page_obj})
+    res_data = {'articles': articles, 'challenge':challenge, 'page_obj':page_obj}
+    return render(request, 'community/communityHome.html', res_data)
 
 @login_required(login_url='/user/signin')
-def new(request):
+def new(request, challenge_id):
+    challenge = Challenge.objects.get(id=challenge_id)
+    participant = Participant.objects.get(user=request.user)
+
     form = ArticleForm()
 
     if request.method == 'POST':
@@ -26,21 +32,25 @@ def new(request):
 
         if form.is_valid():
             article = form.save(commit=False)
-            article.author = request.user
+            article.author = participant
+            article.challenge = challenge
+            article.user = request.user
             article.save()
-            return redirect('community:detail', article.id)
-
-    return render(request, 'community/new.html', {'form':form})
+            return redirect('community:detail', challenge.id, article.id)
+        
+    return render(request, 'community/new.html', {'form':form, 'challenge':challenge})
 
 @login_required(login_url='/user/signin')
-def detail(request, article_id):
+def detail(request, challenge_id, article_id):
+    challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
     like_count = len(Like.objects.filter(article=article))
 
-    return render(request, 'community/detail.html', {'article':article, 'like_count':like_count})
+    return render(request, 'community/detail.html', {'challenge':challenge, 'article':article, 'like_count':like_count})
 
 @login_required(login_url='/user/signin')
-def edit(request, article_id):
+def edit(request, challenge_id, article_id):
+    challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
 
     form = ArticleForm(instance=article)
@@ -50,12 +60,13 @@ def edit(request, article_id):
 
         if form.is_valid():
             article = form.save()
-            return redirect('community:detail', article.id)
+            return redirect('community:detail', challenge.id, article.id)
     
-    return render(request, 'community/edit.html', {'form':form, 'article':article})
+    return render(request, 'community/edit.html', {'form':form, 'challenge':challenge, 'article':article})
 
 @login_required(login_url='/user/signin')
-def delete(request, article_id):
+def delete(request, challenge_id, article_id):
+    challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
 
     article.delete()
