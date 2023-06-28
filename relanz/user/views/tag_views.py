@@ -14,7 +14,26 @@ def survey(request):
         user=request.user
         if user.nickname is None:
             return redirect('user:content')
-        if request.user.is_authenticated:
+        if user.is_authenticated:
+            # # 전체
+            # # if survey_result_count >= 1 and survey_result_count <=3
+            # # 1-3 취약하지 않음
+            # survey_result_count
+            # # 4-5 취약
+            # # 6-7 매우 취약
+
+            # # 성별
+            
+            # User.objects.filter(sex='sex')
+
+            # # 나이
+
+            # User.objects
+            
+            # # 성별+나이
+
+            # age = user.age
+            # sex = user.sex
             return redirect('user:tagsurvey')
     return render(request, 'main/home.html')
 
