@@ -77,17 +77,20 @@ def delete(request, challenge_id, article_id):
     return redirect('main:home')
 
 @login_required(login_url='/user/signin')
-def like(request, article_id):    
-    # 현재 로그인한 사용자가 해당 글에 Like 객체를 만든 것이 존재한다면 detail로 이동 -> 본인 글에 좋아요 누르기 가능
-    if Like.objects.filter(likedUser=request.user, article_id=article_id):
-        return redirect("community:detail", article_id)
+def like(request, article_id):   
+    article = get_object_or_404(Article, pk=article_id)
+
+    # 이미 좋아요 누른 경우 detail로 이동, 본인 글에 좋아요 누르기 가능
+    if Like.objects.filter(likedUser=request.user, article=article).exists():
+        return redirect("community:detail", challenge_id=article.challenge.id, article_id=article.id)
     
-    # 현재 로그인한 사용자가 해당 글에 Like 객체를 만든 것이 존재하지 않는다면 Like 객체 만들기
+    # 좋아요 아직 안 누른 경우 Like 객체 만들기
     like = Like()
     like.article = get_object_or_404(Article, pk=article_id)
     like.likedUser = request.user
     like.save()
-    return redirect('community:detail', article_id)
+    return redirect('community:detail', challenge_id=article.challenge.id, article_id=article.id)
+
 
 # # a 참가자의 글들을 a 유저에 저장
 # def save_articles(request, participant_id):
