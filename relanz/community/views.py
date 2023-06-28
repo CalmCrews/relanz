@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from .forms import ArticleForm
-from .models import Article, Like
+from .models import Article, Like, Participant
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 # Create your views here.
 
