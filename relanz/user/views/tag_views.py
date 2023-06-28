@@ -96,6 +96,14 @@ def survey(request):
             age_percentages = {key: round((value / total_age_users) * 100) for key, value in age_result_num.items()}
             age_sex_percentages = {key: round((value / total_age_sex_users) * 100) for key, value in age_sex_result_num.items()}
 
+            # -------------------- 본인 결과 ----------------------
+            if user.survey_result_count >= 1 and user.survey_result_count <= 3:
+                user_survey_result = '취약하지 않음'
+            elif user.survey_result_count >= 4 and user.survey_result_count <= 5:
+                user_survey_result = '취약'
+            elif user.survey_result_count >= 6 and user.survey_result_count <= 7:
+                user_survey_result = '매우 취약'
+            
             return redirect('user:tagsurvey')
     return render(request, 'main/home.html')
 
