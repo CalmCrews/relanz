@@ -76,18 +76,29 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: #FFF;
 
     color: #494949;
     text-align: center;
     font-size: 14px;
     font-family: Pretendard;
     letter-spacing: -0.7px;
+
+    position: relative;
 }
 .select-type-first  > div:hover {
     cursor: pointer;
     background: #D0E0FF;
 }
+
+.select-type-first  > div:active {
+    animation: shake 0.1s;
+}
+@keyframes shake {
+    0% { top: 0; }
+    50% { top: 2px; }
+    100% { top: 0; }
+}
+
 
 .select-type-second {
     z-index: -1;
@@ -104,7 +115,7 @@
 }
 .anytime-long:hover {
     cursor: pointer;
-    background: #D0E0FF;
+    background: #dae7ff;
 }
 
 .short {
@@ -112,7 +123,6 @@
     height: 80px;
     border: 2px solid #9ABCFF;
     border-radius: 20px;
-    background: #FFF;
 
     display: flex;
     justify-content: center;
@@ -124,6 +134,8 @@
     font-size: 14px;
     font-family: Pretendard;
     letter-spacing: -0.7px;
+
+    position: relative;
 }
 .anytime-long {
     width: 319px;
@@ -131,7 +143,6 @@
     flex-shrink: 0;
     border: 2px solid #9ABCFF;
     border-radius: 20px;
-    background: #FFF;
 
     display: flex;
     justify-content: center;
@@ -143,6 +154,15 @@
     font-size: 14px;
     font-family: Pretendard;
     letter-spacing: -0.7px;
+
+    position: relative;
+}
+
+.short:active {
+    animation: shake 0.1s;
+} 
+.anytime-long:active {
+    animation: shake 0.1s;
 }
 
 .select-type-third {
@@ -165,19 +185,27 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: #FFF;
 
     color: #494949;
     text-align: center;
     font-size: 14px;
     font-family: Pretendard;
     letter-spacing: -0.7px;
+
+    position: relative;
 }
 .select-type-third > div:hover {
     cursor: pointer;
-    background: #D0E0FF;
+    background: #dae7ff;
 }
-
+.select-type-third > div:active {
+    animation: shake 0.1s;
+}
+@keyframes shake {
+    0% { top: 0; }
+    50% { top: 2px; }
+    100% { top: 0; }
+}
 
 .submit-shape-btn {
     width: 254px;
@@ -195,7 +223,19 @@
     font-family: Pretendard;
     font-weight: 700;
     letter-spacing: -0.8px;
+
+    position: relative;
 }
+.submit-shape-btn:active {
+    animation: shake 0.1s;
+}
+@keyframes shake {
+    0% { top: 0; }
+    50% { top: 2px; }
+    100% { top: 0; }
+}
+
+
 
 .submit-div {
     display: flex;
@@ -205,4 +245,8 @@
 .submit-shape-btn:hover {
     cursor: pointer;
     background-color: #3F80FC;
+}
+
+.clicked-change-color {
+    background: #D0E0FF;
 }

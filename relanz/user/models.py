@@ -11,7 +11,7 @@ class User(AbstractUser):
         ('male', 'male'),
         ('female', 'female')
     ]
-
+    
     password = models.CharField(max_length=20, blank=False)
     email = models.EmailField(max_length=128, blank=False)
     is_email_valid = models.BooleanField(default=False)
