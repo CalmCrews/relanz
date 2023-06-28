@@ -531,17 +531,38 @@
 
 .info-section > img {
   position: absolute;
-  bottom: 24px;
-  left: 20px;
+  bottom: 26px;
+  left: 23px;
   font-size: 8px;
 }
 
 .info-section > span {
   position: absolute;
-  bottom: 24px;
-  left: 37px;
+  bottom: 26px;
+  left: 43px;
   font-size: 8px;
   color: #626262;
+}
+
+.info-section > a {
+  position: absolute;
+  right: 20px;
+  bottom: 23px;
+  width: 60px;
+  height: 24px;
+  color: #fff;
+  background-color: #9abcff;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow:  0 2px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.info-section > a {
+  color: #fff;
 }
 
 .carousel-dots {
