@@ -159,11 +159,20 @@
             </div>
             <div class="report-section">
               <div class="report-header">
-                <div class="report-title"></div>
-                <div class="weekly-monthly"></div>
+                <div class="report-title" style="background-image: url('{% static "icons/report-title.png" %}')">
+                  {{user.nickname}}님의<br>스트레스 관리 리포트
+                </div>
+                <div class="weekly-monthly">
+                  <div class="weekly-option option-active">주간</div>
+                  <div class="monthly-option">월간</div>
+                  <div class="slide-button"></div>
+                </div>
               </div>
               <div class="report-summary">
-                <div class="summary-block"></div>
+                <div class="summary-block">
+                  <span>&#128079;</span>
+                  <p>{{user.nickname}}님이 참여하신 릴렌지를 바탕으로 정리한<br>{{user.nickname}}님만의 건강한 스트레스 해소 활동입니다</p>
+                </div>
                 <div class="summary-detail-1"></div>
                 <div class="summary-detail-2"></div>
               </div>
@@ -301,6 +310,26 @@
       loadShow();
     }
    
+
+    //주간 - 월간 슬라이딩 버튼
+    var weeklyOption = document.querySelector('.weekly-option');
+    var monthlyOption = document.querySelector('.monthly-option');
+    var slideButton = document.querySelector('.slide-button');
+
+    function activateOption(option) {
+      option.classList.add('option-active');
+      var siblingOption = option === weeklyOption ? monthlyOption : weeklyOption;
+      siblingOption.classList.remove('option-active');
+      slideButton.style.left = option.offsetLeft + 'px';
+    }
+
+    weeklyOption.addEventListener('click', function() {
+      activateOption(weeklyOption);
+    });
+
+    monthlyOption.addEventListener('click', function() {
+      activateOption(monthlyOption);
+    });
   </script>
 {% endblock %}
 
