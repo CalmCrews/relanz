@@ -1,0 +1,96 @@
+.container-mobile {}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+
+    padding-top: 110px;
+    padding-bottom: 25px;
+}
+.title > p {
+    color: #71A1FF;
+    text-align: center;
+    font-size: 24px;
+    font-family: Pretendard;
+    font-weight: 500;
+    line-height: 145.023%;
+    letter-spacing: -0.5px;
+    word-spacing: 3px;
+}
+
+.image-box {
+    width: 199px;
+    height: 199px;
+    flex-shrink: 0;
+    display: flex;
+    margin: 0 auto;
+}
+.image-box > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.info-middle-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+.info-middle-div > p {
+    color: #000;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-weight: 700;
+    line-height: 145.023%;
+    letter-spacing: -0.8px;
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+.button-div > a {
+    width: 230px;
+    height: 60px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 30px;
+    background: #9ABCFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.button-div > a:link {
+    text-decoration: none;
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-weight: 700;
+    line-height: 145.023%;
+    letter-spacing: -0.8px;
+}
+.button-div > a:visited {
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-weight: 700;
+    line-height: 145.023%;
+    letter-spacing: -0.8px;
+}
+
+.button-div > a:hover {
+    cursor: pointer;
+    background-color: #3F80FC;
+}
