@@ -86,6 +86,16 @@ def survey(request):
                 elif user.survey_result_count >= 6 and user.survey_result_count <= 7:
                     age_sex_result_num['매우 취약'] += 1
             
+
+            # 인원수를 퍼센트로 계산
+            total_sex_users = sex_group_users.count()
+            total_age_users = age_group_users.count()
+            total_age_sex_users = age_sex_group_users.count()
+
+            sex_percentages = {key: round((value / total_sex_users) * 100) for key, value in sex_result_num.items()}
+            age_percentages = {key: round((value / total_age_users) * 100) for key, value in age_result_num.items()}
+            age_sex_percentages = {key: round((value / total_age_sex_users) * 100) for key, value in age_sex_result_num.items()}
+
             return redirect('user:tagsurvey')
     return render(request, 'main/home.html')
 
