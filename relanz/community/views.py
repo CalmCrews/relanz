@@ -37,16 +37,19 @@ def new(request, challenge_id):
             article.user = request.user
             article.save()
             return redirect('community:detail', challenge.id, article.id)
-        
-    return render(request, 'community/new.html', {'form':form, 'challenge':challenge})
+    
+    res_data = {'form':form, 'challenge':challenge}
+    return render(request, 'community/new.html', res_data)
 
 @login_required(login_url='/user/signin')
 def detail(request, challenge_id, article_id):
     challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
     like_count = len(Like.objects.filter(article=article))
+    author_nickname = article.author.user.nickname
 
-    return render(request, 'community/detail.html', {'challenge':challenge, 'article':article, 'like_count':like_count})
+    res_data = {'challenge':challenge, 'article':article, 'like_count':like_count, 'author_nickname':author_nickname}
+    return render(request, 'community/detail.html', res_data)
 
 @login_required(login_url='/user/signin')
 def edit(request, challenge_id, article_id):
@@ -62,22 +65,19 @@ def edit(request, challenge_id, article_id):
             article = form.save()
             return redirect('community:detail', challenge.id, article.id)
     
-    return render(request, 'community/edit.html', {'form':form, 'challenge':challenge, 'article':article})
+    res_data = {'form':form, 'challenge':challenge, 'article':article}
+    return render(request, 'community/edit.html', res_data)
 
 @login_required(login_url='/user/signin')
-def delete(request, challenge_id, article_id):
-    challenge = Challenge.objects.get(id=challenge_id)
+def delete(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
 
     article.delete()
 
     return redirect('main:home')
 
-def like(request, article_id):
-    # 로그인하지 않았다면 좋아요 못누르고 로그인으로 이동
-    if request.user.is_anonymous:
-        return redirect("user:signin")
-    
+@login_required(login_url='/user/signin')
+def like(request, article_id):    
     # 현재 로그인한 사용자가 해당 글에 Like 객체를 만든 것이 존재한다면 detail로 이동 -> 본인 글에 좋아요 누르기 가능
     if Like.objects.filter(likedUser=request.user, article_id=article_id):
         return redirect("community:detail", article_id)
@@ -89,16 +89,16 @@ def like(request, article_id):
     like.save()
     return redirect('community:detail', article_id)
 
-# a 참가자의 글들을 a 유저에 저장
-def save_articles(request, participant_id):
-    try:
-        participant = Participant.objects.get(id=participant_id)
-        user = participant.user
+# # a 참가자의 글들을 a 유저에 저장
+# def save_articles(request, participant_id):
+#     try:
+#         participant = Participant.objects.get(id=participant_id)
+#         user = participant.user
 
-        # participant_id의 글들 저장
-        articles = participant.article_set.all()
-        for article in articles:
-            Article.objects.create(author=participant, user=user, image=article.image)
+#         # participant_id의 글들 저장
+#         articles = participant.article_set.all()
+#         for article in articles:
+#             Article.objects.create(author=participant, user=user, image=article.image)
             
-    except Participant.DoesNotExist:
-        return HttpResponse("참여자가 존재하지 않습니다")
+#     except Participant.DoesNotExist:
+#         return HttpResponse("참여자가 존재하지 않습니다")
