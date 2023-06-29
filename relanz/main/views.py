@@ -213,5 +213,28 @@ def ranking(request, user_id):
     if len(challenge_ranking) > 5:
         challenge_ranking = challenge_ranking[:5]
 
+    # 유저의 나이대가 참여한 랭킹 순위
+    # propert를 통해 생성된 것은 filter 적용 X -> birth를 기준으로 각자 나이대에 10대, 20대 등 나이대 설정
+    age = datetime.now().year - user.birth
+    min_age = 2023 - (age // 10 * 10)
+    max_age = 2023 - ((age // 10 + 1) * 10)  
+    # 나이대를 기준으로 설정한 birth를 통해 필터링
+    participants = Participant.objects.filter(user__birth__lte=min_age, user__birth__gt=max_age)
+    # valuse를 통해 group by 후에 distionct로 중복 제거, user_id를 통해 참여한 유저 수 세기
+    participants = participants.values('challenge_id').annotate(count=Count('user_id')).distinct()
+    # 참여한 유저수를 기준으로 정렬
+    participants = participants.order_by('-count')
+    participants_list = list(participants)
+    age_challenge_rank=[]
+    for i in range(0,len(participants_list)):
+        age_challenge_id = participants_list[i]['challenge_id']
+        age_challenge = Challenge.objects.get(id=age_challenge_id)
+        age_challenge_rank.append(age_challenge)
+    age_challenge_ranking=[]
+    for i in range(1,len(age_challenge_rank) + 1):
+        age_challenge_ranking.append((f'{i}', age_challenge_rank[i-1]))
+    if len(age_challenge_ranking) > 5:
+        age_challenge_ranking = age_challenge_ranking[:5]
+
 
     return render(request, 'main/ranking.html', {'combined_data': combined_data, 'challenge_ranking':challenge_ranking})
