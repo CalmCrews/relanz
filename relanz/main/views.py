@@ -152,7 +152,15 @@ def home(request):
             
     return render(request, 'main/splashscreen.html')
 
-
+# 성별에 따른 랭킹, 함수처리
+def get_challenge_ranking(sex):
+    # 성별에 따른 참여자 쿼리셋 생성
+    participants = Participant.objects.filter(user__sex=sex)
+    # 생성된 쿼리셋에서 challenge를 기준으로 group_by, 각 챌린지마다 유저 아이디 개수 생성, 생성된 개수를 바탕으로 정렬
+    challenge_counts = participants.values('challenge_id').annotate(count=Count('user_id')).order_by('-count')[:5]
+    # 챌린지 카운터를 기준으로 순위를 묶고, 딕셔너리 형태의 숫자 붙여서 tuple 생성
+    challenge_ranking = [(f'{i+1}', Challenge.objects.get(id=item['challenge_id'])) for i, item in enumerate(challenge_counts)]
+    return challenge_ranking
 
 def ranking(request, user_id):
     # 내가 속한 챌린지의 랭킹
@@ -236,5 +244,17 @@ def ranking(request, user_id):
     if len(age_challenge_ranking) > 5:
         age_challenge_ranking = age_challenge_ranking[:5]
 
+    # 유저 성별별 TOP 5 릴렌지
+    female_ranking = get_challenge_ranking('female')
+    male_ranking = get_challenge_ranking('male')
+    if user.sex == 'male':
+        res_ranking = {
+            'male_ranking': male_ranking,
+            'female_ranking': female_ranking,
+        }
+    res_ranking = {
+        'female_ranking': male_ranking,
+        'male_ranking': female_ranking,
+    }
 
-    return render(request, 'main/ranking.html', {'combined_data': combined_data, 'challenge_ranking':challenge_ranking})
+    return render(request, 'main/ranking.html', {'combined_data':combined_data, 'challenge_ranking':challenge_ranking, 'res_ranking':res_ranking})
