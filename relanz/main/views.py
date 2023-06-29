@@ -4,6 +4,10 @@ from challenge.models import Challenge, ChallengeTag, Participant
 from django.forms.models import model_to_dict
 from django.db.models import Q
 
+from community.models import Article
+from django.db.models import Sum, Count
+from datetime import datetime
+
 
 # Create your views here.
 def home(request):
@@ -147,3 +151,31 @@ def home(request):
         
             
     return render(request, 'main/splashscreen.html')
+
+
+
+def ranking(request, user_id):
+    # 내가 속한 챌린지의 랭킹
+    user=request.user
+    participants = Participant.objects.filter(user=user)
+
+    # 내가 참여하고 있는 챌린지 리스트
+    challenges = []
+    for participant in participants:
+        challenge = participant.challenge
+        challenges.append(challenge)
+
+    # 내가 쓴 글의 쿼리셋
+    articles = Article.objects.filter(author__in=participants)
+
+    # 내가 쓴 글의 쿼리셋을 challenge를 기준으로 묶어서, score를 기준으로 정렬
+    ranked_articles = articles.values('challenge').annotate(sum=Sum('article_score')).distinct()
+    ranked_articles = ranked_articles.order_by('-sum')
+    
+    # 정렬한 쿼리셋을 기준으로 챌린지 객체를 list 형식으로 인덱스 = 순위가 될 수 있도록 추가
+    ranked_my_challenges = []
+    for ranked_article in ranked_articles[:3]:
+        ranked_my_challenge = Challenge.objects.get(id=ranked_article['challenge'])
+        ranked_my_challenges.append(ranked_my_challenge)
+
+    return render(request, 'main/ranking.html', {'ranked_my_challenges': ranked_my_challenges})
