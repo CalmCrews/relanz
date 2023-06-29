@@ -102,7 +102,23 @@ def home(request):
             # 챌린지와 참여자의 수를 튜플로 묶어서 전달
             combined_data = list(zip(sorted_challenges, participant_counts))
 
-            return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data})
+            # ------------ survey 결과 가져오기 --------------
+            age_group_start = request.session.get('age_group_start')
+            all_survey_result = request.session.get('all_survey_result')
+            sex_survey_result = request.session.get('sex_survey_result')
+            age_survey_result = request.session.get('age_survey_result')
+            age_sex_survey_result = request.session.get('age_sex_survey_result')
+            user_survey_result = request.session.get('user_survey_result')
+            # -------------------------------------------------
+
+            res_data = {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data, 
+                        'age_group_start':age_group_start,
+                        'all_survey_result':all_survey_result, 
+                        'sex_survey_result':sex_survey_result,
+                        'age_survey_result':age_survey_result,
+                        'age_sex_survey_result':age_sex_survey_result,
+                        'user_survey_result':user_survey_result}
+            return render(request, 'main/home.html', res_data)
         except UserTag.DoesNotExist:
             return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
