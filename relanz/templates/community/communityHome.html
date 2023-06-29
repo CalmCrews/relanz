@@ -3,12 +3,12 @@
 {% endblock title %}
 
 {% block content %}
-<a href="{% url 'community:new'%}">내 기록 남기기</a>
-<a href="{% url 'community:communityHome' %}">내 기록 모아보기</a>
+<a href="{% url 'community:new' challenge.id %}">내 기록 남기기</a>
+<a href="{% url 'community:communityHome' challenge.id %}">내 기록 모아보기</a>
 <br />
 <hr />
 {% for article in page_obj %}
-<a href="{% url 'community:detail' article.id %}">
+<a href="{% url 'community:detail' challenge.id article.id %}">
     {% if article.image %}
     <img src="{{article.image.url}}" width="100">
     {% endif %}
