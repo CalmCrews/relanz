@@ -8,11 +8,10 @@ const mentList = [
         "이루고자 하는 목표가 높다는 말을 자주 듣는다.",
         "칭찬을 듣고 의심해 본 적이 많다.",
     ],
-    [
-        
-    ],
-    []
 ]
+
+const survey_result_count = document.getElementById("survey_result_count");
+let count = 0;
 
 function controlPopUp() {
     const pop_up_div = document.getElementById("pop_up_div")
@@ -32,8 +31,12 @@ function checkTurnBlue(obj) {
     if (isClicked) {
         obj.style.backgroundColor = "#FFF"
         obj.dataset.ischeck = "0"
+        --count;
+        survey_result_count.value = count;
     } else {
         obj.style.backgroundColor = "#D0E0FF"
         obj.dataset.ischeck = "1"
+        ++count;
+        survey_result_count.value = count;
     }
 }
