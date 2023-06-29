@@ -366,6 +366,7 @@
   background: #ffffff;
   box-shadow: 0px -21px 24px #9abcff;
   border-radius: 38px 38px 0px 0px;
+  padding-bottom: 88px; 
   z-index: 8;
 }
 
@@ -690,7 +691,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 20px 9%;
+  padding: 20px 9% 40px 9%;
 }
 
 #profile-set #top-page .report-section .report-summary .summary-block {
