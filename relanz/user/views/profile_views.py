@@ -74,12 +74,10 @@ def userinfo(request, user_id):
             tag_lists_.append(tag_name)
 
     participants = Participant.objects.filter(user=user.id)
-    print(participants)
     challenges=[]
     for participant in participants:
         challenges.append(participant.challenge)
-    print(challenges)
-
+        
     res_data = {'user':user, 'tags':tag_lists_, 'challenges':challenges}
     
     return render(request, 'user/userinfo.html', res_data)
