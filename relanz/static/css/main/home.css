@@ -366,6 +366,7 @@
   background: #ffffff;
   box-shadow: 0px -21px 24px #9abcff;
   border-radius: 38px 38px 0px 0px;
+  padding-bottom: 88px; 
   z-index: 8;
 }
 
@@ -375,7 +376,6 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
   padding-top: 27px;
   z-index: 10;
 }
@@ -408,6 +408,7 @@
   width: 100%;
   margin: 30px 0;
   overflow-x: auto;
+  height: auto;
 }
 
 #profile-set #top-page .relenge-section .tag-list {
@@ -431,10 +432,10 @@
   padding: 3px;
   color: #5f5f5f;
   background-color: #fff;
-  border: 2px solid #9abcff;
+  border: 1px solid #9abcff;
   border-radius: 20px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 00;
   text-align: center;
   align-items: center;
   gap: -1px;
@@ -531,17 +532,38 @@
 
 .info-section > img {
   position: absolute;
-  bottom: 24px;
-  left: 20px;
+  bottom: 26px;
+  left: 23px;
   font-size: 8px;
 }
 
 .info-section > span {
   position: absolute;
-  bottom: 24px;
-  left: 37px;
+  bottom: 26px;
+  left: 43px;
   font-size: 8px;
   color: #626262;
+}
+
+.info-section > a {
+  position: absolute;
+  right: 20px;
+  bottom: 23px;
+  width: 60px;
+  height: 24px;
+  color: #fff;
+  background-color: #9abcff;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow:  0 2px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.info-section > a {
+  color: #fff;
 }
 
 .carousel-dots {
@@ -580,28 +602,131 @@
 
 #profile-set #top-page .report-section {
   /* 보고서 섹션 스타일 */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 #profile-set #top-page .report-section .report-header {
   /* 보고서 헤더 스타일 */
+  display: flex;
+  width: 100%;
+  padding: 0 9%;
+  justify-content: space-between;
 }
 
 #profile-set #top-page .report-section .report-header .report-title {
   /* 보고서 제목 스타일 */
+  width: 180px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #494949;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 10px 0 0 49px;
+  line-height: 130%;
 }
 
 #profile-set #top-page .report-section .report-header .weekly-monthly {
   /* 주간/월간 스타일 */
+  position: relative;
+  width: 140px;
+  height: 50px;
+  border-radius: 24px;
+  border: 2px solid #9abcff;
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.weekly-option,
+.monthly-option {
+  position: absolute;
+  width: 62px;
+  height: 37px;
+  padding-top: 10px;
+  color: #5f5f5f;
+  cursor: pointer;
+  z-index: 20;
+  transition: color 0.3s;
+}
+
+.weekly-monthly > .option-active{
+  color: #fff;
+  cursor: default;
+}
+
+.weekly-monthly > .slide-button {
+  position: absolute;
+  width: 62px;
+  height: 37px;
+  border-radius: 24px;
+  background-color: #9abcff;
+  z-index: 19;
+  transition: left 0.3s, right 0.3s;
+}
+
+.weekly-option {
+  left: 6px;
+}
+
+.monthly-option {
+  right: 6px;
+}
+
+.weekly-option.option-active ~ .slide-button {
+  left: 6px;
+  right: unset;
+}
+
+.monthly-option.option-active ~ .slide-button {
+  right: 6px;
+  left: unset;
 }
 
 #profile-set #top-page .report-section .report-summary {
   /* 보고서 요약 스타일 */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 9% 40px 9%;
 }
 
 #profile-set #top-page .report-section .report-summary .summary-block {
   /* 요약 블록 스타일 */
+  display: flex;
+  width: 100%;
+  height: 65px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+  padding: 15px 18px;
 }
 
+.summary-block > span {
+  font-size: 20px;
+  padding-top: 5px;
+  margin-right: 15px;
+}
+
+.summary-block > p {
+  color: #5f5f5f;
+  font-size: 14px;
+}
+
+
+.report-summary > .summary-detail-1,
+.report-summary > .summary-detail-2  {
+  /* 요약 세부내용 1 스타일 */
+  width: 100%;
+  height: 320px;
+  margin-top: 38px;
+  border: 1px solid #9abcff;
+  border-radius: 10px;
+  box-shadow:  0 2px 3px 0 rgba(0, 0, 0, 0.25);
+}
 #profile-set #top-page .report-section .report-summary .summary-detail-1 {
   /* 요약 세부내용 1 스타일 */
 }
