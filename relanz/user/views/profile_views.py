@@ -20,16 +20,16 @@ def content(request):
         if not nickname:
             message['error'] = "닉네임을 입력해주세요."
             return render(request, 'user/content.html', message)
-        elif User.objects.filter(nickname=nickname).exists():
-            message['error'] = "이미 존재하는 닉네임입니다."
-            return render(request, 'user/content.html', message)
-        elif user.nickname is not None and user.nickname == nickname:
+        elif user.nickname is not None or user.nickname == nickname:
             user.nickname = nickname
             user.birth = birth
             user.sex = sex
             user.save()
-            return redirect('user:userinfo',user.id)
+            return redirect('user:userinfo', user.id)
         else:
+            if User.objects.filter(nickname=nickname).exists():
+                message['error'] = "이미 존재하는 닉네임입니다."
+                return render(request, 'user/content.html', message)
             user.nickname = nickname
             user.birth = birth
             user.sex = sex
