@@ -89,23 +89,30 @@
 }
 
 .page-wrapper {
+  position: relative;
   margin-top: 100px;
-  padding-top: 270px;
-  padding-bottom: 1000px;
-  max-width: 700px;
+  padding-top: 250px;
   margin: 0 auto;
+}
+
+#today_date {
+  position: absolute;
+  top: 32px;
+  left: calc(7% + 104px);
+  font-size: 14px;
+  font-weight: 500;
+  color: #4c89ff;
 }
 
 .profile-section {
   /* 프로필 섹션 스타일 */
   display: flex;
   position: absolute;
-  top: 50px;
+  top: 70px;
   width: 100%;
-  padding: 5%;
+  padding: 5% 7%;
   height: 180px;
 }
-
 
 .profile-wrapper {
   display: flex;
@@ -115,8 +122,8 @@
 }
 
 .profile-circle {
-  width: 100px; /* 조정 가능 */
-  height: 100px; /* 조정 가능 */
+  width: 104px; /* 조정 가능 */
+  height: 104px; /* 조정 가능 */
   border-radius: 50%;
   border: 2px solid #71a1ff;
   background-color: #fff; /* 배경색 조정 가능 */
@@ -182,14 +189,272 @@
   z-index: 15;
 }
 
-#profile-set #under-page .profile-section .bubble {
-  /* 버블 스타일 */
-}
 
-#profile-set #under-page .profile-section .badge-section {
+.score-section {
   /* 배지 섹션 스타일 */
 }
 
+/* 오늘의 한마디 */
+.bubble {
+  position: relative;
+  left: -20px;
+  top: -25px;
+  height: 50px;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.bubble .triangle {
+  position: absolute;
+  width: 20;
+  left: 0;
+  bottom: 0;
+  z-index: 21;
+}
+
+.bubble .circle {
+  position: absolute;
+  display: flex;
+  left: 5.8px;
+  bottom: 9.8px;
+  width: 256px;
+  height: 52px;
+  background-color: #71a1ff;
+  border-radius: 33px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  transform-origin: center bottom;
+  transition: transform 0.3s;
+}
+
+.bubble .hidden-message {
+  position: absolute;
+  display: none;
+  left: 5.8px;
+  bottom: 9.8px;
+  width: 256px;
+  height: 52px;
+  border-radius: 33px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.bubble .hidden-message > p {
+  text-shadow: 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.bubble .hidden-message::selection {
+  color: #fff;
+}
+
+.bubble.clicked .triangle {
+  animation: blinkTriangle 0.35s;
+}
+
+@keyframes blinkTriangle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  10%,
+  90% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.bubble.unclicked .triangle {
+  animation: blinkTriangleUnclicked 0.35s;
+}
+
+@keyframes blinkTriangleUnclicked {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  10%,
+  90% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.bubble.clicked .hidden-message {
+  animation: blinkMessage 1s;
+}
+
+@keyframes blinkMessage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.bubble.clicked .circle {
+  animation: rotateCircle 0.3s linear;
+  transform-style: preserve-3d;
+  transform-origin: center;
+}
+
+@keyframes rotateCircle {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+
+.bubble.unclicked .circle {
+  animation: rotateCircleUnclicked 0.3s linear;
+  transform-style: preserve-3d;
+  transform-origin: center;
+}
+
+@keyframes rotateCircleUnclicked {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+
+.bubble.unclicked .circle > p {
+  animation: blinkMessageUnclicked 0.6s linear;
+  transform-style: preserve-3d;
+  transform-origin: center;
+}
+
+@keyframes blinkMessageUnclicked {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.name {
+  position: absolute;
+  top: 200px;
+  left: 60px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.name > span {
+  color: #71a1ff;
+
+}
+
+.score-section {
+  display: flex;
+  position: absolute;
+  top: 130px;
+  left: 155px;
+  width: 210px;
+  height: 62px;
+  background-color: #fff;
+  border: 1px solid #71a1ff;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.score-section .score-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #71a1ff;
+  border-radius: 20px;
+  padding: 2px;
+  background-color: #9abcff;
+  justify-content: center;
+  text-align: center;
+  z-index: 50;
+}
+
+.score-icon > img {
+  width: 95%;
+  height: 95%;
+}
+
+.score-icon > span {
+  position: relative;
+  top: -30px;
+  height: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #71a1ff;
+  font-weight: 600;
+  font-size: 10px;
+}
+
+.score-section > span {
+  margin-left: 15px;
+  color: #71a1ff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.score-section > .score-graph {
+  position: absolute;
+  top: 25px;
+  left: 35px;
+  width: 160px;
+  height: 24px;
+  padding: 3px 0;
+  z-index: 49;
+}
+
+.score-graph > .goal-score-bar {
+  position: relative;;
+  width: 155px;
+  height: 18px;
+  background-color: #71a1ff;
+  border-radius: 16px;
+}
+
+.score-graph > .current-score-bar {
+  position: relative;
+  top: -15px;
+  height: 12px;
+  background-color: #9abcff;
+  border-radius: 16px;
+  border: 1px solid #fff;
+  transition: width 1s ease-in-out;
+}
+
+.score-graph > .current-score-bar > span {
+  position: absolute;
+  right: 4px;
+  top: -1px;
+  color: #fff;
+  font-size: 7px;
+}
+
+
+
+/* 컨텐츠 페이지 */
 #top-page {
   position: sticky;
   top: 20px;
@@ -197,6 +462,7 @@
   background: #ffffff;
   box-shadow: 0px -21px 24px #9abcff;
   border-radius: 38px 38px 0px 0px;
+  padding-bottom: 88px; 
   z-index: 8;
 }
 
@@ -206,10 +472,8 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
   padding-top: 27px;
   z-index: 10;
-
 }
 
 #profile-set #top-page .header-message {
@@ -231,14 +495,16 @@
 
 .header-message > span {
   font-size: 14px;
+  font-weight: 600;
+  color: #494949;
 }
-
 
 #profile-set #top-page .relenge-section {
   /* 릴렌지 섹션 스타일 */
   width: 100%;
-  margin: 20px 0;
+  margin: 30px 0;
   overflow-x: auto;
+  height: auto;
 }
 
 #profile-set #top-page .relenge-section .tag-list {
@@ -246,7 +512,7 @@
   padding-left: 10%;
   list-style: none;
   overflow-x: scroll;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   white-space: nowrap;
 }
 
@@ -256,18 +522,20 @@
 
 #profile-set #top-page .relenge-section .tag-list > li {
   display: inline-block;
-  width: 80px;
+  width: 70px;
   height: 25px;
   margin-right: 10px;
   padding: 3px;
-  color: #5F5F5F;
+  color: #5f5f5f;
   background-color: #fff;
-  border: 2px solid #9abcff;
+  border: 1px solid #9abcff;
   border-radius: 20px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 00;
   text-align: center;
   align-items: center;
+  gap: -1px;
+  flex-shrink: 0;
 }
 
 .relenge-section > .relenge-list-container {
@@ -276,7 +544,7 @@
   position: relative;
 }
 
-.relenge-list-container  .relenge-list {
+.relenge-list-container .relenge-list {
   /* 릴렌지 리스트 스타일 */
   display: flex;
   list-style: none;
@@ -290,53 +558,271 @@
   display: none;
 }
 
-.relenge-list li {
-  flex: 0 0 80%;
-  margin: 0 10% 0 10%;
-  transform: scale(0.8);
-  opacity: 0.5;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  width: 160px;
-  height: 300px;
-  color: #5F5F5F;
-  background-color: #fff;
-  border: 2px solid #9abcff;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  align-items: center;
+/* 릴렌지 카드 섹션 */
+.relenge-list-container {
+  position: relative;
+  width: 100%;
 }
 
-.relenge-list li.active {
-  transform: scale(1);
-  opacity: 1;
+.relenge-list {
+  width: 100%;
+  height: 380px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.relenge-list .relenge-card {
+  position: absolute;
+  width: 240px;
+  height: 360px;
+  text-align: justify;
+  border: 2px solid #9abcff;
+  border-radius: 25px;
+  transition: 0.5s;
+  left: calc(50% - 110px);
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.relenge-card > .image-section {
+  width: 100%;
+  height: 65%;
+  background-color: #f2f2f2;
+}
+
+.relenge-card > .info-section {
+  position: relative;
+  width: 100%;
+  height: 35%;
+  background-color: #fff;
+}
+
+.info-section > .sticker {
+  position: absolute;
+  width: 75px;
+  height: 20px;
+  top: -8px;
+  left: 10px;
+  color: #9abcff;
+  border: 1px solid #9abcff;
+  border-radius: 15px;
+  padding: 2px;
+  font-size: 8px;
+  font-weight: 500;
+  background-color: #fff;
+  text-align: center;
+}
+
+.info-section > h2 {
+  position: absolute;
+  top: 25px;
+  left: 17px;
+  width: 180px;
+  height: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #5f5f5f;
+}
+
+.info-section > img {
+  position: absolute;
+  bottom: 26px;
+  left: 23px;
+  font-size: 8px;
+}
+
+.info-section > span {
+  position: absolute;
+  bottom: 26px;
+  left: 43px;
+  font-size: 8px;
+  color: #626262;
+}
+
+.info-section > a {
+  position: absolute;
+  right: 20px;
+  bottom: 23px;
+  width: 60px;
+  height: 24px;
+  color: #fff;
+  background-color: #9abcff;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow:  0 2px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.info-section > a {
+  color: #fff;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #e7e7e7;
+  margin: 0 3px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #9abcff;
+}
+
+.carousel-arrows {
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.arrow {
+  font-size: 24px;
+  cursor: pointer;
 }
 
 #profile-set #top-page .report-section {
   /* 보고서 섹션 스타일 */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 #profile-set #top-page .report-section .report-header {
   /* 보고서 헤더 스타일 */
+  display: flex;
+  width: 100%;
+  padding: 0 9%;
+  justify-content: space-between;
 }
 
 #profile-set #top-page .report-section .report-header .report-title {
   /* 보고서 제목 스타일 */
+  width: 180px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #494949;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 10px 0 0 49px;
+  line-height: 130%;
 }
 
 #profile-set #top-page .report-section .report-header .weekly-monthly {
   /* 주간/월간 스타일 */
+  position: relative;
+  width: 140px;
+  height: 50px;
+  border-radius: 24px;
+  border: 2px solid #9abcff;
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.weekly-option,
+.monthly-option {
+  position: absolute;
+  width: 62px;
+  height: 37px;
+  padding-top: 10px;
+  color: #5f5f5f;
+  cursor: pointer;
+  z-index: 20;
+  transition: color 0.3s;
+}
+
+.weekly-monthly > .option-active{
+  color: #fff;
+  cursor: default;
+}
+
+.weekly-monthly > .slide-button {
+  position: absolute;
+  width: 62px;
+  height: 37px;
+  border-radius: 24px;
+  background-color: #9abcff;
+  z-index: 19;
+  transition: left 0.3s, right 0.3s;
+}
+
+.weekly-option {
+  left: 6px;
+}
+
+.monthly-option {
+  right: 6px;
+}
+
+.weekly-option.option-active ~ .slide-button {
+  left: 6px;
+  right: unset;
+}
+
+.monthly-option.option-active ~ .slide-button {
+  right: 6px;
+  left: unset;
 }
 
 #profile-set #top-page .report-section .report-summary {
   /* 보고서 요약 스타일 */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 9% 40px 9%;
 }
 
 #profile-set #top-page .report-section .report-summary .summary-block {
   /* 요약 블록 스타일 */
+  display: flex;
+  width: 100%;
+  height: 65px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+  padding: 15px 18px;
 }
 
+.summary-block > span {
+  font-size: 20px;
+  padding-top: 5px;
+  margin-right: 15px;
+}
+
+.summary-block > p {
+  color: #5f5f5f;
+  font-size: 14px;
+}
+
+
+.report-summary > .summary-detail-1,
+.report-summary > .summary-detail-2  {
+  /* 요약 세부내용 1 스타일 */
+  width: 100%;
+  height: 320px;
+  margin-top: 38px;
+  border: 1px solid #9abcff;
+  border-radius: 10px;
+  box-shadow:  0 2px 3px 0 rgba(0, 0, 0, 0.25);
+}
 #profile-set #top-page .report-section .report-summary .summary-detail-1 {
   /* 요약 세부내용 1 스타일 */
 }

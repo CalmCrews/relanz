@@ -11,7 +11,7 @@ class User(AbstractUser):
         ('male', 'male'),
         ('female', 'female')
     ]
-
+    
     password = models.CharField(max_length=20, blank=False)
     email = models.EmailField(max_length=128, blank=False)
     is_email_valid = models.BooleanField(default=False)
@@ -21,8 +21,8 @@ class User(AbstractUser):
     birth = models.IntegerField(null=True)
     sex = models.CharField(max_length=10, choices=SEX_TUPLE, null=True)
     avatar = models.CharField(max_length=30, null=True)
-    survey_result_count = models.IntegerField(default=0)
-    
+    survey_result_count = models.IntegerField(default=0, null=True)
+
     @property
     def age(self):
         age_ = datetime.now().year - self.birth

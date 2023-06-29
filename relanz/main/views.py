@@ -65,18 +65,28 @@ def home(request):
 
             # 기본 태그를 통해 가져온 챌린지와 릴렌지 태그를 통해 가져온 챌린지 쿼리를 합집합
             basic_tag_query =Q()
-            for key in sorted_user_keys[:3]:
+            for key in sorted_user_keys[:4]:
                 basic_tag_query |=Q(**{key: True})
             challenge_tag_query=Q()
             for key in tag_lists:
                 challenge_tag_query |=Q(**{key: True})
             challenge_query = basic_tag_query|challenge_tag_query
             
-            challenge_tags = ChallengeTag.objects.filter(challenge_query).order_by(f'-{sorted_user_keys[0]}', f'-{sorted_user_keys[1]}', f'-{sorted_user_keys[2]}')
+            challenge_tags = ChallengeTag.objects.filter(challenge_query).order_by(f'-{sorted_user_keys[0]}', f'-{sorted_user_keys[1]}', f'-{sorted_user_keys[2]}', f'-{sorted_user_keys[3]}')
             challenge_ids  = challenge_tags.values_list('challenge', flat=True)
             challenges = Challenge.objects.filter(id__in=challenge_ids)
             challenge_order = {challenge_id: order for order, challenge_id in enumerate(challenge_ids)}
             sorted_challenges = sorted(challenges, key=lambda c: challenge_order.get(c.id, float('inf')))
+            # 이미 참여한 챌린지는 추천에서 제외
+            minus_challenge = []
+            # 정렬된 챌린지의 아이디를 뽑아서, requset.user와 challenge.id를 통해 파싱
+            for sorted_challenge in sorted_challenges:
+                already_participant=Participant.objects.filter(challenge=sorted_challenge.id, user=user.id)
+                # 빈쿼리셋이 반환된 게 아니라면, 이미 참여하고 있는 챌린지 (TRUE)
+                if already_participant.exists():  
+                    minus_challenge.append(sorted_challenge)
+            # x가 sorted_challenge의 element면서 참여하고 있는 챌린지가 아닐 때
+            sorted_challenges = [x for x in sorted_challenges if x not in minus_challenge]
 
             # 참여자 모델 관련 처리(참여자 쿼리 가져오기, 쿼리 순서 정렬, 정렬된 순서를 바탕으로 쿼리셋 생성)
             participants = Participant.objects.filter(challenge_id__in=sorted_challenges)
@@ -88,9 +98,10 @@ def home(request):
             unique_numbers = list(dict.fromkeys(participant_ids))
             # 중복되는 값을 제외한 튜플에서 count를 통해 각 챌린지 당 참여자의 수를 반환
             participant_counts = [participants.filter(challenge_id=unique_number).count() for unique_number in unique_numbers]
-            
+
             # 챌린지와 참여자의 수를 튜플로 묶어서 전달
-            combined_data = list(zip(challenges, participant_counts))
+            combined_data = list(zip(sorted_challenges, participant_counts))
+
             return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data})
         except UserTag.DoesNotExist:
             user_tag = UserTag.objects.create(user=user)

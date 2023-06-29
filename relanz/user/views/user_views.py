@@ -32,10 +32,10 @@ def signup(request):
         res_data = {'username':username, 'password':password}
         if not (username and email and password and re_password):
             res_data['error']="입력되지 않은 값이 있습니다."
-            render(request, 'user/signup.html', res_data)
+            return render(request, 'user/signup.html', res_data)
         elif (password != re_password):
             res_data['error']="비밀번호가 일치하지 않습니다."
-            render(request, 'user/signup.html', res_data)
+            return render(request, 'user/signup.html', res_data)
         else:
             user=User.objects.create_user(
                 username=username,
@@ -70,10 +70,10 @@ def signin(request):
             username = request.POST['username']
             password = request.POST['password']
             if not username:
-                messages.add_message(request, messages.ERROR, 'Please enter a valid username.')
+                messages.add_message(request, messages.ERROR, '아이디')
                 return render(request, 'user/signin.html')
             if not password:
-                messages.add_message(request, messages.ERROR, 'Please enter a valid password.')
+                messages.add_message(request, messages.ERROR, '비밀번호')
                 return render(request, 'user/signin.html')
             user = authenticate(request, username=username, password=password)
             if user is not None:
@@ -85,7 +85,7 @@ def signin(request):
                     messages.add_message(request, messages.INFO, '이메일 인증을 완료해주세요. 이메일을 확인하세요.')
                     return render(request, 'user/email_sent.html', {'user':user})
             else:
-                messages.add_message(request, messages.ERROR, '유효한 ID와 비밀번호가 아닙니다.')
+                messages.add_message(request, messages.ERROR, '정보')
                 return render(request, 'user/signin.html')
         else:
             return redirect('main:home')
