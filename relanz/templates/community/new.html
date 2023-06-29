@@ -10,7 +10,7 @@
 {% endblock title %}
 
 {% block content %}
-<form method="POST" action="{% url 'community:new' %}" enctype="multipart/form-data">
+<form method="POST" action="{% url 'community:new' challenge.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     사진 : <input type="file" name="image"/>
     <button type="submit">글작성</button>

@@ -71,7 +71,7 @@ class ChallengeTag(models.Model):
 
 class Participant(models.Model):
     class Meta:
-        db_table="participant"
+        db_table="participant" # 오타 수정: participaint -> participant
 
     user = models.ForeignKey('user.User', on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, related_name='challenge')
