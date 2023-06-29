@@ -18,11 +18,11 @@
     <div class="main-container-div scroll">
         <div class="nav-div-absolute">
             <div class="nav-info">
-                <a href="http://">릴렌지 안내</a>
+                <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">릴렌지 안내</a>
             </div>
             <div class="nav-board">
                 {% comment %} 여기에 커뮤게시판으로 가기 url {% endcomment %}
-                <a href="http://">커뮤니티 게시판</a>
+                <a href="{% url 'community:communityHome' challenge_id=challenge.id %}">커뮤니티 게시판</a>
             </div>
         </div>
         <div class="title-container-div">
