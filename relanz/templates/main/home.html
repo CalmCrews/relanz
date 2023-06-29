@@ -22,6 +22,7 @@
   {% else %}
     <div id="profile-set">
       <div class="page-wrapper">
+        <div id="today_date"></div>
         <div class="profile-section">
 
           <div class="profile-wrapper">
@@ -48,7 +49,21 @@
           <span>{{ user.nickname }}</span>
           님
         </div>
-        <div class="score-section"></div>
+        <div class="score-section">
+          <div class="score-icon">
+            <img src="{% static "icons/star30.png"%}" alt="star">
+            <span>Lv.
+              <span id="user_level">1</span>
+            </span>
+          </div>
+          <span>score</span>
+          <div class="score-graph">
+            <div class="goal-score-bar"></div>
+            <div class="current-score-bar">
+              <span></span>
+            </div>
+          </div>
+        </div>
 
         <div id="top-page">
           <div class="top-page-content">
@@ -218,7 +233,62 @@
         accElement.style.backgroundImage = `url("{% static 'character/acc/acc' %}${combinationData[8]}.png")`;
 
     }
-    
+    //오늘 날짜 불러오기
+    const dateElement = document.getElementById('today_date');
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('ko-KR', options);
+    dateElement.innerText = formattedDate;
+
+    //score graph
+    //var userScore = {{ user.score }};
+    var userScore = 1200;
+    var goalScore;
+    var userLevel = "1";
+
+    if (userScore <= 1000) {
+      goalScore = 1000;
+      userLevel = "1";
+    } else if (userScore <= 5000) {
+      goalScore = 5000;
+      userLevel = "2";
+    } else if (userScore <= 10000) {
+      goalScore = 10000;
+      userLevel = "3";
+    } else if (userScore <= 20000) {
+      goalScore = 20000;
+      userLevel = "4";
+    } else {
+      goalScore = 50000;
+    }
+
+    var userLevelSpan = document.getElementById("user_level");
+    var userScoreSpan = document.querySelector(".current-score-bar > span")
+    var currentScoreWidth = (userScore / goalScore) * 150 + 5;
+    var currentScoreBar = document.querySelector(".current-score-bar");
+
+    //user level설정
+    userLevelSpan.textContent = userLevel;
+    userScoreSpan.textContent = userScore;
+    // 초기 상태에서 너비를 0으로 설정
+    currentScoreBar.style.width = "0";
+
+    // 지정된 시간 간격마다 너비를 증가시키는 애니메이션 함수
+    function animateScoreBar() {
+      var width = 0;
+      var interval = setInterval(function() {
+        width += currentScoreWidth / 10; 
+        currentScoreBar.style.width = width + "px";
+        if (width >= currentScoreWidth) {
+          clearInterval(interval);
+        }
+      }, 3); 
+    }
+
+    // 페이지가 로드될 때 애니메이션 실행
+    window.addEventListener("load", animateScoreBar);
+
     
     // 조합 데이터를 적용하여 프로필 렌더링
     //console.log({{user.avatar}})

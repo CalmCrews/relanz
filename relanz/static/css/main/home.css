@@ -95,11 +95,20 @@
   margin: 0 auto;
 }
 
+#today_date {
+  position: absolute;
+  top: 32px;
+  left: calc(7% + 104px);
+  font-size: 14px;
+  font-weight: 500;
+  color: #4c89ff;
+}
+
 .profile-section {
   /* 프로필 섹션 스타일 */
   display: flex;
   position: absolute;
-  top: 55px;
+  top: 70px;
   width: 100%;
   padding: 5% 7%;
   height: 180px;
@@ -346,8 +355,8 @@
 
 .name {
   position: absolute;
-  top: 187px;
-  left: 54px;
+  top: 200px;
+  left: 60px;
   font-size: 14px;
   font-weight: 600;
 }
@@ -356,6 +365,93 @@
   color: #71a1ff;
 
 }
+
+.score-section {
+  display: flex;
+  position: absolute;
+  top: 130px;
+  left: 155px;
+  width: 210px;
+  height: 62px;
+  background-color: #fff;
+  border: 1px solid #71a1ff;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.score-section .score-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #71a1ff;
+  border-radius: 20px;
+  padding: 2px;
+  background-color: #9abcff;
+  justify-content: center;
+  text-align: center;
+  z-index: 50;
+}
+
+.score-icon > img {
+  width: 95%;
+  height: 95%;
+}
+
+.score-icon > span {
+  position: relative;
+  top: -30px;
+  height: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #71a1ff;
+  font-weight: 600;
+  font-size: 10px;
+}
+
+.score-section > span {
+  margin-left: 15px;
+  color: #71a1ff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.score-section > .score-graph {
+  position: absolute;
+  top: 25px;
+  left: 35px;
+  width: 160px;
+  height: 24px;
+  padding: 3px 0;
+  z-index: 49;
+}
+
+.score-graph > .goal-score-bar {
+  position: relative;;
+  width: 155px;
+  height: 18px;
+  background-color: #71a1ff;
+  border-radius: 16px;
+}
+
+.score-graph > .current-score-bar {
+  position: relative;
+  top: -15px;
+  height: 12px;
+  background-color: #9abcff;
+  border-radius: 16px;
+  border: 1px solid #fff;
+  transition: width 1s ease-in-out;
+}
+
+.score-graph > .current-score-bar > span {
+  position: absolute;
+  right: 4px;
+  top: -1px;
+  color: #fff;
+  font-size: 7px;
+}
+
 
 
 /* 컨텐츠 페이지 */
