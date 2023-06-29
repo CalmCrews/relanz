@@ -11,7 +11,7 @@ def home(request):
     if user.is_authenticated:
         if not user.is_email_valid:
             # return redirect('user:email_sent')
-            # return render(request, 'user/email_sent.html', {'user':user})
+            return render(request, 'user/email_sent.html', {'user':user})
         try:
             user_tag = UserTag.objects.get(user=user.id)
             participant = Participant.objects.filter(user=user.id)
