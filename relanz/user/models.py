@@ -25,6 +25,8 @@ class User(AbstractUser):
 
     score = models.IntegerField(default=0)
 
+    score = models.IntegerField(default=0)
+
     @property
     def age(self):
         age_ = datetime.now().year - self.birth
