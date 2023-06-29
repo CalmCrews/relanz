@@ -9,55 +9,67 @@ const div_end = document.getElementById("div_end");
 
 
 async function makeRequest(url) {
-    if (isRequestPending) {
-      return; // 요청이 진행 중인 경우 함수 실행 중단
-    }
-    isRequestPending = true;
+  const resultData = [];
+  if (isRequestPending) {
+    return; // 요청이 진행 중인 경우 함수 실행 중단
+  }
+  isRequestPending = true;
 
-    try {
-      // loadingTag.classList.remove("hide")
-      // const response = await fetch(url);
-      // data = await response.json();
-      // 응답 처리 로직
-      ++testNum
+  try {
+    loadingTag.classList.remove("hide")
+    const response = await fetch(url);
+    const data = await response.json();
 
-    } catch (error) {
-      // 에러 처리 로직
-    } finally {
-      isRequestPending = false;
-    }
 
-    loadingTag.classList.add("hide")
 
+    data.forEach(element => {
+      const obj = {
+        imgUrl : element.urls.raw,
+        atagUrl : element.urls.raw,
+      }
+      resultData.push(obj);
+    });
+
+    // 응답 처리 로직
+    ++testNum
+
+  } catch (error) {
+    // 에러 처리 로직
+  } finally {
+    isRequestPending = false;
+  }
+
+  loadingTag.classList.add("hide")
+
+  console.log(testNum)
+
+  if ( testNum === 4 ) {
+    div_end.style.backgroundColor = "#D0E0FF"
     console.log(testNum)
+    observer.disconnect()
+  }
+  //   const resultData = [
+  //     "http://",
+  //     "http://",
+  //     "http://",
 
-    if ( testNum === 4 ) {
-      div_end.style.backgroundColor = "#D0E0FF"
-      console.log(testNum)
-      observer.disconnect()
-    }
+  //     "http://",
+  //     "http://",
+  //     "http://",
 
-    const resultData = [
-      "http://",
-      "http://",
-      "http://",
-
-      "http://",
-      "http://",
-      "http://",
-
-      "http://",
-      "http://",
-      "http://",
-  ]
-    return resultData
+  //     "http://",
+  //     "http://",
+  //     "http://",
+  // ]
+  return resultData
 }
 
 const getUrl = async () => {
     // 여기에 백엔드 url 적어주삼요
-    const url = ``;
+    const Access_Key = "";
+    const url = `https://api.unsplash.com/photos/?client_id=${Access_Key}&count=8&content_filter=low`;
     const resultData = await makeRequest(url);
-    console.log(resultData)
+    
     return resultData;
 } 
 
@@ -71,15 +83,17 @@ function makeImageDiv(imageUrlList) {
     return
   }
 
+  console.log("imageUrlList :", imageUrlList)
+
   for (let i=0; i<imageUrlList.length; i++) {
     const a_tag = document.createElement("a");
     const div_tag = document.createElement("div");
     const img_tag = document.createElement("img");
 
     // 여기에 url 입력
-    a_tag.href = "";
+    a_tag.href = imageUrlList[i].atagUrl;
     
-    img_tag.src = "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201808/26/889cec62-8806-4d4c-9e45-b2fe2bfd1f59.jpg"
+    img_tag.src = imageUrlList[i].imgUrl
 
     a_tag.classList.add("images-box-single");
     div_tag.classList.add("images-box-single");
