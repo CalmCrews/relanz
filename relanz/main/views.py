@@ -198,4 +198,20 @@ def ranking(request, user_id):
                 rank.append(item)
     combined_data = list(zip(ranked_my_challenges, rank))
 
-    return render(request, 'main/ranking.html', {'combined_data': combined_data})
+    # 참여자 TOP 5 릴렌지 (실시간)
+    participants = Participant.objects.values('challenge_id').annotate(count=Count('user_id')).distinct()
+    participants = participants.order_by('-count')
+    participants_list = list(participants)
+    best_challenges = []
+    for i in range(0,len(participants_list)):
+        best_challenge = participants_list[i]['challenge_id']
+        rank_challenge = Challenge.objects.get(id=best_challenge)
+        best_challenges.append(rank_challenge)
+    challenge_ranking=[]
+    for i in range(1, len(best_challenges) + 1):
+        challenge_ranking.append((f'{i}', best_challenges[i-1]))
+    if len(challenge_ranking) > 5:
+        challenge_ranking = challenge_ranking[:5]
+
+
+    return render(request, 'main/ranking.html', {'combined_data': combined_data, 'challenge_ranking':challenge_ranking})
