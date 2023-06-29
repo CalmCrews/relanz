@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from .forms import ArticleForm
 from .models import Article, Like, Participant
+from user.models import User
 from challenge.models import Challenge
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -23,8 +24,12 @@ def communityHome(request, challenge_id):
 @login_required(login_url='/user/signin')
 def new(request, challenge_id):
     challenge = Challenge.objects.get(id=challenge_id)
-    participant = Participant.objects.get(user=request.user)
-
+    try:
+        participant = Participant.objects.get(user=request.user, challenge=challenge)
+    
+    # 챌린지에 참여하지 않았는데, 글을 작성하려고 할 때
+    except Participant.DoesNotExist:
+        return redirect('community:communityHome', challenge_id)
     form = ArticleForm()
 
     if request.method == 'POST':
@@ -35,7 +40,15 @@ def new(request, challenge_id):
             article.author = participant
             article.challenge = challenge
             article.user = request.user
+            duplication_article = Article.objects.filter(author=participant, challenge=challenge)
+            if duplication_article.exists():
+                article.article_score = 100
+            else:
+                article.article_score = 500
             article.save()
+            user=User.objects.get(id=request.user.id)
+            user.score += article.article_score
+            user.save()
             return redirect('community:detail', challenge.id, article.id)
     
     res_data = {'form':form, 'challenge':challenge}
