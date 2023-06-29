@@ -103,8 +103,7 @@ def home(request):
 
             return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data})
         except UserTag.DoesNotExist:
-            user_tag = UserTag.objects.create(user=user)
-            return render(request, 'main/home.html', {'user':user})
+            return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
             basic_tags_ = {
             '아침': user_tag.morning,

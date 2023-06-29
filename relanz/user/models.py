@@ -7,22 +7,21 @@ from datetime import datetime
 # Create your models here.
 
 class User(AbstractUser):
-    password = models.CharField(max_length=255, blank=False)
-    email = models.EmailField(max_length=128, blank=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    nickname = models.CharField(max_length=32, unique=True, null=True)
-    birth = models.IntegerField(null=True, default=0)
-    is_email_valid = models.BooleanField(default=False)
-    
-    sex_tuple = [
+    SEX_TUPLE = [
         ('male', 'male'),
         ('female', 'female')
     ]
-
-    sex = models.CharField(max_length=10, choices=sex_tuple, null=True)
     
+    password = models.CharField(max_length=20, blank=False)
+    email = models.EmailField(max_length=128, blank=False)
+    is_email_valid = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    nickname = models.CharField(max_length=32, unique=True, null=True)
+    birth = models.IntegerField(null=True)
+    sex = models.CharField(max_length=10, choices=SEX_TUPLE, null=True)
     avatar = models.CharField(max_length=30, null=True)
+    survey_result_count = models.IntegerField(default=0, null=True)
 
     score = models.IntegerField(default=0)
 

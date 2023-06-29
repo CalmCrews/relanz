@@ -1,3 +1,4 @@
+{% load static %}
 <h1>유저 정보</h1>
 <br />
 <hr />
@@ -11,71 +12,20 @@
 <p>성별: 여성 </p>
 {% endif %}
 
-
-{% if tags.morning %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.afternoon %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.evening %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.inside %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.outside %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.solo %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.group %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.extreme %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.calm %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.focus %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.achievement %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.bodyhealth %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.confidence %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.mental %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.short %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
-
-{% if tags.newtry %}
-    <!-- 해당 태그를 유저가 가지고 있을 때 뜰 내용을 적어주세요 -->
-{% endif %}
+{% for tag in tags%}
+    {{tag}}
+{% endfor %}
 
 <a href="{% url 'main:home' %}">홈으로</a>
 
 
+{% for challenge in challenges %}
+    <hr>
+    {{challenge.title}}
+    {% if challenge.image %}
+    <img src="{% static challenge.image %}" alt="이미지">
+    {% endif %}
+    <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">상세보기</a>
+{% endfor %}
+<a href="{% url 'user:content' %}">프로필 수정하기</a>
+<a href="{% url 'user:avatar' %}">아바타 수정하기</a>
