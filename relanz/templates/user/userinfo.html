@@ -1,3 +1,4 @@
+{% load static %}
 <h1>유저 정보</h1>
 <br />
 <hr />
@@ -11,8 +12,20 @@
 <p>성별: 여성 </p>
 {% endif %}
 
-
+{% for tag in tags%}
+    {{tag}}
+{% endfor %}
 
 <a href="{% url 'main:home' %}">홈으로</a>
 
 
+{% for challenge in challenges %}
+    <hr>
+    {{challenge.title}}
+    {% if challenge.image %}
+    <img src="{% static challenge.image %}" alt="이미지">
+    {% endif %}
+    <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">상세보기</a>
+{% endfor %}
+<a href="{% url 'user:content' %}">프로필 수정하기</a>
+<a href="{% url 'user:avatar' %}">아바타 수정하기</a>

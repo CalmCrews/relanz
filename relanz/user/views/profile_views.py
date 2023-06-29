@@ -1,8 +1,9 @@
 from django.http import HttpResponseForbidden, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import User, UserTag
 from django.contrib.auth.decorators import login_required
 from config.email_decorator import email_verified_required
+from user.models import User, UserTag
+from challenge.models import Challenge, Participant
 
 @login_required(login_url='/user/signin')
 @email_verified_required
@@ -55,9 +56,31 @@ def avatar(request):
 def userinfo(request, user_id):
     user = request.user
     user = User.objects.get(username=user.username) 
-    tags = UserTag.objects.get(user_id=user_id)
+    user_tag = UserTag.objects.get(user=user.id)
+    basic_tags_ = {
+        '아침': user_tag.morning,
+        '점심': user_tag.afternoon,
+        '저녁': user_tag.evening,
+        '실내': user_tag.inside,
+        '야외': user_tag.outside,
+        '혼자': user_tag.solo,
+        '여럿이': user_tag.group,
+        '정적인': user_tag.static,
+        '동적인': user_tag.dynamic,
+        }
+    tag_lists_=[]
+    for tag_name, tag_value in basic_tags_.items():
+        if tag_value is True:
+            tag_lists_.append(tag_name)
 
-    res_data = {'user':user, 'tags':tags}
+    participants = Participant.objects.filter(user=user.id)
+    print(participants)
+    challenges=[]
+    for participant in participants:
+        challenges.append(participant.challenge)
+    print(challenges)
+
+    res_data = {'user':user, 'tags':tag_lists_, 'challenges':challenges}
     
     return render(request, 'user/userinfo.html', res_data)
 
