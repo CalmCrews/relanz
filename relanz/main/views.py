@@ -178,4 +178,24 @@ def ranking(request, user_id):
         ranked_my_challenge = Challenge.objects.get(id=ranked_article['challenge'])
         ranked_my_challenges.append(ranked_my_challenge)
 
-    return render(request, 'main/ranking.html', {'ranked_my_challenges': ranked_my_challenges})
+    # TOP3의 챌린지 중에 내 순위
+    rank = []
+    # TOP 1,TOP 2, TOP 3 챌린지에 해당하는 글 모으기
+    for my_rank in ranked_my_challenges:
+        article_list = Article.objects.filter(challenge=my_rank)
+
+        # user.id를 기준으로 중복없이 group by, 합쳐진 score를 기준으로 정렬
+        user_rank = article_list.values('author__user').annotate(sum=Sum('article_score')).distinct()
+        user_rank = user_rank.order_by('-sum')
+
+        # list에 순위를 기준으로 차례대로 list에 추가
+        user_rank_list = list(user_rank)
+
+        # list의 인덱스 번호를 토대로 순위를 tuple형식으로 결합
+        for item, value in enumerate(user_rank_list, start=1): 
+            # request한 user의 id를 토대로 파싱하여, 순위를 rank의 추가       
+            if value[f'author__user'] == user.id:
+                rank.append(item)
+    combined_data = list(zip(ranked_my_challenges, rank))
+
+    return render(request, 'main/ranking.html', {'combined_data': combined_data})
