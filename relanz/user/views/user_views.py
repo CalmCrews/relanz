@@ -46,9 +46,10 @@ def signup(request):
 
             login(request, user)
 
-            email_sent(request)
+            # email_sent(request)
 
             return render(request, 'user/email_sent.html', {'user':user})
+            # return redirect('user:email_sent')
         
 @csrf_exempt
 def identify(request):
