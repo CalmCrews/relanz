@@ -107,8 +107,7 @@ def home(request):
 
             return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data})
         except UserTag.DoesNotExist:
-            user_tag = UserTag.objects.create(user=user)
-            return render(request, 'main/home.html', {'user':user})
+            return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
             basic_tags_ = {
             '아침': user_tag.morning,
@@ -165,47 +164,8 @@ def get_challenge_ranking(sex):
 def ranking(request, user_id):
     # 내가 속한 챌린지의 랭킹
     user=request.user
-    participants = Participant.objects.filter(user=user)
-
-    # 내가 참여하고 있는 챌린지 리스트
-    challenges = []
-    for participant in participants:
-        challenge = participant.challenge
-        challenges.append(challenge)
-
-    # 내가 쓴 글의 쿼리셋
-    articles = Article.objects.filter(author__in=participants)
-
-    # 내가 쓴 글의 쿼리셋을 challenge를 기준으로 묶어서, score를 기준으로 정렬
-    ranked_articles = articles.values('challenge').annotate(sum=Sum('article_score')).distinct()
-    ranked_articles = ranked_articles.order_by('-sum')
-    
-    # 정렬한 쿼리셋을 기준으로 챌린지 객체를 list 형식으로 인덱스 = 순위가 될 수 있도록 추가
-    ranked_my_challenges = []
-    for ranked_article in ranked_articles[:3]:
-        ranked_my_challenge = Challenge.objects.get(id=ranked_article['challenge'])
-        ranked_my_challenges.append(ranked_my_challenge)
-
-    # TOP3의 챌린지 중에 내 순위
-    rank = []
-    # TOP 1,TOP 2, TOP 3 챌린지에 해당하는 글 모으기
-    for my_rank in ranked_my_challenges:
-        article_list = Article.objects.filter(challenge=my_rank)
-
-        # user.id를 기준으로 중복없이 group by, 합쳐진 score를 기준으로 정렬
-        user_rank = article_list.values('author__user').annotate(sum=Sum('article_score')).distinct()
-        user_rank = user_rank.order_by('-sum')
-
-        # list에 순위를 기준으로 차례대로 list에 추가
-        user_rank_list = list(user_rank)
-
-        # list의 인덱스 번호를 토대로 순위를 tuple형식으로 결합
-        for item, value in enumerate(user_rank_list, start=1): 
-            # request한 user의 id를 토대로 파싱하여, 순위를 rank의 추가       
-            if value[f'author__user'] == user.id:
-                rank.append(item)
-    combined_data = list(zip(ranked_my_challenges, rank))
-
+    if user.nickname is None or user.birth is None or user.sex is None:
+        return redirect('user:content')
     # 참여자 TOP 5 릴렌지 (실시간)
     participants = Participant.objects.values('challenge_id').annotate(count=Count('user_id')).distinct()
     participants = participants.order_by('-count')
@@ -253,8 +213,49 @@ def ranking(request, user_id):
             'female_ranking': female_ranking,
         }
     res_ranking = {
-        'female_ranking': male_ranking,
-        'male_ranking': female_ranking,
-    }
+        'male_ranking': male_ranking,
+        'female_ranking': female_ranking,
+    } 
+    participants = Participant.objects.filter(user=user)
+    # 내가 참여하고 있는 챌린지 리스트
+    if participants.exists():
+        challenges = []
+        for participant in participants:
+            challenge = participant.challenge
+            challenges.append(challenge)
 
-    return render(request, 'main/ranking.html', {'combined_data':combined_data, 'challenge_ranking':challenge_ranking, 'res_ranking':res_ranking})
+        # 내가 쓴 글의 쿼리셋
+        articles = Article.objects.filter(author__in=participants)
+
+        # 내가 쓴 글의 쿼리셋을 challenge를 기준으로 묶어서, score를 기준으로 정렬
+        ranked_articles = articles.values('challenge').annotate(sum=Sum('article_score')).distinct()
+        ranked_articles = ranked_articles.order_by('-sum')
+            
+        # 정렬한 쿼리셋을 기준으로 챌린지 객체를 list 형식으로 인덱스 = 순위가 될 수 있도록 추가
+        ranked_my_challenges = []
+        for ranked_article in ranked_articles[:3]:
+            ranked_my_challenge = Challenge.objects.get(id=ranked_article['challenge'])
+            ranked_my_challenges.append(ranked_my_challenge)
+
+        # TOP3의 챌린지 중에 내 순위
+        rank = []
+        # TOP 1,TOP 2, TOP 3 챌린지에 해당하는 글 모으기
+        for my_rank in ranked_my_challenges:
+            article_list = Article.objects.filter(challenge=my_rank)
+
+            # user.id를 기준으로 중복없이 group by, 합쳐진 score를 기준으로 정렬
+            user_rank = article_list.values('author__user').annotate(sum=Sum('article_score')).distinct()
+            user_rank = user_rank.order_by('-sum')
+
+            # list에 순위를 기준으로 차례대로 list에 추가
+            user_rank_list = list(user_rank)
+
+            # list의 인덱스 번호를 토대로 순위를 tuple형식으로 결합
+            for item, value in enumerate(user_rank_list, start=1): 
+                # request한 user의 id를 토대로 파싱하여, 순위를 rank의 추가       
+                if value[f'author__user'] == user.id:
+                    rank.append(item)
+        combined_data = list(zip(ranked_my_challenges, rank))
+        return render(request, 'main/ranking.html', {'combined_data':combined_data, 'challenge_ranking':challenge_ranking, 'res_ranking':res_ranking, 'age_challenge_ranking':age_challenge_ranking})
+    else:
+        return render(request, 'main/ranking.html', {'challenge_ranking':challenge_ranking, 'res_ranking':res_ranking, 'age_challenge_ranking':age_challenge_ranking})
