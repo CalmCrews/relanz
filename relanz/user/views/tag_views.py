@@ -3,7 +3,7 @@ from ..models import User, UserTag
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from config.email_decorator import email_verified_required
-from django.db.models import Q, Count
+from django.db.models import Q
 from datetime import datetime
 
 # @email_verified_required
@@ -17,6 +17,24 @@ def survey(request):
         if user.nickname is None:
             return redirect('user:content')
         if request.user.is_authenticated:
+            # -------------------- 전체 기준 -------------------------
+            all_result_num = {
+                '취약하지 않음': 0,
+                '취약': 0,
+                '매우 취약': 0,
+            }
+
+            # 전체 유저 데이터 필터링
+            all_users = User.objects.all()
+
+            for user in all_users:
+                if user.survey_result_count >= 1 and user.survey_result_count <= 3:
+                    all_result_num['취약하지 않음'] += 1
+                elif user.survey_result_count >= 4 and user.survey_result_count <= 5:
+                    all_result_num['취약'] += 1
+                elif user.survey_result_count >= 6 and user.survey_result_count <= 7:
+                    all_result_num['매우 취약'] += 1
+
             # -------------------- 성별 기준 -------------------------
             sex_result_num = {
                 '취약하지 않음': 0,
@@ -88,10 +106,12 @@ def survey(request):
             
 
             # 인원수를 퍼센트로 계산
+            total_all_users = all_users.count()
             total_sex_users = sex_group_users.count()
             total_age_users = age_group_users.count()
             total_age_sex_users = age_sex_group_users.count()
 
+            all_percentages = {key: round((value / total_all_users) * 100) for key, value in all_result_num.items()}
             sex_percentages = {key: round((value / total_sex_users) * 100) for key, value in sex_result_num.items()}
             age_percentages = {key: round((value / total_age_users) * 100) for key, value in age_result_num.items()}
             age_sex_percentages = {key: round((value / total_age_sex_users) * 100) for key, value in age_sex_result_num.items()}
@@ -105,7 +125,13 @@ def survey(request):
                 user_survey_result = '매우 취약'
             
             return redirect('user:tagsurvey')
-    return render(request, 'main/home.html')
+        
+    res_data = {'all_percentages':all_percentages, 
+                'sex_percentages':sex_percentages, 
+                'age_percentage':age_percentages, 
+                'age_sex_percentages':age_sex_percentages,
+                'user_survey_result':user_survey_result}
+    return render(request, 'main/home.html', res_data)
 
 # @email_verified_required
 @login_required(login_url='/user/signin')
