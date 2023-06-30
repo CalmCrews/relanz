@@ -26,17 +26,17 @@
     </div>
     <div class="select-type-second" id="select_type_second">
       <div id="type_second_morning" class="short " onclick="selectMyTag_ver2(this)" data-isclicked="0">아침</div>
-      <div id="type_second_nooing" class="short" onclick="selectMyTag_ver2(this)" data-isclicked="0">점심</div>
+      <div id="type_second_afternoon" class="short" onclick="selectMyTag_ver2(this)" data-isclicked="0">점심</div>
       <div id="type_second_evening" class="short" onclick="selectMyTag_ver2(this)" data-isclicked="0">저녁</div>
       <div id="type_second_anytime" class="anytime-long" onclick="selectMyTag_ver2(this)" data-isclicked="0">시간 상관없이 추천 받을께요</div>
     </div>
     <div class="select-type-third" id="select_type_third">
       <div id="type_third_inside" class="inside class-for-hover" onclick="selectMyTag(this)" data-isclicked="0">실내에서 하는</div>
       <div id="type_third_solo" class="solo class-for-hover" onclick="selectMyTag(this)" data-isclicked="0">혼자만의 시간</div>
-      <div id="type_third_calm" class="calm class-for-hover" onclick="selectMyTag(this)" data-isclicked="0">잔잔한 활동</div>
+      <div id="type_third_static" class="calm class-for-hover" onclick="selectMyTag(this)" data-isclicked="0">잔잔한 활동</div>
       <div id="type_third_outside" class="outside class-for-hover" onclick="selectMyTag(this)" data-isclicked="0">실외에서 하는</div>
       <div id="type_third_group" class="group class-for-hover" onclick="selectMyTag(this)" data-isclicked="0">여럿이서 하는</div>
-      <div id="type_third_extreme" class="extreme class-for-hover" onclick="selectMyTag(this)" data-isclicked="0">익스트림한<br>활동</div>
+      <div id="type_third_dynamic" class="extreme class-for-hover" onclick="selectMyTag(this)" data-isclicked="0">익스트림한<br>활동</div>
     </div>
   </div>
   <div class="submit-div">
@@ -55,7 +55,7 @@
       </div>
       <div>
         <input type="hidden" value="" name="morning" id="morning">
-        <input type="hidden" value="" name="nooing" id="nooing">
+        <input type="hidden" value="" name="afternoon" id="afternoon">
         <input type="hidden" value="" name="evening" id="evening">
         <input type="hidden" value="" name="anytime" id="anytime">
       </div>
@@ -64,8 +64,8 @@
         <input type="hidden" value="" name="outside" id="outside">
         <input type="hidden" value="" name="solo" id="solo">
         <input type="hidden" value="" name="group" id="group">
-        <input type="hidden" value="" name="extreme" id="extreme">
-        <input type="hidden" value="" name="calm" id="calm">
+        <input type="hidden" value="" name="dynamic" id="dynamic">
+        <input type="hidden" value="" name="static" id="static">
         <input type="hidden" value="" name="focus" id="focus">
         <input type="hidden" value="" name="achievement" id="achievement"> 
         <input type="hidden" value="" name="bodyhealth" id="bodyhealth">
@@ -75,6 +75,20 @@
         <input type="hidden" value="" name="newtry" id="newtry">
       </div>
       <button type="submit" id="real_submit_btn"></button>
+      <div id="my-hidden-tags">
+          <input type="hidden" id="tags_list_morning" data-tags="{{tags.morning}}">
+          <input type="hidden" id="tags_list_afternoon" data-tags="{{tags.afternoon}}">
+          <input type="hidden" id="tags_list_evening" data-tags="{{tags.evening}}">
+
+          <input type="hidden" id="tags_list_inside" data-tags="{{tags.inside}}">
+          <input type="hidden" id="tags_list_outside" data-tags="{{tags.outside}}">
+
+          <input type="hidden" id="tags_list_solo" data-tags="{{tags.solo}}">
+          <input type="hidden" id="tags_list_group" data-tags="{{tags.group}}">
+
+          <input type="hidden" id="tags_list_static" data-tags="{{tags.static}}">
+          <input type="hidden" id="tags_list_dynamic" data-tags="{{tags.dynamic}}">
+      </div>
     </form>
   </div>
 </div>
