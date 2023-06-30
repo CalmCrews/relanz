@@ -98,21 +98,39 @@ def signout(request):
 # 인증 메일 보내기
 def email_sent(request):
     user = request.user
-    current_site = get_current_site(request)
-    message = render_to_string('user/activation_email.html', {
-        'user': user,
-        'domain': current_site.domain,
-        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': account_activation_token.make_token(user),
-    })
+    if request.method == 'GET':
+        return render(request, 'user/email_sent.html')
+    
+    if request.method == 'POST':
+        if 'send_email' in request.POST:
+            current_site = get_current_site(request)
+            message = render_to_string('user/activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            mail_title = "계정 활성화 확인 이메일"
+            mail_to = user.email
+            try:
+                email = EmailMessage(mail_title, message, to=[mail_to])
+                email.send()
+                res_data = {'message': '메일 발송 완료.'}
+                return JsonResponse(res_data)
+            except Exception as e:
+                res_data = {'error': '메일 발송 중 오류가 발생했습니다.'}
+                return JsonResponse(res_data, status=500)
+            
+        elif 'complete_verification' in request.POST:
+            if not user.is_email_valid:
+                res_data = {'error': '인증이 완료되지 않았습니다. 다시 시도해주세요.'}
+                return JsonResponse(res_data)
+            else:
+                return redirect('main:home')
+    
+    res_data = {'message': 'nothing happened'}
+    return JsonResponse(res_data)
 
-    mail_title = "계정 활성화 확인 이메일"
-    mail_to = user.email
-    email = EmailMessage(mail_title, message, to=[mail_to])
-    email.send()
-
-    res_data = {'user':user, 'error':'인증이 완료되지 않았습니다. 다시 시도해주세요.'}
-    return render(request, 'user/email_sent.html', res_data)
 
 # 이메일 인증 후 유저 활성화
 def activate(request, uidb64, token):
