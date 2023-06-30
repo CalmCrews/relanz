@@ -156,30 +156,62 @@ def tagsurvey(request):
         group = request.POST.get('Group')
         static = request.POST.get('static')
         dynamic = request.POST.get('dynamic')
+        anytime = request.POST.get('anytime')
         tag_cnt = 0
-        tag_lists = [morning, afternoon, evening, inside, outside, solo, group, static, dynamic]
+        tag_lists = [morning, afternoon, evening, inside, outside, solo, group, static, dynamic, anytime]
         for tag_list in tag_lists:
             if tag_list is not None:
                 tag_cnt += 1
         if tag_cnt > 0:
             if morning is not None:
                 tags.morning = True
+            else:
+                tags.morning =False
+
             if afternoon is not None:
                 tags.afternoon = True
+            else:
+                tags.afternoon =False
+
             if evening is not None:
                 tags.evening = True
+            else:
+                tags.evening =False
+
             if inside is not None:
                 tags.inside = True
+            else:
+                tags.inside =False
+
             if outside is not None:
                 tags.outside = True
+            else:
+                tags.outside =False
+
             if solo is not None:
                 tags.solo = True
+            else:
+                tags.solo =False
+
             if group is not None:
                 tags.group = True
+            else:
+                tags.group =False
+
             if static is not None:
                 tags.static = True
+            else:
+                tags.static =False
+
             if dynamic is not None:
                 tags.dynamic = True
+            else:
+                tags.dynamic =False
+
+            if anytime is not None:
+                tags.morning = True
+                tags.afternoon = True
+                tags.evening = True
             tags.save()
             if user.avatar is None:
                 return redirect('user:avatar')
