@@ -137,15 +137,16 @@ def survey(request):
 @login_required(login_url='/user/signin')
 def tagsurvey(request):
     if request.method=="GET":
-        return render(request, 'tag/tagsurvey.html')
-    if request.method=="POST":
-        user=request.user
-        if user.nickname is None:
-            return redirect('user:content')
         try:
             tags = UserTag.objects.get(user=user)
         except UserTag.DoesNotExist:
             tags = UserTag.objects.create(user=user)
+        return render(request, 'tag/tagsurvey.html', {'tags':tags})
+    if request.method=="POST":
+        user=request.user
+        if user.nickname is None:
+            return redirect('user:content')
+        tags = UserTag.objects.get(user=user)
         morning = request.POST.get('morning')
         afternoon = request.POST.get('afternoon')
         evening = request.POST.get('evening')
