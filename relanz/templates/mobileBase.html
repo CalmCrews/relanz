@@ -28,18 +28,18 @@
       <li>
         {% comment %}임시로 연결{% endcomment %}
         <a href="{% url 'main:home' %}">
-          <img src="{% static "icons/Around_icon.png"%}" alt="around-icon">
+          <img src="{% static "icons/My_icon.png"%}" alt="around-icon">
         </a>
       </li>
       <li>
         {% comment %}임시로 연결{% endcomment %}
-        <a href="{% url 'community:communityHome' %}">
-          <img src="{% static "icons/Community_icon.png"%}" alt="community-icon">
+        <a href="{% url 'main:home' %}">
+          <img src="{% static "icons/Ranking_icon.png"%}" alt="community-icon">
         </a>
       </li>
       <li>
         <a href="{% url 'user:content' %}">
-          <img src="{% static "icons/Settings_icon.png"%}" alt="settings-icon">
+          <img src="{% static "icons/More_icon.png"%}" alt="settings-icon">
         </a>
       </li>
     </ul>
