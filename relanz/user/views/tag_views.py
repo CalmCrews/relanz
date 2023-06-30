@@ -142,11 +142,7 @@ def tagsurvey(request):
         user=request.user
         if user.nickname is None:
             return redirect('user:content')
-        try:
-            tags = UserTag.objects.get(user=user)
-        except UserTag.DoesNotExist:
-            tags = UserTag.objects.create(user=user)
-            return redirect('user:activetime')
+        tags = UserTag.objects.get(user=user)
         morning = request.POST.get('morning')
         afternoon = request.POST.get('afternoon')
         evening = request.POST.get('evening')

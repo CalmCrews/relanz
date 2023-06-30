@@ -48,8 +48,8 @@ def signup(request):
 
             # email_sent(request)
 
-            return render(request, 'user/email_sent.html', {'user':user})
-            # return redirect('user:email_sent')
+            # return render(request, 'user/email_sent.html', {'user':user})
+            return redirect('user:email_sent')
         
 @csrf_exempt
 def identify(request):
@@ -81,9 +81,10 @@ def signin(request):
                 if user.is_email_valid:
                     return redirect('main:home')
                 else:
-                    email_sent(request)
-                    messages.add_message(request, messages.INFO, '이메일 인증을 완료해주세요. 이메일을 확인하세요.')
-                    return render(request, 'user/email_sent.html', {'user':user})
+                    # email_sent(request)
+                    # messages.add_message(request, messages.INFO, '이메일 인증을 완료해주세요. 이메일을 확인하세요.')
+                    # return render(request, 'user/email_sent.html', {'user':user})
+                    return redirect('user:email_sent')
             else:
                 messages.add_message(request, messages.ERROR, '정보')
                 return render(request, 'user/signin.html')
@@ -98,8 +99,6 @@ def signout(request):
 # 인증 메일 보내기
 def email_sent(request):
     user = request.user
-    if request.method == 'GET':
-        return render(request, 'user/email_sent.html')
     
     if request.method == 'POST':
         if 'send_email' in request.POST:
@@ -124,12 +123,13 @@ def email_sent(request):
         elif 'complete_verification' in request.POST:
             if not user.is_email_valid:
                 res_data = {'error': '인증이 완료되지 않았습니다. 다시 시도해주세요.'}
-                return JsonResponse(res_data)
+                return JsonResponse(res_data, status=500)
             else:
                 return redirect('main:home')
     
-    res_data = {'message': 'nothing happened'}
-    return JsonResponse(res_data)
+        res_data = {'message': 'nothing happened'}
+        return JsonResponse(res_data)
+    return render(request, 'user/email_sent.html')
 
 
 # 이메일 인증 후 유저 활성화
@@ -146,4 +146,4 @@ def activate(request, uidb64, token):
         return redirect("main:home")
     else:
         res_data = {'error' : '계정 활성화 오류'}
-        return render(request, 'main/home.html', res_data)
+        return redirect("user: email_sent", res_data, status=500)

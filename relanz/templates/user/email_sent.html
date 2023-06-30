@@ -6,6 +6,7 @@
 
 {% block extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static "css/user/email_sent.css"%}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock extrahead %}
 
 
@@ -18,11 +19,7 @@
     <p class="info-message">지금 메일함에 도착한 링크에 접속해<br>회원가입을 완료해 주세요</p>
     <div class="user-button" id="send_email">인증 메일 보내기</div>
     <div class="user-button" id="complete_verification">인증 완료</div>
-    <form id="myForm" method="POST">
-      {% csrf_token %}
-      <input type="submit" name="send_email" value="Send Email">
-      <input type="submit" name="complete_verification" value="Complete Verification">
-    </form>
+    
     <div id="alert">
       <div class="popup">
         <div class="close-button"><img src="{% static "icons/close.png"%}" alt="x"></div>
@@ -36,45 +33,68 @@
 {% endblock %}
 
 {% block scripts %}
+
   <script>
     const sendEmailButton = document.getElementById("send_email");
+    console.log(sendEmailButton);
     const completeVerificationButton = document.getElementById("complete_verification");
-    const form = document.getElementById("myForm");
+    const popupAlert = document.getElementById('alert');
+    const closeButton = document.querySelector('#alert > .popup > .close-button');
 
-    sendEmailButton.addEventListener("click", () => {
-      form.submit();
-    });
+    function completeVerify() {
+      $.ajax({
+        type: "POST",
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+        url: "/user/email_sent/",  // 이메일 보내기 요청을 처리하는 URL
+        data: {
+          complete_verification: true  // send_email 파라미터를 설정하여 서버에서 이메일 보내기 동작을 수행
+        },
+        error: function(xhr, status, error) {
+          // 오류 응답을 받은 경우
+          console.error(error);  // 오류 메세지 출력
+          
+          popupAlert.style.display = 'block';
+        }
+      });
+    }
 
-    fetch('', {
-      method: 'POST',
-      headers: {
-        'X-CSRFToken': '{{ csrf_token }}',
-      },
-      body: new FormData(form)
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.message) {
-        console.log(data.message);
-        sendEmailButton.style.backgroundColor = '#fff';
-        sendEmailButton.style.border = '#71aff';
-        sendEmailButton.style.border = '2px solid #71a1ff';
+    function sendEmail() {
+      // AJAX 요청 보내기
+      $.ajax({
+        type: "POST",
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+        url: "/user/email_sent/",  // 이메일 보내기 요청을 처리하는 URL
+        data: {
+          send_email: true  // send_email 파라미터를 설정하여 서버에서 이메일 보내기 동작을 수행
+        },
+        success: function(response) {
+          // 성공적인 응답을 받은 경우
+          console.log(response.message);  // 응답 메세지 출력
+          // 추가로 처리할 작업 수행
+          sendEmailButton.style.backgroundColor = '#fff';
+          sendEmailButton.style.color = '#71a1ff';
+          sendEmailButton.style.border = '2px solid #71a1ff';
 
-        completeVerificationButton.style.cursor = 'pointer';
-        completeVerificationButton.style.backgroundColor = '#71a1ff';
-        completeVerificationButton.classList.add('active');
+          completeVerificationButton.style.cursor = 'pointer';
+          completeVerificationButton.style.backgroundColor = '#71a1ff';
+          completeVerificationButton.classList.add('active');
 
-        completeVerificationButton.addEventListener("click", () => {
-          form.submit();
-        });
-      } else if (data.error) {
-        console.log(data.error);
-        const popupAlert = document.getElementById('alert');
-        popupAlert.style.display = 'block';
-      }
-    })
-    .catch(error => {
-      console.error(error);
+          completeVerificationButton.addEventListener("click", completeVerify);
+        },
+        error: function(xhr, status, error) {
+          // 오류 응답을 받은 경우
+          console.error(error);  // 오류 메세지 출력
+        }
+      });
+    }
+
+    sendEmailButton.addEventListener("click", sendEmail);
+    closeButton.addEventListener("click", ()=> {
+      popupAlert.style.display = 'none';
     });
 
       

@@ -12,6 +12,8 @@ def home(request):
         if not user.is_email_valid:
             # return redirect('user:email_sent')
             return redirect('user:email_sent')
+        elif not user.nickname:
+            return render(request, 'main/home.html', {'user': user})
         try:
             user_tag = UserTag.objects.get(user=user.id)
             participant = Participant.objects.filter(user=user.id)
