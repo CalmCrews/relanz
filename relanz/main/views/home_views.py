@@ -121,6 +121,7 @@ def home(request):
             'dynamic': 0,
             }
             
+
             # user_id를 통해 참여자 모델 가져오기
             user_participants = Participant.objects.filter(user=user.id)
             for user_participant in user_participants:
@@ -130,7 +131,6 @@ def home(request):
                         participant_report[key] += 1
 
             analysis_user_tag = [k for k, v in sorted(participant_report.items(), key=lambda item: item[1], reverse=True)]
-
             # 내가 최근 남긴 인증 10개 중에 인증을 가장 많이 남긴 릴렌지 출력
             articles = Article.objects.filter(author__user=user)
             articles = articles.order_by('-created_at')
@@ -141,9 +141,13 @@ def home(request):
                 like_challenge = article.challenge_id
                 like_challenge_list.append(like_challenge)
 
-            challenge_element = Counter(like_challenge_list)
-            most_common_challenge = challenge_element.most_common(1)[0][0]
-            most_like_challenge = Challenge.objects.get(id=most_common_challenge)
+            if not like_challenge_list:
+                r = random.randint(0, len(minus_challenge)-1)
+                most_like_challenge=minus_challenge[r]
+            else:
+                challenge_element = Counter(like_challenge_list)
+                most_common_challenge = challenge_element.most_common(1)[0][0]
+                most_like_challenge = Challenge.objects.get(id=most_common_challenge)
 
             # 이전에 뽑은 추천할 챌린지 중에 랜덤으로 3개를 픽(중복 제거)
             analysis_titles = []
@@ -164,6 +168,8 @@ def home(request):
             age_survey_result = request.session.get('age_survey_result')
             age_sex_survey_result = request.session.get('age_sex_survey_result')
             user_survey_result = request.session.get('user_survey_result')
+
+
             # -------------------------------------------------
 
             res_data = {'user':user, 
