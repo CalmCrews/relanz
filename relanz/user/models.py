@@ -12,7 +12,7 @@ class User(AbstractUser):
         ('female', 'female')
     ]
     
-    password = models.CharField(max_length=20, blank=False)
+    password = models.CharField(max_length=255, blank=False)
     email = models.EmailField(max_length=128, blank=False)
     is_email_valid = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -22,9 +22,6 @@ class User(AbstractUser):
     sex = models.CharField(max_length=10, choices=SEX_TUPLE, null=True)
     avatar = models.CharField(max_length=30, null=True)
     survey_result_count = models.IntegerField(default=0, null=True)
-
-    score = models.IntegerField(default=0)
-
     score = models.IntegerField(default=0)
 
     @property
