@@ -2,11 +2,22 @@
 이메일을 인증하면<br>
 회원가입 완료!<br>
 <br>
-지금 메일함에 도착한 링크에 접속해<br>
+이메일 인증 버튼을 눌러<br>
+메일함에 도착한 링크에 접속해<br>
 회원가입을 완료해 주세요<br>
 <br>
-{% if user.is_authenticated %}
+
+{% comment %} 첫 try {% endcomment %}
+{% if not user.is_email_valid %}
+    <a href="{% url 'user:email_sent' %}">인증 메일 보내기</a>
+
+{% comment %} 두번째 이상 try {% endcomment %}
+{% elif user.is_authenticated and not user.is_email_valid%}
     {{ error }}
+    <a href="{% url 'user:email_sent' %}">인증 메일 다시 보내기</a>
+
+{% elif user.is_email_valid %}
+    <a href="{% url 'main:home' %}">인증 완료</a>
 {% endif %}
-<a href="{% url 'main:home' %}">인증 완료</a>
+
 {% endblock %}

@@ -12,7 +12,8 @@ def home(request):
     user=request.user
     if user.is_authenticated:
         if not user.is_email_valid:
-            return redirect('user:email_sent')
+            # return redirect('user:email_sent')
+            return render(request, 'user/email_sent.html', {'user':user})
         try:
             user_tag = UserTag.objects.get(user=user.id)
             participant = Participant.objects.filter(user=user.id)
@@ -154,7 +155,27 @@ def home(request):
                 'most_like_challenge': most_like_challenge,
                 'analysis_titles':analysis_titles
             }
-            return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data, 'analysis_data':analysis_data})
+            # ------------ survey 결과 가져오기 --------------
+            age_group_start = request.session.get('age_group_start')
+            all_survey_result = request.session.get('all_survey_result')
+            sex_survey_result = request.session.get('sex_survey_result')
+            age_survey_result = request.session.get('age_survey_result')
+            age_sex_survey_result = request.session.get('age_sex_survey_result')
+            user_survey_result = request.session.get('user_survey_result')
+            # -------------------------------------------------
+
+            res_data = {'user':user, 
+                        'tag_lists':tag_lists_, 
+                        'combined_data': combined_data, 
+                        'age_group_start':age_group_start,
+                        'all_survey_result':all_survey_result, 
+                        'sex_survey_result':sex_survey_result,
+                        'age_survey_result':age_survey_result,
+                        'age_sex_survey_result':age_sex_survey_result,
+                        'user_survey_result':user_survey_result,
+                        'analysis_data':analysis_data
+                        }
+            return render(request, 'main/home.html', res_data)
         except UserTag.DoesNotExist:
             return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
