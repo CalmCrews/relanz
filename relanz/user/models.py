@@ -23,6 +23,10 @@ class User(AbstractUser):
     avatar = models.CharField(max_length=30, null=True)
     survey_result_count = models.IntegerField(default=0, null=True)
 
+    score = models.IntegerField(default=0)
+
+    score = models.IntegerField(default=0)
+
     @property
     def age(self):
         age_ = datetime.now().year - self.birth

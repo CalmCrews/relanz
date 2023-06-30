@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from user.models import User, UserTag
 from challenge.models import Challenge, ChallengeTag, Participant
+from community.models import Article
 from django.forms.models import model_to_dict
 from django.db.models import Q
-
+import random
+from collections import Counter
 
 # Create your views here.
 def home(request):
@@ -104,7 +106,78 @@ def home(request):
             # 챌린지와 참여자의 수를 튜플로 묶어서 전달
             combined_data = list(zip(sorted_challenges, participant_counts))
 
-            return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data})
+            # report 분석 알고리즘
+            participant_report = {
+            'morning': 0,
+            'afternoon': 0,
+            'evening': 0,
+            'inside': 0,
+            'outside': 0,
+            'solo': 0,
+            'group': 0,
+            'pay': 0,
+            'free': 0,
+            'static': 0,
+            'dynamic': 0,
+            }
+            
+            # user_id를 통해 참여자 모델 가져오기
+            user_participants = Participant.objects.filter(user=user.id)
+            for user_participant in user_participants:
+                analysis_challenge = ChallengeTag.objects.get(challenge=user_participant.challenge_id)
+                for key in participant_report.keys():
+                    if getattr(analysis_challenge, key):
+                        participant_report[key] += 1
+
+            analysis_user_tag = [k for k, v in sorted(participant_report.items(), key=lambda item: item[1], reverse=True)]
+
+            # 내가 최근 남긴 인증 10개 중에 인증을 가장 많이 남긴 릴렌지 출력
+            articles = Article.objects.filter(author__user=user)
+            articles = articles.order_by('-created_at')
+            if len(articles) > 10:
+                articles=articles[:10]
+            like_challenge_list=[]
+            for article in articles:
+                like_challenge = article.challenge_id
+                like_challenge_list.append(like_challenge)
+
+            challenge_element = Counter(like_challenge_list)
+            most_common_challenge = challenge_element.most_common(1)[0][0]
+            most_like_challenge = Challenge.objects.get(id=most_common_challenge)
+
+            # 이전에 뽑은 추천할 챌린지 중에 랜덤으로 3개를 픽(중복 제거)
+            analysis_titles = []
+            while len(analysis_titles) < 3:
+                analysis_title = random.choice(sorted_challenges)
+                if analysis_title.title not in analysis_titles:
+                    analysis_titles.append(analysis_title.title)
+
+            analysis_data = {
+                'analysis_user_tag':analysis_user_tag,
+                'most_like_challenge': most_like_challenge,
+                'analysis_titles':analysis_titles
+            }
+            # ------------ survey 결과 가져오기 --------------
+            age_group_start = request.session.get('age_group_start')
+            all_survey_result = request.session.get('all_survey_result')
+            sex_survey_result = request.session.get('sex_survey_result')
+            age_survey_result = request.session.get('age_survey_result')
+            age_sex_survey_result = request.session.get('age_sex_survey_result')
+            user_survey_result = request.session.get('user_survey_result')
+            # -------------------------------------------------
+
+            res_data = {'user':user, 
+                        'tag_lists':tag_lists_, 
+                        'combined_data': combined_data, 
+                        'age_group_start':age_group_start,
+                        'all_survey_result':all_survey_result, 
+                        'sex_survey_result':sex_survey_result,
+                        'age_survey_result':age_survey_result,
+                        'age_sex_survey_result':age_sex_survey_result,
+                        'user_survey_result':user_survey_result,
+                        'analysis_data':analysis_data
+                        }
+            return render(request, 'main/home.html', res_data)
         except UserTag.DoesNotExist:
             return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
