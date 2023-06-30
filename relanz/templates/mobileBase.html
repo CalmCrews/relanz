@@ -27,7 +27,7 @@
       </li>
       <li>
         {% comment %}임시로 연결{% endcomment %}
-        <a href="{% url 'main:home' %}">
+        <a href="{% url 'user:userinfo' user_id=user.id %}">
           <img src="{% static "icons/My_icon.png"%}" alt="around-icon">
         </a>
       </li>
