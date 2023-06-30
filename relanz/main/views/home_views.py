@@ -13,7 +13,9 @@ def home(request):
     if user.is_authenticated:
         if not user.is_email_valid:
             # return redirect('user:email_sent')
-            return render(request, 'user/email_sent.html', {'user':user})
+            return redirect('user:email_sent')
+        elif not user.nickname:
+            return render(request, 'main/home.html', {'user': user})
         try:
             user_tag = UserTag.objects.get(user=user.id)
             participant = Participant.objects.filter(user=user.id)
@@ -176,8 +178,8 @@ def home(request):
                         'analysis_data':analysis_data
                         }
             return render(request, 'main/home.html', res_data)
-        except UserTag.DoesNotExist:
-            return redirect('user:tagsurvey')
+        # except UserTag.DoesNotExist:
+        #     return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
             basic_tags_ = {
             '아침': user_tag.morning,
