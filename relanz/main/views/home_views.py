@@ -178,8 +178,8 @@ def home(request):
                         'analysis_data':analysis_data
                         }
             return render(request, 'main/home.html', res_data)
-        except UserTag.DoesNotExist:
-            return redirect('user:tagsurvey')
+        # except UserTag.DoesNotExist:
+        #     return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
             basic_tags_ = {
             '아침': user_tag.morning,
