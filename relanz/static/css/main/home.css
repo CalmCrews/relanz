@@ -184,11 +184,6 @@
   z-index: 15;
 }
 
-
-.score-section {
-  /* 배지 섹션 스타일 */
-}
-
 /* 오늘의 한마디 */
 .bubble {
   position: relative;

@@ -1,31 +1,123 @@
+{% extends 'mobileBase.html' %}
 {% load static %}
-<h1>유저 정보</h1>
-<br />
-<hr />
-<h2>{{user.username}}</h2>
-<hr />
-<p>닉네임: {{user.nickname}}</p>
-<p>나이: {{ user.age }}</p>
-{% if user.sex == 'male' %}
-<p>성별: 남성 </p>
-{% else %}
-<p>성별: 여성 </p>
-{% endif %}
 
-{% for tag in tags%}
-    {{tag}}
-{% endfor %}
+{% block mobile_title %}
+  User Info
+{% endblock mobile_title %}
 
-<a href="{% url 'main:home' %}">홈으로</a>
+{% block mobile_extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/user/userinfo.css"%}">
+{% endblock mobile_extrahead %}
 
 
-{% for challenge in challenges %}
-    <hr>
-    {{challenge.title}}
-    {% if challenge.image %}
-    <img src="{% static challenge.image %}" alt="이미지">
-    {% endif %}
-    <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">상세보기</a>
-{% endfor %}
-<a href="{% url 'user:content' %}">프로필 수정하기</a>
-<a href="{% url 'user:avatar' %}">아바타 수정하기</a>
+{% block mobile_content %}
+<div class="user-info">
+  <div class="my-profile-section">
+    <div class="profile-wrapper">
+      <div class="profile-circle">
+        <div class="back-hair"></div>
+        <div class="face"></div>
+        <div class="front-hair"></div>
+        <div class="eyebrows"></div>
+        <div class="eyes"></div>
+        <div class="nose"></div>
+        <div class="mouth"></div>
+        <div class="makeup"></div>
+        <div class="clothes"></div>
+        <div class="acc"></div>
+      </div>
+    </div>
+    <div class="profile-side">
+      <div class="nickname">
+        <div class="user-nickname">{{user.nickname}}<span> 님</span></div>
+        <a href="{% url 'user:avatar' %}" class="avatar-edit">아바타 수정</a>
+      </div>
+      <div class="info-container">
+        {% if user.sex == 'male' %}
+        <span>남성 </span>
+        {% else %}
+        <span>여성 </span>
+        {% endif %}
+        <span>{{ user.age }}살&nbsp;</span>
+        <a href="{% url 'user:content' %}" class="content-edit"><img src="{% static "icons/edit.png"%}" alt=""></a>
+      </div>
+    </div>
+  </div>
+  <div class="tag-container">
+    <span>
+      태그&nbsp;
+      <a href="{% url 'user:tagsurvey' %}"><img src="{% static "icons/edit.png"%}" alt=""></a>
+    </span>
+    {% comment %} <a href="{% url 'user:survey' %}"></a> {% endcomment %}
+    <ul class="tag-list">
+      {% for tag in tags%}
+        <li>{{tag}}</li>  
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="my-relange-section">
+    <h3>나의 릴렌지</h3>
+    <ul class="relange-list">
+        <li>
+          <div class="relange-image">
+            <img src="{% static challenge.image %}" alt="이미지">
+          </div>
+          <div class="relange-info">
+            <span>지친 하루 끝 반신욕해요</span>
+            <a href="">상세보기</a>
+          </div>
+        </li>
+    </ul>
+    {% comment %} {% if challenges %}
+      <ul class="relange-list">
+        {% for challenge in challenges %}
+          <li>
+            <hr>
+            {{challenge.title}}
+            <img src="{% static challenge.image %}" alt="이미지">
+            <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">상세보기</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <span>참여하고 있는 릴렌지가 없습니다</span>
+    {% endif %} {% endcomment %}
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block mobile-scripts %}
+<script>
+  function renderProfileCombination(combinationData) {
+    const backHairElement = document.querySelector(".back-hair");
+    const frontHairElement = document.querySelector(".front-hair");
+    const eyebrowsElement = document.querySelector(".eyebrows");
+    const eyesElement = document.querySelector(".eyes");
+    const noseElement = document.querySelector(".nose");
+    const mouthElement = document.querySelector(".mouth");
+    const cheekElement = document.querySelector(".makeup");
+    const faceElement = document.querySelector(".face");
+    const clothesElement = document.querySelector(".clothes");
+    const accElement = document.querySelector(".acc");
+  
+    // 각 조합 요소의 숫자에 해당하는 이미지 경로 설정
+    frontHairElement.style.backgroundImage = `url("{% static 'character/fronthair/fronthair' %}${combinationData[0]}.png")`;
+    if (combinationData[1] > 0)
+      backHairElement.style.backgroundImage = `url("{% static 'character/backhair/backhair' %}${combinationData[1]}.png")`;
+    eyebrowsElement.style.backgroundImage = `url("{% static 'character/brows/brows' %}${combinationData[2]}.png")`;
+    eyesElement.style.backgroundImage = `url("{% static 'character/eyes/eyes' %}${combinationData[3]}.png")`;
+    noseElement.style.backgroundImage = `url("{% static 'character/nose/nose' %}${combinationData[4]}.png")`;
+    mouthElement.style.backgroundImage = `url("{% static 'character/mouth/mouth' %}${combinationData[5]}.png")`;
+    if (combinationData[6] > 0)
+      cheekElement.style.backgroundImage = `url("{% static 'character/makeup/makeup' %}${combinationData[6]}.png")`;
+    faceElement.style.backgroundImage = `url("{% static 'character/face.png' %}")`;
+    clothesElement.style.backgroundImage = `url("{% static 'character/clothes/clothes' %}${combinationData[7]}.png")`;
+    if (combinationData[8] > 0)
+      accElement.style.backgroundImage = `url("{% static 'character/acc/acc' %}${combinationData[8]}.png")`;
+
+  }
+  renderProfileCombination("{{user.avatar}}");
+</script>
+{% endblock %}
