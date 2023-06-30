@@ -103,14 +103,13 @@ function selectMyTag_ver2 (obj) {
 
 
 window.addEventListener("load", () => {
-    const tag_lists = ["morning", "afternoon", "evening", "inside", "outside", "solo", "group", "static", "dynamic"];
+    const tag_lists = ["morning", "afternoon", "evening", "anytime", "inside", "outside", "solo", "group", "static", "dynamic"];
     const isClickedAboutTime = [false, false, false];
     let handleTime;
     for (let i=0; i<tag_lists.length; i++) {
         const id = `tags_list_${tag_lists[i]}`;
-        const divId = tag_lists[i] === "morning" ||tag_lists[i] === "afternoon"|| tag_lists[i] === "evening" ? `type_second_${tag_lists[i]}` : `type_third_${tag_lists[i]}`
+        const divId = tag_lists[i] === "morning" || tag_lists[i] === "afternoon" || tag_lists[i] === "evening" || tag_lists[i] === "anytime" ? `type_second_${tag_lists[i]}` : `type_third_${tag_lists[i]}`
         const isClicked = document.getElementById(id).dataset.tags === "True";
-        console.log(i, divId, isClicked)
         if (isClicked) {
             if (divId.includes("third")) {
                 document.getElementById(divId).click();
