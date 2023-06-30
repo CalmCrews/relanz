@@ -107,7 +107,7 @@ def survey(request):
             age_sex_percentages = [round((value / total_age_sex_users) * 100) for value in age_sex_result_num]
 
             # -------------------- 본인 결과 ----------------------
-            if user.survey_result_count >= 1 and user.survey_result_count <= 3:
+            if user.survey_result_count >= 0 and user.survey_result_count <= 3:
                 user_survey_result = '취약하지 않음'
             elif user.survey_result_count >= 4 and user.survey_result_count <= 5:
                 user_survey_result = '취약'

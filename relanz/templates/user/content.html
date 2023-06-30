@@ -16,7 +16,11 @@
       {% csrf_token %}
       <div class="content-nickname">
         <p>나를</p>
-        <input type="text" placeholder="닉네임을 입력해주세요" name='nickname' class="nickname-field">
+        {% if user.nickname %}
+          <input type="text" placeholder="닉네임을 입력해주세요" name='nickname' class="nickname-field" value={{user.nickname} }="}">
+        {% else %}
+          <input type="text" placeholder="닉네임을 입력해주세요" name='nickname' class="nickname-field">
+        {% endif %}
         <p>라고 불러줘!</p>
       </div>
       <div class="content-img-box">
@@ -30,20 +34,32 @@
             <div class="selcet-img-div">
               <img src="{% static 'icons/check_circle_up.png' %}" alt="." onclick="showBirthYear(this)" id="showBirthArrow">
             </div>
-            <div type="text" name="birth" id="select_born_year" class="select-born-year">{{user.birth}}년</div>
+            {% if user.birth %}
+              <div type="text" name="birth" id="select_born_year" class="select-born-year">{{user.birth}}년</div>
+            {% else %}
+              <div type="text" name="birth" id="select_born_year" class="select-born-year">2000년
+              </div>
+            {% endif %}
             <input type="hidden" name="birth" id="hidden_birth" value="2000">
             <div class="select-li-div" id="select_li_div"></div>
           </div>
           <p class="gender-ment">나의 성별은</p>
           <div class="input-gender-div">
+            {% if user.sex == "남자" %}
+              <div id="user_sex" data-usersex="man"></div>
+            {% elif user.sex == "여자" %}
+              <div id="user_sex" data-usersex="woman"></div>
+            {% else %}
+              <div id="user_sex" data-usersex="none"></div>
+            {% endif %}
             <input type="hidden" name="sex" id="sex_value">
             <input type="button" id="sex_male" value="남자" class="input-gender" onclick="selectOnlyOneGenderForMan(this)">
             <input type="button" id="sex_female" value="여자" class="input-gender" onclick="selectOnlyOneGenderForWoman(this)"></input>
           </div>
           {% if user.nickname %}
-          <input type="submit" value="수정 하기" class="submit">
+            <input type="submit" value="수정 하기" class="submit">
           {% else %}
-          <input type="submit" value="다음 단계" class="submit">
+            <input type="submit" value="다음 단계" class="submit">
           {% endif %}
         </div>
       </form>

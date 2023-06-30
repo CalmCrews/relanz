@@ -57,7 +57,7 @@
         <button type="submit" action="{% url 'user:survey' %}">다음단계</button>
       </div>
     </div>
-    <input type="hidden" name="survey_result_count" value="" id="survey_result_count">
+    <input type="hidden" name="survey_result_count" value="0" id="survey_result_count">
   </form>
   <script src="{% static "js/survey.js" %}"></script>
 {% endblock %}
