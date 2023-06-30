@@ -137,7 +137,6 @@ def tagsurvey(request):
             tags = UserTag.objects.get(user=user)
         except UserTag.DoesNotExist:
             tags = UserTag.objects.create(user=user)
-            return redirect('user:activetime')
         morning = request.POST.get('morning')
         afternoon = request.POST.get('afternoon')
         evening = request.POST.get('evening')
