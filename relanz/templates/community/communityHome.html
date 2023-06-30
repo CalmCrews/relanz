@@ -1,35 +1,134 @@
-{% block title %}
-<h1>기록 게시판 홈</h1>  
-{% endblock title %}
+{% extends 'mobileBase.html' %}
+{% load static %}
+{% block mobile_title %}
+communityHome
+{% endblock mobile_title %}
+{% block mobile_extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/communityHome.css"%}">
+{% endblock mobile_extrahead %}
+{% block mobile_content%}
+    <div class="container-mobile">
+        <div class="main-img-div">
+            {% if challenge.image %}
+                <img src="{% static "challenge.image" %}" alt="이미지">
+            {% else %}
+                <img src="{% static "images/leein_example.jpeg" %}" alt=".">
+            {% endif %}
+        </div>
+        <div class="main-container-div">
+            <div class="nav-div-absolute">
+                <div class="nav-info">
+                    <a href="http://">릴렌지 안내</a>
+                </div>
+                <div class="nav-board">
+                    {% comment %} 여기에 커뮤게시판으로 가기 url {% endcomment %}
+                    <a href="http://">커뮤니티 게시판</a>
+                </div>
+            </div>
+        </div>
+        <div class="title-container-div">
+            <div class="title-div">
+                <div class="img-div">
+                    <img src="{% static "icons/check_circle_down_lean.png" %}" alt=".">
+                </div>
+                {% if challenge.title %}
+                    <p class="title-p">{{challenge.title}}</p>
+                {% else %}
+                    <p class="title-p">변수명으로 이름 넘겨줘잉~</p>
+                {% endif %}
+            </div>
+            <div class="participant-count-div">
+                <div class="participant-img-div">
+                    <img src="{% static "icons/human_shaped.png" %}" alt=".">
+                </div>
+                {% if participant %}
+                    <small class="participant-count-small">{{participant}} 명이 참여 중인 릴렌지</small>
+                {% else %}
+                <small class="participant-count-small">00 명이 참여 중인 릴렌지</small>
+                {% endif %}
+            </div>
+        </div>
+        <div class="tag-record-div">
+            {% comment %} 참가하면으로 조건 걸 것! {% endcomment %}
+            {% if participant %}
+                <a href="http://" class="record-btn">내 기록 남기기</a>
+                <a href="http://" class="record-btn">내 기록 모아보기</a>
+            {% else %}
+                <a href="http://" class="record-btn">시작하기</a>
+            {% endif %}
+        </div>
+        <div class="images-box-div" id="images_box_div">
+            {% comment %} 여기에 이미지 url이 list로 던저져야함! {% endcomment %}
+            {% if imageList %}
+                {% for imngeUrl in imageList %}
+                <a href="http://" class="images-box-single-a">
+                    <div class="images-box-single">
+                        <img src="{% static "{{imngeUrl}}" %}" alt=".">
+                    </div>
+                </a>
+                {% endfor %}
+            {% else %}
+                <a href="http://" class="images-box-single-a">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+                <a href="http://" class="images-box-single">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+                <a href="http://" class="images-box-single">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+                <a href="http://" class="images-box-single">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+                <a href="http://" class="images-box-single">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+                <a href="http://" class="images-box-single">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+                
+                <a href="http://" class="images-box-single">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+                <a href="http://" class="images-box-single">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+                <a href="http://" class="images-box-single">
+                    <div class="images-box-single">
+                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+                    </div>
+                </a>
+            {% endif %}
+            
+        </div>
+        <div class="loading-div">
+            <div class="loading-img-div" id="loading_img_div">
+                <img src="{% static "icons/loading.png" %}" alt=".">
+            </div>
+        </div>
+        <div class="just-for-margin-div" id="div_end"></div>
+        <div class="see-full-go-next" id="see_full_go_next"></div>
+    </div>
+    <script src={% static "js/communityHome.js"%}></script>
+{% endblock %}
+   
+{% block scripts%}
+{% endblock scripts%}
 
-{% block content %}
-<a href="{% url 'community:new' challenge.id %}">내 기록 남기기</a>
-<a href="{% url 'community:communityHome' challenge.id %}">내 기록 모아보기</a>
-<br />
-<hr />
-{% for article in page_obj %}
-<a href="{% url 'community:detail' challenge.id article.id %}">
-    {% if article.image %}
-    <img src="{{article.image.url}}" width="100">
-    {% endif %}
-</a>
-{% endfor %}
 
-<span>
-    {% if page_obj.has_previous %}
-    <a href="?page=1">처음으로</a>
-    <a href="?page={{ page_obj.previous_page_number }}">이전</a>
-    {% endif %}
-
-    <p>{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</p>
-
-    {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}">다음</a>
-    <a href="?page={{ page_obj.paginator.num_pages }}">마지막으로</a>
-    {% endif %}
-</span>
-
-<br/>
-<a href="{% url 'main:home' %}">홈</a>
-<a href="{% url 'community:new' challenge_id=challenge.id %}">글작성</a>
-{% endblock content %}
