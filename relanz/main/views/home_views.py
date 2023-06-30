@@ -18,7 +18,7 @@ def home(request):
             return render(request, 'main/home.html', {'user': user})
         try:
             user_tag = UserTag.objects.get(user=user.id)
-            participant = Participant.objects.filter(user=user.id)
+            participant = Participant.objects.get(user=user.id)
             basic_tags_ = {
             '아침': user_tag.morning,
             '점심': user_tag.afternoon,
@@ -142,7 +142,10 @@ def home(request):
                 like_challenge_list.append(like_challenge)
 
             if not like_challenge_list:
-                r = random.randint(0, len(minus_challenge)-1)
+                if len(minus_challenge) == 1:
+                    r = 0
+                else:
+                    r = random.randint(0, len(minus_challenge)-1)
                 most_like_challenge=minus_challenge[r]
             else:
                 challenge_element = Counter(like_challenge_list)
@@ -184,8 +187,8 @@ def home(request):
                         'analysis_data':analysis_data
                         }
             return render(request, 'main/home.html', res_data)
-        # except UserTag.DoesNotExist:
-        #     return redirect('user:tagsurvey')
+        except UserTag.DoesNotExist:
+            return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
             basic_tags_ = {
             '아침': user_tag.morning,
