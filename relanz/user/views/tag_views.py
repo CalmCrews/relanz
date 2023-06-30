@@ -136,16 +136,17 @@ def survey(request):
 # @email_verified_required
 @login_required(login_url='/user/signin')
 def tagsurvey(request):
+    user=request.user
     if request.method=="GET":
-        return render(request, 'tag/tagsurvey.html')
-    if request.method=="POST":
-        user=request.user
-        if user.nickname is None:
-            return redirect('user:content')
         try:
             tags = UserTag.objects.get(user=user)
         except UserTag.DoesNotExist:
             tags = UserTag.objects.create(user=user)
+        return render(request, 'tag/tagsurvey.html', {'tags':tags})
+    if request.method=="POST":
+        if user.nickname is None:
+            return redirect('user:content')
+        tags = UserTag.objects.get(user=user)
         morning = request.POST.get('morning')
         afternoon = request.POST.get('afternoon')
         evening = request.POST.get('evening')
@@ -180,7 +181,10 @@ def tagsurvey(request):
             if dynamic is not None:
                 tags.dynamic = True
             tags.save()
-            return redirect('user:avatar')
+            if user.avatar is None:
+                return redirect('user:avatar')
+            else:
+                return redirect('user:userinfo', user.id)
         else:
             messages.add_message(request, messages.ERROR, '')
             return render(request, 'tag/tagsurvey.html')
