@@ -17,7 +17,7 @@
       <div class="content-nickname">
         <p>나를</p>
         {% if user.nickname %}
-          <input type="text" placeholder="닉네임을 입력해주세요" name='nickname' class="nickname-field" value={{user.nickname} }="}">
+          <input type="text" placeholder="닉네임을 입력해주세요" name='nickname' class="nickname-field" value="{{user.nickname}}">
         {% else %}
           <input type="text" placeholder="닉네임을 입력해주세요" name='nickname' class="nickname-field">
         {% endif %}
@@ -45,9 +45,9 @@
           </div>
           <p class="gender-ment">나의 성별은</p>
           <div class="input-gender-div">
-            {% if user.sex == "남자" %}
+            {% if user.sex == "male" %}
               <div id="user_sex" data-usersex="man"></div>
-            {% elif user.sex == "여자" %}
+            {% elif user.sex == "female" %}
               <div id="user_sex" data-usersex="woman"></div>
             {% else %}
               <div id="user_sex" data-usersex="none"></div>
