@@ -10,7 +10,15 @@
 {% endblock mobile_extrahead %}
 
 {% block mobile_content %}
-  <div class="button-container">
+  <div class="button-container relative">
+    <div class="block-screen" id="block_screen" data-depth="y"></div>
+    <div class="warning-absolute" id="warning_absolute">
+      <p class="signout-ment">로그아웃 하시겠습니까?</p>
+      <div class="button-div">
+        <button class="no-btn-signout" onclick="sayNo(this)">아니요</button>
+        <a href="{% url 'user:signout' %}" class="yes-btn">네</a>
+      </div>
+    </div>
     <a class="each-button-a" href="" id="a_blue_1">
       <p class="text-p blue-color">맴버십 전환</p>
       <div class="img-div">
@@ -23,7 +31,7 @@
         <img src="{% static "icons/right_single_arrow.svg" %}" alt="." class="img-tag" id="blue-2">
       </div>
     </a>
-    <a class="each-button-a" href="{% url 'user:signout' %}" id="a_blue_3">
+    <a class="each-button-a" id="a_blue_3" onclick="signout(this)">
       <p class="text-p blue-color">로그아웃</p>
       <div class="img-div">
         <img src="{% static "icons/right_single_arrow.svg" %}" alt="." class="img-tag" id="blue-3">
@@ -36,4 +44,20 @@
       </div>
     </a>
   </div>
+  <script>
+    const block_screen = document.getElementById("block_screen");
+    const warning_absolute = document.getElementById("warning_absolute");
+
+    function signout(obj) {
+      block_screen.dataset.depth = "y"
+      block_screen.style.zIndex = "5";
+      warning_absolute.style.zIndex = "10";
+    }
+
+    function sayNo(obj) {
+      block_screen.dataset.depth = "n"
+      block_screen.style.zIndex = "-1";
+      warning_absolute.style.zIndex = "-1";
+    }
+  </script>
 {% endblock %}
