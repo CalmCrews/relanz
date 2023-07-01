@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-
+  <div class="loading-cover"><div class="loading-image-div"><img src="{% static 'icons/loading.png'%}" alt="loading"></div></div>
 
 {% endblock %}
 
@@ -40,7 +40,8 @@
     const completeVerificationButton = document.getElementById("complete_verification");
     const popupAlert = document.getElementById('alert');
     const closeButton = document.querySelector('#alert > .popup > .close-button');
-
+    const loadingCover = document.querySelector('.loading-cover')
+    
     function completeVerify() {
       $.ajax({
         type: "POST",
@@ -51,16 +52,22 @@
         data: {
           complete_verification: true  // send_email 파라미터를 설정하여 서버에서 이메일 보내기 동작을 수행
         },
+        success: function(response) {
+          // 성공적인 응답을 받은 경우
+          console.log(response.message);
+          window.location.href = "{% url 'main:home' %}";
+        },
         error: function(xhr, status, error) {
           // 오류 응답을 받은 경우
           console.error(error);  // 오류 메세지 출력
-          
           popupAlert.style.display = 'block';
         }
       });
     }
 
     function sendEmail() {
+      // 로딩표시 보이기
+      loadingCover.style.display = 'block';
       // AJAX 요청 보내기
       $.ajax({
         type: "POST",
@@ -84,10 +91,12 @@
           completeVerificationButton.classList.add('active');
 
           completeVerificationButton.addEventListener("click", completeVerify);
+          loadingCover.style.display = 'none';
         },
         error: function(xhr, status, error) {
           // 오류 응답을 받은 경우
           console.error(error);  // 오류 메세지 출력
+          loadingCover.style.display = 'none';
         }
       });
     }
