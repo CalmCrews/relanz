@@ -121,11 +121,12 @@ def email_sent(request):
                 return JsonResponse(res_data, status=500)
             
         elif 'complete_verification' in request.POST:
-            if not user.is_email_valid:
+            if user.is_email_valid:
+                res_data = {'message': '인증 완료.'}
+                return JsonResponse(res_data)
+            else:
                 res_data = {'error': '인증이 완료되지 않았습니다. 다시 시도해주세요.'}
                 return JsonResponse(res_data, status=500)
-            else:
-                return redirect('main:home')
     
         res_data = {'message': 'nothing happened'}
         return JsonResponse(res_data)
