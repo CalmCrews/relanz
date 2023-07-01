@@ -220,4 +220,4 @@ def tagsurvey(request):
         else:
             messages.add_message(request, messages.ERROR, '')
             return render(request, 'tag/tagsurvey.html')
-    return render(request, 'main/home.html')
+    return render(request, 'main/home.html', {user:user})

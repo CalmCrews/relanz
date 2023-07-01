@@ -1,0 +1,1 @@
+document.getElementById(`${color}_${num}`).src = ``
