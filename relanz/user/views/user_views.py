@@ -147,3 +147,9 @@ def activate(request, uidb64, token):
     else:
         res_data = {'error' : '계정 활성화 오류'}
         return redirect("user: email_sent", res_data, status=500)
+    
+
+# 하단바 더보기 페이지
+def moreInfo(request, user_id):
+    user=request.user
+    return render(request, 'user/moreInfo.html', {"user":user})

@@ -1,0 +1,39 @@
+{% extends 'mobileBase.html' %}
+{% load static %}
+
+{% block mobile_title %}
+  moreInfo
+{% endblock mobile_title %}
+
+{% block mobile_extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/moreInfo.css"%}">
+{% endblock mobile_extrahead %}
+
+{% block mobile_content %}
+  <div class="button-container">
+    <a class="each-button-a" href="" id="a_blue_1">
+      <p class="text-p blue-color">맴버십 전환</p>
+      <div class="img-div">
+        <img src="{% static "icons/right_single_arrow.svg" %}" alt="." class="img-tag" id="blue-1">
+      </div>
+    </a>
+    <a class="each-button-a" href="" id="a_blue_2">
+      <p class="text-p blue-color">버전 정보</p>
+      <div class="img-div">
+        <img src="{% static "icons/right_single_arrow.svg" %}" alt="." class="img-tag" id="blue-2">
+      </div>
+    </a>
+    <a class="each-button-a" href="" id="a_blue_3">
+      <p class="text-p blue-color">로그아웃</p>
+      <div class="img-div">
+        <img src="{% static "icons/right_single_arrow.svg" %}" alt="." class="img-tag" id="blue-3">
+      </div>
+    </a>
+    <a class="each-button-a" href="" id="a_red_1">
+      <p class="text-p red-color">회원탈퇴</p>
+      <div class="img-div">
+        <img src="{% static "icons/right_single_arrow.svg" %}" alt="." class="img-tag-red" id="red-1">
+      </div>
+    </a>
+  </div>
+{% endblock %}
