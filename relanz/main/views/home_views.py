@@ -106,12 +106,6 @@ def home(request):
 
             # 챌린지와 참여자의 수를 튜플로 묶어서 전달
             combined_data = list(zip(sorted_challenges, participant_counts))
-
-            # 설문조사 결과 불러옴
-            res_data = survey_result(request)
-
-            res_data2 = {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data}
-            res_data.update(res_data2)
             
             # report 분석 알고리즘
             participant_report = {
@@ -171,29 +165,14 @@ def home(request):
                 'most_like_challenge': most_like_challenge,
                 'analysis_titles':analysis_titles
             }
-            # ------------ survey 결과 가져오기 --------------
-            age_group_start = request.session.get('age_group_start')
-            all_survey_result = request.session.get('all_survey_result')
-            sex_survey_result = request.session.get('sex_survey_result')
-            age_survey_result = request.session.get('age_survey_result')
-            age_sex_survey_result = request.session.get('age_sex_survey_result')
-            user_survey_result = request.session.get('user_survey_result')
 
-
-            # -------------------------------------------------
-
-            res_data = {'user':user, 
-                        'tag_lists':tag_lists_, 
-                        'combined_data': combined_data, 
-                        'age_group_start':age_group_start,
-                        'all_survey_result':all_survey_result, 
-                        'sex_survey_result':sex_survey_result,
-                        'age_survey_result':age_survey_result,
-                        'age_sex_survey_result':age_sex_survey_result,
-                        'user_survey_result':user_survey_result,
-                        'analysis_data':analysis_data
-                        }
+            # 설문조사 결과 불러옴 (승언 파트)
+            res_data = survey_result(request)
+            res_data2 = {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data, 'analysis_data':analysis_data}
+            res_data.update(res_data2)
+            
             return render(request, 'main/home.html', res_data)
+        
         except UserTag.DoesNotExist:
             return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
