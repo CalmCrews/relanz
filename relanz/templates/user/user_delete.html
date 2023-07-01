@@ -1,0 +1,50 @@
+{% extends 'mobileBase.html' %}
+{% load static %}
+
+{% block mobile_title %}
+  user_delete
+{% endblock mobile_title %}
+
+{% block mobile_extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/user/user_delete.css"%}">
+{% endblock mobile_extrahead %}
+{% block mobile_content %}
+  <div class="user-delete-container-div">
+    <div class="screen-block-div" id="screen_block_div"></div>
+    <div class="good-pw" id="good_pw">
+      <p class="good-pw-p">회원을 탈퇴하시겠습니까?</p>
+      <div class="good-pw-div">
+        <button class="good-pw-btn-no" onclick="concealDeleteUser()">아니요</button>
+        <button class="good-pw-btn-yes" onclick="clickRealSubmit()">네</button>
+      </div>
+    </div>
+    {% if error == "reject" %}
+      <div class="bad-pw" id="bad_pw">
+        <p class="bad-pw-p">잘못된 비밀번호입니다</p>
+        <button type="button" id="bad_pw_btn" class="bad-pw-btn" onclick="wrongPasswordBtn()">확인</button>
+      </div>
+    {% endif %}
+
+    <div class="title-div">
+      <p class="big-title">정말 탈퇴하시겠습니까?</p>
+      <p class="small-title">탈퇴를 원할 시 비밀번호를 입력해주세요</p>
+    </div>
+    <div class="img-div">
+      <img src="{% static "images/sad_face.png" %}" alt=".">
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="password-input-div">
+        <p class="password-text">비밀번호 확인</p>
+        <div class="input-div">
+          <div class="pw-icon">PW</div>
+          <input id="password_real" class="password-real" type="password" placeholder="비밀번호를 입력해주세요" name="password" required="required">
+        </div>
+      </div>
+      <button class="submit-btn" type="button" onclick="submitDeleteUser()" id="submit_btn">회원 탈퇴</button>
+      <button type="submit" id="real_submit_btn"></button>
+    </form>
+    <div class="for-padding"></div>
+  </div>
+  <script src={% static "js/user_delete.js" %}></script>
+{% endblock %}
