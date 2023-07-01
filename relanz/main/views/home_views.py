@@ -16,7 +16,46 @@ def home(request):
             return redirect('user:email_sent')
         try:
             participant = Participant.objects.filter(user=user.id)
-            if participant.exists():
+            if not participant.exists():
+                basic_tags_ = {
+                '아침': user_tag.morning,
+                '점심': user_tag.afternoon,
+                '저녁': user_tag.evening,
+                '실내': user_tag.inside,
+                '야외': user_tag.outside,
+                '혼자': user_tag.solo,
+                '여럿이': user_tag.group,
+                '정적인': user_tag.static,
+                '동적인': user_tag.dynamic,
+                }
+                tag_lists_=[]
+                for tag_name, tag_value in basic_tags_.items():
+                    if tag_value is True:
+                        tag_lists_.append(tag_name)
+                basic_tags = {
+                'morning': user_tag.morning,
+                'afternoon': user_tag.afternoon,
+                'evening': user_tag.evening,
+                'inside': user_tag.inside,
+                'outside': user_tag.outside,
+                'solo': user_tag.solo,
+                'group': user_tag.group,
+                'pay': user_tag.pay,
+                'free': user_tag.free,
+                'static': user_tag.static,
+                'dynamic': user_tag.dynamic,
+                }
+
+                tag_lists=[]
+                for tag_name, tag_value in basic_tags.items():
+                    if tag_value is True:
+                        tag_lists.append(tag_name)
+                challenge_query = Q()
+                for tag_list in tag_lists:
+                    challenge_query |= Q(**{tag_list: True})
+                challenges = ChallengeTag.objects.filter(challenge_query)
+                return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'challengs':challenges})
+            else:
                 user_tag = UserTag.objects.get(user=user.id)
                 basic_tags_ = {
                 '아침': user_tag.morning,
@@ -186,8 +225,6 @@ def home(request):
                             'analysis_data':analysis_data
                             }
                 return render(request, 'main/home.html', res_data)
-            else:
-                participant = Participant.objects.get(user=user.id)
         except UserTag.DoesNotExist:
             return redirect('user:tagsurvey')
         except Participant.DoesNotExist:
