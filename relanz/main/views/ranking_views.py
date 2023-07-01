@@ -6,23 +6,14 @@ from django.db.models import Sum, Count
 from datetime import datetime
 
 
-# 성별에 따른 랭킹, 함수처리
-def get_challenge_ranking(sex):
-    # 성별에 따른 참여자 쿼리셋 생성
-    participants = Participant.objects.filter(user__sex=sex)
-    # 생성된 쿼리셋에서 challenge를 기준으로 group_by, 각 챌린지마다 유저 아이디 개수 생성, 생성된 개수를 바탕으로 정렬
-    challenge_counts = participants.values('challenge_id').annotate(count=Count('user_id')).order_by('-count')[:5]
-    # 챌린지 카운터를 기준으로 순위를 묶고, 딕셔너리 형태의 숫자 붙여서 tuple 생성
-    challenge_ranking = [(f'{i+1}', Challenge.objects.get(id=item['challenge_id'])) for i, item in enumerate(challenge_counts)]
-    return challenge_ranking
-
 def ranking(request, user_id):
     user=request.user
     if user.nickname is None or user.birth is None or user.sex is None:
         return redirect('user:content')
+    
+
     # 참여자 TOP 5 릴렌지 (실시간)
-    participants = Participant.objects.values('challenge_id').annotate(count=Count('user_id')).distinct()
-    participants = participants.order_by('-count')
+    participants = Participant.objects.values('challenge_id').annotate(count=Count('user_id')).order_by('-count').distinct()
     participants_list = list(participants)
     best_challenges = []
     for i in range(0,len(participants_list)):
@@ -33,7 +24,7 @@ def ranking(request, user_id):
     for i in range(1, len(best_challenges) + 1):
         challenge_ranking.append((f'{i}', best_challenges[i-1]))
     if len(challenge_ranking) > 5:
-        challenge_ranking = challenge_ranking[:5]
+        challenge_rankings = challenge_ranking[:5]
 
     # 유저의 나이대가 참여한 랭킹 순위
     # propert를 통해 생성된 것은 filter 적용 X -> birth를 기준으로 각자 나이대에 10대, 20대 등 나이대 설정
@@ -85,7 +76,6 @@ def ranking(request, user_id):
         # 내가 쓴 글의 쿼리셋을 challenge를 기준으로 묶어서, score를 기준으로 정렬
         ranked_articles = articles.values('challenge').annotate(sum=Sum('article_score')).distinct()
         ranked_articles = ranked_articles.order_by('-sum')
-            
         # 정렬한 쿼리셋을 기준으로 챌린지 객체를 list 형식으로 인덱스 = 순위가 될 수 있도록 추가
         ranked_my_challenges = []
         for ranked_article in ranked_articles[:3]:
@@ -104,13 +94,35 @@ def ranking(request, user_id):
 
             # list에 순위를 기준으로 차례대로 list에 추가
             user_rank_list = list(user_rank)
-
             # list의 인덱스 번호를 토대로 순위를 tuple형식으로 결합
             for item, value in enumerate(user_rank_list, start=1): 
-                # request한 user의 id를 토대로 파싱하여, 순위를 rank의 추가       
+                # request한 user의 id를 토대로 파싱하여, 순위를 rank의 추가 
                 if value[f'author__user'] == user.id:
-                    rank.append(item)
-        combined_data = list(zip(ranked_my_challenges, rank))
-        return render(request, 'main/ranking.html', {'combined_data':combined_data, 'challenge_ranking':challenge_ranking, 'res_ranking':res_ranking, 'age_challenge_ranking':age_challenge_ranking})
+                    rank.append((item, value))
+
+        # participant -> 각 챌린지 마다 유저가 참여하고 있는 수
+        user_challenge = Article.objects.filter(author__user=user.id)
+        challenge_score = user_challenge.values('challenge_id').annotate(sum=Sum('article_score'))
+        all_challenge_ranking = []
+        challenge_participants = []
+        for my_challenge in ranked_my_challenges:
+            challenge_participant = Participant.objects.filter(challenge=my_challenge).values('challenge').annotate(count=Count('user_id'))
+            challenge_participants.append(challenge_participant)
+            for user_challenge_ranking in challenge_ranking:
+                if my_challenge.id == user_challenge_ranking[1].id:
+                    all_challenge_ranking.append(user_challenge_ranking[0])
+        combined_data = list(zip(ranked_my_challenges, rank, all_challenge_ranking, challenge_participants))
+        print(combined_data)
+        return render(request, 'main/ranking.html', {'combined_data':combined_data, 'challenge_ranking':challenge_rankings, 'res_ranking':res_ranking, 'age_challenge_ranking':age_challenge_ranking})
     else:
         return render(request, 'main/ranking.html', {'challenge_ranking':challenge_ranking, 'res_ranking':res_ranking, 'age_challenge_ranking':age_challenge_ranking})
+    
+# 성별에 따른 랭킹, 함수처리
+def get_challenge_ranking(sex):
+    # 성별에 따른 참여자 쿼리셋 생성
+    participants = Participant.objects.filter(user__sex=sex)
+    # 생성된 쿼리셋에서 challenge를 기준으로 group_by, 각 챌린지마다 유저 아이디 개수 생성, 생성된 개수를 바탕으로 정렬
+    challenge_counts = participants.values('challenge_id').annotate(count=Count('user_id')).order_by('-count')[:5]
+    # 챌린지 카운터를 기준으로 순위를 묶고, 딕셔너리 형태의 숫자 붙여서 tuple 생성
+    challenge_ranking = [(f'{i+1}', Challenge.objects.get(id=item['challenge_id'])) for i, item in enumerate(challenge_counts)]
+    return challenge_ranking
