@@ -153,3 +153,19 @@ def activate(request, uidb64, token):
 def moreInfo(request, user_id):
     user=request.user
     return render(request, 'user/moreInfo.html', {"user":user})
+
+# 유저 탈퇴
+def user_delete(request):
+    if request.method=="GET":
+            return render(request, 'user/user_delete.html')
+    elif request.method=="POST":
+        user_username = request.user.username
+        password = request.POST['password']
+        user = authenticate(request, username=user_username, password=password)
+        if user is not None:
+            # 유저 삭제 기능을 구현한다
+            return redirect("main:home")
+            
+        else:
+            error = {'error' : 'reject'}
+            return render(request, 'user/user_delete.html', error)
