@@ -14,8 +14,8 @@ def home(request):
         if not user.is_email_valid:
             # return redirect('user:email_sent')
             return redirect('user:email_sent')
+        participant = Participant.objects.filter(user=user.id)
         try:
-            participant = Participant.objects.filter(user=user.id)
             if not participant.exists():
                 basic_tags_ = {
                 '아침': user_tag.morning,
@@ -226,8 +226,8 @@ def home(request):
                             }
                 return render(request, 'main/home.html', res_data)
         except UserTag.DoesNotExist:
-            return redirect('user:tagsurvey')
-        except Participant.DoesNotExist:
+            return redirect('user:survey')
+        except (Participant.DoesNotExist, IndexError, ValueError):
             basic_tags_ = {
             '아침': user_tag.morning,
             '점심': user_tag.afternoon,
