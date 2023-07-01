@@ -153,7 +153,7 @@ def tagsurvey(request):
         inside = request.POST.get('inside')
         outside = request.POST.get('outside')
         solo = request.POST.get('solo')
-        group = request.POST.get('Group')
+        group = request.POST.get('group')
         static = request.POST.get('static')
         dynamic = request.POST.get('dynamic')
         anytime = request.POST.get('anytime')
@@ -163,52 +163,52 @@ def tagsurvey(request):
             if tag_list is not None:
                 tag_cnt += 1
         if tag_cnt > 0:
-            if morning is not None:
+            if morning == 'morning':
                 tags.morning = True
             else:
                 tags.morning =False
 
-            if afternoon is not None:
+            if afternoon == 'afternoon':
                 tags.afternoon = True
             else:
                 tags.afternoon =False
 
-            if evening is not None:
+            if evening == 'evening':
                 tags.evening = True
             else:
                 tags.evening =False
 
-            if inside is not None:
+            if inside == 'inside':
                 tags.inside = True
             else:
                 tags.inside =False
 
-            if outside is not None:
+            if outside == 'outside':
                 tags.outside = True
             else:
                 tags.outside =False
 
-            if solo is not None:
+            if solo == 'solo':
                 tags.solo = True
             else:
                 tags.solo =False
 
-            if group is not None:
+            if group == 'group':
                 tags.group = True
             else:
                 tags.group =False
 
-            if static is not None:
+            if static == 'static':
                 tags.static = True
             else:
                 tags.static =False
 
-            if dynamic is not None:
+            if dynamic == 'dynamic':
                 tags.dynamic = True
             else:
                 tags.dynamic =False
 
-            if anytime is not None:
+            if anytime == 'anytime':
                 tags.morning = True
                 tags.afternoon = True
                 tags.evening = True
