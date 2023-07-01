@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from config.email_decorator import email_verified_required
 from user.models import User, UserTag
-from challenge.models import Challenge, Participant
+from challenge.models import Challenge, Participant,ChallengeTag
 
 @login_required(login_url='/user/signin')
 @email_verified_required
@@ -72,12 +72,31 @@ def userinfo(request, user_id):
     for tag_name, tag_value in basic_tags_.items():
         if tag_value is True:
             tag_lists_.append(tag_name)
-
+    
+    
     participants = Participant.objects.filter(user=user.id)
     challenges=[]
+    
     for participant in participants:
-        challenges.append(participant.challenge)
-        
+        challenge_tag = ChallengeTag.objects.get(challenge=participant.challenge)
+        basic_tags = {
+            '아침': challenge_tag.morning,
+            '점심': challenge_tag.afternoon,
+            '저녁': challenge_tag.evening,
+            '실내': challenge_tag.inside,
+            '야외': challenge_tag.outside,
+            '혼자': challenge_tag.solo,
+            '여럿이': challenge_tag.group,
+            '정적인': challenge_tag.static,
+            '동적인': challenge_tag.dynamic,
+            '유료' : challenge_tag.pay,
+            '무료' : challenge_tag.free
+        }
+        challenge_tag_list=[]
+        for tag_name, tag_value in basic_tags.items():
+            if tag_value == True:
+                challenge_tag_list.append(tag_name)
+        challenges.append((participant.challenge, challenge_tag_list))
     res_data = {'user':user, 'tags':tag_lists_, 'challenges':challenges}
     
     return render(request, 'user/userinfo.html', res_data)
