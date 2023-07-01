@@ -18,5 +18,38 @@
     {% endfor %}
     </ol>
 {% endfor %}
+To display the combined_data in HTML, you can pass it as a context variable to your HTML template and iterate over it using nested loops. Here's an example of how you can achieve this:
 
+html
+Copy code
+<!-- Your HTML template -->
+<table>
+  <thead>
+    <tr>
+      <th>1. 별</th>
+      <th>2. 제목</th>
+      <th>3. 랭킹</th>
+      <th>4. user_id</th>
+      <th>5. score</th>
+      <th>6. 전체 랭킹</th>
+      <th>7. 참여자수</th>
+
+    </tr>
+  </thead>
+  
+  <tbody>
+  Top3 챌린지의 user_id랑 score
+    {% for data in combined_data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ data.0.title }}</td> <!-- TOP3 Challenge 객체-->
+      <td>{{ data.1.0 }}</td> <!--  챌린지 내에서 유저 순위 Rank -->
+      <td>{{ data.1.1.author__user }}</td> <!-- User ID -->
+      <td>{{ data.1.1.sum }}</td> <!-- 해당 릴렌지에 대한 유저의 Score -->
+      <td>{{ data.2 }}</td> <!-- 해당 릴렌지의 전체 랭킹 -->
+      <td>{{ data.3.0.count }}</td> <!-- 해당 릴렌지의 참여자수 -->
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
