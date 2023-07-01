@@ -10,6 +10,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(blank=True, null=True, upload_to='')
+    article_score = models.IntegerField(default=0)
 
 class Like(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, null=True)

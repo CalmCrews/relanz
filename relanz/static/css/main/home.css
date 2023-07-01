@@ -33,14 +33,14 @@
 
 #profile-unset > .welcome-box > img {
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-@media (max-width: 900px) {
+@media (min-height: 1600px) {
   #profile-unset > .welcome-box > img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
@@ -64,7 +64,7 @@
   text-align: center;
   letter-spacing: -0.05em;
 
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   text-decoration: none;
 }
 
@@ -74,11 +74,6 @@
   background-color: #71a1ff;
 }
 
-#profile-unset > #log_out {
-  margin-top: 15px;
-  color: #ffffff;
-  background-color: #e7e7e7;
-}
 
 /* profile-set(real main-page) */
 
@@ -187,11 +182,6 @@
 .acc {
   /* 악세사리 스타일의 CSS 속성 */
   z-index: 15;
-}
-
-
-.score-section {
-  /* 배지 섹션 스타일 */
 }
 
 /* 오늘의 한마디 */

@@ -116,3 +116,19 @@ function selectOnlyOneGenderForWoman (obj) {
         return
     }
 }
+
+
+
+window.addEventListener("load", () => {
+    const firstSexValue = document.getElementById("user_sex").dataset.usersex;
+    switch (firstSexValue) {
+        case "man":
+            document.getElementById("sex_male").click();
+            break;
+        case "woman":
+            document.getElementById("sex_female").click()
+            break;
+        case "none":
+            break;
+    }
+});

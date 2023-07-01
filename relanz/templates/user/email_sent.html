@@ -1,12 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  이메일 인증을 완료하세요!
+{% endblock title %}
+
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/user/email_sent.css"%}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock extrahead %}
+
+
 {% block content%}
-이메일을 인증하면<br>
-회원가입 완료!<br>
-<br>
-지금 메일함에 도착한 링크에 접속해<br>
-회원가입을 완료해 주세요<br>
-<br>
-{% if user.is_authenticated %}
-    {{ error }}
-{% endif %}
-<a href="{% url 'main:home' %}">인증 완료</a>
+  <div id="email_validation">
+    <p class="signin-complete">이메일을 인증하면<br>회원가입 완료!</p>
+    <div class="welcome-box">
+      <img src="{% static "images/welcome-box.png" %}" alt="welcome-img">
+    </div>
+    <p class="info-message">지금 메일함에 도착한 링크에 접속해<br>회원가입을 완료해 주세요</p>
+    <div class="user-button" id="send_email">인증 메일 보내기</div>
+    <div class="user-button" id="complete_verification">인증 완료</div>
+    
+    <div id="alert">
+      <div class="popup">
+        <div class="close-button"><img src="{% static "icons/close.png"%}" alt="x"></div>
+        <img src="{% static "icons/alert.png"%}" alt="alert">
+        <span>이메일 인증을 완료해주세요</span>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script>
+    const sendEmailButton = document.getElementById("send_email");
+    console.log(sendEmailButton);
+    const completeVerificationButton = document.getElementById("complete_verification");
+    const popupAlert = document.getElementById('alert');
+    const closeButton = document.querySelector('#alert > .popup > .close-button');
+
+    function completeVerify() {
+      $.ajax({
+        type: "POST",
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+        url: "/user/email_sent/",  // 이메일 보내기 요청을 처리하는 URL
+        data: {
+          complete_verification: true  // send_email 파라미터를 설정하여 서버에서 이메일 보내기 동작을 수행
+        },
+        error: function(xhr, status, error) {
+          // 오류 응답을 받은 경우
+          console.error(error);  // 오류 메세지 출력
+          
+          popupAlert.style.display = 'block';
+        }
+      });
+    }
+
+    function sendEmail() {
+      // AJAX 요청 보내기
+      $.ajax({
+        type: "POST",
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+        url: "/user/email_sent/",  // 이메일 보내기 요청을 처리하는 URL
+        data: {
+          send_email: true  // send_email 파라미터를 설정하여 서버에서 이메일 보내기 동작을 수행
+        },
+        success: function(response) {
+          // 성공적인 응답을 받은 경우
+          console.log(response.message);  // 응답 메세지 출력
+          // 추가로 처리할 작업 수행
+          sendEmailButton.style.backgroundColor = '#fff';
+          sendEmailButton.style.color = '#71a1ff';
+          sendEmailButton.style.border = '2px solid #71a1ff';
+
+          completeVerificationButton.style.cursor = 'pointer';
+          completeVerificationButton.style.backgroundColor = '#71a1ff';
+          completeVerificationButton.classList.add('active');
+
+          completeVerificationButton.addEventListener("click", completeVerify);
+        },
+        error: function(xhr, status, error) {
+          // 오류 응답을 받은 경우
+          console.error(error);  // 오류 메세지 출력
+        }
+      });
+    }
+
+    sendEmailButton.addEventListener("click", sendEmail);
+    closeButton.addEventListener("click", ()=> {
+      popupAlert.style.display = 'none';
+    });
+
+      
+  </script>
 {% endblock %}

@@ -17,7 +17,6 @@
       </div>
       <p class="wel-message">이제 릴렌즈와<br>스트레스 해소법을 찾아보아요!</p>
       <a href="{% url 'user:content' %}" class="user-button" id="profile_setting">프로필 설정하기</a>
-      <a href="{% url 'user:signout' %}" class="user-button" id="log_out">로그아웃하기</a>
     </div>
   {% else %}
     <div id="profile-set">
@@ -257,7 +256,7 @@
 
     //score graph
     //var userScore = {{ user.score }};
-    var userScore = 1200;
+    var userScore = 999;
     var goalScore;
     var userLevel = "1";
 

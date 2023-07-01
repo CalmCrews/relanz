@@ -136,53 +136,88 @@ def calculate_avg_result(user, users):
 # @email_verified_required
 @login_required(login_url='/user/signin')
 def tagsurvey(request):
+    user=request.user
     if request.method=="GET":
-        return render(request, 'tag/tagsurvey.html')
-    if request.method=="POST":
-        user=request.user
-        if user.nickname is None:
-            return redirect('user:content')
         try:
             tags = UserTag.objects.get(user=user)
         except UserTag.DoesNotExist:
             tags = UserTag.objects.create(user=user)
-            return redirect('user:activetime')
+        return render(request, 'tag/tagsurvey.html', {'tags':tags})
+    if request.method=="POST":
+        if user.nickname is None:
+            return redirect('user:content')
+        tags = UserTag.objects.get(user=user)
         morning = request.POST.get('morning')
         afternoon = request.POST.get('afternoon')
         evening = request.POST.get('evening')
         inside = request.POST.get('inside')
         outside = request.POST.get('outside')
         solo = request.POST.get('solo')
-        group = request.POST.get('Group')
+        group = request.POST.get('group')
         static = request.POST.get('static')
         dynamic = request.POST.get('dynamic')
+        anytime = request.POST.get('anytime')
         tag_cnt = 0
-        tag_lists = [morning, afternoon, evening, inside, outside, solo, group, static, dynamic]
+        tag_lists = [morning, afternoon, evening, inside, outside, solo, group, static, dynamic, anytime]
         for tag_list in tag_lists:
             if tag_list is not None:
                 tag_cnt += 1
         if tag_cnt > 0:
-            if morning is not None:
+            if morning == 'morning':
                 tags.morning = True
-            if afternoon is not None:
+            else:
+                tags.morning =False
+
+            if afternoon == 'afternoon':
                 tags.afternoon = True
-            if evening is not None:
+            else:
+                tags.afternoon =False
+
+            if evening == 'evening':
                 tags.evening = True
-            if inside is not None:
+            else:
+                tags.evening =False
+
+            if inside == 'inside':
                 tags.inside = True
-            if outside is not None:
+            else:
+                tags.inside =False
+
+            if outside == 'outside':
                 tags.outside = True
-            if solo is not None:
+            else:
+                tags.outside =False
+
+            if solo == 'solo':
                 tags.solo = True
-            if group is not None:
+            else:
+                tags.solo =False
+
+            if group == 'group':
                 tags.group = True
-            if static is not None:
+            else:
+                tags.group =False
+
+            if static == 'static':
                 tags.static = True
-            if dynamic is not None:
+            else:
+                tags.static =False
+
+            if dynamic == 'dynamic':
                 tags.dynamic = True
+            else:
+                tags.dynamic =False
+
+            if anytime == 'anytime':
+                tags.morning = True
+                tags.afternoon = True
+                tags.evening = True
             tags.save()
-            return redirect('user:avatar')
+            if user.avatar is None:
+                return redirect('user:avatar')
+            else:
+                return redirect('user:userinfo', user.id)
         else:
             messages.add_message(request, messages.ERROR, '')
             return render(request, 'tag/tagsurvey.html')
-    return render(request, 'main/home.html')
+    return render(request, 'main/home.html', {user:user})

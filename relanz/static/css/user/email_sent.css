@@ -1,0 +1,122 @@
+#email_validation {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 11.3em);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#email_validation .signin-complete {
+  margin-bottom: 50px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 145.02%;
+  text-align: center;
+  color: #71a1ff;
+}
+
+#email_validation > .welcome-box {
+  position: relative;
+  height: 25vh;
+  width: 80%;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#email_validation > .welcome-box > img {
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (min-height: 1600px) {
+  #email_validation > .welcome-box > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+#email_validation > .info-message {
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 40px;
+}
+
+#email_validation > .user-button {
+  width: 230px;
+  height: 50px;
+  padding: 15px 15px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: -0.05em;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 14px;
+}
+
+#email_validation > #send_email {
+  color: #fff;
+  background-color: #71a1ff;
+  cursor: pointer;
+}
+
+#email_validation > #complete_verification {
+  background-color: #e7e7e7;
+  color: #fff;
+}
+
+#email_validation > #send_email:hover,
+#email_validation > #complete_verification.active:hover {
+  background-color: #3f80fc;
+  color: #fff;
+}
+
+
+form {
+  display: none;
+}
+
+#alert {
+  display: none;
+  position: absolute;
+  top: 30vh;
+  width: 260px;
+  height: 160px;
+  background-color: #fff;
+  border: 2px solid #71a1ff;
+  border-radius: 30px;
+}
+
+#alert > .popup {
+  position: relative;
+}
+
+.popup > .close-button {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  cursor: pointer;
+}
+
+.popup > img {
+  position: absolute;
+  top: 60px;
+  left: calc(50% - 9px);
+}
+
+.popup > span {
+  position: absolute;
+  top: 83px;
+  width: 100%;
+  text-align: center;
+  color: #5f5f5f;
+  font-size: 16px;
+  font-weight: 500;
+}

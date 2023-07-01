@@ -10,10 +10,17 @@
 
 {% block content%}
   <div class="avatar-page-container">
+    {% if not user.avatar%}
     <div class="header-message">
       <div class="span"><span>이제 마지막!</span></div>
       <div class="para"><p>{{ user.nickname }}님을 표현하는 캐릭터를<br>설정하면 끝이에요!</p></div>
     </div>
+    {% else %}
+    <div class="header-message">
+      <div class="span"><span>프로필 수정</span></div>
+      <div class="para"><p>{{ user.nickname }}님을 표현하는 캐릭터를<br>설정해주세요</p></div>
+    </div>
+    {% endif %}
 
     <div class="profile-wrapper">
       <div class="backhair"></div>
@@ -43,7 +50,7 @@
         <div>
           <label for="avatar">&nbsp;&nbsp; 앞머리</label>
           <div class="item-selection avatar-section" id="fronthair">
-            <img src="{% static "character/fronthair/fronthair1.png" %}" alt="앞머리 1" data-id="1" class="selected">
+            <img src="{% static "character/fronthair/fronthair1.png" %}" alt="앞머리 1" data-id="1">
             <img src="{% static "character/fronthair/fronthair2.png" %}" alt="앞머리 2" data-id="2">
             <img src="{% static "character/fronthair/fronthair3.png" %}" alt="앞머리 3" data-id="3">
             <img src="{% static "character/fronthair/fronthair4.png" %}" alt="앞머리 4" data-id="4">
@@ -64,28 +71,28 @@
         <div>
           <label for="avatar">&nbsp;&nbsp; 눈썹</label>
           <div class="item-selection avatar-section" id="brows">
-            <img src="{% static "character/brows/brows1.png" %}" alt="눈썹 1" data-id="1" class="selected">
+            <img src="{% static "character/brows/brows1.png" %}" alt="눈썹 1" data-id="1">
             <img src="{% static "character/brows/brows2.png" %}" alt="눈썹 2" data-id="2">
           </div>
         </div>
         <div>
           <label for="avatar">&nbsp;&nbsp; 눈</label>
           <div class="item-selection avatar-section" id="eyes">
-            <img src="{% static "character/eyes/eyes1.png" %}" alt="눈 1" data-id="1" class="selected">
+            <img src="{% static "character/eyes/eyes1.png" %}" alt="눈 1" data-id="1">
             <img src="{% static "character/eyes/eyes2.png" %}" alt="눈 2" data-id="2">
           </div>
         </div>
         <div>
           <label for="avatar">&nbsp;&nbsp; 코</label>
           <div class="item-selection avatar-section" id="nose">
-            <img src="{% static "character/nose/nose1.png" %}" alt="코 1" data-id="1" class="selected">
+            <img src="{% static "character/nose/nose1.png" %}" alt="코 1" data-id="1">
             <img src="{% static "character/nose/nose2.png" %}" alt="코 2" data-id="2">
           </div>
         </div>
         <div>
           <label for="avatar">&nbsp;&nbsp; 입</label>
           <div class="item-selection avatar-section" id="mouth">
-            <img src="{% static "character/mouth/mouth1.png" %}" alt="입 1" data-id="1" class="selected">
+            <img src="{% static "character/mouth/mouth1.png" %}" alt="입 1" data-id="1">
             <img src="{% static "character/mouth/mouth2.png" %}" alt="입 2" data-id="2">
             <img src="{% static "character/mouth/mouth3.png" %}" alt="입 2" data-id="3">
           </div>
@@ -103,7 +110,7 @@
         <div>
           <label for="avatar">&nbsp;&nbsp; 옷</label>
           <div class="item-selection avatar-section" id="clothes">
-            <img src="{% static "character/clothes/clothes1.png" %}" alt="옷 1" data-id="1" class="selected">
+            <img src="{% static "character/clothes/clothes1.png" %}" alt="옷 1" data-id="1">
             <img src="{% static "character/clothes/clothes2.png" %}" alt="옷 2" data-id="2">
             <img src="{% static "character/clothes/clothes3.png" %}" alt="옷 2" data-id="3">
           </div>
@@ -130,7 +137,7 @@
         </div>
     </fieldset>
     {% comment %} <a href="{% url 'main:home'%}">프로필 설정 완료 !</a> {% endcomment %}
-    <button id="real_bttn"class="avatar" type="submit">다음</button>
+    <button id="real_bttn" class="avatar" type="submit">다음</button>
   </form>
 {% endblock %}
 
@@ -269,8 +276,22 @@
 
   //첫 프로필 화면 로드
   window.addEventListener('DOMContentLoaded', () => {
-    const avatarSections = document.querySelectorAll('.avatar-section');
-    avatarSections.forEach(section => {
+    let combinations = "101111010";
+    let index = 0;
+    if ({{user.avatar}})
+      combinations = "{{user.avatar}}";
+    const avatarItemSelection = document.querySelectorAll('.item-selection');
+    console.log(combinations);
+    combinations.split('').forEach((combination, index) => {
+      const categoryIndex = parseInt(combination) - 1;
+      if (categoryIndex >= 0) {
+        const imagesInCategory = avatarItemSelection[index].querySelectorAll('img');
+        let imageToSelect = imagesInCategory[categoryIndex];
+        imageToSelect.classList.add('selected');
+      }
+    });
+    
+    avatarItemSelection.forEach(section => {
       const selectedImages = section.querySelectorAll('img.selected');
       selectedImages.forEach(image => {
         const divId = image.closest('div').id;
