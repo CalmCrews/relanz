@@ -27,14 +27,14 @@ def survey_result(request):
     user = request.user
     # -------------------- 본인 결과 ----------------------
     if user.survey_result_count >= 1 and user.survey_result_count <= 3:
-        user_survey_result = '취약하지 않음'
+        user_survey_result = '취약하지 않은'
     elif user.survey_result_count >= 4 and user.survey_result_count <= 5:
-        user_survey_result = '취약'
+        user_survey_result = '다소 취약한'
     elif user.survey_result_count >= 6 and user.survey_result_count <= 7:
-        user_survey_result = '매우 취약'
+        user_survey_result = '매우 취약한'
 
     # -------------------- 전체 기준 -------------------------
-    # 순서: '취약하지 않음' - '취약' - '매우 취약'
+    # 순서: '취약하지 않음' - '다소 취약' - '매우 취약'
     all_result_num = [0, 0, 0]
 
     # 전체 유저 데이터 필터링
