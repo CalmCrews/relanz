@@ -68,20 +68,22 @@
           </div>
         </li>
     </ul>
-    {% comment %} {% if challenges %}
+   {% if challenges %}
       <ul class="relange-list">
         {% for challenge in challenges %}
           <li>
             <hr>
-            {{challenge.title}}
-            <img src="{% static challenge.image %}" alt="이미지">
-            <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">상세보기</a>
+            {{challenge.0.title}}
+            <img src="{% static challenge.0.image %}" alt="이미지">
+            {% for tag in challenges.1.1 %}
+              {{ tag }}
+            {% endfor %}
           </li>
         {% endfor %}
       </ul>
     {% else %}
       <span>참여하고 있는 릴렌지가 없습니다</span>
-    {% endif %} {% endcomment %}
+    {% endif %}
   </div>
 </div>
 
