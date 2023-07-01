@@ -3,6 +3,7 @@ from user.models import User, UserTag
 from challenge.models import Challenge, ChallengeTag, Participant
 from django.forms.models import model_to_dict
 from django.db.models import Q
+from user.views.tag_views import survey_result
 
 
 # Create your views here.
@@ -101,22 +102,12 @@ def home(request):
             # 챌린지와 참여자의 수를 튜플로 묶어서 전달
             combined_data = list(zip(sorted_challenges, participant_counts))
 
-            # ------------ survey 결과 가져오기 --------------
-            age_group_start = request.session.get('age_group_start')
-            all_survey_result = request.session.get('all_survey_result')
-            sex_survey_result = request.session.get('sex_survey_result')
-            age_survey_result = request.session.get('age_survey_result')
-            age_sex_survey_result = request.session.get('age_sex_survey_result')
-            user_survey_result = request.session.get('user_survey_result')
-            # -------------------------------------------------
+            # 설문조사 결과 불러옴
+            res_data = survey_result(request)
 
-            res_data = {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data, 
-                        'age_group_start':age_group_start,
-                        'all_survey_result':all_survey_result, 
-                        'sex_survey_result':sex_survey_result,
-                        'age_survey_result':age_survey_result,
-                        'age_sex_survey_result':age_sex_survey_result,
-                        'user_survey_result':user_survey_result}
+            res_data2 = {'user':user, 'tag_lists':tag_lists_, 'combined_data': combined_data}
+            res_data.update(res_data2)
+            
             return render(request, 'main/home.html', res_data)
         except UserTag.DoesNotExist:
             user_tag = UserTag.objects.create(user=user)

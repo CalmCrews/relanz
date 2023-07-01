@@ -192,12 +192,12 @@
                   스트레스 취약성 테스트 문항 {{ user.survey_result_count }}개를 선택하신<br>
                   {{ user.nickname }}님!<br>
                   {{ user.nickname }}님은 스트레스에 {{ user_survey_result }} 편 입니다
-                  <p>전체 {{ all_survey_result }}</p>
-                  <p>성별 {{ sex_survey_result }}</p>
-                  <p>나이 {{ age_survey_result }}</p>
+                  <p>전체 {{ all_percentages }}</p>
+                  <p>성별 {{ sex_percentages }}</p>
+                  <p>나이 {{ age_percentages }}</p>
                   <p>
                     {% if user.sex == 'female'%}
-                    {{ age_group_start }}대 여성이 가진 스트레스 취약성에 비해 평균적인 편이에요
+                    {{ age_group_start }}대 여성이 가진 스트레스 취약성에 비해 {{avg_result}}인 편이에요 
                     {% elif user.sex == 'male'%}
                     {{ age_group_start }}대 남성이 가진 스트레스 취약성에 비해 평균적인 편이에요
                     {% endif %}
