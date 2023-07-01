@@ -276,9 +276,11 @@
 
   //첫 프로필 화면 로드
   window.addEventListener('DOMContentLoaded', () => {
-    let combinations = "101111010";
+    let combinations;
     let index = 0;
-    if ({{user.avatar}})
+    if ("{{user.avatar}}" === "None")
+      combinations = "101111010";
+    else
       combinations = "{{user.avatar}}";
     const avatarItemSelection = document.querySelectorAll('.item-selection');
     console.log(combinations);

@@ -121,6 +121,7 @@ def email_sent(request):
                 return JsonResponse(res_data, status=500)
             
         elif 'complete_verification' in request.POST:
+            user = request.user
             if user.is_email_valid:
                 res_data = {'message': '인증 완료.'}
                 return JsonResponse(res_data)

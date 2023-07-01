@@ -14,9 +14,12 @@ def home(request):
     if user.is_authenticated:
         if not user.is_email_valid:
             return redirect('user:email_sent')
+        elif not user.nickname:
+            return render(request, 'main/home.html', {'user': user})
         participant = Participant.objects.filter(user=user.id)
         try:
             if not participant.exists():
+                user_tag = UserTag.objects.get(user=user.id)
                 basic_tags_ = {
                 '아침': user_tag.morning,
                 '점심': user_tag.afternoon,

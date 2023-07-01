@@ -360,8 +360,8 @@
   display: flex;
   position: absolute;
   top: 130px;
-  left: 155px;
-  width: 210px;
+  left: 145px;
+  width: 230px;
   height: 62px;
   background-color: #fff;
   border: 1px solid #71a1ff;
@@ -371,11 +371,11 @@
 
 .score-section .score-icon {
   position: relative;
-  width: 40px;
+  width: 65px;
   height: 40px;
-  border: 1px solid #71a1ff;
+  border: 2px solid #71a1ff;
   border-radius: 20px;
-  padding: 2px;
+  padding: 5px 0;
   background-color: #9abcff;
   justify-content: center;
   text-align: center;
@@ -383,24 +383,36 @@
 }
 
 .score-icon > img {
-  width: 95%;
-  height: 95%;
+  position: absolute;
+  top: 5px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
 }
 
-.score-icon > span {
-  position: relative;
-  top: -30px;
-  height: 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  color: #71a1ff;
+.score-icon > .rank {
+  position: absolute;
+  top: 11px;
+  left: 10.5px;
+  font-size: 12px;
   font-weight: 600;
-  font-size: 10px;
+  color: #71a1ff;
+}
+
+.score-icon > .level-text {
+  position: absolute;
+  top: 11px;
+  left: 30px;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .score-section > span {
-  margin-left: 15px;
+  position: relative;
+  top: -2px;
+  margin-left: 5px;
   color: #71a1ff;
   font-size: 16px;
   font-weight: 600;
@@ -409,7 +421,7 @@
 .score-section > .score-graph {
   position: absolute;
   top: 25px;
-  left: 35px;
+  left: 55px;
   width: 160px;
   height: 24px;
   padding: 3px 0;
@@ -418,19 +430,20 @@
 
 .score-graph > .goal-score-bar {
   position: relative;;
-  width: 155px;
-  height: 18px;
+  width: 160px;
+  height: 20px;
   background-color: #71a1ff;
   border-radius: 16px;
 }
 
 .score-graph > .current-score-bar {
   position: relative;
-  top: -15px;
-  height: 12px;
+  top: -17.2px;
+  height: 14.5px;
   background-color: #9abcff;
   border-radius: 16px;
   border: 1px solid #fff;
+  padding: 1px;
   transition: width 1s ease-in-out;
 }
 
