@@ -1,7 +1,7 @@
 [
 {
     "model": "challenge.challenge",
-    "pk": 3,
+    "pk": 1,
     "fields": {
         "title": "지친 하루 끝, 반신욕으로 물에 몸을 맡겨봐요",
         "sub_effect": "반신욕이 가져다주는 스트레스 해소 효과",
@@ -12,7 +12,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 4,
+    "pk": 2,
     "fields": {
         "title": "스님과 함께 스트레스 해소를! 템플스테이를 즐겨요",
         "sub_effect": "템플스테이가 가져다주는 스트레스 해소 효과",
@@ -23,7 +23,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 5,
+    "pk": 3,
     "fields": {
         "title": "뽀짝뽀짝 내 손으로 만드는 십자수",
         "sub_effect": "십자수가 가져다주는 스트레스 해소 효과",
@@ -34,7 +34,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 6,
+    "pk": 4,
     "fields": {
         "title": "조각조각 퍼즐 맞추기",
         "sub_effect": "퍼즐 맞추기가 가져다주는 스트레스 해소 효과",
@@ -45,7 +45,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 7,
+    "pk": 5,
     "fields": {
         "title": "내가 좋아하는 구절 필사하기",
         "sub_effect": "필사하기가 가져다주는 스트레스 해소 효과",
@@ -56,7 +56,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 8,
+    "pk": 6,
     "fields": {
         "title": "래프팅을 타고 사람들과 신나게!",
         "sub_effect": "래프팅이 가져다주는 스트레스 해소 효과",
@@ -67,7 +67,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 9,
+    "pk": 7,
     "fields": {
         "title": "카약과 함께 카약카약한 자유 느껴보기!",
         "sub_effect": "카약이 가져다주는 스트레스 해소 효과",
@@ -78,7 +78,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 10,
+    "pk": 8,
     "fields": {
         "title": "자전거 타고싶구나, bmx는 어때?",
         "sub_effect": "BMX가 가져다주는 스트레스 해소 효과",
@@ -89,7 +89,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 11,
+    "pk": 9,
     "fields": {
         "title": "좋은 향이 솔솔, 진정한 힐링은 인센스 테라피로!",
         "sub_effect": "인세스 테라피가 가져다주는 스트레스 해소 효과",
@@ -100,7 +100,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 12,
+    "pk": 10,
     "fields": {
         "title": "들어는 봤니? 카이트 서핑에 도전!",
         "sub_effect": "카이트 서핑이 가져다주는 스트레스 해소 효과",
@@ -111,7 +111,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 13,
+    "pk": 11,
     "fields": {
         "title": "한 번 해볼까, 쉘 위 파쿠르?",
         "sub_effect": "파쿠르가 가져다주는 스트레스 해소 효과",
@@ -122,7 +122,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 14,
+    "pk": 12,
     "fields": {
         "title": "망설이지 말고 지금 바로 사운드 테라피",
         "sub_effect": "사운드 테라피가 가져다주는 스트레스 해소 효과",
@@ -133,7 +133,7 @@
 },
 {
     "model": "challenge.challenge",
-    "pk": 15,
+    "pk": 13,
     "fields": {
         "title": "자꾸자꾸 손이가는 다꾸, 다이어리 꾸미기",
         "sub_effect": "다이어리 꾸미기가 가져다주는 스트레스 해소 효과",
