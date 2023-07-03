@@ -8,7 +8,7 @@
 {% endblocktranslate %}
 
 {% block reset_link %}
-{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+{{ protocol }}://{{ domain }}{% url 'user:password_reset_confirm' uidb64=uid token=token %}
 {% endblock %}
 
 {% blocktranslate %}
