@@ -11,6 +11,8 @@ from datetime import datetime
 # Create your views here.
 def home(request):
     user=request.user
+    referer = request.META.get('HTTP_REFERER')
+    print(referer)
     if user.is_authenticated:
         if not user.is_email_valid:
             return redirect('user:email_sent')

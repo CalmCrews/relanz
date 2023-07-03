@@ -6,6 +6,11 @@ from user.models import User
 from challenge.models import Challenge
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.db.models import Q
+from django.http import JsonResponse
+from django.contrib import messages
+
+import re
 
 # Create your views here.
 
@@ -60,8 +65,9 @@ def detail(request, challenge_id, article_id):
     article = get_object_or_404(Article, pk=article_id)
     like_count = len(Like.objects.filter(article=article))
     author_nickname = article.author.user.nickname
+    isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
 
-    res_data = {'challenge':challenge, 'article':article, 'like_count':like_count, 'author_nickname':author_nickname}
+    res_data = {'challenge':challenge, 'article':article, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist}
     return render(request, 'community/detail.html', res_data)
 
 @login_required(login_url='/user/signin')
@@ -93,16 +99,65 @@ def delete(request, challenge_id, article_id):
 def like(request, article_id):   
     article = get_object_or_404(Article, pk=article_id)
 
-    # 이미 좋아요 누른 경우 detail로 이동, 본인 글에 좋아요 누르기 가능
-    if Like.objects.filter(likedUser=request.user, article=article).exists():
-        return redirect("community:detail", challenge_id=article.challenge.id, article_id=article.id)
+    referer = request.META.get('HTTP_REFERER')
     
+
+    # 이미 좋아요 누른 경우 detail로 이동, 본인 글에 좋아요 누르기 가능
+    isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
+    if isExist:
+        try:
+            get_object_or_404(Like, Q(article=article_id) & Q(likedUser=request.user.id)).delete()
+        except:
+            like_count = len(Like.objects.filter(article=article))
+            likeCount = {
+                    'likeCount': like_count,
+                    "isClicked": isExist
+            }
+            messages.add_message(request, messages.ERROR, '다시 시도해주세요')
+            return JsonResponse(likeCount, status=400)
+
+        like_count = len(Like.objects.filter(article=article))
+        likeCount = {
+            'likeCount': like_count,
+            "isClicked": isExist
+        }
+        # detail 페이지에서 좋아요를 시도할 때
+        if referer:
+            pattern = r'community/\d+/\d+'
+            match = re.search(pattern, referer)
+            if match:
+                return JsonResponse(likeCount, status=200)
+            
+        return redirect("community:detail", challenge_id=article.challenge.id, article_id=article.id)
+
     # 좋아요 아직 안 누른 경우 Like 객체 만들기
-    like = Like()
-    like.article = get_object_or_404(Article, pk=article_id)
-    like.likedUser = request.user
-    like.save()
-    return redirect('community:detail', challenge_id=article.challenge.id, article_id=article.id)
+    else:
+        try:
+            like = Like()
+            like.article = get_object_or_404(Article, pk=article_id)
+            like.likedUser = request.user
+            like.save()
+        except:
+            messages.add_message(request, messages.ERROR, '다시 시도해주세요')
+            like_count = len(Like.objects.filter(article=article))
+            likeCount = {
+                    'likeCount': like_count,
+                    "isClicked": isExist
+            }
+            return JsonResponse(likeCount, status=400)
+
+        like_count = len(Like.objects.filter(article=article))
+        likeCount = {
+                'likeCount': like_count,
+                "isClicked": isExist
+        }
+
+        if referer:
+            pattern = r'community/\d+/\d+'
+            match = re.search(pattern, referer)
+            if match:
+                return JsonResponse(likeCount, status=200)
+        return redirect('community:detail', challenge_id=article.challenge.id, article_id=article.id)
 
 
 # # a 참가자의 글들을 a 유저에 저장
