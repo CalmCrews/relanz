@@ -103,7 +103,7 @@ def tagsurvey(request):
             if user.avatar is None:
                 return redirect('user:avatar')
             else:
-                return redirect('user:userinfo', user.id)
+                return redirect('user:userinfo')
         else:
             messages.add_message(request, messages.ERROR, '')
             return render(request, 'tag/tagsurvey.html')
