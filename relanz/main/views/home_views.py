@@ -261,7 +261,7 @@ def home(request):
             for tag_name, tag_value in basic_tags.items():
                 if tag_value is True:
                     tag_lists.append(tag_name)
-            # print(tag_lists)
+
             challenge_query = Q()
             for tag_list in tag_lists:
                 challenge_query |= Q(**{tag_list: True})
@@ -279,6 +279,7 @@ def home(request):
 def survey_result(request):
     user = request.user
     user_survey_result = ''
+
     # -------------------- 본인 결과 ----------------------
     if user.survey_result_count >= 1 and user.survey_result_count <= 3:
         user_survey_result = '취약하지 않은'
@@ -292,7 +293,9 @@ def survey_result(request):
     all_result_num = [0, 0, 0]
 
     # 전체 유저 데이터 필터링
-    all_users = User.objects.all()
+    all_users = User.objects.filter(
+        ~Q(survey_result_count=0)
+    )
 
     all_result_num = calculate_result_num(all_users, all_result_num)
 
@@ -302,7 +305,8 @@ def survey_result(request):
 
     # 유저와 같은 성별인 데이터 필터링
     sex_group_users = User.objects.filter(
-        Q(sex=user_sex)
+        Q(sex=user_sex),
+        ~Q(survey_result_count=0)
     )
 
     sex_result_num = calculate_result_num(sex_group_users, sex_result_num)
@@ -318,7 +322,8 @@ def survey_result(request):
     # 유저와 같은 나이대인 데이터 필터링
     age_group_users = User.objects.filter(
         Q(birth__gt=datetime.now().year - age_group_end, 
-            birth__lt=datetime.now().year - age_group_start)
+            birth__lt=datetime.now().year - age_group_start),
+        ~Q(survey_result_count=0)
     )
 
     age_result_num = calculate_result_num(age_group_users, age_result_num)
@@ -330,7 +335,8 @@ def survey_result(request):
     age_sex_group_users = User.objects.filter(
         Q(sex=user_sex, 
             birth__gt=datetime.now().year - age_group_end, 
-            birth__lt=datetime.now().year - age_group_start)
+            birth__lt=datetime.now().year - age_group_start),
+        ~Q(survey_result_count=0)
     )
 
     age_sex_result_num = calculate_result_num(age_sex_group_users, age_sex_result_num)
