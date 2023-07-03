@@ -57,7 +57,12 @@ def home(request):
                 for tag_list in tag_lists:
                     challenge_query |= Q(**{tag_list: True})
                 challenges = ChallengeTag.objects.filter(challenge_query)
-                return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'challengs':challenges})
+
+                res_data = survey_result(request)
+                res_data2 = {'user':user, 'tag_lists':tag_lists_, 'challengs':challenges}
+                res_data.update(res_data2)
+
+                return render(request, 'main/home.html', res_data)
             else:
                 user_tag = UserTag.objects.get(user=user.id)
                 basic_tags_ = {
