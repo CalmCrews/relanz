@@ -1,9 +1,9 @@
 [
 {
     "model": "challenge.challengetag",
-    "pk": 3,
+    "pk": 1,
     "fields": {
-        "challenge": 3,
+        "challenge": 1,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -57,9 +57,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 4,
+    "pk": 2,
     "fields": {
-        "challenge": 4,
+        "challenge": 2,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -113,9 +113,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 5,
+    "pk": 3,
     "fields": {
-        "challenge": 5,
+        "challenge": 3,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -169,9 +169,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 6,
+    "pk": 4,
     "fields": {
-        "challenge": 6,
+        "challenge": 4,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -225,9 +225,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 7,
+    "pk": 5,
     "fields": {
-        "challenge": 7,
+        "challenge": 5,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -281,9 +281,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 8,
+    "pk": 6,
     "fields": {
-        "challenge": 8,
+        "challenge": 6,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -337,9 +337,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 9,
+    "pk": 7,
     "fields": {
-        "challenge": 9,
+        "challenge": 7,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -393,9 +393,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 10,
+    "pk": 8,
     "fields": {
-        "challenge": 10,
+        "challenge": 8,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -449,9 +449,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 11,
+    "pk": 9,
     "fields": {
-        "challenge": 11,
+        "challenge": 9,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -505,9 +505,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 12,
+    "pk": 10,
     "fields": {
-        "challenge": 14,
+        "challenge": 12,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -561,9 +561,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 13,
+    "pk": 11,
     "fields": {
-        "challenge": 12,
+        "challenge": 10,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -617,9 +617,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 14,
+    "pk": 12,
     "fields": {
-        "challenge": 13,
+        "challenge": 11,
         "morning": false,
         "afternoon": false,
         "evening": false,
@@ -673,9 +673,9 @@
 },
 {
     "model": "challenge.challengetag",
-    "pk": 15,
+    "pk": 13,
     "fields": {
-        "challenge": 15,
+        "challenge": 13,
         "morning": false,
         "afternoon": false,
         "evening": false,

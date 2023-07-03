@@ -7,6 +7,8 @@ from django.db.models import Q
 import random
 from collections import Counter
 from datetime import datetime
+from django.db.models import Sum, Count
+
 
 # Create your views here.
 def home(request):
@@ -60,6 +62,7 @@ def home(request):
                 for tag_list in tag_lists:
                     challenge_query |= Q(**{tag_list: True})
                 challenges_tags = ChallengeTag.objects.filter(challenge_query)
+
                 
                 res_data = survey_result(request)
                 res_data2 = {'user':user, 'tag_lists':tag_lists_, 'challenges':challenges_tags}
@@ -67,6 +70,7 @@ def home(request):
 
                 return render(request, 'main/home.html', res_data)
             
+
             else:
                 user_tag = UserTag.objects.get(user=user.id)
                 basic_tags_ = {
@@ -127,34 +131,34 @@ def home(request):
                 challenge_query = basic_tag_query|challenge_tag_query
                 
                 challenge_tags = ChallengeTag.objects.filter(challenge_query).order_by(f'-{sorted_user_keys[0]}', f'-{sorted_user_keys[1]}', f'-{sorted_user_keys[2]}', f'-{sorted_user_keys[3]}')
-                challenge_ids  = challenge_tags.values_list('challenge', flat=True)
-                challenges = Challenge.objects.filter(id__in=challenge_ids)
-                challenge_order = {challenge_id: order for order, challenge_id in enumerate(challenge_ids)}
-                sorted_challenges = sorted(challenges, key=lambda c: challenge_order.get(c.id, float('inf')))
                 # 이미 참여한 챌린지는 추천에서 제외
                 minus_challenge = []
                 # 정렬된 챌린지의 아이디를 뽑아서, requset.user와 challenge.id를 통해 파싱
-                for sorted_challenge in sorted_challenges:
-                    already_participant=Participant.objects.filter(challenge=sorted_challenge.id, user=user.id)
+                for challenge_tag in challenge_tags:
+                    already_participant=Participant.objects.filter(challenge=challenge_tag.challenge, user=user.id)
                     # 빈쿼리셋이 반환된 게 아니라면, 이미 참여하고 있는 챌린지 (TRUE)
                     if already_participant.exists():  
-                        minus_challenge.append(sorted_challenge)
+                        minus_challenge.append(challenge_tag)
                 # x가 sorted_challenge의 element면서 참여하고 있는 챌린지가 아닐 때
-                sorted_challenges = [x for x in sorted_challenges if x not in minus_challenge]
+                challenge_tags = [x for x in challenge_tags if x not in minus_challenge]
 
+                participants=[]
+                for challenge_tag in challenge_tags:
                 # 참여자 모델 관련 처리(참여자 쿼리 가져오기, 쿼리 순서 정렬, 정렬된 순서를 바탕으로 쿼리셋 생성)
-                participants = Participant.objects.filter(challenge_id__in=sorted_challenges)
-                participants_order = {challenge_id: order for order, challenge_id in enumerate(challenge_ids)}
-                sorted_participants = sorted(participants, key=lambda p: participants_order.get(p.challenge_id, float('inf')))
-                # 챌린지 아이디 순서를 기준으로 참여자 tuple 순서를 반환
-                participant_ids = [p.challenge_id for p in sorted_participants]
-                # 반환 튜플의 순서 리스트에서 각 리스트에서 중복되는 값을 제외 
-                unique_numbers = list(dict.fromkeys(participant_ids))
-                # 중복되는 값을 제외한 튜플에서 count를 통해 각 챌린지 당 참여자의 수를 반환
-                participant_counts = [participants.filter(challenge_id=unique_number).count() for unique_number in unique_numbers]
-
-                # 챌린지와 참여자의 수를 튜플로 묶어서 전달
-                combined_data = list(zip(sorted_challenges, participant_counts))
+                    participants.append(Participant.objects.filter(challenge_id=challenge_tag.challenge.id))
+                
+                sorted_participants = []
+                for participant in participants:
+                    if participant:
+                        sorted_participants.append(participant.values('challenge_id').annotate(count=Count('user_id')).order_by('-count').distinct())
+                    else:
+                        sorted_participants.append(int(0))
+                i = 0
+                for sorted_participant in sorted_participants:
+                    if sorted_participant != 0:
+                        sorted_participants[i] = sorted_participant[0]['count']
+                    i+=1
+                combined_data = list(zip(challenge_tags, sorted_participants))
 
                 # report 분석 알고리즘
                 participant_report = {
@@ -202,16 +206,15 @@ def home(request):
                     most_like_challenge = Challenge.objects.get(id=most_common_challenge)
 
                 # 이전에 뽑은 추천할 챌린지 중에 랜덤으로 3개를 픽(중복 제거)
-                analysis_titles = []
-                while len(analysis_titles) < 3:
-                    analysis_title = random.choice(sorted_challenges)
-                    if analysis_title.title not in analysis_titles:
-                        analysis_titles.append(analysis_title.title)
-
+                analysis_challenges = []
+                while len(analysis_challenges) < 3:
+                    analysis_challenge_tags = random.choice(challenge_tags)
+                    if analysis_challenge_tags not in analysis_challenges:
+                        analysis_challenges.append(analysis_challenge.challenge)
                 analysis_data = {
                     'analysis_user_tag':analysis_user_tag,
                     'most_like_challenge': most_like_challenge,
-                    'analysis_titles':analysis_titles
+                    'analysis_titles':analysis_challenges
                 }
 
                 res_data = survey_result(request)
