@@ -152,7 +152,7 @@ def activate(request, uidb64, token):
     
 
 # 하단바 더보기 페이지
-def moreInfo(request, user_id):
+def moreInfo(request):
     user=request.user
     return render(request, 'user/moreInfo.html', {"user":user})
 
