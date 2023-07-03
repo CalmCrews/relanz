@@ -12,7 +12,7 @@ from datetime import datetime
 def home(request):
     user=request.user
     referer = request.META.get('HTTP_REFERER')
-    print(referer)
+
     if user.is_authenticated:
         if not user.is_email_valid:
             return redirect('user:email_sent')
@@ -55,15 +55,18 @@ def home(request):
                 for tag_name, tag_value in basic_tags.items():
                     if tag_value is True:
                         tag_lists.append(tag_name)
-                # print(tag_lists)
+
                 challenge_query = Q()
                 for tag_list in tag_lists:
                     challenge_query |= Q(**{tag_list: True})
                 challenges_tags = ChallengeTag.objects.filter(challenge_query)
+                
                 res_data = survey_result(request)
                 res_data2 = {'user':user, 'tag_lists':tag_lists_, 'challenges':challenges_tags}
                 res_data.update(res_data2)
+
                 return render(request, 'main/home.html', res_data)
+            
             else:
                 user_tag = UserTag.objects.get(user=user.id)
                 basic_tags_ = {
@@ -168,7 +171,6 @@ def home(request):
                 'dynamic': 0,
                 }
                 
-
                 # user_id를 통해 참여자 모델 가져오기
                 user_participants = Participant.objects.filter(user=user.id)
                 for user_participant in user_participants:
@@ -219,8 +221,9 @@ def home(request):
                             'analysis_data':analysis_data
                             }
                 res_data.update(res_data2)
-                # print(res_data)
+
                 return render(request, 'main/home.html', res_data)
+            
         except UserTag.DoesNotExist:
             res_data = survey_result(request)
             return redirect('user:survey')
@@ -269,10 +272,8 @@ def home(request):
             res_data.update(res_data2)
 
             return render(request, 'main/home.html', res_data)
-        
-            
+           
     return render(request, 'main/splashscreen.html')
-
 
 
 def survey_result(request):
