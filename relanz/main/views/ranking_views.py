@@ -6,7 +6,7 @@ from django.db.models import Sum, Count
 from datetime import datetime
 
 
-def ranking(request, user_id):
+def ranking(request):
     user=request.user
     if user.nickname is None or user.birth is None or user.sex is None:
         return redirect('user:content')
@@ -113,7 +113,7 @@ def ranking(request, user_id):
                     all_challenge_ranking.append(user_challenge_ranking[0])
         combined_data = list(zip(ranked_my_challenges, rank, all_challenge_ranking, challenge_participants))
         print(combined_data)
-        return render(request, 'main/ranking.html', {'combined_data':combined_data, 'challenge_ranking':challenge_rankings, 'res_ranking':res_ranking, 'age_challenge_ranking':age_challenge_ranking})
+        return render(request, 'main/ranking.html', {'combined_data':combined_data, 'challenge_ranking':challenge_ranking, 'res_ranking':res_ranking, 'age_challenge_ranking':age_challenge_ranking})
     else:
         return render(request, 'main/ranking.html', {'challenge_ranking':challenge_ranking, 'res_ranking':res_ranking, 'age_challenge_ranking':age_challenge_ranking})
     
