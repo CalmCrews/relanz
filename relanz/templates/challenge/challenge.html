@@ -9,11 +9,9 @@
 {% block mobile_content%}
   <div class="scroll container-mobile">
     <div class="main-img-div">
-        {% if not challenge.image %}
-            <img src="{% static "challenge.image" %}" alt="이미지">
+        {% if challenge.image %}
+            <img src="{% static challenge.image %}" alt="이미지">
         {% else %}
-            <img src="{% static "images/challenge/jerry.gif" %}" alt=".">
-        {% endif %}
     </div>
     <div class="main-container-div scroll">
         <div class="nav-div-absolute">
