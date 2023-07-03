@@ -151,8 +151,12 @@ def like(request, article_id):
                 'likeCount': like_count,
                 "isClicked": isExist
         }
-        if match:
-            return JsonResponse(likeCount, status=200)
+
+        if referer:
+            pattern = r'community/\d+/\d+'
+            match = re.search(pattern, referer)
+            if match:
+                return JsonResponse(likeCount, status=200)
         return redirect('community:detail', challenge_id=article.challenge.id, article_id=article.id)
 
 
