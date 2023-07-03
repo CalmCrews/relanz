@@ -6,7 +6,7 @@ from django.db.models import Sum, Count
 from datetime import datetime
 
 
-def ranking(request, user_id):
+def ranking(request):
     user=request.user
     if user.nickname is None or user.birth is None or user.sex is None:
         return redirect('user:content')
