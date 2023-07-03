@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from ..models import User
 from django.core.mail import send_mail
 import os
-    
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.utils.translation import gettext as _
+
 def findid(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -28,3 +31,16 @@ def findid(request):
 
     return render(request, 'user/findid.html')
 
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'user/custom_password_reset.html'
+    email_template_name = 'user/custom_password_reset_email.html'
+    subject_template_name = 'user/custom_password_reset_subject.txt'
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = "user/custom_password_reset_done.html"
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "user/custom_password_reset_confirm.html"
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = "user/custom_password_reset_complete.html"

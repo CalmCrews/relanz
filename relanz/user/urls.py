@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from django.contrib.auth import views as auth_views
+from .views import CustomPasswordResetView, CustomPasswordResetDoneView, CustomPasswordResetConfirmView, CustomPasswordResetCompleteView
 
 app_name = 'user'
 
@@ -20,10 +20,10 @@ urlpatterns = [
     path('avatar/', views.avatar, name="avatar"), # 프로필 이미지
     path('findid/', views.findid, name="findid"), # 아이디 찾기
 
-    path('password_reset/', auth_views.PasswordResetView.as_view(), name="password_reset"),
-    path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
-    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
-    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
+    path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', CustomPasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/', CustomPasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path('password_reset_complete/', CustomPasswordResetCompleteView.as_view(), name="password_reset_complete"),
 
     path('email_sent/', views.email_sent, name="email_sent"), # 이메일 전송
     path('activate/<str:uidb64>/<str:token>/', views.activate, name="activate"), # 이메일 인증 활성화
