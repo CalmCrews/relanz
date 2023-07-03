@@ -13,6 +13,8 @@ from django.db.models import Sum, Count
 # Create your views here.
 def home(request):
     user=request.user
+    referer = request.META.get('HTTP_REFERER')
+    print(referer)
     if user.is_authenticated:
         if not user.is_email_valid:
             return redirect('user:email_sent')
@@ -55,13 +57,18 @@ def home(request):
                 for tag_name, tag_value in basic_tags.items():
                     if tag_value is True:
                         tag_lists.append(tag_name)
+                        
                 challenge_query = Q()
                 for tag_list in tag_lists:
                     challenge_query |= Q(**{tag_list: True})
                 challenges_tags = ChallengeTag.objects.filter(challenge_query)
-        
 
-                return render(request, 'main/home.html', {'user':user, 'tag_lists':tag_lists_, 'challenges':challenges_tags})
+                res_data = survey_result(request)
+                res_data2 = {'user':user, 'tag_lists':tag_lists_, 'challenges':challenges_tags}
+                res_data.update(res_data2)
+                
+                return render(request, 'main/home.html', res_data)
+
             else:
                 user_tag = UserTag.objects.get(user=user.id)
                 basic_tags_ = {
@@ -254,6 +261,7 @@ def home(request):
             for tag_name, tag_value in basic_tags.items():
                 if tag_value is True:
                     tag_lists.append(tag_name)
+            # print(tag_lists)
             challenge_query = Q()
             for tag_list in tag_lists:
                 challenge_query |= Q(**{tag_list: True})

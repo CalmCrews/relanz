@@ -1,4 +1,166 @@
-{% block title %}
+{% extends 'mobileBase.html' %}
+{% load static %}
+{% block mobile_title %}
+communityHome
+{% endblock mobile_title %}
+{% block mobile_extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/detail.css"%}">
+{% endblock mobile_extrahead %}
+{% block mobile_content%}
+    <div class="container-mobile">
+        <div class="main-img-div">
+            {% if article.image %}
+                <img src="{{article.image.url}}" alt="이미지">
+            {% else %}
+                <img src="{% static "images/leein_example.jpeg" %}" alt=".">
+            {% endif %}
+        </div>
+        <div class="main-container-div">
+            <div class="nav-div-absolute">
+                <div class="nav-info">
+                    <a href="http://">릴렌지 안내</a>
+                </div>
+                <div class="nav-board">
+                    {% comment %} 여기에 커뮤게시판으로 가기 url {% endcomment %}
+                    <a href="http://">커뮤니티 게시판</a>
+                </div>
+            </div>
+        </div>
+        <div class="title-container-div">
+            <div class="title-div">
+                <div class="img-div">
+                    <img src="{% static "icons/check_circle_down_lean.png" %}" alt=".">
+                </div>
+                {% if challenge.title %}
+                    <p class="title-p">{{challenge.title}}</p>
+                {% else %}
+                    <p class="title-p">변수명으로 이름 넘겨줘잉~</p>
+                {% endif %}
+            </div>
+            <div class="participant-count-div">
+                <div class="participant-img-div">
+                    <img src="{% static "icons/human_shaped.png" %}" alt=".">
+                </div>
+                {% if participant %}
+                    <small class="participant-count-small">{{participant}} 명이 참여 중인 릴렌지</small>
+                {% else %}
+                <small class="participant-count-small">00 명이 참여 중인 릴렌지</small>
+                {% endif %}
+            </div>
+        </div>
+        <div class="detail-content-background">
+            <div class="main-content-div">
+                <div class="header-div">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="error-msg-div" id="warning_user_div">
+                                {% comment %} <p class="warning-ment">{{message}}</p> {% endcomment %}
+                                <p class="warning-ment">다시 시도해주세요</p>
+                                <button type="button" class="warning-btn" id="warning_btn" onclick="clickCancelBtn(this)">확인</button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="user-info-div">
+                        
+                        <div class="profile-wrapper">
+                            <div class="profile-circle">
+                              <div class="back-hair"></div>
+                              <div class="face"></div>
+                              <div class="front-hair"></div>
+                              <div class="eyebrows"></div>
+                              <div class="eyes"></div>
+                              <div class="nose"></div>
+                              <div class="mouth"></div>
+                              <div class="makeup"></div>
+                              <div class="clothes"></div>
+                              <div class="acc"></div>
+                            </div>
+                          </div>
+
+                        <div class="nickname-created-div">
+                            <div class="user-nickname">{{author_nickname}} 님</div>
+                            <div class="content-created-at">기록 일시: {{article.created_at}}</div>
+                        </div>
+                    </div>
+                    <div class="like-dislike-div">
+                        <span class="like-count" id="like_count">{{like_count}}</span>
+                        <div id="like_count_image_div" data-url="{% url 'community:like' article.id %}" onclick="clickLikeHeartBtn(this)">
+                            <div class="like-img-div">
+                                {% if isExist %}
+                                    <div class="like-heart-img-div", id="like_heart_img_div">
+                                        <img class="like-heart-img" src="{% static "icons/fill_heart.svg" %}" alt=".">
+                                    </div>
+                                    <div class="dislike-heart-img-div hide" id="dislike_heart_img_div">
+                                        <img class="dislike-heart-img" src="{% static "icons/unfill_heart.png" %}" alt=".">
+                                    </div>
+                                {% else %}
+                                    <div class="like-heart-img-div hide", id="like_heart_img_div">
+                                        <img class="like-heart-img" src="{% static "icons/fill_heart.svg" %}" alt=".">
+                                    </div>
+                                    <div class="dislike-heart-img-div" id="dislike_heart_img_div">
+                                        <img class="dislike-heart-img" src="{% static "icons/unfill_heart.png" %}" alt=".">
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-image-div">
+                    <img src="" alt=".">
+                </div>
+            </div>
+        </div>
+        <div class="rest-image-bundle-div" >
+            <ul>
+                {% comment %} {% if  %}
+                    <a href="">
+                        <img src="" alt="">
+                    </a>
+                {% endif %} {% endcomment %}
+            </ul>
+        </div>
+        <div class="just-for-margin-div"></div>
+    </div>
+    <script src={% static "js/detail.js"%}></script>
+    <script>
+        function renderProfileCombination(combinationData) {
+            const backHairElement = document.querySelector(".back-hair");
+            const frontHairElement = document.querySelector(".front-hair");
+            const eyebrowsElement = document.querySelector(".eyebrows");
+            const eyesElement = document.querySelector(".eyes");
+            const noseElement = document.querySelector(".nose");
+            const mouthElement = document.querySelector(".mouth");
+            const cheekElement = document.querySelector(".makeup");
+            const faceElement = document.querySelector(".face");
+            const clothesElement = document.querySelector(".clothes");
+            const accElement = document.querySelector(".acc");
+          
+            // 각 조합 요소의 숫자에 해당하는 이미지 경로 설정
+            frontHairElement.style.backgroundImage = `url("{% static 'character/fronthair/fronthair' %}${combinationData[0]}.png")`;
+            if (combinationData[1] > 0)
+              backHairElement.style.backgroundImage = `url("{% static 'character/backhair/backhair' %}${combinationData[1]}.png")`;
+            eyebrowsElement.style.backgroundImage = `url("{% static 'character/brows/brows' %}${combinationData[2]}.png")`;
+            eyesElement.style.backgroundImage = `url("{% static 'character/eyes/eyes' %}${combinationData[3]}.png")`;
+            noseElement.style.backgroundImage = `url("{% static 'character/nose/nose' %}${combinationData[4]}.png")`;
+            mouthElement.style.backgroundImage = `url("{% static 'character/mouth/mouth' %}${combinationData[5]}.png")`;
+            if (combinationData[6] > 0)
+              cheekElement.style.backgroundImage = `url("{% static 'character/makeup/makeup' %}${combinationData[6]}.png")`;
+            faceElement.style.backgroundImage = `url("{% static 'character/face.png' %}")`;
+            clothesElement.style.backgroundImage = `url("{% static 'character/clothes/clothes' %}${combinationData[7]}.png")`;
+            if (combinationData[8] > 0)
+              accElement.style.backgroundImage = `url("{% static 'character/acc/acc' %}${combinationData[8]}.png")`;
+      
+        
+        }
+        renderProfileCombination("{{user.avatar}}");
+    </script>
+{% endblock %}
+   
+{% block scripts%}
+{% endblock scripts%}
+
+{% comment %} {% block title %}
 <h1>사진 상세보기 페이지</h1>  
 {% endblock title %}
 
@@ -18,4 +180,4 @@
 <a href="{% url 'community:communityHome' challenge.id %}">기록 게시판으로 돌아가기</a>
 <a href="{% url 'community:edit' challenge.id article.id %}">수정하기</a>
 <a href="{% url 'community:delete' challenge.id article.id %}">삭제하기</a>
-{% endblock content %}
+{% endblock content %} {% endcomment %}
