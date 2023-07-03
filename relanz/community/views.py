@@ -100,8 +100,7 @@ def like(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
 
     referer = request.META.get('HTTP_REFERER')
-    pattern = r'community/\d+/\d+'
-    match = re.search(pattern, referer)
+    
 
     # 이미 좋아요 누른 경우 detail로 이동, 본인 글에 좋아요 누르기 가능
     isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
@@ -123,8 +122,11 @@ def like(request, article_id):
             "isClicked": isExist
         }
         # detail 페이지에서 좋아요를 시도할 때
-        if match:
-            return JsonResponse(likeCount, status=200)
+        if referer:
+            pattern = r'community/\d+/\d+'
+            match = re.search(pattern, referer)
+            if match:
+                return JsonResponse(likeCount, status=200)
             
         return redirect("community:detail", challenge_id=article.challenge.id, article_id=article.id)
 
