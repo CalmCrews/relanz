@@ -6,5 +6,5 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.home, name="home"),
-    path('ranking/<int:user_id>/', views.ranking, name="ranking"),
+    path('ranking/', views.ranking, name="ranking"),
 ]

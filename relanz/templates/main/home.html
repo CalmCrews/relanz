@@ -40,8 +40,8 @@
           </div>
           <div class="bubble">
             <div class="triangle"><img src="{%static 'icons/triangleforbubble.png'%}" alt=""></div>
-            <div class="circle"><p>{{ user.nickname }}님에게 도착한 오늘의 한마디 &#128172;<p></div>
-            <div class="hidden-message"><p>오늘도 화이팅!<p></div>
+            <div class="circle"><p>{{ user.nickname }}님에게 도착한 오늘의 한마디&#128172;</p></div>
+            <div class="hidden-message"><p>오늘도 화이팅!</p></div>
           </div>
         </div>
         <div class="name">
@@ -73,35 +73,58 @@
             </div>
             <div class="relenge-section">
               <ul class="tag-list">
-                {% comment %} 임시 {% endcomment %}
                 <li>전체</li>
+                {% comment %} 임시 {% endcomment %}
+                {% comment %} <li>전체</li>
                 <li>야외</li>
                 <li>실내</li>
                 <li>동적인</li>
                 <li>정적인</li>
-                <li>혼자서</li>
-                {% comment %} {% for item in tag_list %}
+                <li>혼자서</li> {% endcomment %}
+                {% for item in tag_lists %}
                   <li>{{item}}</li>
-                {% endfor %} {% endcomment %}
+                {% endfor %}
                 
               </ul>
               <div class="relenge-list-container">
                 <ul class="relenge-list">
                   {% comment %} 임시 {% endcomment %}
+                  {% if challenges %}
+                    {% for challenge in challenges %}
+                      {% if challenge.static %}
+                      <li>
+                        <div class="relenge-card">
+                          <div class="image-section">
+                            <img src="{% static challenge.challenge.image %}" alt="{{ challenge.title }}">
+                          </div>
+                          <div class="info-section">
+                            <div class="sticker">공식 릴렌지 활동</div>
+                            <h2>{{ challenge.challenge.title }}</h2>
+                            <img src="{% static "icons/ppl.png" %}" alt="icon"/>
+                            <span>n명이 참여 중인 릴렌지</span>
+                            <a href="{% url 'challenge:participate' challenge_id=challenge.id %}">참여하기</a>
+                          </div>
+                        </div>
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  {% for challenge, participant in combined_data %}
                   <li>
                     <div class="relenge-card">
                       <div class="image-section">
-                        <img src="" alt="">
+                        <img src="{{ challenge.image }}" alt="{{ challenge.title }}">
                       </div>
                       <div class="info-section">
                         <div class="sticker">공식 릴렌지 활동</div>
-                        <h2>전체</h2>
+                        <h2>"{{ challenge.title }}"</h2>
                         <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                        <span>n명이 참여 중인 릴렌지</span>
-                        <a href="">참여하기</a>
+                        <span>{{ participant }}명이 참여 중인 릴렌지</span>
+                        <a href="{% url 'challenge:participate' challenge_id=challenge.id %}">참여하기</a>
                       </div>
                     </div>
                   </li>
+                  {% endfor %}
                   <li>
                     <div class="relenge-card">
                       <div class="image-section">
@@ -160,8 +183,11 @@
                   </li>
                 </ul>
                 <div class="carousel-dots">
-                  <span class="dot active"></span>
-                  <span class="dot"></span>
+                  {% if challenges %}
+                    {% for challenge in challenges %}
+                      <span class="dot"></span>
+                    {% endfor %}
+                  {% endif %}
                   <span class="dot"></span>
                   <span class="dot"></span>
                   <span class="dot"></span>
@@ -186,13 +212,66 @@
               <div class="report-summary">
                 <div class="summary-block">
                   <span>&#128079;</span>
-                  <p>{{user.nickname}}님이 참여하신 릴렌지를 바탕으로 정리한<br>{{user.nickname}}님만의 건강한 스트레스 해소 활동입니다</p>
+                  <p>{{user.nickname}} 님이 참여하신 릴렌지를 바탕으로 정리한 {{user.nickname}} 님만의 건강한 스트레스 해소 활동입니다</p>
                 </div>
+                
                 <div class="summary-detail-1">
-                  스트레스 취약성 테스트 문항 {{ user.survey_result_count }}개를 선택하신<br>
-                  {{ user.nickname }}님!<br>
-                  {{ user.nickname }}님은 스트레스에 {{ user_survey_result }} 편 입니다
-                  <p>전체 {{ all_percentages }}</p>
+                  <div class="comment-1">
+                    스트레스 취약성 테스트 문항 {{ user.survey_result_count }}개를 선택하신
+                  </div>
+                  <div class="comment-2">
+                    {{ user.nickname }}님!
+                  </div>
+                  <div class="comment-3">
+                    {{ user.nickname }}님은 스트레스에 
+                    <div class="user-result">
+                      {{ user_survey_result }}
+                    </div>
+                    편 입니다
+                  </div>
+                  <div class="result-graph">
+                    <div class="label-container">
+                      <span>전체</span>
+                      {% if user.sex == "female" %}
+                        <span>여성</span>
+                      {% else %}
+                        <span>남성</span>
+                      {% endif %}
+                      <span>{{ age_group_start}}대</span>
+                    </div>
+                    <div class="start-line"></div>
+                    <div class="line-graphs">
+                      <div class="entire line">
+                        <div class="first"></div>
+                        <div class="second"></div>
+                        <div class="third"></div>
+                      </div>
+                      <div class="gender line">
+                        <div class="first"></div>
+                        <div class="second"></div>
+                        <div class="third"></div>
+                      </div>
+                      <div class="age line">
+                        <div class="first"></div>
+                        <div class="second"></div>
+                        <div class="third"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="labels-info">
+                    <div class="very"><div class="square"></div>&nbsp; 매우 취약한</div>
+                    <div class="some"><div class="square"></div>&nbsp; 다소 취약한</div>
+                    <div class="not"><div class="square"></div>&nbsp; 취약하지 않은</div>
+                  </div>
+                  <div class="graph-summary">
+                    {% if user.sex == 'female'%}
+                    {{ age_group_start }}대 여성이 가진 스트레스 취약성에 비해 {{avg_result}}인 편이에요 
+                    {% elif user.sex == 'male'%}
+                    {{ age_group_start }}대 남성이 가진 스트레스 취약성에 비해 {{avg_result}}인 편이에요
+                    {% endif %}
+                  </div>
+
+                  {% comment %} <p>전체 {{ all_percentages }}</p>
                   <p>성별 {{ sex_percentages }}</p>
                   <p>나이 {{ age_percentages }}</p>
                   <p>
@@ -201,7 +280,7 @@
                     {% elif user.sex == 'male'%}
                     {{ age_group_start }}대 남성이 가진 스트레스 취약성에 비해 평균적인 편이에요
                     {% endif %}
-                  </p>
+                  </p> {% endcomment %}
                 </div>
                 <div class="summary-detail-2"></div>
               </div>
@@ -419,7 +498,35 @@
     monthlyOption.addEventListener('click', function() {
       activateOption(monthlyOption);
     });
+
+    console.log({{ combined_data }})
+
+
+    //그래프 작성
+
+    const entireDivs = document.querySelectorAll('.entire > div');
+    const genderDivs = document.querySelectorAll('.gender > div');
+    const ageDivs = document.querySelectorAll('.age > div');
+
+    const entirePercentages = {{all_percentages}};
+    const sexPercentages = {{sex_percentages}}
+    const agePercentages = {{age_percentages}};
+
+    function setElementWidth(elements, percentages) {
+      for (let i = 0; i < 3 ; i++) {
+        elements[i].style.width = (percentages[i] / 100) * 210 + 'px';
+        if (i!=0 && percentages[i] === 0) {
+          elements[i - 1].style.borderRadius = '0 12px 12px 0';
+        }
+      }
+    }
+
+    setElementWidth(entireDivs, entirePercentages);
+    setElementWidth(genderDivs, sexPercentages);
+    setElementWidth(ageDivs, agePercentages);
   </script>
+
+
 
 
 {% endblock %}

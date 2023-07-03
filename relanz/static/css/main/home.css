@@ -1,5 +1,5 @@
 * {
-  margin: 0;
+margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -73,7 +73,6 @@
   color: #ffffff;
   background-color: #71a1ff;
 }
-
 
 /* profile-set(real main-page) */
 
@@ -202,13 +201,13 @@
   z-index: 21;
 }
 
-.bubble .circle {
+.bubble > .circle {
   position: absolute;
   display: flex;
   left: 5.8px;
   bottom: 9.8px;
   width: 256px;
-  height: 52px;
+  height: 56px;
   background-color: #71a1ff;
   border-radius: 33px;
   color: #fff;
@@ -222,11 +221,16 @@
   transition: transform 0.3s;
 }
 
+.bubble .circle > p {
+  padding: 10px;
+  text-align: center;
+}
+
 .bubble .hidden-message {
   position: absolute;
   display: none;
   left: 5.8px;
-  bottom: 9.8px;
+  bottom: 10px;
   width: 256px;
   height: 52px;
   border-radius: 33px;
@@ -353,7 +357,6 @@
 
 .name > span {
   color: #71a1ff;
-
 }
 
 .score-section {
@@ -429,7 +432,7 @@
 }
 
 .score-graph > .goal-score-bar {
-  position: relative;;
+  position: relative;
   width: 160px;
   height: 20px;
   background-color: #71a1ff;
@@ -455,8 +458,6 @@
   font-size: 7px;
 }
 
-
-
 /* 컨텐츠 페이지 */
 #top-page {
   position: sticky;
@@ -465,7 +466,7 @@
   background: #ffffff;
   box-shadow: 0px -21px 24px #9abcff;
   border-radius: 38px 38px 0px 0px;
-  padding-bottom: 88px; 
+  padding-bottom: 88px;
   z-index: 8;
 }
 
@@ -592,7 +593,11 @@
 .relenge-card > .image-section {
   width: 100%;
   height: 65%;
-  background-color: #f2f2f2;
+}
+
+.relenge-card > .image-section > img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .relenge-card > .info-section {
@@ -611,7 +616,7 @@
   color: #9abcff;
   border: 1px solid #9abcff;
   border-radius: 15px;
-  padding: 2px;
+  padding: 3px 0;
   font-size: 8px;
   font-weight: 500;
   background-color: #fff;
@@ -658,7 +663,8 @@
   padding: 6px;
   text-align: center;
   text-decoration: none;
-  box-shadow:  0 2px 3px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .info-section > a {
@@ -717,7 +723,7 @@
 #profile-set #top-page .report-section .report-header .report-title {
   /* 보고서 제목 스타일 */
   width: 180px;
-  height: 50px;
+  height: auto;
   background-size: contain;
   background-repeat: no-repeat;
   color: #494949;
@@ -752,7 +758,7 @@
   transition: color 0.3s;
 }
 
-.weekly-monthly > .option-active{
+.weekly-monthly > .option-active {
   color: #fff;
   cursor: default;
 }
@@ -797,7 +803,7 @@
   /* 요약 블록 스타일 */
   display: flex;
   width: 100%;
-  height: 65px;
+  height: auto;
   margin-top: 10px;
   border-radius: 10px;
   background-color: #e7e7e7;
@@ -815,20 +821,176 @@
   font-size: 14px;
 }
 
-
 .report-summary > .summary-detail-1,
-.report-summary > .summary-detail-2  {
+.report-summary > .summary-detail-2 {
   /* 요약 세부내용 1 스타일 */
   width: 100%;
-  height: 320px;
+  height: 350px;
   margin-top: 38px;
   border: 1px solid #9abcff;
   border-radius: 10px;
-  box-shadow:  0 2px 3px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25);
 }
 #profile-set #top-page .report-section .report-summary .summary-detail-1 {
   /* 요약 세부내용 1 스타일 */
+  position: relative;
+  padding: 20px;
 }
+
+.summary-detail-1 > .comment-1 {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  color: #5f5f5f;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: start;
+}
+
+.summary-detail-1 > .comment-2 {
+  position: absolute;
+  top: 42px;
+  left: 22px;
+  color: #5f5f5f;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: start;
+}
+
+.summary-detail-1 > .comment-3 {
+  position: absolute;
+  display: flex;
+  top: 70px;
+  left: 22px;
+  color: #5f5f5f;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: start;
+}
+
+.comment-3 > .user-result {
+  position: relative;
+  top: -9px;
+  width: 90px;
+  height: 30px;
+  margin: 0 5px;
+  border-radius: 18px;
+  padding: 6px 3px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #9abcff;
+  color: #fff;
+}
+
+.summary-detail-1 > .result-graph {
+  position: absolute;
+  display: flex;
+  top: 100px;
+  left: 40px;
+}
+
+.result-graph > .label-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40px;
+  height: 96px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #7e7e7e;
+  margin-top: 12px;
+}
+
+.result-graph > .start-line {
+  width: 3px;
+  height: 118px;
+  border-radius: 2px;
+  background-color: #71a1ff;
+}
+
+.result-graph > .line-graphs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 210px;
+  height: 96px;
+  margin-top: 12px;
+}
+
+.line-graphs > .line {
+  display: flex;
+  height: 24px;
+}
+
+.line-graphs > .line > div {
+  height: 100%;
+}
+
+.line-graphs > .line > .first {
+  background-color: #4c89ff;
+}
+
+.line-graphs > .line > .second {
+  background-color: #9abcff;
+}
+
+.line-graphs > .line > .third {
+  border-radius: 0 12px 12px 0;
+  background-color: #6888c5;
+}
+
+.summary-detail-1 > .labels-info {
+  position: absolute;
+  top: 235px;
+  left: 40px;
+  display: flex;
+  width: 260px;
+  justify-content: space-between;
+  color: #494949;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.summary-detail-1 > .labels-info > div {
+  display: flex;
+}
+
+.summary-detail-1 > .labels-info > div > div {
+  width: 15px;
+  height: 15px;
+}
+
+.summary-detail-1 > .labels-info > .very > div {
+  background-color: #4c89ff;
+}
+
+.summary-detail-1 > .labels-info > .some > div {
+  background-color: #9abcff;
+}
+
+.summary-detail-1 > .labels-info > .not > div {
+  background-color: #6888c5;
+}
+
+.summary-detail-1 > .graph-summary {
+  position: absolute;
+  top: 270px;
+  left: 40px;
+  width: 260px;
+  height: 60px;
+  border-radius: 15px;
+  padding: 12px 32px;
+  background-color: #d0e0ff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #5f5f5f;
+  line-height: 145%;
+}
+
+
+
 
 #profile-set #top-page .report-section .report-summary .summary-detail-2 {
   /* 요약 세부내용 2 스타일 */

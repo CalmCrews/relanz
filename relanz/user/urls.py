@@ -10,9 +10,9 @@ urlpatterns = [
     path('signout/', views.signout, name="signout"),
     path('user_delete/', views.user_delete, name="user_delete"),
     path('api/identify', views.identify, name="identify"),
-    path('<int:user_id>/', views.userinfo, name="userinfo"), #계정 마이페이지
+    path('userinfo/', views.userinfo, name="userinfo"), #계정 마이페이지
     path('content/', views.content, name="content"), #닉네임, 나이, 성별 받아오기 - 하나의 페이지로 통합
-    path('moreInfo/<int:user_id>', views.moreInfo, name="moreInfo"), # 하단바 더보기 페이지
+    path('moreInfo/', views.moreInfo, name="moreInfo"), # 하단바 더보기 페이지
     # path('<int:user_id>/moreInfo', views.moreInfo, name="moreInfo"), 
     
     path('survey/', views.survey, name="survey"), # 해소 정도 -> 닉네임, 나이, 성별 작성 후 가정 먼저 설문조사하는 페이지 (figma 참고)
