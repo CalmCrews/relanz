@@ -45,8 +45,8 @@ def participate(request, challenge_id):
 	user = request.user
 	if user.nickname is None:
 		return redirect('user:content')
-	# if Participant.objects.filter(user=user.id, challenge=challenge_id):
-	# 	return redirect("challenge:challenge", challenge_id)
+	if Participant.objects.filter(user=user.id, challenge=challenge_id):
+		return redirect("challenge:challenge", challenge_id)
 	
 
 	challenge = Challenge.objects.get(id=challenge_id)
@@ -93,7 +93,6 @@ def participate(request, challenge_id):
 	participant = Participant(user=user, challenge=challenge)
 	participant.save()
 
-	return render(request, 'challenge/participate.html', {
-		"user" : user.nickname,
-	})
+	res_data = {"user": user.nickname, 'challenge':challenge}
+	return render(request, 'challenge/participate.html', res_data)
 
