@@ -334,6 +334,21 @@
     const formattedDate = today.toLocaleDateString('ko-KR', options);
     dateElement.innerText = formattedDate;
 
+    //요일별 오늘의 한마디
+    const dayOfWeek = today.getDay();
+    const weeklyMessages = [
+      "오늘 하루, 맛있는 음식을 먹으며 행복을 누려보아요!", 
+      "늦었다고 생각할 때가 진짜 늦었습니다.",
+      "나의 하루는 내가 만들어가요!", 
+      "사람 관계에서 큰 기대는 금물!", 
+      "어제의 한계를 오늘의 도전으로 바꿔봐요, 지금 당장 릴렌지!", 
+      "도전은 당신을 더 강하게 만들어 줄거에요",
+      "믿는 사람은 무엇이든지 할 수 있어요!"
+    ];
+    const hiddenMessageInnerText = document.querySelector(".hidden-message > p");
+    hiddenMessageInnerText.innerText = weeklyMessages[dayOfWeek];
+    
+
     //score graph
     //var userScore = {{ user.score }};
     var user_score = 19000
