@@ -208,7 +208,7 @@ def home(request):
                 while len(analysis_challenges) < 3:
                     analysis_challenge_tags = random.choice(challenge_tags)
                     if analysis_challenge_tags not in analysis_challenges:
-                        analysis_challenges.append(analysis_challenge.challenge)
+                        analysis_challenges.append(analysis_challenge_tags.challenge)
                 analysis_data = {
                     'analysis_user_tag':analysis_user_tag,
                     'most_like_challenge': most_like_challenge,
@@ -223,10 +223,9 @@ def home(request):
                             }
                 res_data.update(res_data2)
 
-                return render(request, 'main/home.html', res_data)
+                return render(request, 'main/home.html', res_data2)
             
         except UserTag.DoesNotExist:
-            res_data = survey_result(request)
             return redirect('user:survey')
         except (Participant.DoesNotExist, IndexError, ValueError):
             basic_tags_ = {
