@@ -374,11 +374,10 @@
     
 
     //score graph
-    //var userScore = {{ user.score }};
-    var user_score = 19000
-    var userScore = user_score;
-    var goalScore;
-    var userLevel = "1";
+    let user_score = {{ user.score }};
+    let userScore = user_score;
+    let goalScore;
+    let userLevel = "1";
 
     if (userScore <= 1000) {
       goalScore = 1000;
@@ -536,7 +535,6 @@
       activateOption(monthlyOption);
     });
 
-    console.log({{ combined_data }})
 
 
     //그래프 작성
