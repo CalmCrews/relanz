@@ -31,7 +31,7 @@
               <input type="text" placeholder="아이디를 입력해주세요" name="username" id="username" class="username-input" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)" autocomplete="off">
             </div>
             <div class="username-button-div">
-              <input type="button" value="아아디 중복 확인" class="username-button" id="username_button">
+              <input type="button" value="아이디 중복 확인" class="username-button" id="username_button">
               <div class="approve-msg hide" id="approve_msg">
                 <div class="approve-msg-div">
                   <img src="{% static "images/login/okIcon.png" %}" alt="." class="check-icon">
@@ -47,7 +47,6 @@
             </div>
           </div>
 
-          {% comment %} 테스트를 위해 백에서 임시로 추가 {% endcomment %}
           <div>
             <div class="email-div">
               <label for="email" class="email-label">이메일</label>

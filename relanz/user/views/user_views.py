@@ -37,30 +37,43 @@ def signup(request):
             res_data['error']="비밀번호가 일치하지 않습니다."
             return render(request, 'user/signup.html', res_data)
         else:
-            user=User.objects.create_user(
-                username=username,
-                email=email,
-                password=password,
-            )
-            user.save()
+            try: # 이메일 중복 확인
+                User.objects.get(email=email) # 해당 이메일 가진 사용자 존재하는지 체크
+                res_data['error'] = "중복된 이메일입니다! 다른 이메일로 다시 시도해주세요"
+                return render(request, 'user/signup.html', res_data)
+            except User.DoesNotExist:            
+                user=User.objects.create_user(
+                    username=username,
+                    email=email,
+                    password=password,
+                )
+                user.save()
 
-            login(request, user)
+                login(request, user)
 
-            # email_sent(request)
-
-            # return render(request, 'user/email_sent.html', {'user':user})
-            return redirect('user:email_sent')
+                return redirect('user:email_sent')
         
 @csrf_exempt
 def identify(request):
-        json_data=json.loads(request.body)
-        username = json_data.get('id')
-        if User.objects.filter(username=username).exists():
-            message = {'message': '이미 있는 아이디입니다.'}
-            return JsonResponse(message, status=400)
-        message = {'message': '사용가능한 아이디입니다.'}
-        return JsonResponse(message, status=200)
-        # return render(request, 'user/signup.html')
+    json_data=json.loads(request.body)
+    username = json_data.get('id')
+    if User.objects.filter(username=username).exists():
+        message = {'message': '이미 있는 아이디입니다'}
+        return JsonResponse(message, status=400)
+    message = {'message': '사용가능한 아이디입니다'}
+    return JsonResponse(message, status=200)
+    # return render(request, 'user/signup.html')
+
+@csrf_exempt
+def email_identify(request):
+    json_data = json.loads(request.body)
+    email = json_data.get('email')
+
+    if User.objects.filter(email=email).exists():
+        message = {'message': '이미 있는 이메일입니다'}
+        return JsonResponse(message, status=400)
+    message = {'message': '사용가능한 이메일입니다'}
+    return JsonResponse(message, status=200)
 
 def signin(request):
     if request.method == "GET":

@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from config.email_decorator import email_verified_required
 
-# @email_verified_required
 @login_required(login_url='/user/signin')
+@email_verified_required
 def survey(request):
     if request.method=="GET":
         user = request.user
@@ -20,8 +20,8 @@ def survey(request):
         return redirect('user:tagsurvey')
     return render(request, 'main/home.html')
 
-# @email_verified_required
 @login_required(login_url='/user/signin')
+@email_verified_required
 def tagsurvey(request):
     user=request.user
     if request.method=="GET":

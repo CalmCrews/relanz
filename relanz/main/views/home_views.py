@@ -208,7 +208,7 @@ def home(request):
                 while len(analysis_challenges) < 3:
                     analysis_challenge_tags = random.choice(challenge_tags)
                     if analysis_challenge_tags not in analysis_challenges:
-                        analysis_challenges.append(analysis_challenge.challenge)
+                        analysis_challenges.append(analysis_challenge_tags.challenge)
                 analysis_data = {
                     'analysis_user_tag':analysis_user_tag,
                     'most_like_challenge': most_like_challenge,
@@ -223,10 +223,9 @@ def home(request):
                             }
                 res_data.update(res_data2)
 
-                return render(request, 'main/home.html', res_data)
+                return render(request, 'main/home.html', res_data2)
             
         except UserTag.DoesNotExist:
-            res_data = survey_result(request)
             return redirect('user:survey')
         except (Participant.DoesNotExist, IndexError, ValueError):
             basic_tags_ = {
@@ -282,7 +281,7 @@ def survey_result(request):
     user_survey_result = ''
 
     # -------------------- 본인 결과 ----------------------
-    if user.survey_result_count >= 1 and user.survey_result_count <= 3:
+    if user.survey_result_count >= 0 and user.survey_result_count <= 3:
         user_survey_result = '취약하지 않은'
     elif user.survey_result_count >= 4 and user.survey_result_count <= 5:
         user_survey_result = '다소 취약한'
@@ -294,9 +293,7 @@ def survey_result(request):
     all_result_num = [0, 0, 0]
 
     # 전체 유저 데이터 필터링
-    all_users = User.objects.filter(
-        ~Q(survey_result_count=0)
-    )
+    all_users = User.objects.all()
 
     all_result_num = calculate_result_num(all_users, all_result_num)
 
@@ -307,7 +304,6 @@ def survey_result(request):
     # 유저와 같은 성별인 데이터 필터링
     sex_group_users = User.objects.filter(
         Q(sex=user_sex),
-        ~Q(survey_result_count=0)
     )
 
     sex_result_num = calculate_result_num(sex_group_users, sex_result_num)
@@ -323,8 +319,7 @@ def survey_result(request):
     # 유저와 같은 나이대인 데이터 필터링
     age_group_users = User.objects.filter(
         Q(birth__gt=datetime.now().year - age_group_end, 
-            birth__lt=datetime.now().year - age_group_start),
-        ~Q(survey_result_count=0)
+            birth__lt=datetime.now().year - age_group_start)
     )
 
     age_result_num = calculate_result_num(age_group_users, age_result_num)
@@ -336,8 +331,7 @@ def survey_result(request):
     age_sex_group_users = User.objects.filter(
         Q(sex=user_sex, 
             birth__gt=datetime.now().year - age_group_end, 
-            birth__lt=datetime.now().year - age_group_start),
-        ~Q(survey_result_count=0)
+            birth__lt=datetime.now().year - age_group_start)
     )
 
     age_sex_result_num = calculate_result_num(age_sex_group_users, age_sex_result_num)
@@ -349,10 +343,22 @@ def survey_result(request):
     total_age_users = age_group_users.count()
     total_age_sex_users = age_sex_group_users.count()
 
-    all_percentages = [round((value / total_all_users) * 100) for value in all_result_num]
-    sex_percentages = [round((value / total_sex_users) * 100) for value in sex_result_num]
-    age_percentages = [round((value / total_age_users) * 100) for value in age_result_num]
-    age_sex_percentages = [round((value / total_age_sex_users) * 100) for value in age_sex_result_num]
+    all_percentages = []
+    sex_percentages = []
+    age_percentages = []
+    age_sex_percentages = []
+
+    if total_all_users != 0:
+        all_percentages = [round((value / total_all_users) * 100) for value in all_result_num]
+
+    if total_sex_users != 0:
+        sex_percentages = [round((value / total_sex_users) * 100) for value in sex_result_num]
+
+    if total_age_users != 0:
+        age_percentages = [round((value / total_age_users) * 100) for value in age_result_num]
+
+    if total_age_sex_users != 0:
+        age_sex_percentages = [round((value / total_age_sex_users) * 100) for value in age_sex_result_num]
 
     res_data = {'user_survey_result':user_survey_result,
                 'age_group_start':age_group_start,
@@ -365,7 +371,7 @@ def survey_result(request):
 
 def calculate_result_num(users, result_num):
     for u in users:
-        if u.survey_result_count >= 1 and u.survey_result_count <= 3:
+        if u.survey_result_count >= 0 and u.survey_result_count <= 3:
             result_num[0] += 1
         elif u.survey_result_count >= 4 and u.survey_result_count <= 5:
             result_num[1] += 1
