@@ -1,0 +1,255 @@
+.container-mobile {}
+
+.form-findid {
+    padding-top: 155px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title-text {
+    color: #71A1FF;
+    font-size: 24px;
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.44px;
+}
+
+.email-div {
+    padding-top: 100px;
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.input-email-text {
+    position: absolute;
+
+    color: #9ABCFF;
+    font-size: 14px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    bottom: 13px;
+    left: 20px;
+}
+
+.email {
+    color: #494949;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.96px; 
+
+    padding-left: 5px;
+    padding-bottom: 13px;
+}
+.email-input {
+    width: 299px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    border-radius: 30px;
+    border: 1px solid #71A1FF;
+    background: #FFF;
+    padding-left: 75px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.info-message-div {
+    height: 400px;
+}
+.info-message-div-div {}
+.error {}
+.login-btn {}
+
+.success {
+    color: #494949;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+
+    padding-bottom: 50px;
+}
+
+.info-message-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.mark-div {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    display: flex;
+}
+.mark-di > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.success-2 {
+    width: 290px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    border-radius: 15px;
+    border: 1px solid #9ABCFF;
+    background: #FFF;
+    
+    justify-content: center;
+    align-items: center;
+
+    color: #999;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.7px;
+
+    padding: 0 10px 0 10px;
+}
+.login-btn-div {
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.login-btn {
+    width: 101px;
+    height: 31px;
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(154, 188, 255, 1);
+    border: none;
+    border-radius: 30px;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 12px;
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+.login-btn:link {
+    text-decoration: none;
+}
+.login-btn:visited {
+    text-decoration: none;
+}
+.login-btn:hover {
+    cursor: pointer;
+    background-color: rgba(63, 128, 252, 1);
+}
+
+
+.findpw-btn:hover {
+    cursor: pointer;
+    background-color: rgba(63, 128, 252, 1);
+}
+.findpw-btn {
+    width: 101px;
+    height: 31px;
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(154, 188, 255, 1);
+    border: none;
+    border-radius: 30px;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 12px;
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+.findpw-btn:link {
+    text-decoration: none;
+}
+.findpw-btn:visited {
+    text-decoration: none;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 254px;
+    height: 50px;
+    flex-shrink: 0;
+    background-color: rgba(113, 161, 255, 1);
+    border-radius: 30px;
+    border: none;
+    margin: 0 auto;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.8px;
+
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+.submit-btn:hover {
+    background-color: rgba(63, 128, 252, 1);
+    cursor: pointer;
+}
+
+.mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    max-width: 430px;
+    width: 100%;
+    height: 5.8rem;
+    justify-content: center;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(154, 188, 255, 0.65);
+    box-shadow: 0px 2px 2px rgba(154, 188, 255, 0.65);
+    z-index: 600;
+  }
+  
+  .mobile-header > a {
+    width: 4.5rem;
+    margin-top: 2.5rem;
+  }
+  
+  .mobile-header > a > img {
+    width: 100%;
+    object-fit: cover;
+  }
