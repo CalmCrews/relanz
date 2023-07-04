@@ -1,20 +1,77 @@
-{% comment %} {% extends "base.html" %}
-{% load static%}
+{% extends "mobileBase.html" %} 
+{% load static%} 
 
-{% block extrahead %}
-<link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
-{% endblock extrahead %} {% endcomment %}
+{% block mobile_extrahead %}
+<link rel="stylesheet" href="{% static 'css/community/new.css' %}" />
+{% endblock %} 
 
-{% block title%}
-<h1>사진 업로드 페이지</h1>
-{% endblock title %}
+{% block mobile_title%}
+  기록 남기기
+{% endblock %} 
 
-{% block content %}
-<form method="POST" action="{% url 'community:new' challenge.id %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    사진 : <input type="file" name="image"/>
-    <button type="submit">글작성</button>
-</form>
+{% block mobile_content %}
+<div class="write-article">
+  <div class="new-container">
+    <div class="challenge-title">
+      <h2>
+        {{challenge.title}}
+      </h2>
+    </div>
+    <div class="my-record">
+      나만의 기록
+    </div>
+    <div class="record-explain">
+      오늘 당신이 한 릴렌지에 대한 사진을 올려 기록해주세요!
+    </div>
+    <div class="form-container">
+      <div class="back-card">
+        <img id="preview-image" class="preview-image" src="#" alt="미리보기" />
+      </div>
+      <img class="pic-icon" src="{% static 'icons/pic-img.png' %}" alt="upload pic">
+      <form
+        method="POST"
+        action="{% url 'community:new' challenge.id %}"
+        enctype="multipart/form-data"
+      >
+        <label class="input-button">
+          {% csrf_token %} 
+          <input id="file-input" type="file" name="image" accept="image/*" />
+          사진 업로드
+        </label>
+        <button type="submit">작성 완료</button>
+      </form>
+    </div>
+  </div>
+</div>
 
-<a href="{% url 'main:home' %}">홈</a>
-{% endblock content %}
+{% endblock %} 
+
+{% block mobile-scripts %}
+<script>
+  const fileInput = document.getElementById('file-input');
+  const previewImage = document.getElementById('preview-image');
+
+  fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previewImage.src = e.target.result;
+        previewImage.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      previewImage.src = '#';
+      previewImage.style.display = 'none';
+    }
+  });
+
+
+
+  //화면 첫 로드
+  window.addEventListener("DOMContentLoaded", function () {
+    const newContainer = document.querySelector(".new-container");
+    newContainer.classList.add("shifted");
+  });
+</script>
+{% endblock %}

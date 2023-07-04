@@ -57,28 +57,22 @@
   </div>
   <div class="my-relange-section">
     <h3>나의 릴렌지</h3>
-    <ul class="relange-list">
-        <li>
-          <div class="relange-image">
-            <img src="{% static challenge.image %}" alt="이미지">
-          </div>
-          <div class="relange-info">
-            <span>지친 하루 끝 반신욕해요</span>
-            <a href="">상세보기</a>
-          </div>
-        </li>
-    </ul>
    {% if challenges %}
       <ul class="relange-list">
         {% for challenge in challenges %}
           <li>
-            <hr>
-            {{challenge.0.title}}
-            <img src="{% static challenge.0.image %}" alt="이미지">
-            {% for tag in challenges.1.1 %}
-              {{ tag }}
-            {% endfor %}
-          </li>
+            <div class="relange-image">
+              <img src="{% static challenge.0.image %}" alt="이미지">
+            </div>
+            <div class="relange-info">
+              <span>{{challenge.0.title}}</span>
+              <a href="{% url 'community:new' challenge_id=challenge.0.id %}">기록하기</a>
+              <div class="tags-wrapper">
+                {% for tag in challenge.1 %}
+                  <span>{{ tag }}</span>
+                {% endfor %}
+              </div>
+            </div>
         {% endfor %}
       </ul>
     {% else %}
