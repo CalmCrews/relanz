@@ -271,20 +271,38 @@
                     {% endif %}
                   </div>
 
-                  {% comment %} <p>전체 {{ all_percentages }}</p>
-                  <p>성별 {{ sex_percentages }}</p>
-                  <p>나이 {{ age_percentages }}</p>
-                  <p>
-                    {% if user.sex == 'female'%}
-                    {{ age_group_start }}대 여성이 가진 스트레스 취약성에 비해 {{avg_result}}인 편이에요 
-                    {% elif user.sex == 'male'%}
-                    {{ age_group_start }}대 남성이 가진 스트레스 취약성에 비해 평균적인 편이에요
-                    {% endif %}
-                  </p> {% endcomment %}
                 </div>
                 <div class="summary-detail-2"></div>
               </div>
               <div class="relanz-magazine">
+                <div class="magazine-wrapper">
+                  <div class="third-page">
+                    <div class="indexing"></div>
+                  </div>
+                  <div class="second-page">
+                    <div class="indexing"></div>
+                  </div>
+                  <div class="first-page">
+                    <div class="indexing">
+                      릴렌즈 매거진 6월호
+                    </div>
+                    <div class="page-cover">
+                      <img src="{% static "images/magazine-climbing.png" %}" alt="climbing-image">
+                      <div class="magazine-info">
+                        <div class="magazine-sticker">릴렌즈 픽</div>
+                        <a href="https://economynewstv.com/%ED%81%B4%EB%9D%BC%EC%9D%B4%EB%B0%8D%EC%9D%98-%EC%A6%90%EA%B1%B0%EC%9B%80-%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%8A%A4-%ED%95%B4%EC%86%8C%EC%99%80-%ED%96%89%EB%B3%B5%EA%B0%90%EC%9D%84-%EB%8A%90%EA%BB%B4/">
+                          <div class="magazine-title"><span>클라이밍</span>의 즐거움:</div>
+                          <div class="magazine-subtitle">스트레스 해소와 행복감을 느껴보세요</div>
+                        </a>
+                        <div class="magazine-explain">건강하고 재미있는 스트레스 해소 방법 없을까? 이왕이면 운동도 되었으면 좋겠어!<br>이런 당신을 위한 서울 주요 지역의 클라이밍 장소를 소개합니다.</div>
+                        <div class="buttons">
+                          <img src="{% static "icons/magazine-like.png"%}" alt="like">
+                          <img src="{% static "icons/magazine-share.png"%}" alt="share">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -298,6 +316,7 @@
 
 {% block mobile-scripts %}
   <script>
+    //캐릭터조합
     function renderProfileCombination(combinationData) {
       const backHairElement = document.querySelector(".back-hair");
       const frontHairElement = document.querySelector(".front-hair");
@@ -326,6 +345,11 @@
         accElement.style.backgroundImage = `url("{% static 'character/acc/acc' %}${combinationData[8]}.png")`;
 
     }
+
+     // 조합 데이터를 적용하여 프로필 렌더링
+    //console.log({{user.avatar}})
+    renderProfileCombination("{{user.avatar}}");
+
     //오늘 날짜 불러오기
     const dateElement = document.getElementById('today_date');
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
@@ -387,7 +411,7 @@
     // 초기 상태에서 너비를 0으로 설정
     currentScoreBar.style.width = "0";
 
-    // 지정된 시간 간격마다 너비를 증가시키는 애니메이션 함수
+    // 지정된 시간 간격마다 레벨너비를 늘려주는 애니메이션 함수
     function animateScoreBar() {
       var width = 0;
       var interval = setInterval(function() {
@@ -403,9 +427,7 @@
     window.addEventListener("load", animateScoreBar);
 
     
-    // 조합 데이터를 적용하여 프로필 렌더링
-    //console.log({{user.avatar}})
-    renderProfileCombination("{{user.avatar}}");
+   
     
     //오늘의 메세지 전환 효과
     const bubble = document.querySelector('.bubble');
@@ -536,6 +558,9 @@
       }
     }
 
+    console.log(entirePercentages);
+    console.log(sexPercentages);
+    console.log(agePercentages);
     setElementWidth(entireDivs, entirePercentages);
     setElementWidth(genderDivs, sexPercentages);
     setElementWidth(ageDivs, agePercentages);

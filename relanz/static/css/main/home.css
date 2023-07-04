@@ -477,7 +477,7 @@ margin: 0;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 27px;
+  padding: 27px 0 30px 0;
   z-index: 10;
 }
 
@@ -999,4 +999,141 @@ margin: 0;
 
 #profile-set #top-page .report-section .relanz-magazine {
   /* 릴렌즈 매거진 스타일 */
+  width: 100%;
+  height: 490px;
+}
+
+.relanz-magazine > .magazine-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.relanz-magazine > .magazine-wrapper > div {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.third-page > .indexing {
+  left: 60px;
+  background-color: #fff;
+  z-index: 3;
+}
+
+.second-page > .indexing {
+  left: 40px;
+  background-color: #d0e0ff;
+  z-index: 5;
+}
+
+.first-page > .indexing {
+  left: 20px;
+  background-color: #9abcff;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 6;
+}
+
+.relanz-magazine > .magazine-wrapper > .first-page {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.relanz-magazine > .magazine-wrapper > .first-page > .page-cover {
+  position: relative;
+  top: 38px;
+  height: 433px;
+  width: 100%;
+  background-color: #9abcff;
+  box-shadow: 0 -2px 11px 0 rgba(0, 0, 0, 0.25);
+}
+
+.magazine-wrapper > div > .indexing {
+  position: absolute;
+  top: 0;
+  width: 172px;
+  height: 38px;
+  border: 3px solid #9abcff;
+  border-radius: 20px 20px 0 0;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 600;
+}
+
+
+.first-page > .page-cover > img {
+  position: absolute;
+  top: 16px;
+  width: 100%;
+  object-fit: cover;
+  z-index: 4;
+}
+
+.first-page > .page-cover > .magazine-info {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 240px;
+  width: 100%;
+  padding: 22px;
+  z-index: 5;
+  color: #fff;
+}
+
+.magazine-info > .magazine-sticker {
+  width: 68px;
+  height: 20px;
+  background-color: #9abcff;
+  border-radius: 10px;
+  padding: 2px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.magazine-info > a {
+  text-decoration: none;
+}
+
+.magazine-info > a:hover {
+  text-decoration: underline;
+}
+
+.magazine-info > a:visited {
+  color: #fff;
+}
+
+.magazine-info > a > .magazine-title {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.magazine-info > a > .magazine-title > span {
+  color: #d0e0ff;
+}
+
+.magazine-info > a > .magazine-subtitle {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.magazine-info > .magazine-explain {
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+
+
+.magazine-info > .buttons {
+  display: flex;
+}
+
+.magazine-info > .buttons > img {
+  width: 24px;
+  margin-right: 15px;
+  cursor: pointer;
 }
