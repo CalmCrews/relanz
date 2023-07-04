@@ -1,0 +1,11 @@
+{% block content %}
+  <h2>비밀번호 찾기</h2>
+  <p>e-mail</p>
+  <p>이메일을 입력해주세요</p>
+  
+  <form method="post">
+    {% csrf_token %}
+    {{ form.email }}
+    <button type="submit">비밀번호 찾기</button>
+  </form>
+{% endblock %}

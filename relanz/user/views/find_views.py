@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from ..models import User
 from django.core.mail import send_mail
 import os
-    
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+
 def findid(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -28,3 +30,20 @@ def findid(request):
 
     return render(request, 'user/findid.html')
 
+
+# 비밀번호 재설정 커스터마이징을 위한 상속
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'user/pw_reset.html'
+    email_template_name = 'user/pw_reset_email.html'
+    subject_template_name = 'user/pw_reset_subject.txt'
+    success_url = reverse_lazy("user:password_reset_done")
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = "user/pw_reset_done.html"
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "user/pw_reset_confirm.html"
+    success_url = reverse_lazy("user:password_reset_complete")
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = "user/pw_reset_complete.html"

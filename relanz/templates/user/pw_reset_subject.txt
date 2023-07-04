@@ -1,0 +1,3 @@
+{% load i18n %}{% autoescape off %}
+{% blocktranslate %}계정 비밀번호 재설정 이메일{% endblocktranslate %}
+{% endautoescape %}
