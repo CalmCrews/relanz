@@ -37,7 +37,8 @@ def content(request):
             user.save()
             return redirect('user:survey')
         
-@login_required(login_url='/user/signin') 
+@login_required(login_url='/user/signin')
+@email_verified_required
 def avatar(request):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
