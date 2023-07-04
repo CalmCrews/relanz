@@ -223,7 +223,7 @@ def home(request):
                             }
                 res_data.update(res_data2)
 
-                return render(request, 'main/home.html', res_data2)
+                return render(request, 'main/home.html', res_data)
             
         except UserTag.DoesNotExist:
             return redirect('user:survey')
