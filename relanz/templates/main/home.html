@@ -234,8 +234,8 @@
                     <div class="tag-container">
                       {% if analysis_data %}
                           <span>
-                            <a href="{% url 'challenge:challenge' challenge_id=analysis_data.most_like_challenge.challenge.id %}">
-                              {{analysis_data.most_like_challenge.challenge.title}}</span>
+                            <a href="{% url 'challenge:challenge' challenge_id=analysis_data.most_like_challenge.id %}">
+                              {{analysis_data.most_like_challenge.title}}</span>
                             </a>
                       {% else %}
                         <span><a href="#top-page">릴렌지 참여하기</a></span>
@@ -382,7 +382,6 @@
     ];
     const hiddenMessageInnerText = document.querySelector(".hidden-message > p");
     hiddenMessageInnerText.innerText = weeklyMessages[dayOfWeek];
-    
 
     //score graph
     //var userScore = {{ user.score }};
