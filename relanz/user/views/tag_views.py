@@ -9,8 +9,6 @@ from config.email_decorator import email_verified_required
 def survey(request):
     if request.method=="GET":
         user = request.user
-        print(user)
-        print(user.nickname)
         return render(request, 'tag/survey.html', {"user":user.nickname})
     if request.method=="POST":
         user=request.user
