@@ -54,6 +54,7 @@ def new(request, challenge_id):
             user=User.objects.get(id=request.user.id)
             user.score += article.article_score
             user.save()
+
             return redirect('community:detail', challenge.id, article.id)
     
     res_data = {'form':form, 'challenge':challenge}

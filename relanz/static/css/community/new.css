@@ -1,0 +1,136 @@
+.write-article {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 180px);
+}
+
+.write-article > .new-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 900px;
+  top: 100vh;
+  border-radius: 30px 30px 0px 0px;
+  border-top: 2px solid #71a1ff;
+  padding: 40px 40px 90px 40px;
+  background: #fff;
+  transition: top 0.8s;
+}
+
+.new-container.shifted {
+  top: 40px;
+}
+
+.new-container > .challenge-title > h2 {
+  color: #494949;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: left;
+  margin: 20px 10px;
+}
+
+.new-container > .my-record {
+  width: 88px;
+  height: 32px;
+  margin: 20px 10px 13px 10px;
+  border-radius: 17px;
+  border: 1.5px solid #71a1ff;
+  padding: 6px;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.new-container > .record-explain {
+  width: 100%;
+  margin-bottom: 32px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+}
+
+.form-container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.form-container > .back-card {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  width: 270px;
+  height: 270px;
+  border-radius: 20px;
+  background: #e7e7e7;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.back-card > .preview-image {
+  display: none;
+  width: 100%;
+  height: 100%;
+  opacity: 50%;
+  object-fit: cover;
+  z-index: 4;
+}
+
+.form-container > .pic-icon {
+  display: block;
+  position: absolute;
+  top: 110px;
+  left: 157.5px;
+  width: 35px;
+  height: 35px;
+  z-index: 3;
+}
+
+.form-container > form {
+  display: flex;
+  flex-direction: column;
+  z-index: 4;
+}
+
+.form-container > form > label {
+  position: absolute;
+  width: 105px;
+  height: 30px;
+  top: 160px;
+  left: 122.5px;
+  border-radius: 30px;
+  padding: 6px;
+  background-color: #9abcff;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.form-container > form > label > input[type="file"] {
+  display: none;
+}
+
+.form-container > form > button {
+  position: absolute;
+  top: 320px;
+  left: 48px;
+  width: 254px;
+  height: 50px;
+  border: 0;
+  outline: 0;
+  border-radius: 25px;
+  padding: 15px;
+  background-color: #71a1ff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
