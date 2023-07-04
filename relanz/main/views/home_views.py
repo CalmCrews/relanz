@@ -349,10 +349,22 @@ def survey_result(request):
     total_age_users = age_group_users.count()
     total_age_sex_users = age_sex_group_users.count()
 
-    all_percentages = [round((value / total_all_users) * 100) for value in all_result_num]
-    sex_percentages = [round((value / total_sex_users) * 100) for value in sex_result_num]
-    age_percentages = [round((value / total_age_users) * 100) for value in age_result_num]
-    age_sex_percentages = [round((value / total_age_sex_users) * 100) for value in age_sex_result_num]
+    all_percentages = []
+    sex_percentages = []
+    age_percentages = []
+    age_sex_percentages = []
+
+    if total_all_users != 0:
+        all_percentages = [round((value / total_all_users) * 100) for value in all_result_num]
+
+    if total_sex_users != 0:
+        sex_percentages = [round((value / total_sex_users) * 100) for value in sex_result_num]
+
+    if total_age_users != 0:
+        age_percentages = [round((value / total_age_users) * 100) for value in age_result_num]
+
+    if total_age_sex_users != 0:
+        age_sex_percentages = [round((value / total_age_sex_users) * 100) for value in age_sex_result_num]
 
     res_data = {'user_survey_result':user_survey_result,
                 'age_group_start':age_group_start,
