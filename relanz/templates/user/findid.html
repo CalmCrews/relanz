@@ -1,7 +1,7 @@
 {% extends 'mobileBase.html' %}
 {% load static %}
 {% block title %}
-  participate
+  findId
 {% endblock title %}
 {% block extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static "css/user/findid.css"%}">
@@ -46,9 +46,8 @@
       </div>
       <input class="submit-btn" type="submit" value="아이디 찾기">
     </form>
+    <div class="just-for-space"></div>
   </div>
 {% endblock %}
 
-{% block scripts%}
-  <script src={% static "js/participate.js"%}></script>
-{% endblock scripts%}
+{% block scripts%}{% endblock scripts%}
