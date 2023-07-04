@@ -208,7 +208,7 @@ def home(request):
                 while len(analysis_challenges) < 3:
                     analysis_challenge_tags = random.choice(challenge_tags)
                     if analysis_challenge_tags not in analysis_challenges:
-                        analysis_challenges.append(analysis_challenge.challenge)
+                        analysis_challenges.append(analysis_challenge_tags.challenge)
                 analysis_data = {
                     'analysis_user_tag':analysis_user_tag,
                     'most_like_challenge': most_like_challenge,
@@ -216,12 +216,12 @@ def home(request):
                 }
 
                 res_data = survey_result(request)
-                res_data2 = {'user':user, 
+                res_data3 = {'user':user, 
                             'tag_lists':tag_lists_, 
                             'combined_data': combined_data, 
                             'analysis_data':analysis_data
                             }
-                res_data.update(res_data2)
+                res_data.update(res_data3)
 
                 return render(request, 'main/home.html', res_data)
             
