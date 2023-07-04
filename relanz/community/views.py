@@ -5,6 +5,7 @@ from .models import Article, Like, Participant
 from user.models import User
 from challenge.models import Challenge
 from django.contrib.auth.decorators import login_required
+from config.email_decorator import email_verified_required
 from django.http import HttpResponse
 from django.db.models import Q
 from django.http import JsonResponse
@@ -15,6 +16,7 @@ import re
 # Create your views here.
 
 @login_required(login_url='/user/signin')
+@email_verified_required
 def communityHome(request, challenge_id):
     challenge = Challenge.objects.get(id=challenge_id)
     articles = Article.objects.filter(challenge=challenge) # a 챌린지의 게시물들만 가져오기
@@ -27,6 +29,7 @@ def communityHome(request, challenge_id):
     return render(request, 'community/communityHome.html', res_data)
 
 @login_required(login_url='/user/signin')
+@email_verified_required
 def new(request, challenge_id):
     challenge = Challenge.objects.get(id=challenge_id)
     try:
@@ -61,6 +64,7 @@ def new(request, challenge_id):
     return render(request, 'community/new.html', res_data)
 
 @login_required(login_url='/user/signin')
+@email_verified_required
 def detail(request, challenge_id, article_id):
     challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
@@ -72,6 +76,7 @@ def detail(request, challenge_id, article_id):
     return render(request, 'community/detail.html', res_data)
 
 @login_required(login_url='/user/signin')
+@email_verified_required
 def edit(request, challenge_id, article_id):
     challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
@@ -89,6 +94,7 @@ def edit(request, challenge_id, article_id):
     return render(request, 'community/edit.html', res_data)
 
 @login_required(login_url='/user/signin')
+@email_verified_required
 def delete(request, challenge_id, article_id):
     article = get_object_or_404(Article, pk=article_id)
 
@@ -97,6 +103,7 @@ def delete(request, challenge_id, article_id):
     return redirect('main:home')
 
 @login_required(login_url='/user/signin')
+@email_verified_required
 def like(request, article_id):   
     article = get_object_or_404(Article, pk=article_id)
 

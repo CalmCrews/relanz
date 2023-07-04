@@ -1,12 +1,12 @@
-{% extends 'mobileBase.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block mobile_title %}
-  participate
-{% endblock mobile_title %}
-{% block mobile_extrahead %}
+{% block title %}
+  findId
+{% endblock title %}
+{% block extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static "css/participate.css"%}">
-{% endblock mobile_extrahead %}
-{% block mobile_content%}
+{% endblock extrahead %}
+{% block content%}
   <div class="container-mobile">
     <div class="title">
       <p>{{user}}님의 릴렌지 활동이</p>
