@@ -1,4 +1,59 @@
-<div class="login-form-div-mobile">
+{% extends 'mobileBase.html' %}
+{% load static %}
+{% block title %}
+  participate
+{% endblock title %}
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/user/findid.css"%}">
+{% endblock extrahead %}
+{% block content%}
+  <div class="container-mobile">
+    <div class="mobile-header">
+      <a href="{% url 'main:home' %}">
+        <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo1">
+      </a>
+    </div>
+    <form class="form-findid" action="{% url 'user:findid' %}" method="post">
+      {% csrf_token %}
+      <div class="title">
+        <p class="title-text">아이디 찾기</p>
+      </div>
+      <div class="email-div">
+        <p class="input-email-text">e-mail</p>
+        <label class="email" for="email">e-mail</label>
+        <input class="email-input" type="email" name="email" id="" placeholder="이메일을 입력해주세요">
+      </div>
+      <div class="info-message-div">
+        <div class="info-message-div-div">
+          {% if error %}
+          <p class="error">{{ error }}</p>
+          <a class="login-btn" href="{% url 'user:signin' %}">로그인</a>
+        {% endif %}
+        {% if success %}
+        <div class="info-message-div">
+            <p class="success">{{ success }}</p>
+            <div class="mark-div">
+              <img src="{% static "icons/exclamation_mark.svg" %}" alt=".">
+            </div>
+            <p class="success-2">만약 이메일을 받지 못하셨다면, 등록하신 이메일을 다시 확인하거나 스팸 메일함을 확인해주새요!</p>
+            <div class="login-btn-div">
+              <a class="login-btn" href="{% url 'user:signin' %}">로그인</a>
+              <a class="findpw-btn" href="{% url 'user:password_reset' %}">비밀번호 찾기</a>
+            </div>
+          </div>
+        {% endif %}
+        </div>
+      </div>
+      <input class="submit-btn" type="submit" value="아이디 찾기">
+    </form>
+  </div>
+{% endblock %}
+
+{% block scripts%}
+  <script src={% static "js/participate.js"%}></script>
+{% endblock scripts%}
+
+{% comment %} <div class="login-form-div-mobile">
     <h2>아이디 찾기 페이지입니다.</h2>
 
     회원가입 시 등록한 이메일을 입력해주세요.
@@ -17,4 +72,4 @@
       <a href="{% url 'user:signin' %}">로그인 페이지로 돌아가기</a>
     {% endif %}
     
-  </div>
+  </div> {% endcomment %}
