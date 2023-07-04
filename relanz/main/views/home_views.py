@@ -282,7 +282,7 @@ def survey_result(request):
     user_survey_result = ''
 
     # -------------------- 본인 결과 ----------------------
-    if user.survey_result_count >= 1 and user.survey_result_count <= 3:
+    if user.survey_result_count >= 0 and user.survey_result_count <= 3:
         user_survey_result = '취약하지 않은'
     elif user.survey_result_count >= 4 and user.survey_result_count <= 5:
         user_survey_result = '다소 취약한'
@@ -294,9 +294,7 @@ def survey_result(request):
     all_result_num = [0, 0, 0]
 
     # 전체 유저 데이터 필터링
-    all_users = User.objects.filter(
-        ~Q(survey_result_count=0)
-    )
+    all_users = User.objects.all()
 
     all_result_num = calculate_result_num(all_users, all_result_num)
 
@@ -306,8 +304,7 @@ def survey_result(request):
 
     # 유저와 같은 성별인 데이터 필터링
     sex_group_users = User.objects.filter(
-        Q(sex=user_sex),
-        ~Q(survey_result_count=0)
+        Q(sex=user_sex)
     )
 
     sex_result_num = calculate_result_num(sex_group_users, sex_result_num)
@@ -323,8 +320,7 @@ def survey_result(request):
     # 유저와 같은 나이대인 데이터 필터링
     age_group_users = User.objects.filter(
         Q(birth__gt=datetime.now().year - age_group_end, 
-            birth__lt=datetime.now().year - age_group_start),
-        ~Q(survey_result_count=0)
+            birth__lt=datetime.now().year - age_group_start)
     )
 
     age_result_num = calculate_result_num(age_group_users, age_result_num)
@@ -336,8 +332,7 @@ def survey_result(request):
     age_sex_group_users = User.objects.filter(
         Q(sex=user_sex, 
             birth__gt=datetime.now().year - age_group_end, 
-            birth__lt=datetime.now().year - age_group_start),
-        ~Q(survey_result_count=0)
+            birth__lt=datetime.now().year - age_group_start)
     )
 
     age_sex_result_num = calculate_result_num(age_sex_group_users, age_sex_result_num)
@@ -377,7 +372,7 @@ def survey_result(request):
 
 def calculate_result_num(users, result_num):
     for u in users:
-        if u.survey_result_count >= 1 and u.survey_result_count <= 3:
+        if u.survey_result_count >= 0 and u.survey_result_count <= 3:
             result_num[0] += 1
         elif u.survey_result_count >= 4 and u.survey_result_count <= 5:
             result_num[1] += 1
