@@ -9,13 +9,261 @@
 {% endblock mobile_extrahead %}
 
 {% block mobile_content%}
+
+
+
+<div class="ranking-page">
+  <header>
+    <img src="{% static 'icons/dot.png' %}" alt="dot">
+    릴렌지 랭킹 살펴보기!
+  </header>
+  <div class="top3-section">
+    <p>나의 Top 3 릴렌지 랭킹</p>
+    <div class="relenge-list-container">
+      <ul class="relenge-list">
+        {% if combined_data.0 %}
+            <li>
+              <div class="relenge-card">
+                <div class="image-section">
+                  <img src="{% static combined_data.0.0.image %%}" alt="{{ combined_data.0.0.title }}">
+                </div>
+                <div class="info-section">
+                  <div class="sticker">{{1}}</div>
+                  <div class="relenge-ranking">이 릴렌지의 현재 전체 랭킹은 {{combined_data.0.2}}위!</div>
+                  <h2>{{ combined_data.0.0.title }}</h2>
+                  <img src="{% static "icons/ppl.png" %}" alt="icon"/>
+                  <span class="participant">{{ combined_data.0.3.0.count }}명이 참여 중인 릴렌지</span>
+                  <span class="my-record">열띤 기록을 통해 {{ combined_data.0.1.1.sum }}스코어를 가진 나는 {{ combined_data.0.3.0.count }}명 중 {{ combined_data.0.1.0 }}등!</span>
+                  <a href="{% url 'challenge:challenge' challenge_id=combined_data.0.0.id %}">자세히 보기</a>
+
+                </div>
+              </div>
+            </li>
+        {% else %}
+            
+        {% endif%}
+
+        {% if combined_data.1 %}
+            <li>
+              <div class="relenge-card">
+                <div class="image-section">
+                  <img src="{% static combined_data.1.0.image %%}" alt="{{ combined_data.1.0.title }}">
+                </div>
+                <div class="info-section">
+                  <div class="sticker">{{2}}</div>
+                  <div class="relenge-ranking">이 릴렌지의 현재 전체 랭킹은 {{combined_data.1.2}}위!</div>
+                  <h2>{{ combined_data.1.0.title }}</h2>
+                  <img src="{% static "icons/ppl.png" %}" alt="icon"/>
+                  <span class="participant">{{ combined_data.1.3.0.count }}명이 참여 중인 릴렌지</span>
+                  <span class="my-record">열띤 기록을 통해 {{ combined_data.1.1.1.sum }}스코어를 가진 나는 {{ combined_data.1.3.0.count }}명 중 {{ combined_data.1.1.0 }}등!</span>
+                  <a href="{% url 'challenge:challenge' challenge_id=combined_data.1.0.id %}">자세히 보기</a>
+
+                </div>
+              </div>
+            </li>
+        {% else %}
+
+        {% endif%}
+        
+        {% if combined_data.2 %}
+            <li>
+              <div class="relenge-card">
+                <div class="image-section">
+                  <img src="{% static combined_data.2.0.image %%}" alt="{{ combined_data.2.0.title }}">
+                </div>
+                <div class="info-section">
+                  <div class="sticker">{{3}}</div>
+                  <div class="relenge-ranking">이 릴렌지의 현재 전체 랭킹은 {{combined_data.2.2}}위!</div>
+                  <h2>{{ combined_data.2.0.title }}</h2>
+                  <img src="{% static "icons/ppl.png" %}" alt="icon"/>
+                  <span class="participant">{{ combined_data.2.3.0.count }}명이 참여 중인 릴렌지</span>
+                  <div class="my-record">열띤 기록을 통해 {{ combined_data.2.1.1.sum }}스코어를 가진 나는 {{ combined_data.2.3.0.count }}명 중 {{ combined_data.2.1.0 }}등!</div>
+                  <a href="{% url 'challenge:challenge' challenge_id=combined_data.2.0.id %}">자세히 보기</a>
+
+                </div>
+              </div>
+            </li>
+        {% else %}
+
+        {% endif%}
+      </ul>
+      <div class="carousel-dots">
+        <span class="dot active"></span>
+        {% if combined_data %}
+          {% for challenge in combined_data %}
+            {% if forloop.counter0 < combined_data|length|add:"-1" %}
+              <span class="dot"></span>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          {% for challenge in challenges %}
+            {% if forloop.counter0 < challenges|length|add:"-1" %}
+              <span class="dot"></span>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="carousel-arrows">
+        <span class="arrow arrow-left"><img src="{% static "icons/leftarrow.png" %}" alt="left-arrow"></span>
+        <span class="arrow arrow-right"><img src="{% static "icons/rightarrow.png" %}" alt="right-arrow"></span>
+      </div>
+    </div>
+        
+  </div>
+  <div class="total-ranking-section ranking-container">
+    <p>실시간 전체 랭킹</p>
+    <ol>
+      {% for rank, challenge in challenge_ranking %}
+        <li>
+          <div class="rank">
+            {% if rank < 1 %}
+              -
+            {% else %}
+              {{rank}}
+            {% endif %}
+          </div>
+          <div class="relenge-title">
+            <div class="scrolling-text">
+              <span class="text">{{ challenge.title }}</span>
+            </div>
+          </div>
+          <a href="{% url 'challenge:challenge' challenge_id=challenge.id%}">자세히 보기</a>
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+  <div class="age-ranking-section ranking-container">
+    {% comment %} 여기 유저 나이대 필요 {% endcomment %}
+    <p>20대 랭킹</p>
+
+  </div>
+  {% for key, value in res_ranking.items %}
+    <div class="gender-section ranking-container">
+      <p>
+        {% if key == "male_ranking" %} 
+          남자 랭킹
+        {% else %}
+          여자 랭킹
+        {% endif %}
+      </p>
+    </div>
+    <ol>
+    {% for rank, challenge in value %}
+        <li>Rank: {{ rank }}, Challenge: {{ challenge.title }}</li>
+    {% endfor %}
+    </ol>
+{% endfor %}
+
+</div>
+{% endblock %}
+
+{% block mobile-scripts %}
+  <script>
+    //릴렌지 카드 섹션
+    const carouselContainer = document.querySelector('.relenge-list');
+    const dots = document.querySelectorAll('.dot');
+    const items = document.querySelectorAll('.relenge-card');
+    const prev = document.querySelector('.arrow-left');
+    const next = document.querySelector('.arrow-right');
+    let active = 0;
+
+
+    // 이전 카드 보기
+
+    function loadShow(){
+      let stt = 0;
+      items[active].style.transform = `none`;
+      items[active].style.zIndex = 1;
+      items[active].style.filter = 'none';
+      items[active].style.opacity = 1;
+      for(var i = active + 1; i < items.length; i++){
+        stt++;
+        items[i].style.transform = `translateX(${120*stt}px) scale(${1 - 0.25*stt}) perspective(16px) rotateY(-0.5deg)`;
+        items[i].style.zIndex = -stt;
+        items[i].style.filter = 'blur(3px)';
+        items[i].style.opacity = stt > 2 ? 0 : 0.6;
+      }
+      stt = 0;
+      for(var i = active - 1; i >= 0; i--){
+        stt++;
+        items[i].style.transform = `translateX(${-120*stt}px) scale(${1 - 0.25*stt}) perspective(16px) rotateY(0.5deg)`;
+        items[i].style.zIndex = -stt;
+        items[i].style.filter = 'blur(3px)';
+        items[i].style.opacity = stt > 2 ? 0 : 0.6;
+      }
+      dots.forEach(dot => {
+        dot.classList.remove('active');
+      });
+
+      dots[active].classList.add('active');
+    }
+    loadShow();
+    // 카드 및 점 업데이트
+
+      
+
+    // 점 클릭 이벤트
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        active = index;
+        loadShow();
+      });
+    });
+
+    next.onclick = function(){
+      active = active + 1 < items.length ? active + 1 : active;
+      loadShow();
+    }
+    prev.onclick = function(){
+      active = active - 1 >= 0 ? active - 1 : active;
+      loadShow();
+    }
+
+    //텍스트 애니메이션
+    document.addEventListener('DOMContentLoaded', function() {
+      var textElements = document.querySelectorAll('.text');
+
+      textElements.forEach(function(textElement) {
+        const textWidth = textElement.offsetWidth; // 텍스트의 너비
+        if (textWidth > 200) {
+          console.log(textWidth)
+          var animationDuration = (textWidth - 200) / 10; // 움직임 속도 조절 (50은 조정 가능한 상수)
+      
+          const keyframes = `@keyframes scroll-left-${textWidth} {
+            0% {
+              transform: translateX(10px);
+            }
+            50% {
+              transform: translateX(calc(200px - ${textWidth}px));
+            }
+            100% {
+              transform: translateX(10px);
+            }
+          }`;
+          var styleElement = document.createElement('style');
+          styleElement.innerHTML = keyframes;
+          document.head.appendChild(styleElement);
+
+          var scrollingText = textElement.parentElement;
+          scrollingText.style.animation = `scroll-left-${textWidth} linear infinite`;
+          scrollingText.style.animationDuration = animationDuration + 's';
+        }
+      });
+    });
+  </script>
+
+
+{% endblock %}
+
 {% comment %} 실시간 랭킹 참조방법 -> 나이 대 별 참조 방법도 동일 {% endcomment %}
 {% for rank, challenge in challenge_ranking %}
   <li>Rank: {{ rank }}, Challenge: {{ challenge.title }}</li>
 {% endfor %}
-
-
-
+<ol>
+{% for rank, challenge in age_challenge_ranking %}
+<li>Rank: {{ rank }}, Challenge: {{ challenge.title }}</li>
+{% endfor %}
+</ol>
 <!-- 성별이 남자일 경우 남자가 먼저 아니면 여자가 먼저 => for문 순서 -->
 {% for key, value in res_ranking.items %}
     <h2>{{ key }}</h2>
@@ -56,4 +304,3 @@
     {% endfor %}
   </tbody>
 </table>
-{% endblock %}

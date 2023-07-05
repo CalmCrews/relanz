@@ -1,0 +1,297 @@
+.ranking-page {
+  padding: 10px 30px 88px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 46px;
+  margin: 20px 0;
+  border: 1px solid #aaaaaa;
+  border-radius: 10px;
+  padding: 12px 50px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #494949;
+}
+
+header > img {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  width: 32px;
+  height: 32px;
+}
+
+.top3-section {
+  margin-bottom: 50px;
+}
+
+.top3-section > p {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 30px 15px;
+  color: #494949;
+}
+
+.relenge-list-container {
+  position: relative;
+  width: 100%;
+}
+
+.relenge-list {
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+}
+
+.relenge-list .relenge-card {
+  position: absolute;
+  width: 240px;
+  height: 360px;
+  text-align: justify;
+  border: 2px solid #9abcff;
+  border-radius: 25px;
+  transition: 0.5s;
+  left: calc(50% - 120px);
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.relenge-card > .image-section {
+  width: 100%;
+  height: 40%;
+}
+
+.relenge-card > .image-section > img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.relenge-card > .info-section {
+  position: relative;
+  width: 100%;
+  height: 60%;
+  background-color: #fff;
+}
+
+.info-section > .sticker {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  top: -20px;
+  left: 10px;
+  background-image: url("../../icons/star94.png");
+  background-size: 45px 45px;
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #71a1ff;
+  text-align: center;
+}
+
+.info-section > .relenge-ranking {
+  position: absolute;
+  top: 10px;
+  left: 60px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #71a1ff;
+}
+
+.info-section > h2 {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  width: 180px;
+  height: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 140%;
+  color: #5f5f5f;
+}
+
+.info-section > img {
+  position: absolute;
+  top: 90px;
+  left: 23px;
+  font-size: 8px;
+}
+
+.info-section > .participant {
+  position: absolute;
+  top: 90px;
+  left: 43px;
+  font-size: 8px;
+  color: #626262;
+}
+
+.info-section > .my-record {
+  position: absolute;
+  top: 115px;
+  left: 25px;
+  background: #ffffff;
+  color: #5f5f5f;
+  font-size: 10px;
+  text-align: center;
+  width: 190px;
+  height: 40px;
+  border-radius: 15px;
+  padding: 8px 10px;
+  border: #9abcff solid 1px;
+}
+
+.info-section > .my-record:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  z-index: 1;
+  border-style: solid;
+  border-color: #ffffff transparent;
+  border-width: 0 10px 12px;
+  top: -12px;
+  left: 17%;
+  margin-left: -10px;
+}
+
+.info-section > .my-record:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  z-index: 0;
+  border-style: solid;
+  border-color: #9abcff transparent;
+  border-width: 0 11px 13px;
+  top: -13.5px;
+  left: 17%;
+  margin-left: -11px;
+  display: block;
+}
+
+.info-section > a {
+  position: absolute;
+  left: 82.5px;
+  bottom: 23px;
+  width: 75px;
+  height: 24px;
+  color: #fff;
+  background-color: #9abcff;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.info-section > a {
+  color: #fff;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #e7e7e7;
+  margin: 0 3px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #9abcff;
+}
+
+.carousel-arrows {
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.arrow {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.ranking-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ranking-container > p {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 20px 15px;
+  color: #494949;
+}
+
+.ranking-container > ol {
+  list-style: none;
+}
+
+.ranking-container > ol > li {
+  display: flex;
+  width: 350px;
+  height: 40px;
+  margin-bottom: 7px;
+  border: 1px solid #9abcff;
+  border-radius: 20px;
+  padding: 6px 6px;
+}
+
+.ranking-container > ol > li > .rank {
+  margin: 0 10px;
+  padding: 2px 0;
+  font-size: 18px;
+  color: #71a1ff;
+}
+
+.ranking-container > ol > li > .relenge-title {
+  width: 210px;
+  height: 100%;
+  margin-right: 10px;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #494949;
+  overflow: hidden;
+  position: relative;
+}
+
+.scrolling-text {
+  position: absolute;
+  width: 210px;
+  white-space: nowrap;
+  animation-delay: 1s;
+}
+
+
+.ranking-container > ol > li > a {
+  text-decoration: none;
+  width: 90px;
+  height: 26px;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #fff;
+  background-color: #9abcff;
+  text-align: center;
+  border-radius: 13px;
+}
