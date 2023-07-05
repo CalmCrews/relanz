@@ -216,12 +216,12 @@ def home(request):
                 }
 
                 res_data = survey_result(request)
-                res_data2 = {'user':user, 
+                res_data3 = {'user':user, 
                             'tag_lists':tag_lists_, 
                             'combined_data': combined_data, 
                             'analysis_data':analysis_data
                             }
-                res_data.update(res_data2)
+                res_data.update(res_data3)
 
                 return render(request, 'main/home.html', res_data)
             
