@@ -40,7 +40,15 @@
               </div>
             </li>
         {% else %}
-            
+          <li>
+            <div class="relenge-card">
+              <div class="empty-card">
+                <img src="{% static 'icons/question_mark.png' %}" alt="question_mark">
+                <span>릴렌지를 참여하고<br>1위 랭킹을 확인해 보아요!</span>
+                <a href="{% url 'main:home' %}">추천 릴렌지 보기</a>
+              </div>
+            </div>
+          </li>
         {% endif%}
 
         {% if combined_data.1 %}
@@ -62,7 +70,15 @@
               </div>
             </li>
         {% else %}
-
+          <li>
+            <div class="relenge-card">
+              <div class="empty-card">
+                <img src="{% static 'icons/question_mark.png' %}" alt="question_mark">
+                <span>릴렌지를 참여하고<br>2위 랭킹을 확인해 보아요!</span>
+                <a href="{% url 'main:home' %}">추천 릴렌지 보기</a>
+              </div>
+            </div>
+          </li>
         {% endif%}
         
         {% if combined_data.2 %}
@@ -84,24 +100,21 @@
               </div>
             </li>
         {% else %}
-
+          <li>
+            <div class="relenge-card">
+              <div class="empty-card">
+                <img src="{% static 'icons/question_mark.png' %}" alt="question_mark">
+                <span>릴렌지를 참여하고<br>3위 랭킹을 확인해 보아요!</span>
+                <a href="{% url 'main:home' %}">추천 릴렌지 보기</a>
+              </div>
+            </div>
+          </li>
         {% endif%}
       </ul>
       <div class="carousel-dots">
         <span class="dot active"></span>
-        {% if combined_data %}
-          {% for challenge in combined_data %}
-            {% if forloop.counter0 < combined_data|length|add:"-1" %}
-              <span class="dot"></span>
-            {% endif %}
-          {% endfor %}
-        {% else %}
-          {% for challenge in challenges %}
-            {% if forloop.counter0 < challenges|length|add:"-1" %}
-              <span class="dot"></span>
-            {% endif %}
-          {% endfor %}
-        {% endif %}
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
       <div class="carousel-arrows">
         <span class="arrow arrow-left"><img src="{% static "icons/leftarrow.png" %}" alt="left-arrow"></span>
@@ -135,7 +148,25 @@
   <div class="age-ranking-section ranking-container">
     {% comment %} 여기 유저 나이대 필요 {% endcomment %}
     <p>20대 랭킹</p>
-
+    <ol>
+      {% for rank, challenge in age_challenge_ranking %}
+        <li>
+          <div class="rank">
+            {% if rank < 1 %}
+              -
+            {% else %}
+              {{rank}}
+            {% endif %}
+          </div>
+          <div class="relenge-title">
+            <div class="scrolling-text">
+              <span class="text">{{ challenge.title }}</span>
+            </div>
+          </div>
+          <a href="{% url 'challenge:challenge' challenge_id=challenge.id%}">자세히 보기</a>
+        </li>
+      {% endfor %}
+    </ol>
   </div>
   {% for key, value in res_ranking.items %}
     <div class="gender-section ranking-container">
@@ -146,14 +177,27 @@
           여자 랭킹
         {% endif %}
       </p>
+      <ol>
+        {% for rank, challenge in value %}
+          <li>
+            <div class="rank">
+              {% if rank < 1 %}
+                -
+              {% else %}
+                {{rank}}
+              {% endif %}
+            </div>
+            <div class="relenge-title">
+              <div class="scrolling-text">
+                <span class="text">{{ challenge.title }}</span>
+              </div>
+            </div>
+            <a href="{% url 'challenge:challenge' challenge_id=challenge.id%}">자세히 보기</a>
+          </li>
+        {% endfor %}
+      </ol>
     </div>
-    <ol>
-    {% for rank, challenge in value %}
-        <li>Rank: {{ rank }}, Challenge: {{ challenge.title }}</li>
-    {% endfor %}
-    </ol>
-{% endfor %}
-
+  {% endfor %}
 </div>
 {% endblock %}
 
@@ -226,8 +270,7 @@
       textElements.forEach(function(textElement) {
         const textWidth = textElement.offsetWidth; // 텍스트의 너비
         if (textWidth > 200) {
-          console.log(textWidth)
-          var animationDuration = (textWidth - 200) / 10; // 움직임 속도 조절 (50은 조정 가능한 상수)
+          var animationDuration = (textWidth - 200) / 10; // 움직임 속도 조절 
       
           const keyframes = `@keyframes scroll-left-${textWidth} {
             0% {
@@ -255,52 +298,3 @@
 
 {% endblock %}
 
-{% comment %} 실시간 랭킹 참조방법 -> 나이 대 별 참조 방법도 동일 {% endcomment %}
-{% for rank, challenge in challenge_ranking %}
-  <li>Rank: {{ rank }}, Challenge: {{ challenge.title }}</li>
-{% endfor %}
-<ol>
-{% for rank, challenge in age_challenge_ranking %}
-<li>Rank: {{ rank }}, Challenge: {{ challenge.title }}</li>
-{% endfor %}
-</ol>
-<!-- 성별이 남자일 경우 남자가 먼저 아니면 여자가 먼저 => for문 순서 -->
-{% for key, value in res_ranking.items %}
-    <h2>{{ key }}</h2>
-    <ol>
-    {% for rank, challenge in value %}
-        <li>Rank: {{ rank }}, Challenge: {{ challenge.title }}</li>
-    {% endfor %}
-    </ol>
-{% endfor %}
-
-<!-- Your HTML template -->
-<table>
-  <thead>
-    <tr>
-      <th>1. 별</th>
-      <th>2. 제목</th>
-      <th>3. 랭킹</th>
-      <th>4. user_id</th>
-      <th>5. score</th>
-      <th>6. 전체 랭킹</th>
-      <th>7. 참여자수</th>
-
-    </tr>
-  </thead>
-  
-  <tbody>
-  Top3 챌린지의 user_id랑 score
-    {% for data in combined_data %}
-    <tr>
-      <td>{{ forloop.counter }}</td>
-      <td>{{ data.0.title }}</td> <!-- TOP3 Challenge 객체-->
-      <td>{{ data.1.0 }}</td> <!--  챌린지 내에서 유저 순위 Rank -->
-      <td>{{ data.1.1.author__user }}</td> <!-- User ID -->
-      <td>{{ data.1.1.sum }}</td> <!-- 해당 릴렌지에 대한 유저의 Score -->
-      <td>{{ data.2 }}</td> <!-- 해당 릴렌지의 전체 랭킹 -->
-      <td>{{ data.3.0.count }}</td> <!-- 해당 릴렌지의 참여자수 -->
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>

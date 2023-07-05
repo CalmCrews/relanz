@@ -65,8 +65,9 @@ async function makeRequest(url) {
 }
 
 const getUrl = async () => {
-    // 여기에 백엔드 url 적어주삼요r1eNaU0kipEVvTaIpS0wNwzka5GLv5rdG6Iut6tQ";
-    const url = ``;
+    // 여기에 백엔드 url 적어주삼요
+    const Access_Key = "uC_r1eNaU0kipEVvTaIpS0wNwzka5GLv5rdG6Iut6tQ";
+    const url = `https://api.unsplash.com/photos/?client_id=${Access_Key}&count=8&content_filter=low`;
     const resultData = await makeRequest(url);
     
     return resultData;
