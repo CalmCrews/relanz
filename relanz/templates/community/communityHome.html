@@ -55,7 +55,7 @@ communityHome
                 <a href="http://" class="record-btn">내 기록 모아보기</a>
 
             {% else %}
-                <a href="http://" class="record-btn">시작하기</a>
+                <a href="{% url 'challenge:participate' challenge.id %}" class="record-btn">시작하기</a>
             {% endif %}
         </div>
         <div class="images-box-div" id="images_box_div">
