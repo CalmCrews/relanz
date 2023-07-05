@@ -546,12 +546,14 @@
     });
 
 
+    //그래프 작성
+
     const entireDivs = document.querySelectorAll('.entire > div');
     const genderDivs = document.querySelectorAll('.gender > div');
     const ageDivs = document.querySelectorAll('.age > div');
 
     const entirePercentages = {{all_percentages}};
-    const sexPercentages = {{sex_percentages}}
+    const sexPercentages = {{sex_percentages}};
     const agePercentages = {{age_percentages}};
     function setElementWidth(elements, percentages) {
       let lastIndex = 0;
@@ -563,6 +565,7 @@
       }
       elements[lastIndex].style.borderRadius = '0 12px 12px 0';
     }
+
 
     setElementWidth(entireDivs, entirePercentages);
     setElementWidth(genderDivs, sexPercentages);

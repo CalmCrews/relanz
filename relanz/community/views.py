@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.paginator import Paginator
 from .forms import ArticleForm
 from .models import Article, Like, Participant
 from user.models import User
@@ -18,14 +17,21 @@ import re
 @login_required(login_url='/user/signin')
 @email_verified_required
 def communityHome(request, challenge_id):
+    user = request.user
+
     challenge = Challenge.objects.get(id=challenge_id)
     articles = Article.objects.filter(challenge=challenge) # a 챌린지의 게시물들만 가져오기
     
-    paginator = Paginator(articles, 3) # 한페이지 당 사진 3개로 설정
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # 이 챌린지 참여했는지 안했는지 체크 위해 변수 만듬
+    participated = Participant.objects.filter(user=user, challenge=challenge) 
 
-    res_data = {'articles': articles, 'challenge':challenge, 'page_obj':page_obj}
+    # 게시물들에서 이미지 URL 추출
+    mediaList = [article.image.url for article in articles if article.image]
+    
+    # 효율적인 순회 위해 mediaList랑 articles 묶어줌
+    zips = zip(mediaList, articles)
+
+    res_data = {'articles': articles, 'challenge':challenge, 'participated':participated, 'mediaList':mediaList, 'zips':zips}
     return render(request, 'community/communityHome.html', res_data)
 
 @login_required(login_url='/user/signin')

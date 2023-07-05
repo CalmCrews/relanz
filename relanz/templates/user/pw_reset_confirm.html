@@ -1,34 +1,92 @@
-{% load i18n static %}
+{% extends 'mobileBase.html' %}
+{% load static %}
+{% block title %}
+  findPassword_confirm
+{% endblock title %}
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/user/pw_reset_confirm.css"%}">
+{% endblock extrahead %}
+{% block content%}
+  <div class="container-mobile">
+    <div class="mobile-header">
+      <a href="{% url 'main:home' %}">
+        <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo1">
+      </a>
+    </div>
 
-{% block content %}
+    <div class="title">
+      <p class="title-text">비밀번호 재설정</p>
+    </div>
 
-{% if validlink %}
-  <h2>비밀번호 재설정</h2>
-
-  <p>새로운 비밀번호를 정확히 입력했는지</p>
-  <p>확인할 수 있도록 두 번 입력하시기 바랍니다</p>
-
-  <form method="post">
-    {% csrf_token %}
-    <fieldset class="module aligned">
-      <div class="form-row">
-        <label for="id_new_password1">새로운 비밀번호 입력</label><br>
-        {{ form.new_password1.errors }}
-        <input type="password" placeholder="비밀번호를 입력해주세요" name="new_password1" id="password" class="password-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
+    <div class="email-div">
+      <div class="info-ment">
+        <p>새로운 비밀번호를 정확히 입력했는지</p>
+        <p>확인할 수 있도록 두 번 입력하시기 바랍니다</p>
       </div>
-      <div class="form-row">
-        <label for="id_new_password2">새로운 비밀번호 확인</label><br>
-        {{ form.new_password2.errors }}
-        <input type="password" placeholder="비밀번호를 다시 입력해주세요" name="new_password2" id="re_password" class="re-password-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
-      </div>
 
-      <input type="submit" value="비밀번호 재설정">
-    </fieldset>
-  </form>
+      <form method="post">
+        {% csrf_token %}
+        <div class="new-password-div">
+          {% if form.new_password1.errors %}
+            <div class="pw-condition-div" id="pw_condition_div_1">
+              <div class="exclamation-img-div">
+                <img src="{% static "icons/exclamation_mark.svg" %}" alt=".">
+              </div>
+              {{ form.new_password1.errors }}}
+              <input type="button" value="확인" class="pw-condition-div-btn" onclick="onclikcPwConditionBtn(this)" data-num="1">
+            </div>
+          {% elif form.new_password2.errors %}
+            <div class="pw-condition-div" id="pw_condition_div_2">
+              <div class="exclamation-img-div">
+                <img src="{% static "icons/exclamation_mark.svg" %}" alt=".">
+              </div>
+              {{ form.new_password2.errors }}
+              <input type="button" value="확인" class="pw-condition-div-btn" onclick="onclikcPwConditionBtn(this)" data-num="2">
+            </div>
+          {% endif %}
 
-{% else %}
-  <p>비밀번호 링크가 유효하지 않습니다</p>
-  <p>다시 초기화를 진행해주세요</p>
-{% endif %}
+          <div class="new-password1-div">
+            <p class="input-email-text">PW</p>
+            <label for="new_password1">새로운 비밀번호 입력</label>
+            <input type="password" placeholder="비밀번호를 입력해주세요" name="new_password1" id="password" class="password-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
+          </div>
+          <div class="new-password2-div">
+            <p class="input-email-text">PW</p>
+            <label for="new_password2">새로운 비밀번호 확인</label>
+            <input type="password" placeholder="비밀번호를 다시 입력해주세요" name="new_password2" id="re_password" class="re-password-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
+          </div>
+        </div>
 
+        <input class="hidden-input" type="submit" id="submit_btn_real">
+      </form>
+
+    </div>
+
+    <input class="submit-btn" type="button" value="비밀번호 재설정" onclick="onclikcSubmitBtn()">
+
+    <div class="just-for-space"></div>
+  </div>
+  <script>
+    function onclikcSubmitBtn() {
+      document
+        .getElementById("submit_btn_real")
+        .click()
+    }
+
+    function onclikcPwConditionBtn(obj) {
+      const number = obj.dataset.num
+      if (Number(number) === 1) {
+        document
+          .getElementById("pw_condition_div_1")
+          .remove()
+      } else if (Number(number) === 2) {
+        document
+          .getElementById("pw_condition_div_2")
+          .remove()
+      }
+      return;
+    }
+  </script>
 {% endblock %}
+
+{% block scripts%}{% endblock scripts%}
