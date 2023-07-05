@@ -10,7 +10,8 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib import messages
-
+from django.utils import timezone
+from datetime import timedelta
 import re
 
 # Create your views here.
@@ -18,15 +19,32 @@ import re
 @login_required(login_url='/user/signin')
 @email_verified_required
 def communityHome(request, challenge_id):
-    challenge = Challenge.objects.get(id=challenge_id)
-    articles = Article.objects.filter(challenge=challenge) # a 챌린지의 게시물들만 가져오기
-    
-    paginator = Paginator(articles, 3) # 한페이지 당 사진 3개로 설정
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    if request.method == 'GET':
+        challenge = Challenge.objects.get(id=challenge_id)
+        articles = Article.objects.filter(challenge=challenge) # a 챌린지의 게시물들만 가져오기
+        
+        paginator = Paginator(articles, 3) # 한페이지 당 사진 3개로 설정
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
-    res_data = {'articles': articles, 'challenge':challenge, 'page_obj':page_obj}
-    return render(request, 'community/communityHome.html', res_data)
+        res_data = {'articles': articles, 'challenge':challenge, 'page_obj':page_obj}
+        return render(request, 'community/communityHome.html', res_data)
+    if request.method == 'POST':
+        user = request.user
+        articles = Article.objects.filter(author__user = user, challenge=challenge_id)
+        if articles.exists():
+            current_time = timezone.now()
+            articles = articles.order_by('-created_at')
+            last_article = articles[0]
+            time_difference = current_time - last_article.created_at
+            if time_difference < timedelta(days=1):
+                message = {'message': '릴렌지 기록은 하루에 한 번만 가능합니다.'}
+                return JsonResponse(message, status=400)
+            else:
+                return redirect('community:new')
+        else:
+            return redirect('community:new')
+
 
 @login_required(login_url='/user/signin')
 @email_verified_required
