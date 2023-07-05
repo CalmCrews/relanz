@@ -585,7 +585,7 @@ margin: 0;
   border: 2px solid #9abcff;
   border-radius: 25px;
   transition: 0.5s;
-  left: calc(50% - 110px);
+  left: calc(50% - 120px);
   top: 0;
   background-color: #fff;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.25);

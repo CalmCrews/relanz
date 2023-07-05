@@ -384,7 +384,7 @@
     hiddenMessageInnerText.innerText = weeklyMessages[dayOfWeek];
 
     //score graph
-    let user_score = {{ user.score }};
+    const user_score = {{ user.score }};
     let userScore = user_score;
     let goalScore;
     let userLevel = "1";
@@ -588,15 +588,4 @@
 
 
 {% endblock %}
-
-
-<!-- {% for challenge, participant in combined_data %}
-<p>Challenge: {{ challenge.title }}</p>
-{% if challenge.image %}
-<img src="{% static challenge.image %}" alt="이미지">
-{% endif %}
-<p>Participant: {{ participant }}</p>
-{% endfor %}
-코드를 실행해 보면 알 수 있습니다! -->
-
 
