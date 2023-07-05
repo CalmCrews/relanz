@@ -30,12 +30,11 @@ def communityHome(request, challenge_id):
         paginator = Paginator(articles, 9) 
         try:
             page_number = request.GET.get('page')
-            if paginator.num_pages <  int(page_number):
+            if page_number is not None and paginator.num_pages < int(page_number):
                 message = {'message': '더 이상 기록이 없습니다.'}
                 return JsonResponse(message, status=400)
             else:
                 page_obj = paginator.get_page(page_number)
-
 
         except PageNotAnInteger:
             page = 1
@@ -108,7 +107,7 @@ def detail(request, challenge_id, article_id):
     paginator = Paginator(articles, 1)
     try:     
         page_number = request.GET.get('page')
-        if paginator.num_pages <  int(page_number):
+        if page_number is not None and paginator.num_pages < page_number:
                 message = {'message': '더 이상 기록이 없습니다.'}
                 return JsonResponse(message, status=400)
         else:
@@ -129,7 +128,6 @@ def detail(request, challenge_id, article_id):
         page_obj=paginator.page(page)
         messages.add_message(request, messages.ERROR, '더 이상 인증 글이 없습니다.')
     
-        
     res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist}
     return render(request, 'community/detail.html', res_data)
 
