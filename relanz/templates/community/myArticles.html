@@ -1,7 +1,7 @@
 {% extends 'mobileBase.html' %}
 {% load static %}
 {% block mobile_title %}
-communityHome
+myArticles
 {% endblock mobile_title %}
 {% block mobile_extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static "css/communityHome.css"%}">
@@ -41,14 +41,14 @@ communityHome
                     <img src="{% static "icons/human_shaped.png" %}" alt=".">
                 </div>
                 {% if participant %}
-                    <small class="participant-count-small">{{participant}} 명이 참여 중인 릴렌지</small>
+                    <small class="participant-count-small">{{participant_count}} 명이 참여 중인 릴렌지</small>
                 {% else %}
                 <small class="participant-count-small">00 명이 참여 중인 릴렌지</small>
                 {% endif %}
             </div>
         </div>
         <div class="tag-record-div">
-            {% if participated %}
+            {% if participant %}
                 <a href="{% url 'community:new' challenge.id %}" class="record-btn">내 기록 남기기</a>
                 <a href="{% url 'community:myArticles' challenge.id %}" class="record-btn">내 기록 모아보기</a>
 
@@ -57,15 +57,13 @@ communityHome
             {% endif %}
         </div>
         <div class="images-box-div" id="images_box_div">
-            {% comment %} 여기에 이미지 url이 list로 던저져야함! -> 했습니당 {% endcomment %}
             {% if mediaList %}
-                {% comment %} reversed 사용해서 가장 최신에 올린 게시물이 위에 있도록 설정 {% endcomment %}
                 {% for mediaUrl, article in zips reversed %}
-                <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
-                    <div class="images-box-single">
-                        <img src="{{mediaUrl}}" alt=".">
-                    </div>
-                </a>
+                    <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
+                        <div class="images-box-single">
+                            <img src="{{mediaUrl}}" alt=".">
+                        </div>
+                    </a>
                 {% endfor %}
             {% else %}
                 <a href="http://" class="images-box-single-a">
@@ -73,32 +71,6 @@ communityHome
                         <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
                     </div>
                 </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                
                 <a href="http://" class="images-box-single">
                     <div class="images-box-single">
                         <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
@@ -130,5 +102,11 @@ communityHome
    
 {% block scripts%}
 {% endblock scripts%}
+
+
+
+
+
+
 
 
