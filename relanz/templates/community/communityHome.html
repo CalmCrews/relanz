@@ -60,9 +60,8 @@ communityHome
         </div>
         <div class="images-box-div" id="images_box_div">
             {% comment %} 여기에 이미지 url이 list로 던저져야함! -> 했습니당 {% endcomment %}
-            {% if zips %}
                 {% comment %} reversed 사용해서 가장 최신에 올린 게시물이 위에 있도록 설정 {% endcomment %}
-                {% for article in articles reversed %}
+            {% for article in articles %}
                 <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
                     <div class="images-box-single">
                         {% if article.image %}
@@ -70,8 +69,8 @@ communityHome
                         {% endif %}
                     </div>
                 </a>
-                {% endfor %}
-            <!-- {% else %}
+            {% endfor %}
+            {% comment %} <!-- {% else %}
                 <a href="http://" class="images-box-single-a">
                     <div class="images-box-single">
                         <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
@@ -118,7 +117,7 @@ communityHome
                         <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
                     </div>
                 </a>
-            {% endif %} -->
+            {% endif %} --> {% endcomment %}
             
         </div>
         <div class="loading-div">

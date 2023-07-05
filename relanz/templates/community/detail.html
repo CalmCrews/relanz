@@ -50,6 +50,7 @@ communityHome
         </div>
         <div class="detail-content-background">
             <div class="main-content-div">
+            {% for article in articles %}
                 <div class="header-div">
                     {% if messages %}
                         {% for message in messages %}
@@ -60,7 +61,6 @@ communityHome
                             </div>
                         {% endfor %}
                     {% endif %}
-
                     <div class="user-info-div">
                         
                         <div class="profile-wrapper">
@@ -77,7 +77,6 @@ communityHome
                               <div class="acc"></div>
                             </div>
                           </div>
-
                         <div class="nickname-created-div">
                             <div class="user-nickname">{{author_nickname}} 님</div>
                             <div class="content-created-at">기록 일시: {{article.created_at}}</div>
@@ -114,6 +113,7 @@ communityHome
                     {% endif %}
                 </div>
             </div>
+            {% endfor %}
         </div>
         <div class="rest-image-bundle-div" >
             <ul>
