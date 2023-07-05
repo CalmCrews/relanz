@@ -9,6 +9,7 @@ from collections import Counter
 from datetime import datetime
 from django.db.models import Sum, Count
 
+from django.http import HttpResponse
 
 # Create your views here.
 def home(request):

@@ -65,7 +65,9 @@ def new(request, challenge_id):
             user.save()
 
             return redirect('community:detail', challenge.id, article.id)
-    
+        else:
+            messages.add_message(request, messages.ERROR, '사진이 없습니다.')
+            return JsonResponse(messages, status=400)
     res_data = {'form':form, 'challenge':challenge}
     return render(request, 'community/new.html', res_data)
 
