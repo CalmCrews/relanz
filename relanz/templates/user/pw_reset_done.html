@@ -15,38 +15,27 @@
     </div>
 
     <div class="title">
-        <p class="title-text">비밀번호 찾기</p>
+      <p class="title-text">비밀번호 찾기</p>
     </div>
 
     <div class="email-div">
-        <div class="info-div">
-            <p class="info-big">비밀번호 재설정 링크가 전송되었습니다</p>
-            <p class="info-small">작성하신 이메일로 비밀번호 재설정 안내문을 전송하였습니다</p>
-        </div>
+      <div class="info-div">
+        <p class="info-big">비밀번호 재설정 링크가 전송되었습니다</p>
+        <p class="info-small">작성하신 이메일로 비밀번호 재설정 안내문을 전송하였습니다</p>
+      </div>
 
-        <div class="warning-div">
-            <div class="mark-div">
-                <img src="{% static "icons/exclamation_mark.svg" %}" alt=".">
-            </div>
-            <div class="warning-box">만약 이메일을 받지 못하셨다면, 등록하신 이메일을 다시 확인하거나 스팸 메일을 확인해주세요!</div>
+      <div class="warning-div">
+        <div class="mark-div">
+          <img src="{% static "icons/exclamation_mark.svg" %}" alt=".">
         </div>
+        <div class="warning-box">만약 이메일을 받지 못하셨다면, 등록하신 이메일을 다시 확인하거나 스팸 메일을 확인해주세요!</div>
+      </div>
     </div>
-    
+
     <input class="submit-btn" type="submit" value="비밀번호 찾는 중">
 
     <div class="just-for-space"></div>
   </div>
 {% endblock %}
 
-{% block scripts%}
-{% endblock scripts%}
-
-{% comment %} {% block content %}
-<h2>비밀번호 찾기</h2>
-
-비밀번호 재설정 링크가 전송되었습니다<br>
-
-작성하신 이메일로 비밀번호 재설정 안내문을 전송하였습니다<br>
-
-만약 이메일을 받지 못하셨다면, 등록하신 이메일을 다시 확인하거나 스팸 메일함을 확인해주세요!<br>
-{% endblock %} {% endcomment %}
+{% block scripts%}{% endblock scripts%}
