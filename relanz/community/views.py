@@ -93,7 +93,11 @@ def new(request, challenge_id):
             user.score += article.article_score
             user.save()
 
-            return redirect('community:detail', challenge.id, article.id)
+        else:
+            message = {'message': '사진 파일이 없습니다.'}
+            return JsonResponse(message, status=400)
+        messages.add_message(request, messages.SUCCESS, f'{article.article_score}')
+        return redirect('community:detail', challenge.id, article.id)
     
     res_data = {'form':form, 'challenge':challenge}
     return render(request, 'community/new.html', res_data)
