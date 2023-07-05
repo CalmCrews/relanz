@@ -1,4 +1,60 @@
-{% load i18n static %}
+{% extends 'mobileBase.html' %}
+{% load static %}
+{% block title %}
+  findPassword_confirm
+{% endblock title %}
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/user/pw_reset_confirm.css"%}">
+{% endblock extrahead %}
+{% block content%}
+  <div class="container-mobile">
+    <div class="mobile-header">
+      <a href="{% url 'main:home' %}">
+        <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo1">
+      </a>
+    </div>
+
+    <div class="title">
+        <p class="title-text">비밀번호 재설정</p>
+    </div>
+
+    <div class="email-div">
+      <div class="info-ment">
+        <p>새로운 비밀번호를 정확히 입력했는지</p>
+        <p>확인할 수 있도록 두 번 입력하시기 바랍니다</p>
+      </div>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="new-password-div">
+          <div class="new-password1-div">
+            <p class="input-email-text">PW</p>
+            <label for="new_password1">새로운 비밀번호 입력</label>
+            <input type="password" placeholder="비밀번호를 입력해주세요" name="new_password1" id="password" class="password-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
+          </div>
+          <div class="new-password2-div">
+            <p class="input-email-text">PW</p>
+            <label for="new_password2">새로운 비밀번호 확인</label>
+            <input type="password" placeholder="비밀번호를 다시 입력해주세요" name="new_password2" id="re_password" class="re-password-input" autocomplete="off" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this)">
+          </div>
+        </div>
+  
+        <input class="hidden-input" type="submit" id="submit_btn_real">
+      </form>
+
+    </div>
+    
+    <input class="submit-btn" type="button" value="비밀번호 재설정">
+
+    <div class="just-for-space"></div>
+  </div>
+{% endblock %}
+
+{% block scripts%}
+{% endblock scripts%}
+
+
+{% comment %} {% load i18n static %}
 
 {% block content %}
 
@@ -31,4 +87,4 @@
   <p>다시 초기화를 진행해주세요</p>
 {% endif %}
 
-{% endblock %}
+{% endblock %} {% endcomment %}

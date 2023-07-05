@@ -1,0 +1,325 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+	-webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    max-width: 430px;
+    width: 100%;
+    height: 5.8rem;
+    justify-content: center;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(154, 188, 255, 0.65);
+    box-shadow: 0px 2px 2px rgba(154, 188, 255, 0.65);
+    z-index: 600;
+}
+
+.mobile-header > a {
+    width: 4.5rem;
+    margin-top: 2.5rem;
+}
+
+.mobile-header > a > img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 155px;
+}
+.title-text {
+    color: #71A1FF;
+    font-size: 24px;
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.44px;
+}
+
+.email-div {
+    /* padding-top: 100px; */
+    height: 372px;
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.info-message-div {
+    height: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 254px;
+    height: 50px;
+    flex-shrink: 0;
+    background-color: rgba(113, 161, 255, 1);
+    border-radius: 30px;
+    border: none;
+    margin: 0 auto;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.8px;
+
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+
+}
+.submit-btn:hover {
+    background-color: rgba(63, 128, 252, 1);
+    cursor: pointer;
+}
+
+.just-for-space {
+    height: 50px;
+}
+
+
+.info-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.info-big {
+    color: #494949;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+.info-small {
+    display: flex;
+    width: 263px;
+    height: 38px;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    color: #494949;
+    text-align: center;
+    font-size: 16px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+
+.warning-div {
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+}
+.mark-div {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    display: flex;
+}
+.mark-div > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.warning-box {
+    width: 290px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    text-align: center;
+
+    border-radius: 15px;
+    border: 1px solid #9ABCFF;
+    background: #FFF;
+
+    color: #999;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.7px;
+}
+
+.info-ment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+
+    margin-top: 30px;
+    margin-bottom: 80px;
+}
+.info-ment > p {
+    display: flex;
+    color: #5F5F5F;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.84px;
+}
+
+
+.new-password-div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.new-password1-div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 5px;
+}
+.input-email-text {
+    position: absolute;
+    color: #9ABCFF;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.84px;
+
+    bottom: 12px;
+    left: 18px;
+}
+.new_password1 {
+    color: #494949;
+    text-align: center;
+    font-size: 15px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -0.96px;
+}
+.new-password1-div > input {
+    width: 299px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+
+    border-radius: 30px;
+    border: 1px solid #71A1FF;
+    background: #FFF;
+    
+    padding-left: 60px;
+}
+.new-password1-div > input::placeholder {
+    color: #AAA;
+    font-size: 12px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+
+.new-password2-div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 5px;
+}
+/* .input-email-text {} */
+.new_password2 {
+    color: #494949;
+    text-align: center;
+    font-size: 15px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -0.96px;
+}
+.new-password2-div > input {
+    width: 299px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+
+    border-radius: 30px;
+    border: 1px solid #71A1FF;
+    background: #FFF;
+    
+    padding-left: 60px;
+}
+.new-password2-div > input::placeholder {
+    color: #AAA;
+    font-size: 12px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.hidden-input {
+    visibility: hidden;
+}
