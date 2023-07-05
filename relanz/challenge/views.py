@@ -35,8 +35,10 @@ def challenge(request, challenge_id):
 			challenge_tag_list.append(tag_name)
 	participant_count = len(Participant.objects.filter(challenge=challenge_id))
 	
+	participated = Participant.objects.filter(user=user, challenge=challenge) # 이 챌린지 참여했는지 안했는지 체크 위해 변수 만듬
 
-	return render(request, 'challenge/challenge.html', {'challenge':challenge, 'challenge_tag':challenge_tag_list, 'participant':participant_count})
+	res_data = {'challenge':challenge, 'challenge_tag':challenge_tag_list, 'participant':participant_count, 'participated':participated}
+	return render(request, 'challenge/challenge.html', res_data)
 
 
 
@@ -93,7 +95,6 @@ def participate(request, challenge_id):
 	participant = Participant(user=user, challenge=challenge)
 	participant.save()
 
-	return render(request, 'challenge/participate.html', {
-		"user" : user.nickname,
-	})
+	res_data = {"user": user.nickname, 'challenge':challenge}
+	return render(request, 'challenge/participate.html', res_data)
 
