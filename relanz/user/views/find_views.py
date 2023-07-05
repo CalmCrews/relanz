@@ -17,7 +17,7 @@ def findid(request):
 
             send_mail(subject=subject, message=message, from_email=from_email, recipient_list=recipient_list)
             
-            res_data = {'success': '입력하신 이메일로 아이디를 전송했습니다.'}
+            res_data = {'success': '입력하신 이메일로 아이디가 전송되었습니다'}
 
             return render(request, 'user/findid.html', res_data)
         

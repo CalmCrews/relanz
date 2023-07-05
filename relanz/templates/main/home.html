@@ -73,25 +73,33 @@
             </div>
             <div class="relenge-section">
               <ul class="tag-list">
-                <li>전체</li>
-                {% comment %} 임시 {% endcomment %}
-                {% comment %} <li>전체</li>
-                <li>야외</li>
-                <li>실내</li>
-                <li>동적인</li>
-                <li>정적인</li>
-                <li>혼자서</li> {% endcomment %}
+                <li class="tag-filter" data-tag="전체">전체</li>
                 {% for item in tag_lists %}
-                  <li>{{item}}</li>
+                  <li class="tag-filter" data-tag="{{ item }}">{{item}}</li>
                 {% endfor %}
-                
               </ul>
               <div class="relenge-list-container">
                 <ul class="relenge-list">
                   {% comment %} 임시 {% endcomment %}
-                  {% if challenges %}
+                  {% if combined_data %}
+                  {% for challenge, participant in combined_data %}
+                  <li>
+                    <div class="relenge-card">
+                      <div class="image-section">
+                        <img src="{% static challenge.challenge.image %%}" alt="{{ challenge.title }}">
+                      </div>
+                      <div class="info-section">
+                        <div class="sticker">공식 릴렌지 활동</div>
+                        <h2>"{{ challenge.challenge.title }}"</h2>
+                        <img src="{% static "icons/ppl.png" %}" alt="icon"/>
+                        <span>{{ participant }}명이 참여 중인 릴렌지</span>
+                        <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">참여하기</a>
+                      </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                  {% else %}
                     {% for challenge in challenges %}
-                      {% if challenge.static %}
                       <li>
                         <div class="relenge-card">
                           <div class="image-section">
@@ -100,97 +108,30 @@
                           <div class="info-section">
                             <div class="sticker">공식 릴렌지 활동</div>
                             <h2>{{ challenge.challenge.title }}</h2>
-                            <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                            <span>n명이 참여 중인 릴렌지</span>
-                            <a href="{% url 'challenge:participate' challenge_id=challenge.id %}">참여하기</a>
+                            {% comment %} <img src="{% static "icons/ppl.png" %}" alt="icon"/>
+                            <span>n명이 참여 중인 릴렌지</span> {% endcomment %}
+                            <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">참여하기</a>
                           </div>
                         </div>
                       </li>
+                    {% endfor %}
+                  {% endif %}
+                </ul>
+                <div class="carousel-dots">
+                  <span class="dot active"></span>
+                  {% if combined_data %}
+                    {% for challenge in combined_data %}
+                      {% if forloop.counter0 < combined_data|length|add:"-1" %}
+                        <span class="dot"></span>
+                      {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    {% for challenge in challenges %}
+                      {% if forloop.counter0 < challenges|length|add:"-1" %}
+                        <span class="dot"></span>
                       {% endif %}
                     {% endfor %}
                   {% endif %}
-                  {% for challenge, participant in combined_data %}
-                  <li>
-                    <div class="relenge-card">
-                      <div class="image-section">
-                        <img src="{{ challenge.image }}" alt="{{ challenge.title }}">
-                      </div>
-                      <div class="info-section">
-                        <div class="sticker">공식 릴렌지 활동</div>
-                        <h2>"{{ challenge.title }}"</h2>
-                        <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                        <span>{{ participant }}명이 참여 중인 릴렌지</span>
-                        <a href="{% url 'challenge:participate' challenge_id=challenge.id %}">참여하기</a>
-                      </div>
-                    </div>
-                  </li>
-                  {% endfor %}
-                  <li>
-                    <div class="relenge-card">
-                      <div class="image-section">
-                        <img src="" alt="">
-                      </div>
-                      <div class="info-section">
-                        <div class="sticker">공식 릴렌지 활동</div>
-                        <h2>야외</h2>
-                        <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                        <span>n명이 참여 중인 릴렌지</span>
-                        <a href="">참여하기</a>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="relenge-card">
-                      <div class="image-section">
-                        <img src="" alt="">
-                      </div>
-                      <div class="info-section">
-                        <div class="sticker">공식 릴렌지 활동</div>
-                        <h2>실내</h2>
-                        <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                        <span>n명이 참여 중인 릴렌지</span>
-                        <a href="">참여하기</a>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="relenge-card">
-                      <div class="image-section">
-                        <img src="" alt="">
-                      </div>
-                      <div class="info-section">
-                        <div class="sticker">공식 릴렌지 활동</div>
-                        <h2>동적인</h2>
-                        <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                        <span>n명이 참여 중인 릴렌지</span>
-                        <a href="">참여하기</a>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="relenge-card">
-                      <div class="image-section">
-                        <img src="" alt="">
-                      </div>
-                      <div class="info-section">
-                        <div class="sticker">공식 릴렌지 활동</div>
-                        <h2>정적인</h2>
-                        <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                        <span>n명이 참여 중인 릴렌지</span>
-                        <a href="">참여하기</a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-                <div class="carousel-dots">
-                  {% if challenges %}
-                    {% for challenge in challenges %}
-                      <span class="dot"></span>
-                    {% endfor %}
-                  {% endif %}
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
                 </div>
                 <div class="carousel-arrows">
                   <span class="arrow arrow-left"><img src="{% static "icons/leftarrow.png" %}" alt="left-arrow"></span>
@@ -224,7 +165,7 @@
                   </div>
                   <div class="comment-3">
                     {{ user.nickname }}님은 스트레스에 
-                    <div class="user-result">
+                    <div class="user-result" id="user-result">
                       {{ user_survey_result }}
                     </div>
                     편 입니다
@@ -272,7 +213,52 @@
                   </div>
 
                 </div>
-                <div class="summary-detail-2"></div>
+                <div class="summary-detail-2">
+                  <div class="detail-explain">
+                    {{user.nickname}} 님의 릴렌지 참여를 바탕으로 분석한 결과입니다
+                  </div>
+                  <div id="mainly" class="summary-detail">
+                    <p>{{user.nickname}} 님의 스트레스 활동은 주로</p>
+                    <div class="tag-container">
+                      {% if analysis_data %}
+                        {% for item in analysis_data.analysis_user_tag %}
+                          <span>{{item}}</span>
+                        {% endfor %}
+                      {% else %}
+                        <span><a href="#top-page">릴렌지 참여하고 분석받기</a></span>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div id="mostly" class="summary-detail">
+                    <p>{{user.nickname}} 님의 최애 릴렌지 활동은</p>
+                    <div class="tag-container">
+                      {% if analysis_data %}
+                          <span>
+                            <a href="{% url 'challenge:challenge' challenge_id=analysis_data.most_like_challenge.id %}">
+                              {{analysis_data.most_like_challenge.title}}</span>
+                            </a>
+                      {% else %}
+                        <span><a href="#top-page">릴렌지 참여하기</a></span>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div id="recommend" class="summary-detail">
+                    <p>{{user.nickname}} 님께 추천하는 다음 릴렌지는</p>
+                    <div class="tag-container">
+                      {% if analysis_data %}
+                        {% for item in analysis_data.analysis_titles %}
+                          <span>
+                            <a href="{% url 'challenge:challenge' challenge_id=item.id %}">
+                              {{item.title}}
+                            </a>
+                          </span>
+                        {% endfor %}
+                      {% else %}
+                        <span><a href="#top-page">릴렌지 참여하고 추천받기</a></span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="relanz-magazine">
                 <div class="magazine-wrapper">
@@ -316,6 +302,31 @@
 
 {% block mobile-scripts %}
   <script>
+    //tag dictionary
+    const tagDict = {
+      morning: "아침",
+      afternoon: "점심",
+      evening: "저녁",
+      inside: "실내",
+      outside: "실외",
+      solo: "혼자",
+      group : "여럿이",
+      pay: "유료",
+      free: "무료",
+      static: "정적인",
+      dynamic: "동적인"
+    }
+
+    const tagContainer = document.querySelector('.tag-container');
+    const tags = tagContainer.querySelectorAll('span');
+
+    tags.forEach(tag => {
+      const tagKey = tag.textContent.trim();
+      if (tagKey in tagDict) {
+        tag.textContent = tagDict[tagKey];
+      }
+    });
+
     //캐릭터조합
     function renderProfileCombination(combinationData) {
       const backHairElement = document.querySelector(".back-hair");
@@ -371,7 +382,6 @@
     ];
     const hiddenMessageInnerText = document.querySelector(".hidden-message > p");
     hiddenMessageInnerText.innerText = weeklyMessages[dayOfWeek];
-    
 
     //score graph
     let user_score = {{ user.score }};
@@ -536,9 +546,6 @@
     });
 
 
-
-    //그래프 작성
-
     const entireDivs = document.querySelectorAll('.entire > div');
     const genderDivs = document.querySelectorAll('.gender > div');
     const ageDivs = document.querySelectorAll('.age > div');
@@ -546,22 +553,32 @@
     const entirePercentages = {{all_percentages}};
     const sexPercentages = {{sex_percentages}}
     const agePercentages = {{age_percentages}};
-
     function setElementWidth(elements, percentages) {
+      let lastIndex = 0;
       for (let i = 0; i < 3 ; i++) {
         elements[i].style.width = (percentages[i] / 100) * 210 + 'px';
-        if (i!=0 && percentages[i] === 0) {
-          elements[i - 1].style.borderRadius = '0 12px 12px 0';
+        if (percentages[i] !== 0) {
+          lastIndex = i;
         }
       }
+      elements[lastIndex].style.borderRadius = '0 12px 12px 0';
     }
 
-    console.log(entirePercentages);
-    console.log(sexPercentages);
-    console.log(agePercentages);
     setElementWidth(entireDivs, entirePercentages);
     setElementWidth(genderDivs, sexPercentages);
     setElementWidth(ageDivs, agePercentages);
+
+
+    const userResultElement = document.getElementById("user-result");
+    const userResultValue = "{{ user_survey_result }}";
+
+    if (userResultValue === "매우 취약한") {
+      userResultElement.style.backgroundColor = "#4c89ff";
+    } else if (userResultValue === "다소 취약한") {
+      userResultElement.style.backgroundColor = "#9abcff";
+    } else if (userResultValue === "취약하지 않은") {
+      userResultElement.style.backgroundColor = "#6888c5";
+    }
   </script>
 
 
