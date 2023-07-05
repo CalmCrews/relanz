@@ -9,7 +9,9 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib import messages
-
+from django.utils import timezone
+from datetime import timedelta
+from django.core.paginator import Paginator, PageNotAnInteger
 import re
 
 # Create your views here.
@@ -17,22 +19,37 @@ import re
 @login_required(login_url='/user/signin')
 @email_verified_required
 def communityHome(request, challenge_id):
-    user = request.user
+    if request.method == 'GET':
+        
+        challenge = Challenge.objects.get(id=challenge_id)
+        articles = Article.objects.filter(challenge=challenge) # a 챌린지의 게시물들만 가져오기
+        try:     
+            paginator = Paginator(articles, 9) # 한페이지 당 사진 3개로 설정
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
 
-    challenge = Challenge.objects.get(id=challenge_id)
-    articles = Article.objects.filter(challenge=challenge) # a 챌린지의 게시물들만 가져오기
-    
-    # 이 챌린지 참여했는지 안했는지 체크 위해 변수 만듬
-    participated = Participant.objects.filter(user=user, challenge=challenge) 
+        except PageNotAnInteger:
+            page = 1
+            page_obj = paginator.page(page)
+            
+        res_data = {'articles': articles, 'challenge':challenge, 'page_obj':page_obj}
+        return render(request, 'community/communityHome.html', res_data)
+    if request.method == 'POST':
+        user = request.user
+        articles = Article.objects.filter(author__user = user, challenge=challenge_id)
+        if articles.exists():
+            current_time = timezone.now()
+            articles = articles.order_by('-created_at')
+            last_article = articles[0]
+            time_difference = current_time - last_article.created_at
+            if time_difference < timedelta(days=1):
+                message = {'message': '릴렌지 기록은 하루에 한 번만 가능합니다.'}
+                return JsonResponse(message, status=400)
+            else:
+                return redirect('community:new')
+        else:
+            return redirect('community:new')
 
-    # 게시물들에서 이미지 URL 추출
-    mediaList = [article.image.url for article in articles if article.image]
-    
-    # 효율적인 순회 위해 mediaList랑 articles 묶어줌
-    zips = zip(mediaList, articles)
-
-    res_data = {'articles': articles, 'challenge':challenge, 'participated':participated, 'mediaList':mediaList, 'zips':zips}
-    return render(request, 'community/communityHome.html', res_data)
 
 @login_required(login_url='/user/signin')
 @email_verified_required
