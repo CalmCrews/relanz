@@ -62,20 +62,69 @@
             </div>
             {% comment %} 여기가 장소라 if 템플릿 사용하면 되용! {% endcomment %}
             <div class="recommand-place-container-outer-div">
-                <div class="recommand-place-container-div">
-                    <div class="title-div">
-                        <div class="img-div">
-                            <img src="{% static "icons/map_point.png" %}" alt=".">
+                {% if challenge_tag_real.pay %}
+                    <div class="recommand-place-container-div">
+                        <div class="title-div">
+                            <div class="img-div">
+                                <img src="{% static "icons/map_point.png" %}" alt=".">
+                            </div>
+                            <p>추천 장소 안내</p>
                         </div>
-                        <p>추천 장소 안내</p>
+                        <div class="text-info-div">
+                            <p>유로 활동의 경우 릴렌즈에서 추천 장소를 안내해드려요!</p>
+                        </div>
+                        {% if challenge.id == 1 %}
+                            <a href='https://map.naver.com/v5/search/%EB%B0%98%EC%8B%A0%EC%9A%95?c=15,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 2 %}
+                            <a href='https://map.naver.com/v5/search/%ED%85%9C%ED%94%8C%EC%8A%A4%ED%85%8C%EC%9D%B4?c=13,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 3 %}
+                            <a href='https://map.naver.com/v5/search/%EC%8B%AD%EC%9E%90%EC%88%98?c=13,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 4 %}
+                            <a href='https://map.naver.com/v5/search/%ED%8D%BC%EC%A6%90?c=15,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 5 %}
+                            <a href='https://map.naver.com/v5/search/%ED%95%84%EC%82%AC?c=15,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 6 %}
+                            <a href='https://map.naver.com/v5/search/%EB%9E%98%ED%94%84%ED%8C%85?c=13,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 7 %}
+                            <a href='https://map.naver.com/v5/search/%EB%9E%98%ED%94%84%ED%8C%85?c=13,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 8 %}
+                            <a href='https://map.naver.com/v5/search/%EC%9E%90%EC%A0%84%EA%B1%B0?c=13,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 9 %}
+                            <a href='https://map.naver.com/v5/search/%EC%9D%B8%EC%84%BC%EC%8A%A4%20%ED%85%8C%EB%9D%BC%ED%94%BC?c=15,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 10 %}
+                            <a href='https://map.naver.com/v5/search/%EC%84%9C%ED%95%91?c=13,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 11 %}
+                            <a href='https://map.naver.com/v5/search/%ED%8C%8C%EC%BF%A0%EB%A5%B4?c=13,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% elif challenge.id == 12 %}
+                            <a href='https://map.naver.com/v5/search/%EC%82%AC%EC%9A%B4%EB%93%9C%20%ED%85%8C%EB%9D%BC%ED%94%BC?c=15,0,0,0,dh' class="go-to-place-a">
+                                <div>장소 보러 가기</div>
+                            </a>
+                        {% endif %}
+                        
                     </div>
-                    <div class="text-info-div">
-                        <p>유로 활동의 경우 릴렌즈에서 추천 장소를 안내해드려요!</p>
-                    </div>
-                    <a href="http://" class="go-to-place-a">
-                        <div>장소 보러 가기</div>
-                    </a>
-                </div>
+                {% endif %}
             </div>
             <div class="start-btn-div">
                 {% comment %} 이미 참여한 경우 시작하기 버튼이 아닌 게시판 구경하기 버튼으로 바뀝니당! {% endcomment %}

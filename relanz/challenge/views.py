@@ -37,7 +37,7 @@ def challenge(request, challenge_id):
 	
 	participated = Participant.objects.filter(user=user, challenge=challenge) # 이 챌린지 참여했는지 안했는지 체크 위해 변수 만듬
 
-	res_data = {'challenge':challenge, 'challenge_tag':challenge_tag_list, 'participant':participant_count, 'participated':participated}
+	res_data = {'challenge':challenge, 'challenge_tag':challenge_tag_list, 'participant':participant_count, 'participated':participated, 'challenge_tag_real':challenge_tag}
 	return render(request, 'challenge/challenge.html', res_data)
 
 
