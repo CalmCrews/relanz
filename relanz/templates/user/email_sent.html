@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="loading-cover"><div class="loading-image-div"><img src="{% static 'icons/loading.png'%}" alt="loading"></div></div>
-
+  <a class="logout" href="{% url 'user:signout' %}">로그아웃</a>
 {% endblock %}
 
 {% block scripts %}

@@ -62,37 +62,13 @@
       {% endif %}
     </div>
     <div class="images-box-div" id="images_box_div">
-      {% if mediaList %}
-        {% for mediaUrl, article in zips reversed %}
-          <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
-            <div class="images-box-single">
-              <img src="{{mediaUrl}}" alt=".">
-            </div>
-          </a>
-        {% endfor %}
-      {% else %}
-        <a href="http://" class="images-box-single-a">
+      {% for mediaUrl, article in zips reversed %}
+        <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
           <div class="images-box-single">
-            <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+            <img src="{{mediaUrl}}" alt=".">
           </div>
         </a>
-        <a href="http://" class="images-box-single">
-          <div class="images-box-single">
-            <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-          </div>
-        </a>
-        <a href="http://" class="images-box-single">
-          <div class="images-box-single">
-            <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-          </div>
-        </a>
-        <a href="http://" class="images-box-single">
-          <div class="images-box-single">
-            <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-          </div>
-        </a>
-      {% endif %}
-
+      {% endfor %}
     </div>
     <div class="loading-div">
       <div class="loading-img-div" id="loading_img_div">
