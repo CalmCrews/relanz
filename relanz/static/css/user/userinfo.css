@@ -316,8 +316,10 @@
 .tags-wrapper > span {
   width: auto;
   height: 13px;
-  padding: 0.5px 4px;
-  text-align: center;
+  padding: 4px 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 3px;
   border-radius: 15px;
   border: 1.5px solid #9abcff;
