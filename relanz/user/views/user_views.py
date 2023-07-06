@@ -178,7 +178,8 @@ def user_delete(request):
         password = request.POST['password']
         user = authenticate(request, username=user_username, password=password)
         if user is not None:
-            # 유저 삭제 기능을 구현한다
+            user.delete()
+            logout(request)
             return redirect("main:home")
             
         else:
