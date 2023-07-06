@@ -218,30 +218,37 @@
   height: 100%;
   background: linear-gradient(0deg, #ffffff 0%, rgba(255, 255, 255, 0) 63.02%);
   z-index: 3;
+  display: flex;
 }
 
-#div5 > .text-section {
-  position: absolute;
+#div5 > .content-container {
   width: 100%;
-  padding: 2em;
-  bottom: calc(100vh - 70%);
+  position: absolute;
+  top: calc(100vh - 40%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#div5 > .content-container > .text-section {
+  width: 100%;
   color: #fff;
   text-align: center;
   font-weight: 700;
   font-size: 1.25em;
-  line-height: 1.375em;
+  line-height: 150%;
   z-index: 4;
 }
 
-#div5 > .sign-section {
-  position: absolute;
+#div5 > .content-container > .sign-section {
   width: 100%;
   padding: 2em;
-  bottom: calc(100vh - 80%);
+  top: calc(100vh - 30%);
   z-index: 4;
 }
 
-#div5 > .sign-section > .sign-up {
+#div5 > .content-container > .sign-section > .sign-up {
   display: flex;
   width: 100%;
   padding: 2em 2em 0 2em;
@@ -250,7 +257,7 @@
   align-items: center;
 }
 
-#div5 > .sign-section > .sign-up > .sign-up-button {
+#div5 > .content-container > .sign-section > .sign-up > .sign-up-button {
   width: 80%;
   height: 3em;
   background: #71a1ff;
@@ -262,18 +269,18 @@
   align-items: center;
 }
 
-#div5 > .sign-section > .sign-up > .sign-up-button:hover {
+#div5 > .content-container > .sign-section > .sign-up > .sign-up-button:hover {
   background-color: #3f80fc;
 }
 
-.sign-section > .sign-up > .sign-up-button > span {
+.content-container > .sign-section > .sign-up > .sign-up-button > span {
   color: #fff;
   text-align: center;
   font-weight: 700;
   font-size: 1em;
 }
 
-#div5 > .sign-section > .sign-in {
+#div5 > .content-container > .sign-section > .sign-in {
   margin-top: 1em;
   text-align: center;
   font-weight: 600;
@@ -285,10 +292,10 @@
   text-decoration-thickness: 2px;
 }
 
-#div5 > .sign-section > .sign-in > a {
+#div5 > .content-container > .sign-section > .sign-in > a {
   color: #71a1ff;
 }
 
-#div5 > .sign-section > .sign-in > a:visited {
+#div5 > .content-container > .sign-section > .sign-in > a:visited {
   color: #71a1ff;
 }
