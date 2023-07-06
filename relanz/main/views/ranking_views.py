@@ -56,7 +56,7 @@ def ranking(request):
         # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 5개까지만 파싱해서 전달
 
         if recommand_challenges:
-            for i in range(5 - len(real_time_challenges)):
+            for i in range(len(recommand_challenges)):
                 real_time_ranks.append(recommand_challenges[i])
 
         # 이렇게 해도 TOP 5를 채우지 못한다면 5개가 될 수 있도록 랜덤한 챌린지를 추천
@@ -142,7 +142,7 @@ def ranking(request):
 
         # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 5개까지만 파싱해서 전달
         if recommand_challenges_age:
-            for i in range(0, (5 - len(age_challenges))):
+            for i in range(0, (len(recommand_challenges_age))):
                 age_ranks.append(recommand_challenges_age[i])
 
         # 이렇게 해도 TOP 5를 채우지 못한다면 5개가 될 수 있도록 랜덤한 챌린지를 추천
@@ -280,7 +280,7 @@ def gender_ranking(sex):
 
         # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 5개까지만 파싱해서 전달
         if recommand_challenges_gender:
-            for i in range(0, (5 - len(gender_challenges))):
+            for i in range(len(recommand_challenges_gender)):
                 gender_ranks.append(recommand_challenges_gender[i])
             
         # 이렇게 해도 TOP 5를 채우지 못한다면 5개가 될 수 있도록 랜덤한 챌린지를 추천
