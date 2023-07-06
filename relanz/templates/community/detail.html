@@ -131,7 +131,7 @@
     </div>
 {% endblock %}
    
-{% block scripts%}
+{% block mobile-scripts%}
     <script src={% static "js/detail.js"%}></script>
     <script>
         function renderProfileCombination(combinationData) {
@@ -163,4 +163,4 @@
         }
         renderProfileCombination("{{user.avatar}}");
     </script>
-{% endblock scripts%}
+{% endblock %}

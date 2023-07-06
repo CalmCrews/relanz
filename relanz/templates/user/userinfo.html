@@ -123,5 +123,8 @@
   }
   renderProfileCombination("{{user.avatar}}");
 
+  const myIcon = document.querySelector(".mobile-nav > ul > li > .my > img");
+  myIcon.src = "{% static 'icons/My_icon_filled.png'%}";
+  
 </script>
 {% endblock %}

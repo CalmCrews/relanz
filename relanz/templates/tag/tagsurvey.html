@@ -93,7 +93,6 @@
     </form>
   </div>
 </div>
-<script src="{% static "js/tagsurvey.js" %}"></script>
 {% comment %} 4
 
 <form method='post'>
@@ -178,4 +177,8 @@
   <button class="userinfo" type="submit" action="{% url 'user:tagsurvey' %}">다음</button>
 </form>
 <a href="{% url 'main:home' %}">홈으로</a> {% endcomment %}
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static "js/tagsurvey.js" %}"></script>
 {% endblock %}
