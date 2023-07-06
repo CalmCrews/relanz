@@ -311,6 +311,16 @@
     top:70px;
 
     background-color: chocolate;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-image-div > img {
+    /* object-fit: cover; */
+    object-fit: contain;
+    max-width: 390px;
+    max-height: 390px;
 }
 
 .rest-image-bundle-div {
@@ -319,7 +329,7 @@
     height: 130px;
     flex-shrink: 0;
 
-    margin-top: 65px;
+    margin-top: 25px;
     background: #D0E0FF;
     width: 100%;
 }

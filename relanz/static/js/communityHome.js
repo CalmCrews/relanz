@@ -20,8 +20,6 @@ async function makeRequest(url) {
     const response = await fetch(url);
     const data = await response.json();
 
-
-
     data.forEach(element => {
       const obj = {
         imgUrl : element.urls.raw,
@@ -48,19 +46,6 @@ async function makeRequest(url) {
     console.log(testNum)
     observer.disconnect()
   }
-  //   const resultData = [
-  //     "http://",
-  //     "http://",
-  //     "http://",
-
-  //     "http://",
-  //     "http://",
-  //     "http://",
-
-  //     "http://",
-  //     "http://",
-  //     "http://",
-  // ]
   return resultData
 }
 
@@ -69,6 +54,7 @@ const getUrl = async () => {
     const Access_Key = "uC_r1eNaU0kipEVvTaIpS0wNwzka5GLv5rdG6Iut6tQ";
     const url = `https://api.unsplash.com/photos/?client_id=${Access_Key}&count=8&content_filter=low`;
     const resultData = await makeRequest(url);
+    console.log(resultData)
     
     return resultData;
 } 
@@ -107,10 +93,13 @@ function makeImageDiv(imageUrlList) {
 }
 
 async function handleIntersection(entries, observer) {
+  // console.log("정상 작동")
   if (isInitialLoad) {
-      return; // 이미 throttle 중이라면 함수 실행을 중지합니다.
+    console.log("금지")
+    return;
   }
   
+  console.log("정상 작동 가동!")
   for (let entry of entries) {
       console.log("이미지 투척짱!")
       if (entry.intersectionRect) {
