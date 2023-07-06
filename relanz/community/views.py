@@ -12,7 +12,9 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-import re
+from django.core import serializers
+
+import re, json
 
 # Create your views here.
 
@@ -34,6 +36,10 @@ def communityHome(request, challenge_id):
             if page_number is not None and paginator.num_pages < int(page_number):
                 message = {'message': '더 이상 기록이 없습니다.'}
                 return JsonResponse(message, status=400)
+            elif page_number is not None:
+                page_obj = paginator.get_page(page_number)
+                serialized_data = serializers.serialize('json', page_obj.object_list)
+                return JsonResponse(serialized_data, safe=False, status=200)
             else:
                 page_obj = paginator.get_page(page_number)
 
@@ -58,7 +64,9 @@ def communityHome(request, challenge_id):
             time_difference = current_time - last_article.created_at
             if time_difference < timedelta(days=1):
                 message = {'message': '릴렌지 기록은 하루에 한 번만 가능합니다.'}
-                return JsonResponse(message, status=400)
+                # return JsonResponse(message, status=400)
+                messages.add_message(request, messages.ERROR, '릴렌지 기록은 하루에 한 번만 가능합니다')
+                return redirect('community:communityHome', challenge_id)
             else:
                 return redirect('community:new')
         else:

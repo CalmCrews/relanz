@@ -304,7 +304,21 @@
 
   top: 70px;
 
+<<<<<<< HEAD
+    background-color: chocolate;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-image-div > img {
+    /* object-fit: cover; */
+    object-fit: contain;
+    max-width: 390px;
+    max-height: 390px;
+=======
   background-color: chocolate;
+>>>>>>> 2b5631834566c57c3f23d7190778c2fe2a8a4742
 }
 
 .rest-image-bundle-div {
@@ -313,9 +327,15 @@
   height: 130px;
   flex-shrink: 0;
 
+<<<<<<< HEAD
+    margin-top: 25px;
+    background: #D0E0FF;
+    width: 100%;
+=======
   margin-top: 65px;
   background: #d0e0ff;
   width: 100%;
+>>>>>>> 2b5631834566c57c3f23d7190778c2fe2a8a4742
 }
 
 .profile-wrapper {
@@ -466,3 +486,10 @@
   color: #71a1ff;
   font-weight: 600;
 }
+<<<<<<< HEAD
+.warning-btn:hover {
+    cursor: pointer;
+    background-color: rgba(63, 128, 252, 1);
+}
+=======
+>>>>>>> 2b5631834566c57c3f23d7190778c2fe2a8a4742

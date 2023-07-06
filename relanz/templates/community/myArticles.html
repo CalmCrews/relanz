@@ -1,112 +1,104 @@
 {% extends 'mobileBase.html' %}
 {% load static %}
 {% block mobile_title %}
-myArticles
+  myArticles
 {% endblock mobile_title %}
 {% block mobile_extrahead %}
-  <link rel="stylesheet" type="text/css" href="{% static "css/communityHome.css"%}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/myArticles.css"%}">
 {% endblock mobile_extrahead %}
 {% block mobile_content%}
-    <div class="container-mobile">
-        <div class="main-img-div">
-            {% if challenge.image %}
-                <img src="{% static challenge.image %}" alt="이미지">
-            {% else %}
-                <img src="{% static "images/leein_example.jpeg" %}" alt=".">
-            {% endif %}
-        </div>
-        <div class="main-container-div">
-            <div class="nav-div-absolute">
-                <div class="nav-info">
-                    <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">릴렌지 안내</a>
-                </div>
-                <div class="nav-board">
-                    <a href="{% url 'community:communityHome' challenge_id=challenge.id %}">커뮤니티 게시판</a>
-                </div>
-            </div>
-        </div>
-        <div class="title-container-div">
-            <div class="title-div">
-                <div class="img-div">
-                    <img src="{% static "icons/check_circle_down_lean.png" %}" alt=".">
-                </div>
-                {% if challenge.title %}
-                    <p class="title-p">{{challenge.title}}</p>
-                {% else %}
-                    <p class="title-p">변수명으로 이름 넘겨줘잉~</p>
-                {% endif %}
-            </div>
-            <div class="participant-count-div">
-                <div class="participant-img-div">
-                    <img src="{% static "icons/human_shaped.png" %}" alt=".">
-                </div>
-                {% if participant %}
-                    <small class="participant-count-small">{{participant_count}} 명이 참여 중인 릴렌지</small>
-                {% else %}
-                <small class="participant-count-small">00 명이 참여 중인 릴렌지</small>
-                {% endif %}
-            </div>
-        </div>
-        <div class="tag-record-div">
-            {% if participant %}
-                <a href="{% url 'community:new' challenge.id %}" class="record-btn">내 기록 남기기</a>
-                <a href="{% url 'community:myArticles' challenge.id %}" class="record-btn">내 기록 모아보기</a>
-
-            {% else %}
-                <a href="{% url 'challenge:participate' challenge.id %}" class="record-btn">시작하기</a>
-            {% endif %}
-        </div>
-        <div class="images-box-div" id="images_box_div">
-            {% if mediaList %}
-                {% for mediaUrl, article in zips reversed %}
-                    <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
-                        <div class="images-box-single">
-                            <img src="{{mediaUrl}}" alt=".">
-                        </div>
-                    </a>
-                {% endfor %}
-            {% else %}
-                <a href="http://" class="images-box-single-a">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-            {% endif %}
-            
-        </div>
-        <div class="loading-div">
-            <div class="loading-img-div" id="loading_img_div">
-                <img src="{% static "icons/loading.png" %}" alt=".">
-            </div>
-        </div>
-        <div class="just-for-margin-div" id="div_end"></div>
-        <div class="see-full-go-next" id="see_full_go_next"></div>
+  <div class="container-mobile">
+    <div class="main-img-div">
+      {% if challenge.image %}
+        <img src="{% static challenge.image %}" alt="이미지">
+      {% else %}
+        <img src="{% static "images/leein_example.jpeg" %}" alt=".">
+      {% endif %}
     </div>
-    <script src={% static "js/communityHome.js"%}></script>
+    <div class="main-container-div">
+      <div class="nav-div-absolute">
+        <div class="nav-info">
+          <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">릴렌지 안내</a>
+        </div>
+        <div class="nav-board">
+          <a href="{% url 'community:communityHome' challenge_id=challenge.id %}">커뮤니티 게시판</a>
+        </div>
+      </div>
+    </div>
+    <div class="title-container-div">
+      <div class="title-div">
+        <div class="img-div">
+          <img src="{% static "icons/check_circle_down_lean.png" %}" alt=".">
+        </div>
+        {% if challenge.title %}
+          <p class="title-p">{{challenge.title}}</p>
+        {% else %}
+          <p class="title-p">변수명으로 이름 넘겨줘잉~</p>
+        {% endif %}
+      </div>
+      <div class="participant-count-div">
+        <div class="participant-img-div">
+          <img src="{% static "icons/human_shaped.png" %}" alt=".">
+        </div>
+        {% if participant %}
+          <small class="participant-count-small">{{participant_count}}
+            명이 참여 중인 릴렌지</small>
+        {% else %}
+          <small class="participant-count-small">00 명이 참여 중인 릴렌지</small>
+        {% endif %}
+      </div>
+    </div>
+    <div class="tag-record-div">
+      {% if participant %}
+        <a class="record-btn-2">나의 기록</a>
+        <a href="{% url 'community:myArticles' challenge.id %}" class="record-btn">내 기록 모아보기</a>
+
+      {% else %}
+        <a href="{% url 'challenge:participate' challenge.id %}" class="record-btn">시작하기</a>
+      {% endif %}
+    </div>
+    <div class="images-box-div" id="images_box_div">
+      {% if mediaList %}
+        {% for mediaUrl, article in zips reversed %}
+          <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
+            <div class="images-box-single">
+              <img src="{{mediaUrl}}" alt=".">
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        <a href="http://" class="images-box-single-a">
+          <div class="images-box-single">
+            <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+          </div>
+        </a>
+        <a href="http://" class="images-box-single">
+          <div class="images-box-single">
+            <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+          </div>
+        </a>
+        <a href="http://" class="images-box-single">
+          <div class="images-box-single">
+            <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+          </div>
+        </a>
+        <a href="http://" class="images-box-single">
+          <div class="images-box-single">
+            <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
+          </div>
+        </a>
+      {% endif %}
+
+    </div>
+    <div class="loading-div">
+      <div class="loading-img-div" id="loading_img_div">
+        <img src="{% static "icons/loading.png" %}" alt=".">
+      </div>
+    </div>
+    <div class="just-for-margin-div" id="div_end"></div>
+    <div class="see-full-go-next" id="see_full_go_next"></div>
+  </div>
+  <script src={% static "js/communityHome.js"%}></script>
 {% endblock %}
-   
-{% block scripts%}
-{% endblock scripts%}
 
-
-
-
-
-
-
-
+{% block scripts%}{% endblock scripts%}

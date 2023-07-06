@@ -17,7 +17,8 @@
 
 .main-img-div {
     width: 100%;
-    min-height: 270px;
+    min-height: 430px;
+    max-height: 430px;
     /* background-color: aquamarine; */
 }
 
@@ -453,8 +454,8 @@
 }
 
 .start-btn-div > a {
-    width: 162px;
-    height: 48px;
+    width: 230px;
+    height: 60px;
     flex-shrink: 0;
     border-radius: 30px;
     background: #9ABCFF;
