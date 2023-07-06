@@ -62,17 +62,20 @@
         {% for challenge in challenges %}
           <li>
             <div class="relange-image">
-              <img src="{% static challenge.0.image %}" alt="이미지">
+              <a href="{% url 'community:communityHome' challenge_id=challenge.0.id %}">
+                <img src="{% static challenge.0.image %}" alt="이미지">
+              </a>
             </div>
             <div class="relange-info">
-              <span>{{challenge.0.title}}</span>
-              <a href="{% url 'community:new' challenge_id=challenge.0.id %}">기록하기</a>
+              <a class="title" href="{% url 'community:communityHome' challenge_id=challenge.0.id %}">{{challenge.0.title}}</a>
+              <a class="write" href="{% url 'community:new' challenge_id=challenge.0.id %}">기록하기</a>
               <div class="tags-wrapper">
                 {% for tag in challenge.1 %}
                   <span>{{ tag }}</span>
                 {% endfor %}
               </div>
             </div>
+          </li>
         {% endfor %}
       </ul>
     {% else %}
@@ -115,5 +118,6 @@
 
   }
   renderProfileCombination("{{user.avatar}}");
+
 </script>
 {% endblock %}
