@@ -23,7 +23,6 @@
       <div class="page-wrapper">
         <div id="today_date"></div>
         <div class="profile-section">
-
           <div class="profile-wrapper">
             <div class="profile-circle">
               <div class="back-hair"></div>
@@ -79,9 +78,8 @@
                 {% endfor %}
               </ul>
               <div class="relenge-list-container">
-                <ul class="relenge-list">
-                  {% comment %} 임시 {% endcomment %}
-                  {% if combined_data %}
+                {% if combined_data %}
+                  <ul class="relenge-list">
                   {% for challenge, participant in combined_data %}
                   <li>
                     <div class="relenge-card">
@@ -98,25 +96,27 @@
                     </div>
                   </li>
                   {% endfor %}
-                  {% else %}
-                    {% for challenge in challenges %}
-                      <li>
-                        <div class="relenge-card">
-                          <div class="image-section">
-                            <img src="{% static challenge.challenge.image %}" alt="{{ challenge.title }}">
-                          </div>
-                          <div class="info-section">
-                            <div class="sticker">공식 릴렌지 활동</div>
-                            <h2>{{ challenge.challenge.title }}</h2>
-                            {% comment %} <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                            <span>n명이 참여 중인 릴렌지</span> {% endcomment %}
-                            <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">참여하기</a>
-                          </div>
+                  </ul>
+                {% else %}
+                  <ul class="relenge-list">
+                  {% for challenge in challenges %}
+                    <li>
+                      <div class="relenge-card">
+                        <div class="image-section">
+                          <img src="{% static challenge.challenge.image %}" alt="{{ challenge.title }}">
                         </div>
-                      </li>
-                    {% endfor %}
-                  {% endif %}
-                </ul>
+                        <div class="info-section">
+                          <div class="sticker">공식 릴렌지 활동</div>
+                          <h2>{{ challenge.challenge.title }}</h2>
+                          {% comment %} <img src="{% static "icons/ppl.png" %}" alt="icon"/>
+                          <span>n명이 참여 중인 릴렌지</span> {% endcomment %}
+                          <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">참여하기</a>
+                        </div>
+                      </div>
+                    </li>
+                  {% endfor %}
+                  </ul>
+                {% endif %}
                 <div class="carousel-dots">
                   <span class="dot active"></span>
                   {% if combined_data %}
@@ -582,6 +582,17 @@
     } else if (userResultValue === "취약하지 않은") {
       userResultElement.style.backgroundColor = "#6888c5";
     }
+
+
+    
+    const ul = document.querySelector(".relenge-list");
+    const firstChild = ul.childNodes[1];
+
+    console.log(ul.childNodes[1]); 
+    const beforeText = document.createTextNode('{% if chllenge.outside %}');
+    const afterText = document.createTextNode('{% endif %}');
+    ul.insertBefore(beforeText, firstChild);
+    ul.insertBefore(afterText, firstChild.nextSibling);
   </script>
 
 
