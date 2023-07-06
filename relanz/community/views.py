@@ -5,10 +5,12 @@ from user.models import User
 from challenge.models import Challenge
 from django.contrib.auth.decorators import login_required
 from config.email_decorator import email_verified_required
-from django.http import HttpResponse
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
+from django.utils import timezone
+from datetime import timedelta
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 import re
 
@@ -18,21 +20,49 @@ import re
 @email_verified_required
 def communityHome(request, challenge_id):
     user = request.user
+    if request.method == 'GET':
+        challenge = Challenge.objects.get(id=challenge_id)
+         # a 챌린지의 게시물들만 가져오기
+        articles = Article.objects.filter(challenge=challenge).order_by('-created_at')
+         # 이 챌린지 참여했는지 안했는지 체크 위해 변수 만듬
+        participated = Participant.objects.filter(user=user, challenge=challenge) 
+        # 한페이지 당 사진 9개로 설정
+        paginator = Paginator(articles, 9) 
+        try:
+            page_number = request.GET.get('page')
+            if page_number is not None and paginator.num_pages < int(page_number):
+                message = {'message': '더 이상 기록이 없습니다.'}
+                return JsonResponse(message, status=400)
+            else:
+                page_obj = paginator.get_page(page_number)
 
-    challenge = Challenge.objects.get(id=challenge_id)
-    articles = Article.objects.filter(challenge=challenge) # a 챌린지의 게시물들만 가져오기
-    
-    # 이 챌린지 참여했는지 안했는지 체크 위해 변수 만듬
-    participated = Participant.objects.filter(user=user, challenge=challenge) 
+        except PageNotAnInteger:
+            page = 1
+            page_obj = paginator.get_page(page)
 
-    # 게시물들에서 이미지 URL 추출
-    mediaList = [article.image.url for article in articles if article.image]
-    
-    # 효율적인 순회 위해 mediaList랑 articles 묶어줌
-    zips = zip(mediaList, articles)
+        except EmptyPage:
+            page=paginator.num_pages
+            page_obj=paginator.page(page)
+            
+        res_data = {'articles': articles, 'challenge':challenge, 'participated':participated, 'articles':page_obj}
 
-    res_data = {'articles': articles, 'challenge':challenge, 'participated':participated, 'mediaList':mediaList, 'zips':zips}
-    return render(request, 'community/communityHome.html', res_data)
+        return render(request, 'community/communityHome.html', res_data)
+    if request.method == 'POST':
+        user = request.user
+        articles = Article.objects.filter(author__user = user, challenge=challenge_id)
+        if articles.exists():
+            current_time = timezone.now()
+            articles = articles.order_by('-created_at')
+            last_article = articles[0]
+            time_difference = current_time - last_article.created_at
+            if time_difference < timedelta(days=1):
+                message = {'message': '릴렌지 기록은 하루에 한 번만 가능합니다.'}
+                return JsonResponse(message, status=400)
+            else:
+                return redirect('community:new')
+        else:
+            return redirect('community:new')
+
 
 @login_required(login_url='/user/signin')
 @email_verified_required
@@ -64,7 +94,11 @@ def new(request, challenge_id):
             user.score += article.article_score
             user.save()
 
-            return redirect('community:detail', challenge.id, article.id)
+        else:
+            message = {'message': '사진 파일이 없습니다.'}
+            return JsonResponse(message, status=400)
+        messages.add_message(request, messages.SUCCESS, f'{article.article_score}')
+        return redirect('community:detail', challenge.id, article.id)
     
     res_data = {'form':form, 'challenge':challenge}
     return render(request, 'community/new.html', res_data)
@@ -74,11 +108,32 @@ def new(request, challenge_id):
 def detail(request, challenge_id, article_id):
     challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
-    like_count = len(Like.objects.filter(article=article))
-    author_nickname = article.author.user.nickname
-    isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
+    articles = Article.objects.filter(challenge=challenge, id__lte=article_id).order_by('-created_at')
+    paginator = Paginator(articles, 1)
+    try:     
+        page_number = request.GET.get('page')
+        if page_number is not None and paginator.num_pages < page_number:
+                message = {'message': '더 이상 기록이 없습니다.'}
+                return JsonResponse(message, status=400)
+        else:
+            page_obj = paginator.get_page(page_number)
+            like_count = len(Like.objects.filter(article=page_obj.object_list[0]))
+            author_nickname = page_obj.object_list[0].author.user.nickname
+            isExist = Like.objects.filter(likedUser=request.user, article=page_obj.object_list[0]).exists() 
 
-    res_data = {'challenge':challenge, 'article':article, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist}
+    except PageNotAnInteger:
+        page = 1
+        page_obj = paginator.get_page(page)
+        like_count = len(Like.objects.filter(article=article))
+        author_nickname = article.author.user.nickname
+        isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
+    
+    except EmptyPage:
+        page=paginator.num_pages
+        page_obj=paginator.page(page)
+        messages.add_message(request, messages.ERROR, '더 이상 인증 글이 없습니다.')
+    
+    res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist}
     return render(request, 'community/detail.html', res_data)
 
 @login_required(login_url='/user/signin')
@@ -115,7 +170,6 @@ def like(request, article_id):
 
     referer = request.META.get('HTTP_REFERER')
     
-
     # 이미 좋아요 누른 경우 detail로 이동, 본인 글에 좋아요 누르기 가능
     isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
     if isExist:
@@ -174,16 +228,19 @@ def like(request, article_id):
         return redirect('community:detail', challenge_id=article.challenge.id, article_id=article.id)
 
 
-# # a 참가자의 글들을 a 유저에 저장
-# def save_articles(request, participant_id):
-#     try:
-#         participant = Participant.objects.get(id=participant_id)
-#         user = participant.user
+@login_required(login_url='/user/signin')
+@email_verified_required
+def myArticles(request, challenge_id):
+    challenge = Challenge.objects.get(id=challenge_id)
+    participant = Participant.objects.get(challenge=challenge, user=request.user)
+    participant_count = Participant.objects.filter(challenge=challenge).count()
 
-#         # participant_id의 글들 저장
-#         articles = participant.article_set.all()
-#         for article in articles:
-#             Article.objects.create(author=participant, user=user, image=article.image)
-            
-#     except Participant.DoesNotExist:
-#         return HttpResponse("참여자가 존재하지 않습니다")
+    if participant:
+        articles = Article.objects.filter(challenge=challenge, author=participant)
+        mediaList = [article.image.url for article in articles if article.image]
+        zips = zip(mediaList, articles)
+
+        res_data = {'challenge': challenge, 'participant':participant, 'participant_count':participant_count, 'articles': articles, 'mediaList': mediaList, 'zips':zips}
+        return render(request, 'community/myArticles.html', res_data)
+    
+    return HttpResponse("No participants found for the current user and challenge.")

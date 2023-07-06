@@ -95,6 +95,6 @@ def participate(request, challenge_id):
 	participant = Participant(user=user, challenge=challenge)
 	participant.save()
 
-	res_data = {"user": user.nickname, 'challenge':challenge}
+	res_data = {"user": user.nickname, 'challenge':challenge, 'participant':participant}
 	return render(request, 'challenge/participate.html', res_data)
 

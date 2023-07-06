@@ -1,7 +1,7 @@
 {% extends 'mobileBase.html' %}
 {% load static %}
 {% block mobile_title %}
-    communityHome
+myArticles
 {% endblock mobile_title %}
 {% block mobile_extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static "css/communityHome.css"%}">
@@ -41,36 +41,31 @@
                     <img src="{% static "icons/human_shaped.png" %}" alt=".">
                 </div>
                 {% if participant %}
-                    <small class="participant-count-small">{{participant}} 명이 참여 중인 릴렌지</small>
+                    <small class="participant-count-small">{{participant_count}} 명이 참여 중인 릴렌지</small>
                 {% else %}
                 <small class="participant-count-small">00 명이 참여 중인 릴렌지</small>
                 {% endif %}
             </div>
         </div>
         <div class="tag-record-div">
-            {% if participated %}
+            {% if participant %}
                 <a href="{% url 'community:new' challenge.id %}" class="record-btn">내 기록 남기기</a>
-                
-                {% comment %} 유저 아이디랑 챌린지 아이디 활용해서 걸러야함! {% endcomment %}
-                <a href="http://" class="record-btn">내 기록 모아보기</a>
+                <a href="{% url 'community:myArticles' challenge.id %}" class="record-btn">내 기록 모아보기</a>
 
             {% else %}
                 <a href="{% url 'challenge:participate' challenge.id %}" class="record-btn">시작하기</a>
             {% endif %}
         </div>
         <div class="images-box-div" id="images_box_div">
-            {% comment %} 여기에 이미지 url이 list로 던저져야함! -> 했습니당 {% endcomment %}
-                {% comment %} reversed 사용해서 가장 최신에 올린 게시물이 위에 있도록 설정 {% endcomment %}
-            {% for article in articles %}
-                <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
-                    <div class="images-box-single">
-                        {% if article.image %}
-                        <img src="{{article.image.url}} alt=".">
-                        {% endif %}
-                    </div>
-                </a>
-            {% endfor %}
-            {% comment %} <!-- {% else %}
+            {% if mediaList %}
+                {% for mediaUrl, article in zips reversed %}
+                    <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
+                        <div class="images-box-single">
+                            <img src="{{mediaUrl}}" alt=".">
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
                 <a href="http://" class="images-box-single-a">
                     <div class="images-box-single">
                         <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
@@ -91,33 +86,7 @@
                         <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
                     </div>
                 </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-            {% endif %} --> {% endcomment %}
+            {% endif %}
             
         </div>
         <div class="loading-div">
@@ -128,10 +97,16 @@
         <div class="just-for-margin-div" id="div_end"></div>
         <div class="see-full-go-next" id="see_full_go_next"></div>
     </div>
+    <script src={% static "js/communityHome.js"%}></script>
 {% endblock %}
    
 {% block scripts%}
-    <script src={% static "js/communityHome.js"%}></script>
 {% endblock scripts%}
+
+
+
+
+
+
 
 

@@ -1,3 +1,7 @@
+.container-mobile {
+    height: 100vh;
+}
+
 .main-img-div {
     width: 100%;
     min-height: 430px;
@@ -292,7 +296,6 @@
     height: 30px;
     flex-shrink: 0;
     animation: spin 1s infinite linear;
-
     position: relative;
 }
 .loading-img-div > img {
