@@ -38,11 +38,13 @@ const onClickCheckId = async () => {
 
     // 여기에서 백에서 준 데이터 받아 변수에 할당하는 곳!
     const data = await response.json();
-    const approveMsg = "사용가능한 아이디입니다."
-    const rejectMsg = "이미 있는 아이디입니다."
+    
+    const approveMsg = "사용가능한 아이디입니다"
+    const rejectMsg = "이미 있는 아이디입니다"
 
-    reject_msg
-    approve_msg
+    console.log(data.message)
+    console.log(data.message === approveMsg)
+    console.log(data.message === rejectMsg)
 
     if (data.message === approveMsg) {
       const approve_msg = document.getElementById("approve_msg")

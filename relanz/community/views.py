@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.paginator import Paginator
 from .forms import ArticleForm
 from .models import Article, Like, Participant
 from user.models import User
 from challenge.models import Challenge
 from django.contrib.auth.decorators import login_required
 from config.email_decorator import email_verified_required
-from django.http import HttpResponse
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
@@ -127,7 +125,6 @@ def like(request, article_id):
 
     referer = request.META.get('HTTP_REFERER')
     
-
     # 이미 좋아요 누른 경우 detail로 이동, 본인 글에 좋아요 누르기 가능
     isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
     if isExist:
@@ -186,16 +183,19 @@ def like(request, article_id):
         return redirect('community:detail', challenge_id=article.challenge.id, article_id=article.id)
 
 
-# # a 참가자의 글들을 a 유저에 저장
-# def save_articles(request, participant_id):
-#     try:
-#         participant = Participant.objects.get(id=participant_id)
-#         user = participant.user
+@login_required(login_url='/user/signin')
+@email_verified_required
+def myArticles(request, challenge_id):
+    challenge = Challenge.objects.get(id=challenge_id)
+    participant = Participant.objects.get(challenge=challenge, user=request.user)
+    participant_count = Participant.objects.filter(challenge=challenge).count()
 
-#         # participant_id의 글들 저장
-#         articles = participant.article_set.all()
-#         for article in articles:
-#             Article.objects.create(author=participant, user=user, image=article.image)
-            
-#     except Participant.DoesNotExist:
-#         return HttpResponse("참여자가 존재하지 않습니다")
+    if participant:
+        articles = Article.objects.filter(challenge=challenge, author=participant)
+        mediaList = [article.image.url for article in articles if article.image]
+        zips = zip(mediaList, articles)
+
+        res_data = {'challenge': challenge, 'participant':participant, 'participant_count':participant_count, 'articles': articles, 'mediaList': mediaList, 'zips':zips}
+        return render(request, 'community/myArticles.html', res_data)
+    
+    return HttpResponse("No participants found for the current user and challenge.")

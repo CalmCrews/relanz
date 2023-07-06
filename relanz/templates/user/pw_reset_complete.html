@@ -1,7 +1,45 @@
-{% block content %}
+{% extends 'mobileBase.html' %}
+{% load static %}
+{% block title %}
+  findPassword_confirm
+{% endblock title %}
+{% block extrahead %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/user/pw_reset_complete.css"%}">
+{% endblock extrahead %}
+{% block content%}
+  <div class="container-mobile">
+    <div class="mobile-header">
+      <a href="{% url 'main:home' %}">
+        <img src="{% static "logo/relanz-logo1.png" %}" alt="relanz-logo1">
+      </a>
+    </div>
+
+    <div class="title">
+      <p class="title-text">비밀번호 재설정</p>
+    </div>
+
+    <div class="email-div">
+        <div class="image-div">
+            <img src="{% static "images/welcome-box.png" %}" alt=".">
+        </div>
+        <div class="text-div">
+            <p>비밀번호가 재설정되었습니다</p>
+            <p>이제 로그인하세요!</p>
+        </div>
+    </div>
+
+    <a class="submit-btn" href="{% url 'user:signin' %}">로그인하기</a>
+
+    <div class="just-for-space"></div>
+  </div>
+{% endblock %}
+
+{% block scripts%}{% endblock scripts%}
+
+{% comment %} {% block content %}
 <h2>비밀번호 재설정</h2>
 비밀번호가 재설정되었습니다<br>
 이제 로그인하세요!<br>
 
 <a href="{% url 'user:signin' %}">로그인하기</a>
-{% endblock %}
+{% endblock %} {% endcomment %}

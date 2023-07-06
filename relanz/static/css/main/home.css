@@ -584,7 +584,7 @@ margin: 0;
   border: 2px solid #9abcff;
   border-radius: 25px;
   transition: 0.5s;
-  left: calc(50% - 110px);
+  left: calc(50% - 120px);
   top: 0;
   background-color: #fff;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.25);
@@ -822,8 +822,7 @@ margin: 0;
   font-size: 14px;
 }
 
-.report-summary > .summary-detail-1,
-.report-summary > .summary-detail-2 {
+.report-summary > .summary-detail-1 {
   /* 요약 세부내용 1 스타일 */
   width: 100%;
   height: 350px;
@@ -993,8 +992,71 @@ margin: 0;
 
 
 
-#profile-set #top-page .report-section .report-summary .summary-detail-2 {
+.report-summary > .summary-detail-2 {
   /* 요약 세부내용 2 스타일 */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin-top: 38px;
+  border: 2px solid #71a1ff;
+  border-radius: 15px;
+  padding: 20px 20px 0 20px;
+}
+
+.summary-detail-2 > .detail-explain {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.summary-detail-2 > .summary-detail {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-detail-2 > .summary-detail > p {
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #71a1ff;
+}
+
+.summary-detail-2 > .summary-detail > .tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.summary-detail > .tag-container > span {
+  margin: 0 5px 5px 0;
+  padding: 5px 12px;
+  text-align:justify;
+  font-size: 15px;
+  color: #71a1ff;
+  font-weight: 600;
+  border: 1px solid #71a1ff;
+  border-radius: 60px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.summary-detail > .tag-container > span > a {
+  text-decoration: none;
+  color: #71a1ff;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.summary-detail > .tag-container > span > a:visited {
+  text-decoration: none;
+  color: #71a1ff;
 }
 
 #profile-set #top-page .report-section .relanz-magazine {
