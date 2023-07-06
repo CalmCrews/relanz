@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 import re
 
 # Create your views here.
@@ -44,6 +45,7 @@ def communityHome(request, challenge_id):
             page_obj=paginator.page(page)
             
         res_data = {'articles': articles, 'challenge':challenge, 'participated':participated, 'articles':page_obj}
+
         return render(request, 'community/communityHome.html', res_data)
     if request.method == 'POST':
         user = request.user
