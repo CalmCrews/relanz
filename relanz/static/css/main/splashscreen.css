@@ -285,6 +285,10 @@
   text-decoration-thickness: 2px;
 }
 
+#div5 > .sign-section > .sign-in > a {
+  color: #71a1ff;
+}
+
 #div5 > .sign-section > .sign-in > a:visited {
   color: #71a1ff;
 }

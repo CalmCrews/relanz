@@ -72,7 +72,7 @@
             </div>
             <div class="relenge-section">
               <ul class="tag-list">
-                <li class="tag-filter" data-tag="전체">전체</li>
+                <li class="tag-filter selected" data-tag="전체">전체</li>
                 {% for item in tag_lists %}
                   <li class="tag-filter" data-tag="{{ item }}">{{item}}</li>
                 {% endfor %}
@@ -82,7 +82,19 @@
                   <ul class="relenge-list">
                   {% for challenge, participant in combined_data %}
                   <li>
-                    <div class="relenge-card">
+                    <div class="relenge-card
+                      {% if challenge.morning %}아침{% endif %}
+                      {% if challenge.afternoon %}점심{% endif %}
+                      {% if challenge.evening %}저녁{% endif %}
+                      {% if challenge.inside %}실내{% endif %}
+                      {% if challenge.outside %}실외{% endif %}
+                      {% if challenge.solo %}혼자{% endif %}
+                      {% if challenge.group %}여럿이{% endif %}
+                      {% if challenge.pay %}유료{% endif %}
+                      {% if challenge.free %}무료{% endif %}
+                      {% if challenge.static %}정적인{% endif %}
+                      {% if challenge.dynamic %}동적인{% endif %}
+                    ">
                       <div class="image-section">
                         <img src="{% static challenge.challenge.image %%}" alt="{{ challenge.title }}">
                       </div>
@@ -101,7 +113,19 @@
                   <ul class="relenge-list">
                   {% for challenge in challenges %}
                     <li>
-                      <div class="relenge-card">
+                      <div class="relenge-card
+                        {% if challenge.morning %}아침{% endif %}
+                        {% if challenge.afternoon %}점심{% endif %}
+                        {% if challenge.evening %}저녁{% endif %}
+                        {% if challenge.inside %}실내{% endif %}
+                        {% if challenge.outside %}실외{% endif %}
+                        {% if challenge.solo %}혼자{% endif %}
+                        {% if challenge.group %}여럿이{% endif %}
+                        {% if challenge.pay %}유료{% endif %}
+                        {% if challenge.free %}무료{% endif %}
+                        {% if challenge.static %}정적인{% endif %}
+                        {% if challenge.dynamic %}동적인{% endif %}
+                      ">
                         <div class="image-section">
                           <img src="{% static challenge.challenge.image %}" alt="{{ challenge.title }}">
                         </div>
@@ -523,6 +547,38 @@
       active = active - 1 >= 0 ? active - 1 : active;
       loadShow();
     }
+
+    const tagFilters = document.querySelectorAll('.tag-filter'); // 태그 필터 요소들 선택
+
+    let selectedTag = '전체'; // 선택된 태그 변수 초기화
+
+
+    tagFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        // 이전에 선택된 태그의 색상 원래대로 돌리기
+        const prevSelectedFilter = document.querySelector(`.tag-filter[data-tag="${selectedTag}"]`);
+        if (prevSelectedFilter) {
+          prevSelectedFilter.classList.remove('selected');
+        }
+
+        selectedTag = filter.dataset.tag; // 선택한 태그 가져오기
+
+        // 선택된 태그 색상 변경
+        filter.classList.add('selected');
+
+        const relengeCards = document.querySelectorAll('.relenge-card'); // 모든 relenge-card 요소 선택
+        relengeCards.forEach((card, index) => {
+          if (selectedTag === '전체' || card.classList.contains(selectedTag)) {
+            card.style.visibility = 'visible'; // 선택된 태그와 일치하거나 '전체'인 경우 보이기
+            dots[index].style.display = "block";
+          } else {
+            card.style.visibility = 'hidden'; // 일치하지 않는 경우 숨기기
+            dots[index].style.display = "none";
+          }
+        });
+        loadShow();
+      });
+    });
    
 
     //주간 - 월간 슬라이딩 버튼
@@ -582,17 +638,8 @@
     } else if (userResultValue === "취약하지 않은") {
       userResultElement.style.backgroundColor = "#6888c5";
     }
-
-
     
-    const ul = document.querySelector(".relenge-list");
-    const firstChild = ul.childNodes[1];
-
-    console.log(ul.childNodes[1]); 
-    const beforeText = document.createTextNode('{% if chllenge.outside %}');
-    const afterText = document.createTextNode('{% endif %}');
-    ul.insertBefore(beforeText, firstChild);
-    ul.insertBefore(afterText, firstChild.nextSibling);
+    
   </script>
 
 

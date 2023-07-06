@@ -541,6 +541,12 @@ margin: 0;
   align-items: center;
   gap: -1px;
   flex-shrink: 0;
+  cursor: pointer;
+}
+
+#profile-set #top-page .relenge-section .tag-list > li.selected {
+  background-color: #9abcff;
+  color: #fff;
 }
 
 .relenge-section > .relenge-list-container {
@@ -570,6 +576,7 @@ margin: 0;
 }
 
 .relenge-list {
+  display: flex;
   width: 100%;
   height: 380px;
   margin-bottom: 10px;
