@@ -44,6 +44,9 @@
       </div>
     </a>
   </div>
+  {% endblock %}
+  
+  {% block mobile-scripts %}
   <script>
     const block_screen = document.getElementById("block_screen");
     const warning_absolute = document.getElementById("warning_absolute");
@@ -59,5 +62,8 @@
       block_screen.style.zIndex = "-1";
       warning_absolute.style.zIndex = "-1";
     }
+
+    const moreIcon = document.querySelector(".mobile-nav > ul > li > .more > img");
+    moreIcon.src = "{% static 'icons/More_icon_filled.png'%}";
   </script>
 {% endblock %}

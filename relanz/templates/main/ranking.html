@@ -1,4 +1,4 @@
-{% extends 'mobilebase.html' %}
+{% extends 'mobileBase.html' %}
 {% load static %}
 {% block mobile_title %}
   Ranking of Relanz
@@ -292,6 +292,8 @@
         }
       });
     });
+    const rankingIcon = document.querySelector(".mobile-nav > ul > li > .ranking > img");
+    rankingIcon.src = "{% static 'icons/Ranking_icon_filled.png'%}";
   </script>
 
 
