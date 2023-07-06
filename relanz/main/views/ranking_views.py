@@ -40,9 +40,10 @@ def ranking(request):
             if recommand_challenge:
                 recommand_challenge = recommand_challenge.values('challenge_id').distinct().annotate(count=Count('user_id'))
                 recommand_challenges.append((recommand_challenge[0]))
+
         # count 값을 기준으로 정렬
         recommand_challenges = sorted(recommand_challenges, key=lambda x: x['count'], reverse=True)
-
+        
         # 각각의 챌린지 아이디에 맞는 챌린지를 파싱
         recommand_challenges_ranks=[]
         for recommand_challenge in recommand_challenges:
@@ -52,10 +53,11 @@ def ranking(request):
         # 파싱한 챌린지에 추천하는 챌린지라는 의미에서 0으로 고정
         recommand_number = [0] * len(recommand_challenges_ranks)
         recommand_challenges = list(zip(recommand_number, recommand_challenges_ranks))
-
         # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 5개까지만 파싱해서 전달
-        for i in range(5 - len(real_time_challenges)):
-            real_time_ranks.append(recommand_challenges[i])
+
+        if recommand_challenges:
+            for i in range(5 - len(real_time_challenges)):
+                real_time_ranks.append(recommand_challenges[i])
 
         # 이렇게 해도 TOP 5를 채우지 못한다면 5개가 될 수 있도록 랜덤한 챌린지를 추천
         if len(real_time_ranks) < 5:
@@ -64,7 +66,7 @@ def ranking(request):
                 # 중복 제거
                 if x in remain_challenge_all:
                     remain_challenge_all.remove(x)
-            for x in recommand_challenge_all:
+            for x in recommand_challenges_ranks:
                 # 중복 제거
                 if x in remain_challenge_all:
                     remain_challenge_all.remove(x)
@@ -75,7 +77,7 @@ def ranking(request):
             remain_challenges = list(zip(remain_number, remain_challenge_random))
             # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 추천 챌린지를 찾은 만큼만 전달
             for i in range(5 - len(real_time_ranks)):
-                real_time_ranks.append(remain_challenges[0])
+                real_time_ranks.append(remain_challenges[i])
             real_time_ranks_result=real_time_ranks[:5]
         else:
             real_time_ranks_result=real_time_ranks[:5]
@@ -139,8 +141,9 @@ def ranking(request):
         recommand_challenges_age = list(zip(recommand_number_age, recommand_challenges_ranks_age))
 
         # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 5개까지만 파싱해서 전달
-        for i in range(0, (5 - len(age_challenges))):
-            age_ranks.append(recommand_challenges_age[i])
+        if recommand_challenges_age:
+            for i in range(0, (5 - len(age_challenges))):
+                age_ranks.append(recommand_challenges_age[i])
 
         # 이렇게 해도 TOP 5를 채우지 못한다면 5개가 될 수 있도록 랜덤한 챌린지를 추천
         if len(age_ranks) < 5:
@@ -160,12 +163,12 @@ def ranking(request):
             remain_challenges_age = list(zip(remain_number_age, remain_challenge_random_age))
             # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 추천 챌린지를 찾은 만큼만 전달
             for i in range(5 - len(age_ranks)):
-                age_ranks.append(remain_challenges_age[0])
+                age_ranks.append(remain_challenges_age[i])
         else:
             age_ranks=age_ranks[:5]
     else:
         age_ranks=age_ranks[:5]
-
+    
     female_ranking = gender_ranking('female')
     male_ranking = gender_ranking('male')
     if user.sex == 'male':
@@ -276,8 +279,9 @@ def gender_ranking(sex):
         recommand_challenges_gender = list(zip(recommand_number_gender, recommand_challenges_ranks_gender))
 
         # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 5개까지만 파싱해서 전달
-        for i in range(0, (5 - len(gender_challenges))):
-            gender_ranks.append(recommand_challenges_gender[i])
+        if recommand_challenges_gender:
+            for i in range(0, (5 - len(gender_challenges))):
+                gender_ranks.append(recommand_challenges_gender[i])
             
         # 이렇게 해도 TOP 5를 채우지 못한다면 5개가 될 수 있도록 랜덤한 챌린지를 추천
         if len(gender_ranks) < 5:
@@ -297,7 +301,7 @@ def gender_ranking(sex):
             remain_challenges_gender = list(zip(remain_number_gender, remain_challenge_random_gender))
             # 넘기는 리스트 데이터가 TOP 5가 될 수 있도록 추천 챌린지를 찾은 만큼만 전달
             for i in range(5 - len(gender_ranks)):
-                gender_ranks.append(remain_challenges_gender[0])
+                gender_ranks.append(remain_challenges_gender[i])
         else:
             gender_ranks=gender_ranks[:5]
     else:
