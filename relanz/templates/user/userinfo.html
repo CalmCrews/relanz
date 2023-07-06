@@ -67,8 +67,12 @@
               </a>
             </div>
             <div class="relange-info">
-              <a class="title" href="{% url 'community:communityHome' challenge_id=challenge.0.id %}">{{challenge.0.title}}</a>
-              <a class="write" href="{% url 'community:new' challenge_id=challenge.0.id %}">기록하기</a>
+              <span>{{challenge.0.title}}</span>
+              {% comment %} <a href="{% url 'community:new' challenge_id=challenge.0.id %}">기록하기</a> {% endcomment %}
+              <form action="{% url "community:communityHome" challenge_id=challenge.0.id  %}" method="post">
+                {% csrf_token %}
+                <button type="submit">기록하기</button>
+              </form>
               <div class="tags-wrapper">
                 {% for tag in challenge.1 %}
                   <span>{{ tag }}</span>
