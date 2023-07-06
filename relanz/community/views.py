@@ -26,6 +26,7 @@ def communityHome(request, challenge_id):
         articles = Article.objects.filter(challenge=challenge).order_by('-created_at')
          # 이 챌린지 참여했는지 안했는지 체크 위해 변수 만듬
         participated = Participant.objects.filter(user=user, challenge=challenge) 
+        participants = len(Participant.objects.filter(challenge=challenge))
         # 한페이지 당 사진 9개로 설정
         paginator = Paginator(articles, 9) 
         try:
@@ -44,7 +45,7 @@ def communityHome(request, challenge_id):
             page=paginator.num_pages
             page_obj=paginator.page(page)
             
-        res_data = {'articles': articles, 'challenge':challenge, 'participated':participated, 'articles':page_obj}
+        res_data = {'articles': articles, 'challenge':challenge, 'participated':participated, 'participants':participants,'articles':page_obj}
 
         return render(request, 'community/communityHome.html', res_data)
     if request.method == 'POST':
