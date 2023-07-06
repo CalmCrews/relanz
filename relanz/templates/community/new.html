@@ -33,14 +33,22 @@
         action="{% url 'community:new' challenge.id %}"
         enctype="multipart/form-data"
       >
-        <label class="input-button">
-          {% csrf_token %} 
-          <input id="file-input" type="file" name="image" accept="image/*" />
-          사진 업로드
-        </label>
+        {% csrf_token %}
+        {{ form }}
+        <label for="file-input" id='input-label'>사진 업로드</label>
+        <input id="file-input" type="file" name="image" accept="image/*" />
         <button type="submit">작성 완료</button>
       </form>
     </div>
+  </div>
+  <div id="alert-message">
+    <div class="popup">
+      <div class="close-button"><img src="{% static "icons/close.png"%}" alt="x"></div>
+      <img src="{% static "icons/alert.png"%}" alt="alert">
+      <span>사진 첨부는 필수입니다.</span>
+    </div>
+  </div>
+  <div class="display-cover">
   </div>
 </div>
 
@@ -48,8 +56,11 @@
 
 {% block mobile-scripts %}
 <script>
+  //이미지 프리뷰
   const fileInput = document.getElementById('file-input');
   const previewImage = document.getElementById('preview-image');
+  const submitButton = document.querySelector('button');
+  const labelButton = document.getElementById('input-label')
 
   fileInput.addEventListener('change', function() {
     const file = this.files[0];
@@ -60,12 +71,45 @@
         previewImage.style.display = 'block';
       };
       reader.readAsDataURL(file);
+      labelButton.innerText = '사진 바꾸기';
+      submitButton.classList.add('valid');
+      submitButton.addEventListener('mouseenter', () => {
+        submitButton.classList.add('hovered');
+      })
+      submitButton.addEventListener('mouseleave', () => {
+        submitButton.classList.remove('hovered');
+      })
     } else {
+      if (submitButton.classList.contains('valid')) {
+        submitButton.classList.remove('valid');
+      }
       previewImage.src = '#';
       previewImage.style.display = 'none';
     }
+
   });
 
+  //사진첨부 안되어있을 때 오류 처리
+  const form = document.querySelector('form');
+  const alertMessage = document.querySelector("#alert-message");
+  const displayCover = document.querySelector(".display-cover");
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // 폼 기본 동작 중단
+
+    if (submitButton.classList.contains('valid')) {
+      form.submit();
+    }
+    else {
+      alertMessage.style.display = "block";
+      displayCover.style.display = "block";
+      const closeButton = document.querySelector('#alert-message > .popup > .close-button');
+      closeButton.addEventListener("click", () => {
+        alertMessage.style.display = "none";
+        displayCover.style.display = "none";
+      })
+    }
+    return;
+  });
 
 
   //화면 첫 로드
@@ -73,5 +117,8 @@
     const newContainer = document.querySelector(".new-container");
     newContainer.classList.add("shifted");
   });
+
+
+
 </script>
 {% endblock %}
