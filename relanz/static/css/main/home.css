@@ -1165,6 +1165,7 @@ margin: 0;
 }
 
 .magazine-info > a {
+  color:
   text-decoration: none;
 }
 
@@ -1174,6 +1175,7 @@ margin: 0;
 
 .magazine-info > a:visited {
   color: #fff;
+  text-decoration: none;
 }
 
 .magazine-info > a > .magazine-title {

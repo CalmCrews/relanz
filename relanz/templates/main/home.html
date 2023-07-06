@@ -400,15 +400,15 @@
       "늦었다고 생각할 때가 진짜 늦었습니다.",
       "나의 하루는 내가 만들어가요!", 
       "사람 관계에서 큰 기대는 금물!", 
+      "도전은 당신을 더 강하게 만들어 줄거예요",
       "어제의 한계를 오늘의 도전으로 바꿔봐요, 지금 당장 릴렌지!", 
-      "도전은 당신을 더 강하게 만들어 줄거에요",
       "믿는 사람은 무엇이든지 할 수 있어요!"
     ];
     const hiddenMessageInnerText = document.querySelector(".hidden-message > p");
     hiddenMessageInnerText.innerText = weeklyMessages[dayOfWeek];
 
     //score graph
-    const user_score = {{ user.score }};
+    const user_score = {{user.score}};
     var userScore = user_score;
     var goalScore;
     var userLevel = "1";
@@ -435,7 +435,7 @@
 
     var userLevelSpan = document.getElementById("user_level");
     var userScoreSpan = document.querySelector(".current-score-bar > span")
-    var currentScoreWidth = (userScore / goalScore) * 110 + 50;
+    var currentScoreWidth = (userScore / goalScore) * 120 + 40;
     var currentScoreBar = document.querySelector(".current-score-bar");
 
     //user level설정
@@ -490,54 +490,60 @@
 
     //릴렌지 카드 섹션
     const carouselContainer = document.querySelector('.relenge-list');
-    const dots = document.querySelectorAll('.dot');
-    const items = document.querySelectorAll('.relenge-card');
+    let dots = document.querySelectorAll('.dot');
+    let items = document.querySelectorAll('.relenge-card');
     const prev = document.querySelector('.arrow-left');
     const next = document.querySelector('.arrow-right');
     let active = 0;
 
 
-    // 이전 카드 보기
-
+    //카드 보기
     function loadShow(){
-      let stt = 0;
-      items[active].style.transform = `none`;
-      items[active].style.zIndex = 1;
-      items[active].style.filter = 'none';
-      items[active].style.opacity = 1;
-      for(var i = active + 1; i < items.length; i++){
-        stt++;
-        items[i].style.transform = `translateX(${120*stt}px) scale(${1 - 0.25*stt}) perspective(16px) rotateY(-0.5deg)`;
-        items[i].style.zIndex = -stt;
-        items[i].style.filter = 'blur(3px)';
-        items[i].style.opacity = stt > 2 ? 0 : 0.6;
+      if (items[active]) {
+        let stt = 0;
+        items[active].style.transform = `none`;
+        items[active].style.zIndex = 1;
+        items[active].style.filter = 'none';
+        items[active].style.opacity = 1;
+        for(var i = active + 1; i < items.length; i++){
+          stt++;
+          items[i].style.transform = `translateX(${120*stt}px) scale(${1 - 0.25*stt}) perspective(16px) rotateY(-0.5deg)`;
+          items[i].style.zIndex = -stt;
+          items[i].style.filter = 'blur(3px)';
+          items[i].style.opacity = stt > 2 ? 0 : 0.6;
+        }
+        stt = 0;
+        for(var i = active - 1; i >= 0; i--){
+          stt++;
+          items[i].style.transform = `translateX(${-120*stt}px) scale(${1 - 0.25*stt}) perspective(16px) rotateY(0.5deg)`;
+          items[i].style.zIndex = -stt;
+          items[i].style.filter = 'blur(3px)';
+          items[i].style.opacity = stt > 2 ? 0 : 0.6;
+        }
+        dots.forEach(dot => {
+          dot.classList.remove('active');
+        });
+  
+        dots[active].classList.add('active');
       }
-      stt = 0;
-      for(var i = active - 1; i >= 0; i--){
-        stt++;
-        items[i].style.transform = `translateX(${-120*stt}px) scale(${1 - 0.25*stt}) perspective(16px) rotateY(0.5deg)`;
-        items[i].style.zIndex = -stt;
-        items[i].style.filter = 'blur(3px)';
-        items[i].style.opacity = stt > 2 ? 0 : 0.6;
-      }
-      dots.forEach(dot => {
-        dot.classList.remove('active');
-      });
-
-      dots[active].classList.add('active');
     }
+    //initial
     loadShow();
     // 카드 및 점 업데이트
 
       
 
     // 점 클릭 이벤트
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        active = index;
-        loadShow();
+    function loadDotsListener() {
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          active = index;
+          console.log(active);
+          loadShow();
+        });
       });
-    });
+    }
+    loadDotsListener();
 
     next.onclick = function(){
       active = active + 1 < items.length ? active + 1 : active;
@@ -566,17 +572,25 @@
         // 선택된 태그 색상 변경
         filter.classList.add('selected');
 
+        //initialize
+        items = [];
+        dots = [];
+        const newDots = document.querySelectorAll('.dot');
         const relengeCards = document.querySelectorAll('.relenge-card'); // 모든 relenge-card 요소 선택
         relengeCards.forEach((card, index) => {
           if (selectedTag === '전체' || card.classList.contains(selectedTag)) {
-            card.style.visibility = 'visible'; // 선택된 태그와 일치하거나 '전체'인 경우 보이기
-            dots[index].style.display = "block";
+            items.push(card);
+            dots.push(newDots[index]);
+            card.style.display = 'block'; // 선택된 태그와 일치하거나 '전체'인 경우 보이기
+            newDots[index].style.display = "block";
           } else {
-            card.style.visibility = 'hidden'; // 일치하지 않는 경우 숨기기
-            dots[index].style.display = "none";
+            card.style.display = 'none'; // 일치하지 않는 경우 숨기기
+            newDots[index].style.display = "none";
           }
         });
+        active = 0;
         loadShow();
+        loadDotsListener();
       });
     });
    
