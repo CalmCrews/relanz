@@ -254,6 +254,30 @@
     position:relative;
     z-index: 100;
 }
+
+.record-btn-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 31px;
+    flex-shrink: 0;
+
+    color: #5F5F5F;
+    text-align: center;
+    font-size: 14px;
+    font-family: Pretendard;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+
+    /* border: 1px solid #9ABCFF; */
+
+    /* border-radius: 30px; */
+    border-radius: 30px;
+    background: #D0E0FF;
+    box-shadow: inset 2px 2px 3px #b1bed9,
+                inset -2px -2px 3px #efffff;
+}
 .record-btn {
     display: flex;
     justify-content: center;
@@ -384,8 +408,3 @@
 .hide {
     z-index: -1;
 }
-
-
-
-
-

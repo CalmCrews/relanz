@@ -22,5 +22,5 @@ async function clickLikeHeartBtn(obj) {
 }
 
 function clickCancelBtn(obj) {
-    document.getElementById("warning_user_div").remove();
+    document.getElementById("alert_user_div").remove();
 }

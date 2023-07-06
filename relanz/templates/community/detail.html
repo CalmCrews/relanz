@@ -1,7 +1,7 @@
 {% extends 'mobileBase.html' %}
 {% load static %}
 {% block mobile_title %}
-communityHome
+    detail
 {% endblock mobile_title %}
 {% block mobile_extrahead %}
   <link rel="stylesheet" type="text/css" href="{% static "css/detail.css"%}">
@@ -14,7 +14,6 @@ communityHome
             {% else %}
                 <img src="{% static "images/leein_example.jpeg" %}" alt=".">
             {% endif %}
-        </div>
         </div>
         <div class="main-container-div">
             <div class="nav-div-absolute">
@@ -54,13 +53,21 @@ communityHome
                 <div class="header-div">
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="error-msg-div" id="warning_user_div">
-                                <p class="warning-ment">{{message}}</p>
-                                {% comment %} <p class="warning-ment">다시 시도해주세요</p> {% endcomment %}
-                                <button type="button" class="warning-btn" id="warning_btn" onclick="clickCancelBtn(this)">확인</button>
+                        <div class="alert-msg-div" id="alert_user_div" onclick="clickCancelBtn(this)">
+                            <p class="score-ment">오늘의 기록을 남긴 멋진 당신,<br>스코어를 획득하셨습니다!</p>
+                            {% comment %} <p class="warning-ment">다시 시도해주세요</p> {% endcomment %}
+                            <div class="score-box">
+                                {% if message|floatformat == "500" %}
+                                <span class="first">1st</span>
+                                {% endif %}
+                                <img src="{% static 'icons/rStar.png' %}" alt="star">
+                                <span class="plus">+</span>
+                                <span class="score">{{message}}</span>
                             </div>
+                        </div>
                         {% endfor %}
                     {% endif %}
+                    
                     <div class="user-info-div">
                         
                         <div class="profile-wrapper">
@@ -108,8 +115,7 @@ communityHome
                 <div class="main-image-div">
                     {% if article.image %}
                         <img src="{{article.image.url}}" alt="이미지">
-                    {% else %}
-                        <img src="{% static "images/leein_example.jpeg" %}" alt=".">
+                        
                     {% endif %}
                 </div>
             </div>
@@ -124,8 +130,10 @@ communityHome
                 {% endif %} {% endcomment %}
             </ul>
         </div>
-        <div class="just-for-margin-div"></div>
     </div>
+{% endblock %}
+   
+{% block scripts%}
     <script src={% static "js/detail.js"%}></script>
     <script>
         function renderProfileCombination(combinationData) {
@@ -154,34 +162,7 @@ communityHome
             clothesElement.style.backgroundImage = `url("{% static 'character/clothes/clothes' %}${combinationData[7]}.png")`;
             if (combinationData[8] > 0)
               accElement.style.backgroundImage = `url("{% static 'character/acc/acc' %}${combinationData[8]}.png")`;
-      
-        
         }
         renderProfileCombination("{{user.avatar}}");
     </script>
-{% endblock %}
-   
-{% block scripts%}
 {% endblock scripts%}
-
-{% comment %} {% block title %}
-<h1>사진 상세보기 페이지</h1>  
-{% endblock title %}
-
-{% block content %}
-<br />
-<hr />
-<p>{{author_nickname}}님</p>
-{% if article.image %}
-<img src="{{article.image.url}}" width="100">
-{% endif %}
-<p>기록 일시: {{article.created_at}}</p>
-
-{{like_count}}
-<a href="{% url 'community:like' article.id %}">좋아요</a>
-<br/>
-
-<a href="{% url 'community:communityHome' challenge.id %}">기록 게시판으로 돌아가기</a>
-<a href="{% url 'community:edit' challenge.id article.id %}">수정하기</a>
-<a href="{% url 'community:delete' challenge.id article.id %}">삭제하기</a>
-{% endblock content %} {% endcomment %}
