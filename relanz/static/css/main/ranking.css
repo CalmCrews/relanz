@@ -310,10 +310,19 @@ header > img {
 }
 
 .ranking-container > ol > li > .rank {
+  position: relative;
   margin: 0 10px;
   padding: 2px 0;
   font-size: 18px;
   color: #71a1ff;
+}
+
+.ranking-container > ol > li > .rank > img {
+  position: absolute;
+  left: -8px;
+  top: 3px;
+  width: 25px;
+  object-fit: contain;
 }
 
 .ranking-container > ol > li > .relenge-title {
@@ -345,4 +354,59 @@ header > img {
   background-color: #9abcff;
   text-align: center;
   border-radius: 13px;
+}
+
+.ranking-container > ol > .empty-rank {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  height: 112px;
+  text-align: center;
+  justify-items: center;
+  border: 2px solid #9abcff;
+  border-radius: 25px;
+  padding: 16px;
+}
+
+.ranking-container > ol > .empty-rank > .loading-div {
+  margin-bottom: 8px;
+}
+
+.ranking-container > ol > .empty-rank img {
+  width: 38px;
+  object-fit: cover;
+  animation: spin-blink 2s linear infinite;
+}
+
+@keyframes spin-blink {
+  0% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.ranking-container > ol > .empty-rank > p {
+  font-size: 17px;
+  font-weight: 400;
+  color: #9abcff;
+  animation: blink 2s linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

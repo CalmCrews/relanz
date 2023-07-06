@@ -126,11 +126,13 @@
   <div class="total-ranking-section ranking-container">
     <p>실시간 전체 랭킹</p>
     <ol>
+      {% if challenge_ranking.0.0 or challenge_ranking.1.0 or challenge_ranking.2.0 or challenge_ranking.3.0 or challenge_ranking.4.0 %}
       {% for rank, challenge in challenge_ranking %}
         <li>
           <div class="rank">
             {% if rank < 1 %}
-              -
+              -&nbsp;
+              <img src="{% static 'icons/recommend.png' %}" alt="recommend" class="recommend">
             {% else %}
               {{rank}}
             {% endif %}
@@ -143,17 +145,27 @@
           <a href="{% url 'challenge:challenge' challenge_id=challenge.id%}">자세히 보기</a>
         </li>
       {% endfor %}
+      {% else %}
+      <div class="empty-rank">
+        <div class="loading-div"><img src="{% static 'icons/loading-ranking.png'%}" alt="loading"></div>
+        <p>
+          릴렌즈에서 실시간 전체 랭킹을 집계중이에요
+        </p>
+      </div>
+      {% endif %}
     </ol>
   </div>
   <div class="age-ranking-section ranking-container">
     {% comment %} 여기 유저 나이대 필요 {% endcomment %}
-    <p>20대 랭킹</p>
+    <p>{{user.age|stringformat:"d"|slice:":1"}}0대 랭킹</p>
     <ol>
+      {% if age_challenge_ranking.0.0 or age_challenge_ranking.1.0 or age_challenge_ranking.2.0 or age_challenge_ranking.3.0 or age_challenge_ranking.4.0 %}
       {% for rank, challenge in age_challenge_ranking %}
         <li>
           <div class="rank">
             {% if rank < 1 %}
-              -
+              -&nbsp;
+              <img src="{% static 'icons/recommend.png' %}" alt="recommend" class="recommend">
             {% else %}
               {{rank}}
             {% endif %}
@@ -166,6 +178,14 @@
           <a href="{% url 'challenge:challenge' challenge_id=challenge.id%}">자세히 보기</a>
         </li>
       {% endfor %}
+      {% else %}
+      <div class="empty-rank">
+        <div class="loading-div"><img src="{% static 'icons/loading-ranking.png'%}" alt="loading"></div>
+        <p>
+          릴렌즈에서 실시간 {{user.age|stringformat:"d"|slice:":1"}}0대 랭킹을 집계중이에요
+        </p>
+      </div>
+      {% endif %}
     </ol>
   </div>
   {% for key, value in res_ranking.items %}
@@ -178,11 +198,13 @@
         {% endif %}
       </p>
       <ol>
+        {% if value.0.0 or value.1.0 or value.2.0 or value.3.0 or value.4.0 %}
         {% for rank, challenge in value %}
           <li>
             <div class="rank">
               {% if rank < 1 %}
-                -
+                -&nbsp;
+                <img src="{% static 'icons/recommend.png' %}" alt="recommend" class="recommend">
               {% else %}
                 {{rank}}
               {% endif %}
@@ -195,6 +217,14 @@
             <a href="{% url 'challenge:challenge' challenge_id=challenge.id%}">자세히 보기</a>
           </li>
         {% endfor %}
+        {% else %}
+        <div class="empty-rank">
+          <div class="loading-div"><img src="{% static 'icons/loading-ranking.png'%}" alt="loading"></div>
+          <p>
+            릴렌즈에서 실시간 {% if key == "male_ranking" %}남자 랭킹{% else %}여자 랭킹{% endif %}을 집계중이에요
+          </p>
+        </div>
+        {% endif%}
       </ol>
     </div>
   {% endfor %}
