@@ -103,7 +103,7 @@
                         <h2>"{{ challenge.challenge.title }}"</h2>
                         <img src="{% static "icons/ppl.png" %}" alt="icon"/>
                         <span>{{ participant }}명이 참여 중인 릴렌지</span>
-                        <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">참여하기</a>
+                        <a href="{% url 'challenge:challenge' challenge_id=challenge.challenge.id %}">참여하기</a>
                       </div>
                     </div>
                   </li>
@@ -408,10 +408,10 @@
     hiddenMessageInnerText.innerText = weeklyMessages[dayOfWeek];
 
     //score graph
-    const user_score = {{user.score}};
-    var userScore = user_score;
-    var goalScore;
-    var userLevel = "1";
+    const user_score = {{ user.score }};
+    let userScore = user_score;
+    let goalScore;
+    let userLevel = "1";
 
     if (userScore <= 1000) {
       goalScore = 1000;

@@ -61,7 +61,6 @@ def home(request):
                     challenge_query |= Q(**{tag_list: True})
                 challenges_tags = ChallengeTag.objects.filter(challenge_query)
 
-                
                 res_data = survey_result(request)
                 res_data2 = {'user':user, 'tag_lists':tag_lists_, 'challenges':challenges_tags}
                 res_data.update(res_data2)
@@ -156,6 +155,7 @@ def home(request):
                     if sorted_participant != 0:
                         sorted_participants[i] = sorted_participant[0]['count']
                     i+=1
+
                 combined_data = list(zip(challenge_tags, sorted_participants))
 
                 # report 분석 알고리즘
@@ -266,7 +266,7 @@ def home(request):
             for tag_list in tag_lists:
                 challenge_query |= Q(**{tag_list: True})
             challenges = ChallengeTag.objects.filter(challenge_query)
-
+            
             res_data = survey_result(request)
             res_data2 = {'user':user, 'tag_lists':tag_lists_, 'challenges':challenges}
             res_data.update(res_data2)

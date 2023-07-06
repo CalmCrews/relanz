@@ -36,7 +36,6 @@
 
   <script>
     const sendEmailButton = document.getElementById("send_email");
-    console.log(sendEmailButton);
     const completeVerificationButton = document.getElementById("complete_verification");
     const popupAlert = document.getElementById('alert');
     const closeButton = document.querySelector('#alert > .popup > .close-button');
@@ -85,6 +84,7 @@
           sendEmailButton.style.backgroundColor = '#fff';
           sendEmailButton.style.color = '#71a1ff';
           sendEmailButton.style.border = '2px solid #71a1ff';
+          sendEmailButton.innerText = "인증 메일 다시 보내기";
 
           completeVerificationButton.style.cursor = 'pointer';
           completeVerificationButton.style.backgroundColor = '#71a1ff';
