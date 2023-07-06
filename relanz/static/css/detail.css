@@ -1,467 +1,468 @@
 .main-img-div {
-    width: 100%;
-    min-height: 270px;
-    max-height: 400px;
-    background-color: aquamarine;
+  width: 100%;
+  min-height: 270px;
+  max-height: 400px;
+  background-color: aquamarine;
 }
 
 .main-img-div > img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .main-container-div {
-    position: relative;
+  position: relative;
 }
 
 .nav-div-absolute {
-    top: -40px;
-    z-index: 10;
-    position: absolute;
-    display: flex;
-    width: 100%;
+  top: -40px;
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  width: 100%;
 }
 .nav-div-absolute > .nav-info {
-    padding-top: 0.9em;
-    display: flex;
-    justify-content: center;
-    width: 50%;
-    height: 138px;
-    flex-shrink: 0;
-    border-radius: 38px 38px 0px 0px;
-    
-    background: #D0E0FF;
+  padding-top: 0.9em;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  height: 138px;
+  flex-shrink: 0;
+  border-radius: 38px 38px 0px 0px;
 
-    box-shadow: -1px -5px 3px -1px rgba(132,175,255,0.8);
-    -webkit-box-shadow: -1px -5px 3px -1px rgba(132,175,255,0.8);
-    -moz-box-shadow: -1px -5px 3px -1px rgba(132,175,255,0.8);
+  background: #d0e0ff;
 
-    border: none;
+  box-shadow: -1px -5px 3px -1px rgba(132, 175, 255, 0.8);
+  -webkit-box-shadow: -1px -5px 3px -1px rgba(132, 175, 255, 0.8);
+  -moz-box-shadow: -1px -5px 3px -1px rgba(132, 175, 255, 0.8);
+
+  border: none;
 }
 .nav-div-absolute > .nav-board {
-    padding-top: 0.9em;
-    display: flex;
-    justify-content: center;
-    width: 50%;
-    height: 138px;
-    flex-shrink: 0;
-    border-radius: 38px 38px 0px 0px;
-    
-    background: #FFF;
+  padding-top: 0.9em;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  height: 138px;
+  flex-shrink: 0;
+  border-radius: 38px 38px 0px 0px;
 
-    box-shadow: -1px -5px 3px -1px rgba(132,175,255,0.8);
-    -webkit-box-shadow: -1px -5px 3px -1px rgba(132,175,255,0.8);
-    -moz-box-shadow: -1px -5px 3px -1px rgba(132,175,255,0.8);
+  background: #fff;
 
-    border: none;
+  box-shadow: -1px -5px 3px -1px rgba(132, 175, 255, 0.8);
+  -webkit-box-shadow: -1px -5px 3px -1px rgba(132, 175, 255, 0.8);
+  -moz-box-shadow: -1px -5px 3px -1px rgba(132, 175, 255, 0.8);
+
+  border: none;
 }
 
 .nav-div-absolute > .nav-info:hover {
-    background: #b1cbff;
+  background: #b1cbff;
 }
 
 .nav-info > a:link {
-    text-decoration: none;
-    color: #5F5F5F;
-    font-size: 14px;
-    font-family: Pretendard;
-    font-weight: 700;
-    letter-spacing: -0.7px;
+  text-decoration: none;
+  color: #5f5f5f;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 700;
+  letter-spacing: -0.7px;
 }
 .nav-info > a:visited {
-    color: #5F5F5F;
-    font-size: 14px;
-    font-family: Pretendard;
-    font-weight: 700;
-    letter-spacing: -0.7px;
+  color: #5f5f5f;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 700;
+  letter-spacing: -0.7px;
 }
 .nav-info > a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .nav-board > a {
-    transition: all ease 0.2s 0s;
+  transition: all ease 0.2s 0s;
 }
 
 .nav-board > a:link {
-    text-decoration: none;
-    color: #5F5F5F;
-    font-size: 14px;
-    font-family: Pretendard;
-    font-weight: 700;
-    letter-spacing: -0.7px;
+  text-decoration: none;
+  color: #5f5f5f;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 700;
+  letter-spacing: -0.7px;
 }
 .nav-board > a:visited {
-    color: #5F5F5F;
-    font-size: 14px;
-    font-family: Pretendard;
-    font-weight: 800;
-    letter-spacing: -0.7px;
+  color: #5f5f5f;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 800;
+  letter-spacing: -0.7px;
 }
 .nav-board > a:hover {
-    cursor: pointer;
-    font-size: 15px;
+  cursor: pointer;
+  font-size: 15px;
 }
 
 .title-container-div {
-    position:relative;
-    z-index: 100;
-    background-color: #FFF;
-    display: flex;
-    flex-direction: column;
-    padding: 1.5em 2.3em 0.8em 2.3em;
-    min-height: 130px;
+  position: relative;
+  z-index: 100;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em 2.3em 0.8em 2.3em;
+  min-height: 130px;
 }
 
 .title-container-div .info-small {
-    color: #5F5F5F;
-    font-size: 10px;
-    font-family: Pretendard;
-    letter-spacing: -0.5px;
+  color: #5f5f5f;
+  font-size: 10px;
+  font-family: Pretendard;
+  letter-spacing: -0.5px;
 }
 
 .title-container-div .title-div {
-    padding-top: 1em;
-    display: flex;
-    align-items: center;
+  padding-top: 1em;
+  display: flex;
+  align-items: center;
 }
 .title-container-div .title-div .img-div {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    margin-right: 0.3em;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-right: 0.3em;
 }
 .title-container-div .title-div .img-div > img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 .title-container-div .title-div .title-p {
-    color: #5F5F5F;
-    font-size: 24px;
-    font-family: Pretendard;
-    font-weight: 700;
-    letter-spacing: -1.2px;
+  color: #5f5f5f;
+  font-size: 24px;
+  font-family: Pretendard;
+  font-weight: 700;
+  letter-spacing: -1.2px;
 }
 
 .participant-count-div {
-    display: flex;
-    align-items: center;
-    padding-top: 2em;
+  display: flex;
+  align-items: center;
+  padding-top: 2em;
 }
 .participant-img-div {
-    width: 12px;
-    height: 14px;
-    flex-shrink: 0;
+  width: 12px;
+  height: 14px;
+  flex-shrink: 0;
 
-    margin-right: 0.7em;
+  margin-right: 0.7em;
 }
 .participant-img-div > img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 .participant-count-small {
-    color: #5F5F5F;
-    font-size: 10px;
-    font-family: Pretendard;
-    letter-spacing: -0.5px;
-    display: flex;
-    align-items:baseline
+  color: #5f5f5f;
+  font-size: 10px;
+  font-family: Pretendard;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: baseline;
 }
-
-
-
 
 .detail-content-background {
-    position:relative;
-    z-index: 100;
-    background-color: #FFF;
+  position: relative;
+  z-index: 100;
+  background-color: #fff;
 }
 .main-content-div {
-    height: 445px;
-    flex-shrink: 0;
-    display: flex;
-    border-radius: 30px;
-    background: #D0E0FF;
+  height: 445px;
+  flex-shrink: 0;
+  display: flex;
+  border-radius: 30px;
+  background: #d0e0ff;
 }
 
 .header-div {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 40px 0 40px;
-    width: 100%;
-    
-    height: 70px;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px 0 40px;
+  width: 100%;
+
+  height: 70px;
+  align-items: center;
 }
 
 .just-for-margin-div {
-    height: 170px;
+  height: 170px;
 }
 
 .user-info-div {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .mage-div {
-    display: flex;
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0;
-    background-color: #b1cbff;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  background-color: #b1cbff;
 }
 .img-div > img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .nickname-created-div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
 }
 .user-nickname {
-    color: #494949;
-    font-size: 16px;
-    font-family: NanumGothic;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.8px;
+  color: #494949;
+  font-size: 16px;
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.8px;
 }
 .content-created-at {
-    color: #5F5F5F;
-    font-size: 12px;
-    font-family: Pretendard;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.6px;
+  color: #5f5f5f;
+  font-size: 12px;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.6px;
 }
 
 .like-dislike-div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 15px;
 }
 .like-count {
-    color: #71A1FF;
-    font-size: 16px;
-    font-family: NanumGothic;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.8px;
+  color: #71a1ff;
+  font-size: 16px;
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.8px;
 }
 .like-img-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .like-img-div:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .like-heart-img-div {
-    display: flex;
-    width: 21px;
-    height: 18px;
-    flex-shrink: 0;
-    position: absolute;
-    left: 0px;
+  display: flex;
+  width: 21px;
+  height: 18px;
+  flex-shrink: 0;
+  position: absolute;
+  left: 0px;
 }
 .dislike-heart-img-div {
-    display: flex;
-    width: 21px;
-    height: 18px;
-    flex-shrink: 0;
-    position: absolute;
-    left: 0px;
+  display: flex;
+  width: 21px;
+  height: 18px;
+  flex-shrink: 0;
+  position: absolute;
+  left: 0px;
 }
 .like-heart-img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 .dislike-heart-img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .hide {
-    z-index: -1;
+  z-index: -1;
 }
 
-
-
-
 .main-image-div {
-    position: absolute;
-    z-index: 100;
-    min-height: 390px;
-    max-height: 390px;
-    width: 100%;
+  position: absolute;
+  z-index: 100;
+  min-height: 390px;
+  max-height: 390px;
+  width: 100%;
 
-    top:70px;
+  top: 70px;
 
-    background-color: chocolate;
+  background-color: chocolate;
 }
 
 .rest-image-bundle-div {
-    display: flex;
-    width: 390px;
-    height: 130px;
-    flex-shrink: 0;
+  display: flex;
+  width: 390px;
+  height: 130px;
+  flex-shrink: 0;
 
-    margin-top: 65px;
-    background: #D0E0FF;
-    width: 100%;
+  margin-top: 65px;
+  background: #d0e0ff;
+  width: 100%;
 }
-
-
-
-
-
 
 .profile-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0; /* 조정 가능 */
-  }
-  
-  .profile-circle {
-    width: 48px; /* 조정 가능 */
-    height: 48px; /* 조정 가능 */
-    border-radius: 50%;
-    border: 2px solid #71a1ff;
-    background-color: #fff; /* 배경색 조정 가능 */
-    position: relative;
-    overflow: hidden;
-    z-index: 10;
-  }
-  
-  .profile-circle div {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    background: transparent center/cover;
-  }
-  
-  .back-hair {
-    /* 머리 스타일의 CSS 속성 */
-    z-index: 11;
-  }
-  
-  .face {
-    /* 얼굴 스타일의 CSS 속성 */
-    z-index: 12;
-  }
-  
-  .front-hair {
-    /* 앞 머리 스타일의 CSS 속성 */
-    z-index: 14;
-  }
-  
-  .eyebrows {
-    /* 눈썹 스타일의 CSS 속성 */
-    z-index: 13;
-  }
-  
-  .eyes {
-    /* 눈 스타일의 CSS 속성 */
-    z-index: 13;
-  }
-  
-  .nose {
-    /* 코 스타일의 CSS 속성 */
-    z-index: 13;
-  }
-  
-  .mouth {
-    /* 입 스타일의 CSS 속성 */
-    z-index: 13;
-  }
-  
-  .makeup {
-    /* 볼터치 스타일의 CSS 속성 */
-    z-index: 14;
-  }
-  
-  .clothes {
-    /* 옷 스타일의 CSS 속성 */
-    z-index: 15;
-  }
-  
-  .acc {
-    /* 악세사리 스타일의 CSS 속성 */
-    z-index: 15;
-  }
-
-
-
-.error-msg-div {
-    width: 300px;
-    height: 150px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    position: absolute;
-    z-index: 200;
-    border-radius: 35px;
-    border: 2px solid #71A1FF;
-    background: #FFF;
-
-    gap: 20px;
-
-    left: 60px;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0; /* 조정 가능 */
 }
-.warning-ment {
-    color: #494949;
-    text-align: center;
-    font-size: 16px;
-    font-family: Pretendard;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.8px;
-    padding-top: 10px;
+
+.profile-circle {
+  width: 50px; /* 조정 가능 */
+  height: 50px; /* 조정 가능 */
+  border-radius: 50%;
+  border: 2px solid #71a1ff;
+  background-color: #fff; /* 배경색 조정 가능 */
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
 }
-.warning-btn {
-    width: 137px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 30px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(113, 161, 255, 1);
-
-    color: #FFF;
-    text-align: center;
-    font-size: 16px;
-    font-family: NanumGothic;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.8px;
-
-    border: none;
+.profile-circle div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent center/cover;
 }
-.warning-btn:hover {
-    cursor: pointer;
-    background-color: rgba(63, 128, 252, 1);
+
+.back-hair {
+  /* 머리 스타일의 CSS 속성 */
+  z-index: 11;
+}
+
+.face {
+  /* 얼굴 스타일의 CSS 속성 */
+  z-index: 12;
+}
+
+.front-hair {
+  /* 앞 머리 스타일의 CSS 속성 */
+  z-index: 14;
+}
+
+.eyebrows {
+  /* 눈썹 스타일의 CSS 속성 */
+  z-index: 13;
+}
+
+.eyes {
+  /* 눈 스타일의 CSS 속성 */
+  z-index: 13;
+}
+
+.nose {
+  /* 코 스타일의 CSS 속성 */
+  z-index: 13;
+}
+
+.mouth {
+  /* 입 스타일의 CSS 속성 */
+  z-index: 13;
+}
+
+.makeup {
+  /* 볼터치 스타일의 CSS 속성 */
+  z-index: 14;
+}
+
+.clothes {
+  /* 옷 스타일의 CSS 속성 */
+  z-index: 15;
+}
+
+.acc {
+  /* 악세사리 스타일의 CSS 속성 */
+  z-index: 15;
+}
+
+.alert-msg-div {
+  width: 326px;
+  height: 245px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  z-index: 200;
+  border-radius: 35px;
+  border: 2px solid #9abcff;
+  background: #fff;
+  gap: 20px;
+  left: 60px;
+  cursor: pointer;
+}
+.score-ment {
+  color: #494949;
+  text-align: center;
+  font-size: 16px;
+  font-family: Pretendard;
+  color: #323232;
+  font-weight: 600;
+  line-height: 140%;
+  padding-top: 10px;
+}
+
+.score-box {
+  position: relative;
+  width: 135px;
+  height: 50px;
+  display: flex;
+  border: 2px solid #71a1ff;
+  border-radius: 15px;
+  padding: 9px 15px;
+}
+
+.score-box > .first {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  font-size: 8px;
+  color: #71a1ff;
+}
+
+.score-box > img {
+  width: 26px;
+  height: 26px;
+  object-fit: cover;
+}
+
+.score-box > .plus {
+  position: absolute;
+  top: 2px;
+  left: 52px;
+  font-size: 30px;
+  color: #71a1ff;
+  font-weight: 600;
+}
+
+.score-box > .score {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 20px;
+  color: #71a1ff;
+  font-weight: 600;
 }
