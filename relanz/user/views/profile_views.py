@@ -4,7 +4,11 @@ from django.contrib.auth.decorators import login_required
 from config.email_decorator import email_verified_required
 from user.models import User, UserTag
 from challenge.models import Challenge, Participant,ChallengeTag
+from django.views.decorators.csrf import csrf_exempt
 
+
+
+@csrf_exempt
 @login_required(login_url='/user/signin')
 @email_verified_required
 def content(request):
@@ -37,6 +41,8 @@ def content(request):
             user.save()
             return redirect('user:survey')
         
+
+@csrf_exempt
 @login_required(login_url='/user/signin')
 @email_verified_required
 def avatar(request):
@@ -52,7 +58,9 @@ def avatar(request):
         user.avatar = request.POST.get('avatar')
         user.save()
         return redirect('user:userinfo')
-    
+
+
+
 @login_required(login_url='/user/signin')
 def userinfo(request):
     user = request.user

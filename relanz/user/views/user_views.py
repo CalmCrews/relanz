@@ -20,7 +20,7 @@ from user.tokens import account_activation_token
 
 User = get_user_model()
 
-@csrf_protect
+@csrf_exempt
 def signup(request):
     if request.method=="GET":
         return render(request, 'user/signup.html')
@@ -75,6 +75,8 @@ def email_identify(request):
     message = {'message': '사용가능한 이메일입니다'}
     return JsonResponse(message, status=200)
 
+
+@csrf_exempt
 def signin(request):
     if request.method == "GET":
         return render(request,'user/signin.html')
@@ -110,6 +112,7 @@ def signout(request):
 
 
 # 인증 메일 보내기
+@csrf_exempt
 def email_sent(request):
     user = request.user
     
@@ -170,6 +173,7 @@ def moreInfo(request):
     return render(request, 'user/moreInfo.html', {"user":user})
 
 # 유저 탈퇴
+@csrf_exempt
 def user_delete(request):
     if request.method=="GET":
             return render(request, 'user/user_delete.html')

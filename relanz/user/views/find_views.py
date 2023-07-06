@@ -4,7 +4,9 @@ from ..models import User
 from django.core.mail import send_mail
 import os
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def findid(request):
     if request.method == 'POST':
         email = request.POST['email']

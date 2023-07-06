@@ -3,7 +3,10 @@ from ..models import User, UserTag
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from config.email_decorator import email_verified_required
+from django.views.decorators.csrf import csrf_exempt
 
+
+@csrf_exempt
 @login_required(login_url='/user/signin')
 @email_verified_required
 def survey(request):
@@ -20,6 +23,7 @@ def survey(request):
         return redirect('user:tagsurvey')
     return render(request, 'main/home.html')
 
+@csrf_exempt
 @login_required(login_url='/user/signin')
 @email_verified_required
 def tagsurvey(request):

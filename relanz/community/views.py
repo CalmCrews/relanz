@@ -11,13 +11,13 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
+from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 
 import re, json
 
 # Create your views here.
-
+@csrf_exempt
 @login_required(login_url='/user/signin')
 @email_verified_required
 def communityHome(request, challenge_id):
@@ -72,7 +72,7 @@ def communityHome(request, challenge_id):
         else:
             return redirect('community:new', challenge_id)
 
-
+@csrf_exempt
 @login_required(login_url='/user/signin')
 @email_verified_required
 def new(request, challenge_id):
@@ -145,6 +145,7 @@ def detail(request, challenge_id, article_id):
     res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist}
     return render(request, 'community/detail.html', res_data)
 
+@csrf_exempt
 @login_required(login_url='/user/signin')
 @email_verified_required
 def edit(request, challenge_id, article_id):
