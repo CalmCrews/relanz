@@ -53,23 +53,21 @@
                 <div class="header-div">
                     {% if messages %}
                         {% for message in messages %}
-                        <div class="alert-msg-div" id="alert_user_div" onclick="clickCancelBtn(this)">
-                            <p class="score-ment">오늘의 기록을 남긴 멋진 당신,<br>스코어를 획득하셨습니다!</p>
-                            {% comment %} <p class="warning-ment">다시 시도해주세요</p> {% endcomment %}
-                            <div class="score-box">
-                                {% if message|floatformat == "500" %}
-                                <span class="first">1st</span>
-                                {% endif %}
-                                <img src="{% static 'icons/rStar.png' %}" alt="star">
-                                <span class="plus">+</span>
-                                <span class="score">{{message}}</span>
+                            <div class="alert-msg-div" id="alert_user_div" onclick="clickCancelBtn(this)">
+                                <p class="score-ment">오늘의 기록을 남긴 멋진 당신,<br>스코어를 획득하셨습니다!</p>
+                                <div class="score-box">
+                                    {% if message|floatformat == "500" %}
+                                        <span class="first">1st</span>
+                                    {% endif %}
+                                    <img src="{% static 'icons/rStar.png' %}" alt="star">
+                                    <span class="plus">+</span>
+                                    <span class="score">{{message}}</span>
+                                </div>
                             </div>
-                        </div>
                         {% endfor %}
                     {% endif %}
                     
                     <div class="user-info-div">
-                        
                         <div class="profile-wrapper">
                             <div class="profile-circle">
                               <div class="back-hair"></div>

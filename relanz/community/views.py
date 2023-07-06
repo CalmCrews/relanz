@@ -70,7 +70,7 @@ def communityHome(request, challenge_id):
             else:
                 return redirect('community:new')
         else:
-            return redirect('community:new')
+            return redirect('community:new', challenge_id)
 
 
 @login_required(login_url='/user/signin')

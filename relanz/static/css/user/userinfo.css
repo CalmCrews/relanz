@@ -266,7 +266,7 @@
   color: #5f5f5f;
 }
 
-.relange-info > a {
+.relange-info > form > button {
   position: absolute;
   top: 80px;
   left: 15px;
@@ -279,6 +279,13 @@
   font-size: 12px;
   font-weight: 500;
   text-decoration: none;
+
+  border: none;
+}
+
+.relange-info > form > button:hover {
+  cursor: pointer;
+  background-color: #71a1ff;
 }
 
 .relange-info > a:visited {

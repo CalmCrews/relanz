@@ -51,7 +51,11 @@
     <div class="tag-record-div">
       {% if participant %}
         <a class="record-btn-2">나의 기록</a>
-        <a href="{% url 'community:myArticles' challenge.id %}" class="record-btn">내 기록 모아보기</a>
+        <form action="{% url "community:communityHome" challenge.id %}" method="post">
+          {% csrf_token %}
+          <button class="record-btn" type="submit">내 기록 남기기</button>
+        </form>
+        {% comment %} <a href="{% url 'community:communityHome' challenge.id %}" class="record-btn">내 기록 남기기</a> {% endcomment %}
 
       {% else %}
         <a href="{% url 'challenge:participate' challenge.id %}" class="record-btn">시작하기</a>
