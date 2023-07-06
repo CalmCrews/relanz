@@ -70,14 +70,14 @@
             {% endfor %}
             {% endif %}
         </div>
-        <div class="images-box-div" id="images_box_div">
+        <div class="images-box-div" id="images_box_div" data-startnum="2" data-askurl="{% url "community:communityHome" challenge.id %}">
             {% comment %} 여기에 이미지 url이 list로 던저져야함! -> 했습니당 {% endcomment %}
                 {% comment %} reversed 사용해서 가장 최신에 올린 게시물이 위에 있도록 설정 {% endcomment %}
             {% for article in articles %}
                 <a href="{% url 'community:detail' challenge.id article.id %}" class="images-box-single-a">
                     <div class="images-box-single">
                         {% if article.image %}
-                        <img src="{{article.image.url}} alt=".">
+                            <img src="{{article.image.url}}"" alt=".">
                         {% endif %}
                     </div>
                 </a>
