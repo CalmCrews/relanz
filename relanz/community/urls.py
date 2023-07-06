@@ -1,4 +1,5 @@
 from django.urls import path
+from .views import new, detail, edit, delete, communityHome, like
 from .views import new, detail, edit, delete, communityHome, like, myArticles
 
 app_name = 'community'
