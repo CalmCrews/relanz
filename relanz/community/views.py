@@ -57,7 +57,9 @@ def communityHome(request, challenge_id):
             time_difference = current_time - last_article.created_at
             if time_difference < timedelta(days=1):
                 message = {'message': '릴렌지 기록은 하루에 한 번만 가능합니다.'}
-                return JsonResponse(message, status=400)
+                # return JsonResponse(message, status=400)
+                messages.add_message(request, messages.ERROR, '릴렌지 기록은 하루에 한 번만 가능합니다')
+                return redirect('community:communityHome', challenge_id)
             else:
                 return redirect('community:new')
         else:

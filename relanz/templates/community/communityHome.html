@@ -49,13 +49,25 @@
         </div>
         <div class="tag-record-div">
             {% if participated %}
-                <a href="{% url 'community:new' challenge.id %}" class="record-btn">내 기록 남기기</a>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="record-btn">내 기록 남기기</button>
+                </form>
                 
                 {% comment %} 유저 아이디랑 챌린지 아이디 활용해서 걸러야함! {% endcomment %}
-                <a href="http://" class="record-btn">내 기록 모아보기</a>
+                <a href="{% url 'community:myArticles' challenge.id %}" class="record-btn">내 기록 모아보기</a>
 
             {% else %}
                 <a href="{% url 'challenge:participate' challenge.id %}" class="record-btn">시작하기</a>
+            {% endif %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="warning-user" id="warning_user_div">
+                        <p class="warning-ment">{{message}}</p>
+                        <button type="button" class="warning-btn" id="warning_btn" onclick="clickCheckBtn()">확인</button>
+                    </div>
+            {% endfor %}
             {% endif %}
         </div>
         <div class="images-box-div" id="images_box_div">
@@ -70,54 +82,6 @@
                     </div>
                 </a>
             {% endfor %}
-            {% comment %} <!-- {% else %}
-                <a href="http://" class="images-box-single-a">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-                <a href="http://" class="images-box-single">
-                    <div class="images-box-single">
-                        <img src="{% static "images/leein_example.jpeg" %}" alt="." class="images-box-img">
-                    </div>
-                </a>
-            {% endif %} --> {% endcomment %}
             
         </div>
         <div class="loading-div">
@@ -132,6 +96,11 @@
    
 {% block scripts%}
     <script src={% static "js/communityHome.js"%}></script>
+    <script>
+        function clickCheckBtn() {
+            document.querySelector(".warning-user").classList.add("hide");
+        } 
+    </script>
 {% endblock scripts%}
 
 
