@@ -154,3 +154,5 @@ DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
 
 
 LOGIN_URL = '/user/signin/'
+
+CSRF_TRUSTED_ORIGINS = ["http://relanz.site/", "https://relanz.site/"]
