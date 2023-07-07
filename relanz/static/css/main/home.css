@@ -740,6 +740,8 @@ margin: 0;
   font-weight: 500;
   padding: 10px 0 0 49px;
   line-height: 130%;
+  background-color: #d0e0ff;
+  border-radius: 10px;
 }
 
 #profile-set #top-page .report-section .report-header .weekly-monthly {
@@ -843,6 +845,7 @@ margin: 0;
   /* 요약 세부내용 1 스타일 */
   position: relative;
   padding: 20px;
+  overflow: hidden ;
 }
 
 .summary-detail-1 > .comment-1 {
@@ -894,8 +897,9 @@ margin: 0;
 .summary-detail-1 > .result-graph {
   position: absolute;
   display: flex;
+  width: 254px;
   top: 100px;
-  left: 40px;
+  left: calc(50% - 127px);
 }
 
 .result-graph > .label-container {
@@ -951,7 +955,7 @@ margin: 0;
 .summary-detail-1 > .labels-info {
   position: absolute;
   top: 235px;
-  left: 40px;
+  left: calc(50% - 130px);
   display: flex;
   width: 260px;
   justify-content: space-between;
@@ -984,7 +988,7 @@ margin: 0;
 .summary-detail-1 > .graph-summary {
   position: absolute;
   top: 270px;
-  left: 40px;
+  left: calc(50% - 135px);
   width: 260px;
   height: 60px;
   border-radius: 15px;
