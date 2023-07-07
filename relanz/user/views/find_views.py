@@ -6,6 +6,8 @@ import os
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.views.decorators.csrf import csrf_exempt
 
+from django.utils.decorators import method_decorator
+
 @csrf_exempt
 def findid(request):
     if request.method == 'POST':
@@ -34,22 +36,34 @@ def findid(request):
 
 
 # 비밀번호 재설정 커스터마이징을 위한 상속
-@csrf_exempt
 class CustomPasswordResetView(PasswordResetView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CustomPasswordResetView, self).dispatch(request, *args, **kwargs)
+
     template_name = 'user/pw_reset.html'
     email_template_name = 'user/pw_reset_email.html'
     subject_template_name = 'user/pw_reset_subject.txt'
     success_url = reverse_lazy("user:password_reset_done")
 
-@csrf_exempt
 class CustomPasswordResetDoneView(PasswordResetDoneView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CustomPasswordResetView, self).dispatch(request, *args, **kwargs)
+
     template_name = "user/pw_reset_done.html"
 
-@csrf_exempt
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CustomPasswordResetView, self).dispatch(request, *args, **kwargs)
+
     template_name = "user/pw_reset_confirm.html"
     success_url = reverse_lazy("user:password_reset_complete")
 
-@csrf_exempt
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CustomPasswordResetView, self).dispatch(request, *args, **kwargs)
+    
     template_name = "user/pw_reset_complete.html"
