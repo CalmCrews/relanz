@@ -205,10 +205,14 @@ def home(request):
 
                 # 이전에 뽑은 추천할 챌린지 중에 랜덤으로 3개를 픽(중복 제거)
                 analysis_challenges = []
-                while len(analysis_challenges) < 3:
-                    analysis_challenge_tags = random.choice(challenge_tags)
-                    if analysis_challenge_tags not in analysis_challenges:
-                        analysis_challenges.append(analysis_challenge_tags.challenge)
+                if len(challenge_tags) > 3:
+                    analysis_challenges_tags = random.sample(challenge_tags, 3)
+                else:
+                    analysis_challenges_tags = challenge_tags
+                for analusis_challenges_tag in analysis_challenges_tags:
+                    analysis_challenges.append(analusis_challenges_tag.challenge)
+
+                print(analysis_challenges)
                 analysis_data = {
                     'analysis_user_tag':analysis_user_tag,
                     'most_like_challenge': most_like_challenge,
