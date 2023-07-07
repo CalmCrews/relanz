@@ -23,7 +23,7 @@
 /* skip */
 .scrollable-container > #skip {
   position: fixed;
-  top: calc(100vh - 90px);
+  bottom: 15%;
   height: 30px;
   margin-left: 40px;
   z-index: 80;
@@ -59,7 +59,7 @@
   text-align: center;
   letter-spacing: -0.08em;
   color: #9abcff;
-  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 #div1 > .background > img {
@@ -195,15 +195,10 @@
 }
 
 #div5 > .background-section > .img-section {
-  width: 80%;
+  width: 60%;
   z-index: 2;
 }
 
-@media (max-height: 700px) {
-  #div5 > .background-section > .img-section {
-    display: none;
-  }
-}
 
 #div5 > .background-section > .img-section > img {
   width: 100%;
@@ -224,7 +219,7 @@
 #div5 > .content-container {
   width: 100%;
   position: absolute;
-  top: calc(100vh - 40%);
+  top: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -243,7 +238,7 @@
 
 #div5 > .content-container > .sign-section {
   width: 100%;
-  padding: 2em;
+  padding: 30px;
   top: calc(100vh - 30%);
   z-index: 4;
 }
