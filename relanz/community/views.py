@@ -112,6 +112,7 @@ def new(request, challenge_id):
     res_data = {'form':form, 'challenge':challenge}
     return render(request, 'community/new.html', res_data)
 
+
 @login_required(login_url='/user/signin')
 @email_verified_required
 def detail(request, challenge_id, article_id):
@@ -119,8 +120,12 @@ def detail(request, challenge_id, article_id):
     article = get_object_or_404(Article, pk=article_id)
     articles = Article.objects.filter(challenge=challenge).order_by('-created_at')
     participant = Participant.objects.filter(challenge_id=challenge_id)
-
+    
     paginator = Paginator(articles, 1)
+    for article_ in articles:
+        for i in range(1, paginator.num_pages+1):
+            if paginator.get_page(i)[0].id == article_.id:
+                article_num = i
     try:     
         page_number = request.GET.get('page')
         print(page_number)

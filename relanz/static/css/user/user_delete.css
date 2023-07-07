@@ -293,3 +293,6 @@
 .for-padding {
     height: 100px;
 }
+#real_submit_btn {
+    visibility: hidden;
+}
