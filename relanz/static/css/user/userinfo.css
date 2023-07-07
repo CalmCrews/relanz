@@ -315,8 +315,8 @@
 
 .tags-wrapper > span {
   width: auto;
-  height: 13px;
-  padding: 2px 7px;
+  height: 14px;
+  padding: 0 7px;
   display: flex;
   justify-content: center;
   align-items: center;

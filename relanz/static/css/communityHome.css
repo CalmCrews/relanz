@@ -4,15 +4,12 @@
 
 .main-img-div {
     width: 100%;
-    min-height: 430px;
     max-height: 430px;
-    background-color: aquamarine;
 }
 
 .main-img-div > img {
     object-fit: cover;
     width: 100%;
-    height: 100%;
 }
 
 .main-container-div {
