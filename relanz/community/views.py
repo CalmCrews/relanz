@@ -118,6 +118,7 @@ def detail(request, challenge_id, article_id):
     challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
     articles = Article.objects.filter(challenge=challenge, id__lte=article_id).order_by('-created_at')
+    participant = Participant.objects.filter(challenge_id=challenge_id)
     paginator = Paginator(articles, 1)
     try:     
         page_number = request.GET.get('page')
@@ -142,7 +143,7 @@ def detail(request, challenge_id, article_id):
         page_obj=paginator.page(page)
         messages.add_message(request, messages.ERROR, '더 이상 인증 글이 없습니다.')
     
-    res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist}
+    res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist, "participant":participant}
     return render(request, 'community/detail.html', res_data)
 
 @csrf_exempt
