@@ -109,49 +109,12 @@
                   </li>
                   {% endfor %}
                   </ul>
-                {% else %}
-                  <ul class="relenge-list">
-                  {% for challenge in challenges %}
-                    <li>
-                      <div class="relenge-card
-                        {% if challenge.morning %}아침{% endif %}
-                        {% if challenge.afternoon %}점심{% endif %}
-                        {% if challenge.evening %}저녁{% endif %}
-                        {% if challenge.inside %}실내{% endif %}
-                        {% if challenge.outside %}실외{% endif %}
-                        {% if challenge.solo %}혼자{% endif %}
-                        {% if challenge.group %}여럿이{% endif %}
-                        {% if challenge.pay %}유료{% endif %}
-                        {% if challenge.free %}무료{% endif %}
-                        {% if challenge.static %}정적인{% endif %}
-                        {% if challenge.dynamic %}동적인{% endif %}
-                      ">
-                        <div class="image-section">
-                          <img src="{% static challenge.challenge.image %}" alt="{{ challenge.title }}">
-                        </div>
-                        <div class="info-section">
-                          <div class="sticker">공식 릴렌지 활동</div>
-                          <h2>{{ challenge.challenge.title }}</h2>
-                          {% comment %} <img src="{% static "icons/ppl.png" %}" alt="icon"/>
-                          <span>n명이 참여 중인 릴렌지</span> {% endcomment %}
-                          <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">참여하기</a>
-                        </div>
-                      </div>
-                    </li>
-                  {% endfor %}
-                  </ul>
                 {% endif %}
                 <div class="carousel-dots">
                   <span class="dot active"></span>
                   {% if combined_data %}
                     {% for challenge in combined_data %}
                       {% if forloop.counter0 < combined_data|length|add:"-1" %}
-                        <span class="dot"></span>
-                      {% endif %}
-                    {% endfor %}
-                  {% else %}
-                    {% for challenge in challenges %}
-                      {% if forloop.counter0 < challenges|length|add:"-1" %}
                         <span class="dot"></span>
                       {% endif %}
                     {% endfor %}
