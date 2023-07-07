@@ -11,6 +11,9 @@ class Challenge(models.Model):
     recommand = models.TextField(blank=False)
     image = models.ImageField()
 
+    def __str__(self) -> str:
+        return self.title
+
 class ChallengeTag(models.Model):
     class Meta:
         db_table="challengeTag"

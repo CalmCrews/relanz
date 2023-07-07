@@ -300,13 +300,13 @@
                       <img src="{% static "images/magazine-climbing.png" %}" alt="climbing-image">
                       <div class="magazine-info">
                         <div class="magazine-sticker">릴렌즈 픽</div>
-                        <a href="https://economynewstv.com/%ED%81%B4%EB%9D%BC%EC%9D%B4%EB%B0%8D%EC%9D%98-%EC%A6%90%EA%B1%B0%EC%9B%80-%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%8A%A4-%ED%95%B4%EC%86%8C%EC%99%80-%ED%96%89%EB%B3%B5%EA%B0%90%EC%9D%84-%EB%8A%90%EA%BB%B4/">
+                        <a href="https://economynewstv.com/%ED%81%B4%EB%9D%BC%EC%9D%B4%EB%B0%8D%EC%9D%98-%EC%A6%90%EA%B1%B0%EC%9B%80-%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%8A%A4-%ED%95%B4%EC%86%8C%EC%99%80-%ED%96%89%EB%B3%B5%EA%B0%90%EC%9D%84-%EB%8A%90%EA%BB%B4/" target="_blank">
                           <div class="magazine-title"><span>클라이밍</span>의 즐거움:</div>
                           <div class="magazine-subtitle">스트레스 해소와 행복감을 느껴보세요</div>
                         </a>
                         <div class="magazine-explain">건강하고 재미있는 스트레스 해소 방법 없을까? 이왕이면 운동도 되었으면 좋겠어!<br>이런 당신을 위한 서울 주요 지역의 클라이밍 장소를 소개합니다.</div>
                         <div class="buttons">
-                          <img src="{% static "icons/magazine-like.png"%}" alt="like">
+                          <img class="heart-icon" id="heart-icon" src="{% static "icons/magazine-like.png"%}" alt="like">
                           <img src="{% static "icons/magazine-share.png"%}" alt="share">
                         </div>
                       </div>
@@ -655,6 +655,20 @@
     
     const homeIcon = document.querySelector(".mobile-nav > ul > li > .home > img");
     homeIcon.src = "{% static 'icons/Home_icon_filled.png'%}";
+  
+    const heartIcon = document.querySelector("img#heart-icon");
+    heartIcon.addEventListener('click', function() {
+      const isHeartClicked = heartIcon.classList.contains("filled");
+      if (isHeartClicked) {
+        heartIcon.classList.remove("filled");
+        heartIcon.src = "{% static 'icons/magazine-like.png' %}";
+      }
+      else {
+        heartIcon.classList.add("filled");
+        heartIcon.src = "{% static 'icons/magazine-like-filled.png' %}";
+      }
+    });
+  
   </script>
 
 
