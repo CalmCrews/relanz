@@ -250,3 +250,8 @@
 .clicked-change-color {
     background: #D0E0FF;
 }
+
+
+#submit_form {
+    visibility: hidden;
+}
