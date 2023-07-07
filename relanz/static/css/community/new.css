@@ -63,7 +63,7 @@
 .form-container > .back-card {
   position: absolute;
   top: 10px;
-  left: 40px;
+  left: calc(50% - 135px);
   width: 270px;
   height: 270px;
   border-radius: 20px;
@@ -85,7 +85,7 @@
   display: block;
   position: absolute;
   top: 110px;
-  left: 157.5px;
+  left: calc(50% - 17.5px);
   width: 35px;
   height: 35px;
   z-index: 3;
@@ -102,7 +102,7 @@
   width: 105px;
   height: 30px;
   top: 160px;
-  left: 122.5px;
+  left: calc(50% - 52.5px);
   border-radius: 30px;
   padding: 6px;
   background-color: #9abcff;
@@ -120,7 +120,7 @@
 .form-container > form > button {
   position: absolute;
   top: 320px;
-  left: 48px;
+  left: calc(50% - 127px);
   width: 254px;
   height: 50px;
   border: 0;
@@ -148,7 +148,7 @@
   display: none;
   position: absolute;
   top: 30vh;
-  left: 85px;
+  left: calc(50% - 130px);
   width: 260px;
   height: 160px;
   background-color: #fff;

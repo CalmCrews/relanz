@@ -87,7 +87,7 @@
                       {% if challenge.afternoon %}점심{% endif %}
                       {% if challenge.evening %}저녁{% endif %}
                       {% if challenge.inside %}실내{% endif %}
-                      {% if challenge.outside %}실외{% endif %}
+                      {% if challenge.outside %}야외{% endif %}
                       {% if challenge.solo %}혼자{% endif %}
                       {% if challenge.group %}여럿이{% endif %}
                       {% if challenge.pay %}유료{% endif %}
@@ -220,10 +220,19 @@
                     <p>{{user.nickname}} 님의 최애 릴렌지 활동은</p>
                     <div class="tag-container">
                       {% if analysis_data %}
+                        {% if analysis_data.most_like_challenge %}
                           <span>
                             <a href="{% url 'challenge:challenge' challenge_id=analysis_data.most_like_challenge.id %}">
-                              {{analysis_data.most_like_challenge.title}}</span>
+                              {{analysis_data.most_like_challenge.title}}
                             </a>
+                          </span>
+                        {% else %}
+                          <span>
+                            <a href="{% url 'user:userinfo' %}">
+                              내 릴렌지 기록하러 가기
+                            </a>
+                          </span>
+                        {% endif %}
                       {% else %}
                         <span><a href="#top-page">릴렌지 참여하기</a></span>
                       {% endif %}
