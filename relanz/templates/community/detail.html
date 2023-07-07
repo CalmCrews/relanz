@@ -96,12 +96,12 @@
                           </div>
                         <div class="nickname-created-div">
                             <div class="user-nickname">{{author_nickname}} 님</div>
-                            <div class="content-created-at">{{article.created_at}}</div>
+                            <div class="content-created-at">{{current.created_at}}</div>
                         </div>
                     </div>
                     <div class="like-dislike-div">
                         <span class="like-count" id="like_count">{{like_count}}</span>
-                        <div id="like_count_image_div" data-url="{% url 'community:like' article.id %}" onclick="clickLikeHeartBtn(this)">
+                        <div id="like_count_image_div" data-url="{% url 'community:like' current.id %}" onclick="clickLikeHeartBtn(this)">
                             <div class="like-img-div">
                                 {% if isExist %}
                                     <div class="like-heart-img-div", id="like_heart_img_div">
@@ -123,8 +123,8 @@
                     </div>
                 </div>
                 <div class="main-image-div">
-                    {% if article.image %}
-                        <img src="{{article.image.url}}" alt="이미지">
+                    {% if current.image %}
+                        <img src="{{current.image.url}}" alt="이미지">
                     {% endif %}
                 </div>
             </div>
