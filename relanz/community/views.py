@@ -132,19 +132,20 @@ def detail(request, challenge_id, article_id):
             like_count = len(Like.objects.filter(article=page_obj.object_list[0]))
             author_nickname = page_obj.object_list[0].author.user.nickname
             isExist = Like.objects.filter(likedUser=request.user, article=page_obj.object_list[0]).exists() 
+    
     except PageNotAnInteger:
-        page = 1
-        page_obj = paginator.get_page(page)
+        page_number = 1
+        page_obj = paginator.get_page(page_number)
         like_count = len(Like.objects.filter(article=article))
         author_nickname = article.author.user.nickname
         isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
-        
+    
     except EmptyPage:
         page=paginator.num_pages
         page_obj=paginator.page(page)
         messages.add_message(request, messages.ERROR, '더 이상 인증 글이 없습니다.')
     
-    res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist, "participant":participant, "current":article}
+    res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist, "participant":participant, "current": article}
     return render(request, 'community/detail.html', res_data)
 
 @csrf_exempt
