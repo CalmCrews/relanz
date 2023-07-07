@@ -212,7 +212,6 @@ def home(request):
                 for analusis_challenges_tag in analysis_challenges_tags:
                     analysis_challenges.append(analusis_challenges_tag.challenge)
 
-                print(analysis_challenges)
                 analysis_data = {
                     'analysis_user_tag':analysis_user_tag,
                     'most_like_challenge': most_like_challenge,
