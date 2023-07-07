@@ -34,18 +34,22 @@ def findid(request):
 
 
 # 비밀번호 재설정 커스터마이징을 위한 상속
+@csrf_exempt
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'user/pw_reset.html'
     email_template_name = 'user/pw_reset_email.html'
     subject_template_name = 'user/pw_reset_subject.txt'
     success_url = reverse_lazy("user:password_reset_done")
 
+@csrf_exempt
 class CustomPasswordResetDoneView(PasswordResetDoneView):
     template_name = "user/pw_reset_done.html"
 
+@csrf_exempt
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = "user/pw_reset_confirm.html"
     success_url = reverse_lazy("user:password_reset_complete")
 
+@csrf_exempt
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "user/pw_reset_complete.html"
