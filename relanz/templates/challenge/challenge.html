@@ -54,11 +54,11 @@
         <div class="content-container-div">
             <div class="effect-div">
                 <div class="title">해소효과</div>
-                <div class="content">{{challenge.effect|linebreaksbr}}</div>
+                <div class="content new-p" id="linebreaks_fix_1">{{challenge.effect|linebreaksbr}}</div>
             </div>
             <div class="recommand-to-people-container-div">
                 <div class="title">이런 사람에게 추천해요!</div>
-                <div class="content">{{challenge.recommand|linebreaksbr}}</div>
+                <div class="content new-p" id="linebreaks_fix_2" >{{challenge.recommand|linebreaksbr}}</div>
             </div>
             {% comment %} 여기가 장소라 if 템플릿 사용하면 되용! {% endcomment %}
             <div class="recommand-place-container-outer-div">
