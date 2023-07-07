@@ -354,7 +354,7 @@
 
   top: 70px;
   background-color: white;
-
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -365,7 +365,7 @@
 .main-image-div > img {
     /* object-fit: cover; */
 
-    /* object-fit: contain;
+    object-fit: contain;
     max-width: 430px;
     max-height: 430px; */
 
@@ -391,7 +391,7 @@
   height: 130px;
   flex-shrink: 0;
   margin-top: 25px;
-  background: #D0E0FF;
+  background: #d0e0ff;
   width: 100%;
   /* margin-top: 65px;
   background: #d0e0ff;
@@ -548,6 +548,6 @@
 }
 
 .warning-btn:hover {
-    cursor: pointer;
-    background-color: rgba(63, 128, 252, 1);
+  cursor: pointer;
+  background-color: rgba(63, 128, 252, 1);
 }
