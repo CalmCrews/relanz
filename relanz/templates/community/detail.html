@@ -48,14 +48,18 @@
             </div>
         </div>
         <div class="detail-content-background">
-            {% comment %} <div class="left-right-arrow">
-                <a href="{% url "community:detail" challenge_id=challenge.id %}" class="left">
+            {% if articles.has_next %}
+                <a href="?page={{ articles.next_page_number }}#focus" class="left">
                     <img src="{% static "icons/left_arrow.svg" %}" alt=".">
                 </a>
-                <a href="{% url "community:detail" challenge_id=challenge.id %}" class="right">
+            {% endif %}
+
+            {% if articles.has_previous %}
+                <a href="?page={{ articles.previous_page_number }}#focus" class="right">
                     <img src="{% static "icons/right_arrow.svg" %}" alt=".">
                 </a>
-            </div> {% endcomment %}
+            {% endif %}
+            
             <div class="main-content-div">
             {% for article in articles %}
                 <div class="header-div">
@@ -126,14 +130,7 @@
             </div>
             {% endfor %}
         </div>
-        <div class="rest-image-bundle-div" >
-            <ul>
-                {% comment %} {% if  %}
-                    <a href="">
-                        <img src="" alt="">
-                    </a>
-                {% endif %} {% endcomment %}
-            </ul>
+        <div class="rest-image-bundle-div" id="focus">
         </div>
     </div>
 {% endblock %}

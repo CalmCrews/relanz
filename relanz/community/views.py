@@ -117,12 +117,14 @@ def new(request, challenge_id):
 def detail(request, challenge_id, article_id):
     challenge = Challenge.objects.get(id=challenge_id)
     article = get_object_or_404(Article, pk=article_id)
-    articles = Article.objects.filter(challenge=challenge, id__lte=article_id).order_by('-created_at')
+    articles = Article.objects.filter(challenge=challenge).order_by('-created_at')
     participant = Participant.objects.filter(challenge_id=challenge_id)
+
     paginator = Paginator(articles, 1)
     try:     
         page_number = request.GET.get('page')
-        if page_number is not None and paginator.num_pages < page_number:
+        print(page_number)
+        if page_number is not None and paginator.num_pages < int(page_number):
                 message = {'message': '더 이상 기록이 없습니다.'}
                 return JsonResponse(message, status=400)
         else:
