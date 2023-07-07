@@ -61,8 +61,25 @@ def home(request):
                     challenge_query |= Q(**{tag_list: True})
                 challenges_tags = ChallengeTag.objects.filter(challenge_query)
 
+                participants=[]
+                for challenge_tag in challenges_tags:
+                # 참여자 모델 관련 처리(참여자 쿼리 가져오기, 쿼리 순서 정렬, 정렬된 순서를 바탕으로 쿼리셋 생성)
+                    participants.append(Participant.objects.filter(challenge_id=challenge_tag.challenge.id))
+                
+                sorted_participants = []
+                for participant in participants:
+                    if participant:
+                        sorted_participants.append(participant.values('challenge_id').annotate(count=Count('user_id')).order_by('-count').distinct())
+                    else:
+                        sorted_participants.append(int(0))
+                i = 0
+                for sorted_participant in sorted_participants:
+                    if sorted_participant != 0:
+                        sorted_participants[i] = sorted_participant[0]['count']
+                    i+=1
+                combined_data = list(zip(challenges_tags, sorted_participants))
                 res_data = survey_result(request)
-                res_data2 = {'user':user, 'tag_lists':tag_lists_, 'challenges':challenges_tags}
+                res_data2 = {'user':user, 'tag_lists':tag_lists_, 'combined_data':combined_data}
                 res_data.update(res_data2)
 
                 return render(request, 'main/home.html', res_data)
@@ -269,12 +286,27 @@ def home(request):
             for tag_list in tag_lists:
                 challenge_query |= Q(**{tag_list: True})
             challenges = ChallengeTag.objects.filter(challenge_query)
-            
+            participants=[]
+            for challenge_tag in challenges_tags:
+            # 참여자 모델 관련 처리(참여자 쿼리 가져오기, 쿼리 순서 정렬, 정렬된 순서를 바탕으로 쿼리셋 생성)
+                participants.append(Participant.objects.filter(challenge_id=challenge_tag.challenge.id))                
+                sorted_participants = []
+                for participant in participants:
+                    if participant:
+                        sorted_participants.append(participant.values('challenge_id').annotate(count=Count('user_id')).order_by('-count').distinct())
+                    else:
+                        sorted_participants.append(int(0))
+                i = 0
+                for sorted_participant in sorted_participants:
+                    if sorted_participant != 0:
+                        sorted_participants[i] = sorted_participant[0]['count']
+                    i+=1
+            combined_data = list(zip(challenges_tags, sorted_participants))
             res_data = survey_result(request)
-            res_data2 = {'user':user, 'tag_lists':tag_lists_, 'challenges':challenges}
+            res_data2 = {'user':user, 'tag_lists':tag_lists_, 'combined_data':combined_data}
             res_data.update(res_data2)
 
-            return render(request, 'main/home.html', res_data)
+            return render(request, 'main/home.html', res_data)    
            
     return render(request, 'main/splashscreen.html')
 
