@@ -18,10 +18,10 @@
         <div class="main-container-div">
             <div class="nav-div-absolute">
                 <div class="nav-info">
-                    <a href="{% url 'challenge:challenge' challenge_id=challenge.id %}">릴렌지 안내</a>
+                    <a href="{% url 'challenge:challenge' challenge.id %}">릴렌지 안내</a>
                 </div>
                 <div class="nav-board">
-                    <a href="{% url 'community:communityHome' challenge_id=challenge.id %}">커뮤니티 게시판</a>
+                    <a href="{% url 'community:communityHome' challenge.id %}">커뮤니티 게시판</a>
                 </div>
             </div>
         </div>
@@ -43,11 +43,19 @@
                 {% if participant %}
                     <small class="participant-count-small">{{participant}} 명이 참여 중인 릴렌지</small>
                 {% else %}
-                <small class="participant-count-small">00 명이 참여 중인 릴렌지</small>
+                <small class="participant-count-small">0 명이 참여 중인 릴렌지</small>
                 {% endif %}
             </div>
         </div>
         <div class="detail-content-background">
+            {% comment %} <div class="left-right-arrow">
+                <a href="{% url "community:detail" challenge_id=challenge.id %}" class="left">
+                    <img src="{% static "icons/left_arrow.svg" %}" alt=".">
+                </a>
+                <a href="{% url "community:detail" challenge_id=challenge.id %}" class="right">
+                    <img src="{% static "icons/right_arrow.svg" %}" alt=".">
+                </a>
+            </div> {% endcomment %}
             <div class="main-content-div">
             {% for article in articles %}
                 <div class="header-div">
@@ -84,7 +92,7 @@
                           </div>
                         <div class="nickname-created-div">
                             <div class="user-nickname">{{author_nickname}} 님</div>
-                            <div class="content-created-at">기록 일시: {{article.created_at}}</div>
+                            <div class="content-created-at">{{article.created_at}}</div>
                         </div>
                     </div>
                     <div class="like-dislike-div">
@@ -113,7 +121,6 @@
                 <div class="main-image-div">
                     {% if article.image %}
                         <img src="{{article.image.url}}" alt="이미지">
-                        
                     {% endif %}
                 </div>
             </div>
