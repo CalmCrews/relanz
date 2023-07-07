@@ -365,8 +365,8 @@
 .main-image-div > img {
     /* object-fit: cover; */
     object-fit: contain;
-    max-width: 390px;
-    max-height: 390px;
+    max-width: 430px;
+    max-height: 430px;
 
 }
 
