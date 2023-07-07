@@ -187,11 +187,15 @@
   z-index: 200;
 }
 .left {
+  top: 265px;
+  position: absolute;
   width: 18px;
   height: 25px;
   flex-shrink: 0;
   display: flex;
-  transition: transform 0.3s ease;;
+  transition: transform 0.3s ease;
+  z-index: 200;
+  left: 15px;
 }
 .left:hover {
   cursor: pointer;
@@ -203,11 +207,15 @@
   height: 100%;
 }
 .right {
+  top: 265px;
+  position: absolute;
   width: 18px;
   height: 25px;
   flex-shrink: 0;
   display: flex;
-  transition: transform 0.3s ease;;
+  transition: transform 0.3s ease;
+  z-index: 200;
+  right: 15px;
 }
 .right:hover {
   cursor: pointer;
