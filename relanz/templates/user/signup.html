@@ -22,7 +22,7 @@
         <h4>Sign up</h4>
       </div>
       <div class="signup-form-div-mobile">
-        <form action="" method="post">
+        <form method="post">
           {% csrf_token %}
           <div class="username-div">
             <label for="username" class="username-label">아이디 설정</label>
@@ -109,14 +109,13 @@
           <div class="submit-div">
             <input type="submit" value="회원가입하기" name='signup' class="mouseover submit-input" id="submit_input">
           </div>
-
         </form>
       </div>
     </div>
   </div>
 
 {% endblock %}
-  
+
 {% block scripts%}
   <script src={% static "js/signup.js"%}></script>
 
