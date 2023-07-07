@@ -28,6 +28,7 @@ async function makeRequest(url) {
         pk: element.pk,
       }
     });
+    console.log(resultData)
 
     return resultData;
   } catch (error) {
@@ -90,7 +91,6 @@ async function handleIntersection(entries, observer) {
   for (let entry of entries) {
     if (entry.isIntersecting) {
       const listUrl = await getUrl();
-      console.log(listUrl)
       makeImageDiv(listUrl);
       observer.unobserve(entry.target);
     }
