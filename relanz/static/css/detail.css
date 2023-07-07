@@ -360,6 +360,7 @@
   align-items: center;
 
   flex-wrap: wrap;
+  overflow: hidden;
 }
 .main-image-div > img {
     /* object-fit: cover; */
@@ -382,7 +383,6 @@
     display:block;
     width:100%;
     height:auto;
-    overflow: hidden;
 }
 
 .rest-image-bundle-div {

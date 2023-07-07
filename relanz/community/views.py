@@ -112,6 +112,7 @@ def new(request, challenge_id):
     res_data = {'form':form, 'challenge':challenge}
     return render(request, 'community/new.html', res_data)
 
+
 @login_required(login_url='/user/signin')
 @email_verified_required
 def detail(request, challenge_id, article_id):
@@ -119,8 +120,12 @@ def detail(request, challenge_id, article_id):
     article = get_object_or_404(Article, pk=article_id)
     articles = Article.objects.filter(challenge=challenge).order_by('-created_at')
     participant = Participant.objects.filter(challenge_id=challenge_id)
-
+    
     paginator = Paginator(articles, 1)
+    for article_ in articles:
+        for i in range(1, paginator.num_pages+1):
+            if paginator.get_page(i)[0].id == article_.id:
+                article_num = i
     try:     
         page_number = request.GET.get('page')
         print(page_number)
@@ -134,7 +139,7 @@ def detail(request, challenge_id, article_id):
             isExist = Like.objects.filter(likedUser=request.user, article=page_obj.object_list[0]).exists() 
 
     except PageNotAnInteger:
-        page = 1
+        page = article_num
         page_obj = paginator.get_page(page)
         like_count = len(Like.objects.filter(article=article))
         author_nickname = article.author.user.nickname
@@ -147,6 +152,38 @@ def detail(request, challenge_id, article_id):
     
     res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist, "participant":participant}
     return render(request, 'community/detail.html', res_data)
+# @login_required(login_url='/user/signin')
+# @email_verified_required
+# def detail(request, challenge_id, article_id):
+#     challenge = Challenge.objects.get(id=challenge_id)
+#     article = get_object_or_404(Article, pk=article_id)
+#     articles = Article.objects.filter(challenge=challenge, id__lte=article_id).order_by('-created_at')
+#     paginator = Paginator(articles, 1)
+#     try:     
+#         page_number = request.GET.get('page')
+#         if page_number is not None and paginator.num_pages < page_number:
+#                 message = {'message': '더 이상 기록이 없습니다.'}
+#                 return JsonResponse(message, status=400)
+#         else:
+#             page_obj = paginator.get_page(page_number)
+#             like_count = len(Like.objects.filter(article=page_obj.object_list[0]))
+#             author_nickname = page_obj.object_list[0].author.user.nickname
+#             isExist = Like.objects.filter(likedUser=request.user, article=page_obj.object_list[0]).exists() 
+
+#     except PageNotAnInteger:
+#         page = 1
+#         page_obj = paginator.get_page(page)
+#         like_count = len(Like.objects.filter(article=article))
+#         author_nickname = article.author.user.nickname
+#         isExist = Like.objects.filter(likedUser=request.user, article=article).exists()
+    
+#     except EmptyPage:
+#         page=paginator.num_pages
+#         page_obj=paginator.page(page)
+#         messages.add_message(request, messages.ERROR, '더 이상 인증 글이 없습니다.')
+    
+#     res_data = {'challenge':challenge, 'articles':page_obj, 'like_count':like_count, 'author_nickname':author_nickname, "isExist": isExist}
+#     return render(request, 'community/detail.html', res_data)
 
 @csrf_exempt
 @login_required(login_url='/user/signin')
